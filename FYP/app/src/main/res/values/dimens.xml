@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_text_size">25sp</dimen>
+    <dimen name="signUp_field_length">320dp</dimen>
+    <dimen name="login_field_length">290dp</dimen>
+</resources>

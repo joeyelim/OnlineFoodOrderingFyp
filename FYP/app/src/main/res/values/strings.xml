@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">FYP</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="order_list">Order List</string>
+    <string name="notification">Notification</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email Address</string>
+    <string name="profile">Profile</string>
+    <string name="online_food_ordering">Online Food Ordering</string>
+    <string name="login">Login</string>
+    <string name="loginA">LOGIN</string>
+    <string name="sign_up"><u>Sign Up</u></string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="registration">Registration</string>
+    <string name="let_s_get_started">Let\'s get started !</string>
+    <string name="create_a_new_account_now">Create a new account now.</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_helperText">Enter your phone number here</string>
+    <string name="firstN_helperText">Enter your first name here</string>
+    <string name="last_name">Last Name</string>
+    <string name="lastN_helperText">Enter your last name here</string>
+    <string name="first_name">First Name</string>
+    <string name="email_helperText">Enter your email here.</string>
+    <string name="password_helperText">Create your password here.</string>
+    <string name="logo">logo</string>
+    <string name="taruc_logo">Taruc logo</string>
+    <string name="already_have_an_account">Already have an account?</string>
+</resources>

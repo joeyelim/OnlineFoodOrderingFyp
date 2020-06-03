@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/destination_home">
+
+    <fragment
+        android:id="@+id/destination_home"
+        android:name="com.example.fyp.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_login_to_registration"
+            app:destination="@id/destination_login" />
+        <action
+            android:id="@+id/action_destination_home_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_destination_home_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_destination_home_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
+        <action
+            android:id="@+id/action_destination_home_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_destination_home_to_canteenFragment2"
+            app:destination="@id/canteenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_login"
+        android:name="com.example.fyp.LoginModule.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@+id/destination_home" />
+        <action
+            android:id="@+id/action_login_to_registration"
+            app:destination="@id/destination_signUp" />
+        <action
+            android:id="@+id/action_destination_login_to_destination_home"
+            app:destination="@id/destination_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_signUp"
+        android:name="com.example.fyp.stuMaintenanceModule.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_destination_signUp_to_destination_home"
+            app:destination="@id/destination_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.fyp.stuMaintenanceModule.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.fyp.LoginModule.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.fyp.fragments.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.example.fyp.fragments.OrderListFragment"
+        android:label="fragment_order_list"
+        tools:layout="@layout/fragment_order_list" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.fyp.fragments.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/canteenFragment"
+        android:name="com.example.fyp.MenuModule.CanteenFragment"
+        android:label="fragment_canteen"
+        tools:layout="@layout/fragment_canteen" />
+    <fragment
+        android:id="@+id/foodFragment"
+        android:name="com.example.fyp.MenuModule.FoodFragment"
+        android:label="fragment_food"
+        tools:layout="@layout/fragment_food" />
+    <fragment
+        android:id="@+id/foodDetailFragment"
+        android:name="com.example.fyp.MenuModule.FoodDetailFragment"
+        android:label="fragment_food_detail"
+        tools:layout="@layout/fragment_food_detail" />
+    <fragment
+        android:id="@+id/ratingFragment"
+        android:name="com.example.fyp.MenuModule.RatingFragment"
+        android:label="fragment_rating"
+        tools:layout="@layout/fragment_rating" />
+    <fragment
+        android:id="@+id/addToCartFragment"
+        android:name="com.example.fyp.OrderingModule.AddToCartFragment"
+        android:label="fragment_add_to_cart"
+        tools:layout="@layout/fragment_add_to_cart" />
+</navigation>
