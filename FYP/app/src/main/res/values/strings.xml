@@ -29,4 +29,5 @@
     <string name="logo">logo</string>
     <string name="taruc_logo">Taruc logo</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="title_canteen">Title Canteen</string>
 </resources>

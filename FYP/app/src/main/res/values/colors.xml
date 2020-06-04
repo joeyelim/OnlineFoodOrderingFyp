@@ -6,4 +6,6 @@
     <color name="colorAccent1">#D81B60</color>
     <color name="colorYellow">#FEDA6F</color>
     <color name="blue">#034AFF</color>
+
+    <color name="gray">#726F6F</color>
 </resources>
