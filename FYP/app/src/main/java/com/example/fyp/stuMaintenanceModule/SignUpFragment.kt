@@ -33,9 +33,9 @@ class SignUpFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        containedBtnSignUp.setOnClickListener {
-            signUpUser()
-        }
+//        containedBtnSignUp.setOnClickListener {
+//            signUpUser()
+//        }
 
         return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }

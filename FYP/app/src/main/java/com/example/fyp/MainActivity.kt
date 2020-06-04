@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
 
         // Pass the IDs of top-level destinations in AppBarConfiguration
-        val appBarConfiguration = AppBarConfiguration(
+        appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf (
                 R.id.fragment_home,
                 R.id.cartFragment,
@@ -133,6 +134,11 @@ class MainActivity : AppCompatActivity() {
 //    override fun onSupportNavigationUp():Boolean {
 //        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.fragmentContainer))
 //    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.myNavHostFragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
 
 
 
