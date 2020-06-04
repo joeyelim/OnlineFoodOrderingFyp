@@ -32,7 +32,7 @@
             android:layout_below="@+id/txtCanteen" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgIcon"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_toEndOf="@+id/txtCanteen"
@@ -41,7 +41,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imgCanteen"
             android:layout_width="370dp"
             android:layout_height="100dp"
             android:layout_below="@+id/txtDescription"

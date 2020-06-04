@@ -1,6 +1,7 @@
 package com.example.fyp.stuMaintenanceModule
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
@@ -25,6 +27,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.fragment_sign_up.txtEmail
 import kotlinx.android.synthetic.main.fragment_sign_up.txtPassword
+import java.util.*
 import java.util.regex.Pattern
 
 /**
@@ -64,54 +67,78 @@ class SignUpFragment : Fragment() {
         return binding.root
     }
 
-    private fun signUpUser(){
-        if(txtFirstN.editText?.text.toString().isEmpty()){
-            txtFirstN.error = "Please enter value"
-            txtFirstN.requestFocus()
+    private fun signUpUser() {
+        if(!validation()) {
             return
         }
-        if(txtLastN.editText?.text.toString().isEmpty()){
-            txtLastN.error = "Please enter value"
-            txtLastN.requestFocus()
-            return
-        }
-        if(txtPhone.editText?.text.toString().isEmpty()){
-            txtPhone.error = "Please enter phone number"
-            txtPhone.requestFocus()
-            return
-        }
-        if(txtEmail.editText?.text.toString().isEmpty()){
-            txtEmail.error = "Please enter email"
-            txtEmail.requestFocus()
-            return
-        }
-        if(!Patterns.EMAIL_ADDRESS.matcher(txtEmail.editText?.text.toString()).matches()){
-            txtEmail.error = "Please enter a valid email"
-            txtEmail.requestFocus()
-            return
-        }
+        val email = binding.txtEmail.text.toString()
+        val password = binding.txtPassword.text.toString()
+        val firstName = binding.txtFirstN.text.toString()
+        val lastName = binding.txtLastN.text.toString()
+        val phone = binding.txtPhone.text.toString()
 
-        if(txtPassword.editText?.text.toString().isEmpty()){
-            txtPassword.error = "Please enter password"
-            txtPassword.requestFocus()
-            return
-        }
+        auth.createUserWithEmailAndPassword(
+            txtEmail.text.toString(),
+            txtPassword.text.toString()
+        )
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("Game", "createUserWithEmail:success")
+                    Toast.makeText(
+                        activity, "Successful create an account",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-//        auth.createUserWithEmailAndPassword(txtEmail.editText.toString(), txtPassword.editText.toString())
-//            .addOnCompleteListener(this) { task ->
-//                if (task.isSuccessful) {
-//                    // Sign in success, update UI with the signed-in user's information
-//                    startActivity(Intent(this,LoginFragment::class.java))
-//                } else {
-//                    // If sign in fails, display a message to the user.
-//                    Toast.makeText(baseContext, "Authentication failed. Try again after some time.",
-//                        Toast.LENGTH_SHORT).show()
-//
-//                }
-//
-//
-//            }
+                    var user = auth.currentUser
+
+                }
+                else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("Game", "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        activity, "Wrong Email or Email Being Registered",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
+
+    private fun validation() : Boolean{
+        if (binding.txtFirstN.text.toString().isEmpty()) {
+            binding.txtFirstN.error = "Please enter value"
+            binding.txtFirstN.requestFocus()
+            return false
+        }
+        else if (binding.txtLastN.text.toString().isEmpty()) {
+            binding.txtLastN.error = "Please enter value"
+            binding.txtLastN.requestFocus()
+            return false
+        }
+        else if (binding.txtPhone.text.toString().isEmpty()) {
+            binding.txtPhone.error = "Please enter phone number"
+            binding.txtPhone.requestFocus()
+            return false
+        }
+        else if (binding.txtEmail.text.toString().isEmpty()) {
+            binding.txtEmail.error = "Please enter email"
+            binding.txtEmail.requestFocus()
+            return false
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
+            binding.txtEmail.error = "Please enter a valid email"
+            binding.txtEmail.requestFocus()
+            return false
+        }
+
+        else if (binding.txtPassword.text.toString().isEmpty()) {
+            binding.txtPassword.error = "Please enter password"
+            binding.txtPassword.requestFocus()
+            return false
+        }
+        return true
+    }
+
 
     //clear option menu
     override fun onPrepareOptionsMenu(menu: Menu) {
