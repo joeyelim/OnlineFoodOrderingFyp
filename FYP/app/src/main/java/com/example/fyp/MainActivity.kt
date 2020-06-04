@@ -12,10 +12,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.view.Menu
 import android.view.View
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.findNavController
+import androidx.navigation.ui.*
 import com.example.fyp.LoginModule.LoginFragment
+import com.example.fyp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -23,9 +26,30 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var navController: NavController
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        navController = this.findNavController(R.id.myNavHostFragment)
+        bottomNavigationView.setupWithNavController(navController)
+
+        // Pass the IDs of top-level destinations in AppBarConfiguration
+        appBarConfiguration = AppBarConfiguration(
+            topLevelDestinationIds = setOf (
+                R.id.fragment_home,
+                R.id.cartFragment,
+                R.id.orderListFragment,
+                R.id.profileFragment
+            )
+
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        bottomNavigationView.setItemBackgroundResource(R.drawable.menu_background);
 
 //        setSupportActionBar(toolbar)
 
@@ -35,37 +59,37 @@ class MainActivity : AppCompatActivity() {
 //        setupActionBar(nacController)
 
         //load first fragment by default
-        loadFragment(HomeFragment())
+//        loadFragment(HomeFragment())
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            when{
-                menuItem.itemId == R.id.ic_home -> {
-                    loadFragment(HomeFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-                menuItem.itemId == R.id.ic_cart -> {
-                    loadFragment(CartFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-                menuItem.itemId == R.id.ic_orderList -> {
-                    loadFragment(OrderListFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-                menuItem.itemId == R.id.ic_notification -> {
-                    loadFragment(NotificationFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-                menuItem.itemId == R.id.ic_profile -> {
-                    loadFragment(LoginFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-                else -> {
-                    return@setOnNavigationItemSelectedListener false
-                }
-            }
-        }
+//        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+//            when{
+//                menuItem.itemId == R.id.ic_home -> {
+//                    loadFragment(HomeFragment())
+//                    return@setOnNavigationItemSelectedListener true
+//                }
+//                menuItem.itemId == R.id.ic_cart -> {
+//                    loadFragment(CartFragment())
+//                    return@setOnNavigationItemSelectedListener true
+//                }
+//                menuItem.itemId == R.id.ic_orderList -> {
+//                    loadFragment(OrderListFragment())
+//                    return@setOnNavigationItemSelectedListener true
+//                }
+//                menuItem.itemId == R.id.ic_notification -> {
+//                    loadFragment(NotificationFragment())
+//                    return@setOnNavigationItemSelectedListener true
+//                }
+//                menuItem.itemId == R.id.ic_profile -> {
+//                    loadFragment(LoginFragment())
+//                    return@setOnNavigationItemSelectedListener true
+//                }
+//                else -> {
+//                    return@setOnNavigationItemSelectedListener false
+//                }
+//            }
+//        }
 
-        bottomNavigationView.setItemBackgroundResource(R.drawable.menu_background);
+
     }
 
 //    private fun setupBottomNavMenu(navController: NavController){
@@ -89,17 +113,15 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        val navController = Navigation.findNavController(this,R.id.fragmentContainer)
 //        val navigated = NavigationUI.onNavDestinationSelected(item!!, navController)
-
-
         when(item.itemId) {
-            R.id.ic_profile -> {
+            R.id.profileFragment -> {
                 Toast.makeText(this, "You haven't login...",Toast.LENGTH_LONG).show()
-                loadFragment(LoginFragment())
+                item.onNavDestinationSelected(navController)
                 setNavInvisible()
                 return true
             }
-            R.id.ic_login -> {
-                loadFragment(LoginFragment())
+            R.id.fragment_login -> {
+                item.onNavDestinationSelected(navController)
                 setNavInvisible()
                 return true
             }
@@ -107,31 +129,33 @@ class MainActivity : AppCompatActivity() {
                 return super.onOptionsItemSelected(item)
             }
         }
-        return super.onOptionsItemSelected(item)
     }
 
 //    override fun onSupportNavigationUp():Boolean {
 //        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.fragmentContainer))
 //    }
 
-
-
-    private fun setNavInvisible(){
-        var bottomNav: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-        bottomNav.visibility = View.GONE
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.myNavHostFragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-//    private fun setNavVisible(){
-//        var bottomNav: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-//        bottomNav.visibility = View.VISIBLE
+
+
+    fun setNavInvisible(){
+        binding.bottomNavigationView.visibility = View.GONE
+    }
+
+    fun setNavVisible(){
+        binding.bottomNavigationView.visibility = View.VISIBLE
+    }
+
+//    private fun loadFragment(fragment:Fragment){
+//        supportFragmentManager.beginTransaction().also { fragmentTransaction ->
+//            fragmentTransaction.replace(R.id.fragmentContainer,fragment)
+//            fragmentTransaction.commit()
+//        }
+//
 //    }
-
-    private fun loadFragment(fragment:Fragment){
-        supportFragmentManager.beginTransaction().also { fragmentTransaction ->
-            fragmentTransaction.replace(R.id.fragmentContainer,fragment)
-            fragmentTransaction.commit()
-        }
-
-    }
 
 }

@@ -3,16 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/destination_home">
+    app:startDestination="@+id/fragment_home">
 
     <fragment
-        android:id="@+id/destination_home"
+        android:id="@+id/fragment_home"
         android:name="com.example.fyp.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_login_to_registration"
-            app:destination="@id/destination_login" />
+            app:destination="@id/fragment_login"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_destination_home_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -30,39 +34,54 @@
             app:destination="@id/canteenFragment" />
     </fragment>
     <fragment
-        android:id="@+id/destination_login"
+        android:id="@+id/fragment_login"
         android:name="com.example.fyp.LoginModule.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@+id/destination_home" />
+            app:destination="@+id/fragment_home" />
         <action
             android:id="@+id/action_login_to_registration"
             app:destination="@id/destination_signUp" />
         <action
             android:id="@+id/action_destination_login_to_destination_home"
-            app:destination="@id/destination_home" />
+            app:destination="@id/fragment_home"
+            app:popUpTo="@+id/fragment_home"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragment_login_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/destination_signUp"
         android:name="com.example.fyp.stuMaintenanceModule.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_destination_signUp_to_destination_home"
-            app:destination="@id/destination_home" />
+            app:destination="@id/fragment_home" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.fyp.stuMaintenanceModule.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_home"
+            app:destination="@id/fragment_home"
+            app:popUpTo="@+id/fragment_home"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.fyp.LoginModule.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" />
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_fragment_login"
+            app:destination="@id/fragment_login" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.fyp.fragments.CartFragment"

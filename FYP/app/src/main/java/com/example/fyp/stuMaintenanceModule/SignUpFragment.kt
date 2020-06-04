@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.get
 import com.example.fyp.LoginModule.LoginFragment
+import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -33,9 +34,12 @@ class SignUpFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        containedBtnSignUp.setOnClickListener {
-            signUpUser()
-        }
+//        containedBtnSignUp.setOnClickListener {
+//            signUpUser()
+//        }
+
+        // hide bottom nav
+        (activity as MainActivity).setNavInvisible()
 
         return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
