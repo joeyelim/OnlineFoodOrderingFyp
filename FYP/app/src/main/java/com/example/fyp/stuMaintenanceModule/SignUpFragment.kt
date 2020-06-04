@@ -20,6 +20,7 @@ import com.example.fyp.R
 import com.example.fyp.databinding.FragmentLoginBinding
 import com.example.fyp.databinding.FragmentSignUpBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.fragment_sign_up.txtEmail
@@ -58,7 +59,7 @@ class SignUpFragment : Fragment() {
         }
 
         // hide bottom nav
-        (activity as MainActivity).setNavInvisible()
+        (activity as MainActivity).bottomNavigationView.visibility = View.GONE
 
         return binding.root
     }
@@ -117,8 +118,4 @@ class SignUpFragment : Fragment() {
         menu.clear()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        (activity as MainActivity).setNavVisible()
-    }
 }

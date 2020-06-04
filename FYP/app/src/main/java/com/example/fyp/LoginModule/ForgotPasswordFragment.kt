@@ -20,7 +20,7 @@ class ForgotPasswordFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        (activity as MainActivity).setNavVisible()
+        (activity as MainActivity).setNavInvisible()
 
         return inflater.inflate(R.layout.fragment_forgot_password, container, false)
     }

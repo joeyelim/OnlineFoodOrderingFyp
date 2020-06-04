@@ -71,7 +71,7 @@ class LoginFragment : Fragment() {
     // 这个是 display bottom navbar, 当你退出这个 fragment 的时候
     override fun onDestroyView() {
         super.onDestroyView()
-        (activity as MainActivity).setNavVisible()
+//        (activity as MainActivity).setNavVisible()
     }
 
     fun updateUI(currentUser: FirebaseUser?) {
