@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_login_to_registration"
-            app:destination="@id/fragment_login" />
+            app:destination="@id/fragment_login"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_destination_home_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -45,6 +49,9 @@
             app:destination="@id/fragment_home"
             app:popUpTo="@+id/fragment_home"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragment_login_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/destination_signUp"
@@ -70,7 +77,11 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.fyp.LoginModule.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" />
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_fragment_login"
+            app:destination="@id/fragment_login" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.fyp.fragments.CartFragment"

@@ -142,11 +142,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun setNavInvisible(){
+    fun setNavInvisible(){
         binding.bottomNavigationView.visibility = View.GONE
     }
 
-    private fun setNavVisible(){
+    fun setNavVisible(){
         binding.bottomNavigationView.visibility = View.VISIBLE
     }
 
