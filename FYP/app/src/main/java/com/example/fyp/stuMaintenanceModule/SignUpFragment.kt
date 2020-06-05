@@ -22,6 +22,7 @@ import com.example.fyp.R
 import com.example.fyp.databinding.FragmentLoginBinding
 import com.example.fyp.databinding.FragmentSignUpBinding
 import com.google.firebase.auth.FirebaseAuth
+//import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
