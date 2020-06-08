@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/fragment_home"
         android:name="com.example.fyp.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="HOME"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_login_to_registration"
@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/fragment_login"
         android:name="com.example.fyp.LoginModule.LoginFragment"
-        android:label="fragment_login">
+        android:label="LOGIN">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@+id/fragment_home" />
@@ -55,7 +55,7 @@
     <fragment
         android:id="@+id/fragment_sign_up"
         android:name="com.example.fyp.stuMaintenanceModule.SignUpFragment"
-        android:label="fragment_sign_up"
+        android:label="REGISTRATION"
         tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_fragment_sign_up_to_fragment_login"
@@ -64,8 +64,8 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.fyp.stuMaintenanceModule.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        android:label="PERSONAL PROFILE"
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_fragment_home"
             app:destination="@id/fragment_home"
@@ -89,7 +89,7 @@
     <fragment
         android:id="@+id/orderListFragment"
         android:name="com.example.fyp.fragments.OrderListFragment"
-        android:label="fragment_order_list"
+        android:label="ORDER LIST"
         tools:layout="@layout/fragment_order_list" />
     <fragment
         android:id="@+id/notificationFragment"
