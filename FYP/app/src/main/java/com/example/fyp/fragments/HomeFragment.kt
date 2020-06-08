@@ -8,7 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.MainActivity
+import com.example.fyp.Model
+import com.example.fyp.MyAdapter
 
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentHomeBinding
@@ -39,8 +42,21 @@ class HomeFragment : Fragment() {
 
         (activity as MainActivity).setNavVisible()
 
-        binding.textView4.text = "123"
-        initializeFirebase()
+
+        val arrayList = ArrayList<Model>()
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
+
+
+        val myAdapter = MyAdapter (arrayList, this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.adapter = myAdapter
+
+//        binding.textView4.text = "123"
+//        initializeFirebase()
 
         return binding.root
     }
@@ -66,20 +82,24 @@ class HomeFragment : Fragment() {
 //            Log.w(TAG, "Listen failed.")
 //        }
 
-        val docRef = FirebaseFirestore.getInstance().collection("Canteen")
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.w(TAG, "Listen failed.", e)
-                return@addSnapshotListener
-            }
+        //---------The above need to comment
 
-            if (snapshot != null ) {
-                for (document in snapshot.documents)
+//        val docRef = FirebaseFirestore.getInstance().collection("Canteen")
+//        docRef.addSnapshotListener { snapshot, e ->
+//            if (e != null) {
+//                Log.w(TAG, "Listen failed.", e)
+//                return@addSnapshotListener
+//            }
+//
+//            if (snapshot != null ) {
+//                for (document in snapshot.documents)
+//
+//                binding.textView4.append(document["type"].toString())
+//            } else {
+//                Log.d(TAG, "Current data: null")
+//            }
 
-                binding.textView4.append(document["type"].toString())
-            } else {
-                Log.d(TAG, "Current data: null")
-            }
+        // -------------The above is needed-------------------------
 
 
 //            if (snapshot != null && snapshot.exists()) {
@@ -88,9 +108,9 @@ class HomeFragment : Fragment() {
 //            } else {
 //                Log.d(TAG, "Current data: null")
 //            }
+//        }
+//
         }
-
-    }
 
 
 }
