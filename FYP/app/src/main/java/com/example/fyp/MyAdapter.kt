@@ -25,11 +25,9 @@ class MyAdapter (val arrayList: ArrayList<Model>, val context: Context) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItems(model: Model) {
-
             itemView.txtCanteen.text = model.title
             itemView.txtDescription.text = model.des
             itemView.imgCanteen.setImageResource(model.image)
-            itemView.imgIcon.setImageResource(model.image)
         }
     }
 

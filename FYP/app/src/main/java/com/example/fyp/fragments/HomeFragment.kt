@@ -42,16 +42,16 @@ class HomeFragment : Fragment() {
 
         (activity as MainActivity).setNavVisible()
 
-
         val arrayList = ArrayList<Model>()
-        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
-        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
-        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
-        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
-        arrayList.add(Model("canteen1","hdnsjka", R.drawable.ic_shopping_cart))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.citc_cafe))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.citc_cafe))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.citc_cafe))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.citc_cafe))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.citc_cafe))
+        arrayList.add(Model("canteen1","hdnsjka", R.drawable.citc_cafe))
 
 
-        val myAdapter = MyAdapter (arrayList, this)
+        val myAdapter = MyAdapter (arrayList, requireContext())
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.adapter = myAdapter
 
