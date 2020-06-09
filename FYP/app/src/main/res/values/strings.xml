@@ -7,6 +7,8 @@
     <string name="cart">Cart</string>
     <string name="order_list">Order List</string>
     <string name="notification">Notification</string>
+
+<!--    login & signup-->
     <string name="password">Password</string>
     <string name="email_address">Email Address</string>
     <string name="profile">Profile</string>
@@ -29,5 +31,16 @@
     <string name="logo">logo</string>
     <string name="taruc_logo">Taruc logo</string>
     <string name="already_have_an_account">Already have an account?</string>
+
+
+<!--    canteen-->
     <string name="title_canteen">Title Canteen</string>
+    <string name="food_image">food image</string>
+
+<!--    cart-->
+    <string name="text_view">TextView</string>
+    <string name="rm_price">RM: Price</string>
+    <string name="plus_button">Plus Button</string>
+    <string name="number">1</string>
+    <string name="food_name">Food Name</string>
 </resources>
