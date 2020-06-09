@@ -55,6 +55,11 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    /******************RecycleView 的第一个方法 start*************/
+    /*
+    *  Recycle View 的第一种方法， 需要第二个 external class 叫 adapter
+    *
+    * */
 //    fun initRecycleView() {
 //        val db = FirebaseFirestore.getInstance()
 //
@@ -71,7 +76,18 @@ class HomeFragment : Fragment() {
 //                adapter2.data = adapter
 //            }
 //    }
+    /******************RecycleView 的第一个方法 end*************/
 
+
+
+
+
+    /******************RecycleView 的第二个方法 start*************/
+///*
+//    RecycleView 的第二个方法 --> 直接接 firebase 的 这个是 attach listener 的，
+//    就是说有什么东i都是直接 update 的， 会 浪费流量
+//*/
+//
     fun initRecycleView() {
         val db = FirebaseFirestore.getInstance()
         val query = db.collection(("Canteen")).orderBy("type",Query.Direction.ASCENDING)
@@ -94,7 +110,7 @@ class HomeFragment : Fragment() {
         internal fun setCanteenState(canteen: Canteen) {
             val canteenName = view.findViewById<TextView>(R.id.txtCanteen)
             canteenName.text = canteen.canteenName
-            val canteenDesciption = view.findViewById<TextView>(R.id.txtCanteen)
+            val canteenDesciption = view.findViewById<TextView>(R.id.txtDescription)
             canteenDesciption.text = canteen.type.toString()
         }
     }
@@ -125,14 +141,17 @@ class HomeFragment : Fragment() {
             adapter!!.stopListening()
         }
     }
+
+    /******************RecycleView 的第二个方法 finish*************/
 }
 
-
+/******************Firebase 拿 data 方法 finish*************/
 //    private fun initializeFirebase () {
 ////        val docRef = FirebaseFirestore.getInstance().collection("Canteen")
 ////            .whereEqualTo("type",1)
 ////            .get()
 ////
+/****************** 拿一次 *************/
 ////        docRef.addOnSuccessListener {
 ////            for (document in it) {
 ////                Log.d(TAG,"${document.id} => ${document.data}")
@@ -142,13 +161,8 @@ class HomeFragment : Fragment() {
 ////            Log.w(TAG, "Error getting documents: ", exception)
 ////        }
 //
-////        docRef.get().addOnSuccessListener {
-////            Log.w(TAG, "Listen Success.")
-////            binding.textView4.append(it["type"].toString())
-////        }.addOnFailureListener {
-////            Log.w(TAG, "Listen failed.")
-////        }
 //
+/****************** set up listener to have realtime Update *************/
 //        val docRef = FirebaseFirestore.getInstance().collection("Canteen")
 //        docRef.addSnapshotListener { snapshot, e ->
 //            if (e != null) {
@@ -174,6 +188,7 @@ class HomeFragment : Fragment() {
 //        }
 //
 //    }
-
+/******************Firebase 拿 data 方法 end*************/
 
 //}
+

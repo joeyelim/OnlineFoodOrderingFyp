@@ -1,13 +1,12 @@
 package com.example.fyp.fragments
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.Canteen
+import kotlinx.android.synthetic.main.canteen_row.view.*
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
@@ -31,16 +30,17 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: HomeAdapter.ViewHolder, position: Int) {
-        val item: Canteen = data[position]
-        var content : String = ""
+//        val item: Canteen = data[position]
+//        var content: String = ""
+        holder.bindItems(data[position])
 
-        holder.name.text = item.canteenName
-        holder.type.text = item.type.toString()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(com.example.fyp.R.id.txtCanteen)
-        val type: TextView = itemView.findViewById(com.example.fyp.R.id.txtDescription)
+        fun bindItems(canteen: Canteen) {
+            itemView.txtCanteen.text = canteen.canteenName
+            itemView.txtDescription.text = canteen.type.toString()
+        }
 
     }
 

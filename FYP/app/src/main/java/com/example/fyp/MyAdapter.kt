@@ -32,7 +32,9 @@ class MyAdapter (val arrayList: ArrayList<Model>, val context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.canteen_row, parent, false)
+        val v = LayoutInflater.from(parent.context)
+            .inflate(R.layout.canteen_row, parent, false)
+
         return ViewHolder(v)
     }
 
