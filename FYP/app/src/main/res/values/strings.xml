@@ -8,7 +8,7 @@
     <string name="order_list">Order List</string>
     <string name="notification">Notification</string>
 
-<!--    login & signup-->
+    <!--    login & signup-->
     <string name="password">Password</string>
     <string name="email_address">Email Address</string>
     <string name="profile">Profile</string>
@@ -33,11 +33,11 @@
     <string name="already_have_an_account">Already have an account?</string>
 
 
-<!--    canteen-->
+    <!--    canteen-->
     <string name="title_canteen">Title Canteen</string>
     <string name="food_image">food image</string>
 
-<!--    cart-->
+    <!--    cart-->
     <string name="text_view">TextView</string>
     <string name="rm_price">RM: Price</string>
     <string name="plus_button">Plus Button</string>
