@@ -7,15 +7,17 @@
     <string name="cart">Cart</string>
     <string name="order_list">Order List</string>
     <string name="notification">Notification</string>
+
+    <!--    login & signup-->
     <string name="password">Password</string>
     <string name="email_address">Email Address</string>
     <string name="profile">Profile</string>
     <string name="online_food_ordering">Online Food Ordering</string>
-    <string name="login">Login</string>
+    <string name="login"><u>Login</u></string>
     <string name="loginA">LOGIN</string>
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="registration">Registration</string>
+    <string name="registration"><u>Registration</u></string>
     <string name="let_s_get_started">Let\'s get started !</string>
     <string name="create_a_new_account_now">Create a new account now.</string>
     <string name="phone_number">Phone Number</string>
@@ -29,5 +31,33 @@
     <string name="logo">logo</string>
     <string name="taruc_logo">Taruc logo</string>
     <string name="already_have_an_account">Already have an account?</string>
+
+
+    <!--    canteen-->
     <string name="title_canteen">Title Canteen</string>
+    <string name="food_image">food image</string>
+
+    <!--    cart-->
+    <string name="text_view">TextView</string>
+    <string name="rm_price">RM: Price</string>
+    <string name="plus_button">Plus Button</string>
+    <string name="number">1</string>
+    <string name="food_name">Food Name</string>
+
+    <!--    Reset & Forgot Pwd-->
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="check_out">Check Out</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirmpwd_helper_text">Enter your confirm password here.</string>
+    <string name="confirm">Confirm</string>
+
+    <!-- reset successful content-->
+    <string name="reset_password"><u>Reset Password</u></string>
+    <string name="textview">TextView</string>
+    <string name="your_email_account_is">Your email account is </string>
+    <string name="dear">Dear </string>
+    <string name="password_reset_successfully">Password Reset Successfully!</string>
+    <string name="sucess_content">Welcome to <b>TARUC Online Food Ordering App</b>. Click the below link and login to our system to place an order. Enjoy for your lunch time^^</string>
 </resources>

@@ -3,6 +3,7 @@ package com.example.fyp.stuMaintenanceModule
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -51,6 +52,8 @@ class SignUpFragment : Fragment() {
         )
 
         setHasOptionsMenu(true)
+
+        binding.btnLogin.paintFlags = binding.btnLogin.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         binding.btnLogin.setOnClickListener {
 

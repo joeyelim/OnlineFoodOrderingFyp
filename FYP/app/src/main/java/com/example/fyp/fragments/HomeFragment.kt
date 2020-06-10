@@ -2,6 +2,7 @@ package com.example.fyp.fragments
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp.Adapter.CanteenFireStoreRecyclerAdapter
+import com.example.fyp.Adapter.onListClick
 import com.example.fyp.Class.Canteen
 import com.example.fyp.MainActivity
 import com.example.fyp.R
@@ -24,10 +27,13 @@ import java.lang.reflect.Member
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), onListClick {
+
+
+
     private lateinit var binding: FragmentHomeBinding
     private lateinit var dataListener: ListenerRegistration
-    private var adapter: ProductFirestoreRecyclerAdapter? = null
+    private var adapter: CanteenFireStoreRecyclerAdapter? = null
 
     companion object {
 
@@ -98,37 +104,40 @@ class HomeFragment : Fragment() {
                 .setQuery(query, Canteen::class.java).build()
 
 
-        adapter = ProductFirestoreRecyclerAdapter(options)
+        adapter = CanteenFireStoreRecyclerAdapter(options, this)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.adapter = adapter
 
-
     }
 
-    private inner class CanteenViewHolder internal constructor(private val view: View) :
-        RecyclerView.ViewHolder(view) {
-        internal fun setCanteenState(canteen: Canteen) {
-            val canteenName = view.findViewById<TextView>(R.id.txtCanteen)
-            canteenName.text = canteen.canteenName
-            val canteenDesciption = view.findViewById<TextView>(R.id.txtDescription)
-            canteenDesciption.text = canteen.type.toString()
-        }
+    override fun onItemClick(canteen: Canteen, position: Int) {
+        Log.i("123", canteen.canteenName)
     }
 
-    private inner class ProductFirestoreRecyclerAdapter internal constructor
-        (options: FirestoreRecyclerOptions<Canteen>) :
-        FirestoreRecyclerAdapter<Canteen, CanteenViewHolder>(options) {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CanteenViewHolder {
-            val view =
-                LayoutInflater.from(parent.context).inflate(R.layout.canteen_row, parent, false)
-            return CanteenViewHolder(view)
-        }
-
-
-        override fun onBindViewHolder(holder: CanteenViewHolder, position: Int, model: Canteen) {
-            holder.setCanteenState(model)
-        }
-    }
+//    private inner class CanteenViewHolder internal constructor(private val view: View) :
+//        RecyclerView.ViewHolder(view) {
+//        internal fun setCanteenState(canteen: Canteen) {
+//            val canteenName = view.findViewById<TextView>(R.id.txtCanteen)
+//            canteenName.text = canteen.canteenName
+//            val canteenDesciption = view.findViewById<TextView>(R.id.txtDescription)
+//            canteenDesciption.text = canteen.type.toString()
+//        }
+//    }
+//
+//    private inner class ProductFirestoreRecyclerAdapter internal constructor
+//        (options: FirestoreRecyclerOptions<Canteen>) :
+//        FirestoreRecyclerAdapter<Canteen, CanteenViewHolder>(options) {
+//        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CanteenViewHolder {
+//            val view =
+//                LayoutInflater.from(parent.context).inflate(R.layout.canteen_row, parent, false)
+//            return CanteenViewHolder(view)
+//        }
+//
+//
+//        override fun onBindViewHolder(holder: CanteenViewHolder, position: Int, model: Canteen) {
+//            holder.setCanteenState(model)
+//        }
+//    }
     override fun onStart() {
         super.onStart()
         adapter!!.startListening()

@@ -11,13 +11,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
 import com.example.fyp.R
-import com.example.fyp.databinding.FragmentForgotPasswordBinding
+import com.example.fyp.databinding.FragmentResetPwdBinding
 
 /**
  * A simple [Fragment] subclass.
  */
-class ForgotPasswordFragment : Fragment() {
-    private lateinit var binding: FragmentForgotPasswordBinding
+class ResetPwdFragment : Fragment() {
+    private lateinit var binding: FragmentResetPwdBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,27 +25,26 @@ class ForgotPasswordFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_forgot_password, container, false
+            inflater, R.layout.fragment_reset_pwd, container, false
         )
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
-        binding.btnNext.setOnClickListener{
+        binding.btnBack.setOnClickListener{
             it.findNavController()
-                .navigate(ForgotPasswordFragmentDirections.actionFragmentForgotPasswordToResetPwdFragment())
+                .navigate(ResetPwdFragmentDirections.actionResetPwdFragmentToFragmentForgotPassword())
         }
 
-        binding.btnBack.setOnClickListener {
+        binding.btnConfirm.setOnClickListener {
             it.findNavController()
-                .navigate(ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToFragmentLogin())
-
+                .navigate(ResetPwdFragmentDirections.actionResetPwdFragmentToResetSucessfulFragment())
         }
-
         return binding.root
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
     }
+
 
 }
