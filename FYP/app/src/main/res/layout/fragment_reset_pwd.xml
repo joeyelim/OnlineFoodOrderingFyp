@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,17 +24,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toTopOf="@+id/txtNewPwdTitle"
+                app:layout_constraintEnd_toStartOf="@+id/txtResetPwdTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo3" />
+
             <TextView
                 android:id="@+id/txtResetPwdTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/reset_password"
-                android:textStyle="bold"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtNewPwdTitle"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                app:layout_constraintStart_toEndOf="@+id/imgLogo"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
             <TextView
@@ -37,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="50dp"
                 android:text="@string/new_password"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="62dp"
+                android:layout_marginEnd="125dp"
                 android:layout_marginBottom="32dp"
                 android:layout_weight="1"
                 android:shadowColor="@color/colorPrimaryDark"
@@ -132,7 +152,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtConfirmPwdLayout" />
 
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 </layout>

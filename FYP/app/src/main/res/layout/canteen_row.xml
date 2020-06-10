@@ -5,18 +5,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clipToPadding="false"
+    android:clipChildren="false">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardPreventCornerOverlap="false">
+        app:cardPreventCornerOverlap="false"
+        android:dividerHeight="0.0px"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:divider="@android:color/transparent"
+        android:elevation="8dp"
+        app:cardElevation="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:elevation="16dp">
 
             <RelativeLayout
                 android:id="@+id/cardTitle"
@@ -31,7 +44,7 @@
                     android:layout_marginStart="8dp"
                     android:text="@string/title_canteen"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/sub_title"
                     android:textStyle="bold"
                     />
 
@@ -44,7 +57,7 @@
                     android:layout_marginTop="5dp"
                     android:text="Open hours: 00:00am -00:00pm"
                     android:textColor="@color/gray"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/content"
                     android:textStyle="normal"
                     />
 
@@ -73,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    app:srcCompat="@drawable/citc_cafe"
                     android:layout_below="@+id/cardTitle"/>
             </LinearLayout>
         </LinearLayout>

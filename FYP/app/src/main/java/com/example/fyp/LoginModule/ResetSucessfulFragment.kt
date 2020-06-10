@@ -1,6 +1,7 @@
 package com.example.fyp.LoginModule
 
 
+import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,11 +25,15 @@ class ResetSucessfulFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding= DataBindingUtil.inflate(
             inflater, R.layout.fragment_reset_sucessful, container, false
         )
+
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
+
+        binding.btnLogin.paintFlags = binding.btnLogin.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         binding.btnLogin.setOnClickListener {
             it.findNavController()

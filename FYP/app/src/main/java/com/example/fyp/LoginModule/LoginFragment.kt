@@ -10,6 +10,7 @@ package com.example.fyp.LoginModule
 *
 * */
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
@@ -42,10 +43,13 @@ class LoginFragment : Fragment() {
         // option menu
         setHasOptionsMenu(true)
 
+        binding.btnSignUp.paintFlags = binding.btnSignUp.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+
         binding.btnSignUp.setOnClickListener {
 
             it.findNavController()
                 .navigate(LoginFragmentDirections.actionLoginToRegistration())
+
         }
 
         binding.btnForgotPassword.setOnClickListener {

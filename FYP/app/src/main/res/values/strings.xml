@@ -17,7 +17,7 @@
     <string name="loginA">LOGIN</string>
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="registration">Registration</string>
+    <string name="registration"><u>Registration</u></string>
     <string name="let_s_get_started">Let\'s get started !</string>
     <string name="create_a_new_account_now">Create a new account now.</string>
     <string name="phone_number">Phone Number</string>
@@ -59,4 +59,5 @@
     <string name="your_email_account_is">Your email account is </string>
     <string name="dear">Dear </string>
     <string name="password_reset_successfully">Password Reset Successfully!</string>
+    <string name="sucess_content">Welcome to <b>TARUC Online Food Ordering App</b>. Click the below link and login to our system to place an order. Enjoy for your lunch time^^</string>
 </resources>
