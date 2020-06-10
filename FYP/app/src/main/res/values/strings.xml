@@ -13,7 +13,7 @@
     <string name="email_address">Email Address</string>
     <string name="profile">Profile</string>
     <string name="online_food_ordering">Online Food Ordering</string>
-    <string name="login">Login</string>
+    <string name="login"><u>Login</u></string>
     <string name="loginA">LOGIN</string>
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="forgot_password">Forgot Password?</string>
@@ -43,4 +43,20 @@
     <string name="plus_button">Plus Button</string>
     <string name="number">1</string>
     <string name="food_name">Food Name</string>
+
+    <!--    Reset & Forgot Pwd-->
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="check_out">Check Out</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirmpwd_helper_text">Enter your confirm password here.</string>
+    <string name="confirm">Confirm</string>
+
+    <!-- reset successful content-->
+    <string name="reset_password"><u>Reset Password</u></string>
+    <string name="textview">TextView</string>
+    <string name="your_email_account_is">Your email account is </string>
+    <string name="dear">Dear </string>
+    <string name="password_reset_successfully">Password Reset Successfully!</string>
 </resources>

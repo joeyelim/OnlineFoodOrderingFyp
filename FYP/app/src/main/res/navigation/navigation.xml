@@ -75,11 +75,14 @@
     <fragment
         android:id="@+id/fragment_forgot_password"
         android:name="com.example.fyp.LoginModule.ForgotPasswordFragment"
-        android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" >
+        android:label="FORGOT PASSWORD"
+        tools:layout="@layout/fragment_forgot_password">
         <action
             android:id="@+id/action_forgotPasswordFragment_to_fragment_login"
             app:destination="@id/fragment_login" />
+        <action
+            android:id="@+id/action_fragment_forgot_password_to_resetPwdFragment"
+            app:destination="@id/resetPwdFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -121,4 +124,23 @@
         android:name="com.example.fyp.OrderingModule.AddToCartFragment"
         android:label="fragment_add_to_cart"
         tools:layout="@layout/fragment_add_to_cart" />
+    <fragment
+        android:id="@+id/resetPwdFragment"
+        android:name="com.example.fyp.LoginModule.ResetPwdFragment"
+        android:label="RESET PASSWORD">
+        <action
+            android:id="@+id/action_resetPwdFragment_to_fragment_forgot_password"
+            app:destination="@id/fragment_forgot_password" />
+        <action
+            android:id="@+id/action_resetPwdFragment_to_resetSucessfulFragment"
+            app:destination="@id/resetSucessfulFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetSucessfulFragment"
+        android:name="com.example.fyp.LoginModule.ResetSucessfulFragment"
+        android:label="RESET SUCCESSFULLY" >
+        <action
+            android:id="@+id/action_resetSucessfulFragment_to_fragment_login"
+            app:destination="@id/fragment_login" />
+    </fragment>
 </navigation>

@@ -21,7 +21,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         style="?attr/materialButtonOutlinedStyle"
-        android:text="Check Out"
+        android:text="@string/check_out"
         android:textColor="@color/colorAccent"
         app:backgroundTint="@android:color/darker_gray"
         app:strokeColor="@color/colorPrimary"
