@@ -30,8 +30,8 @@
             android:id="@+id/action_destination_home_to_notificationFragment"
             app:destination="@id/notificationFragment" />
         <action
-            android:id="@+id/action_destination_home_to_canteenFragment2"
-            app:destination="@id/canteenFragment" />
+            android:id="@+id/action_fragment_home_to_canteenStoreFragment"
+            app:destination="@id/canteenStoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_login"
@@ -100,11 +100,6 @@
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
-        android:id="@+id/canteenFragment"
-        android:name="com.example.fyp.MenuModule.CanteenFragment"
-        android:label="fragment_canteen"
-        tools:layout="@layout/fragment_canteen" />
-    <fragment
         android:id="@+id/foodFragment"
         android:name="com.example.fyp.MenuModule.FoodFragment"
         android:label="fragment_food"
@@ -143,4 +138,9 @@
             android:id="@+id/action_resetSucessfulFragment_to_fragment_login"
             app:destination="@id/fragment_login" />
     </fragment>
+    <fragment
+        android:id="@+id/canteenStoreFragment"
+        android:name="com.example.fyp.MenuModule.CanteenStoreFragment"
+        android:label="fragment_canteen_store"
+        tools:layout="@layout/fragment_canteen_store" />
 </navigation>

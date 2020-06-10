@@ -11,7 +11,9 @@
 <!--        <item name="android:itemTextAppearance">@style/CustomTextColor</item>-->
     </style>
 
-
+    <style name="Theme.App" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 
 
 <!--    <style name="CustomOverflowBack" parent="@style/Widget.AppCompat.Light.ListPopupWindow">-->
