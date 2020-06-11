@@ -42,6 +42,8 @@ class LoginFragment : Fragment() {
         // option menu
         setHasOptionsMenu(true)
 
+        (activity as MainActivity).setNavInvisible()
+
         binding.btnSignUp.setOnClickListener {
 
             it.findNavController()
