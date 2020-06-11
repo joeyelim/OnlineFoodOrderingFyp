@@ -11,14 +11,14 @@ import com.example.fyp.R
 /**
  * A simple [Fragment] subclass.
  */
-class CanteenFragment : Fragment() {
+class CanteenStoreFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_canteen, container, false)
+        return inflater.inflate(R.layout.fragment_canteen_store, container, false)
     }
 
 

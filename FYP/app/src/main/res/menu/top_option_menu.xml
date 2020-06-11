@@ -5,10 +5,11 @@
     <item
         android:id="@+id/profileFragment"
         android:title="@string/profile"
+        android:icon="@drawable/ic_profile"
         app:showAsAction="never"/>
     <item
         android:id="@+id/fragment_login"
-        android:title="@string/login"
+        android:title="@string/loginA"
         app:showAsAction="never" />
 
 </menu>
