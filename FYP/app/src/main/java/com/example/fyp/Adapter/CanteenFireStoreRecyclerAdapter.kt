@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.fyp.Class.Canteen
+import com.example.fyp.MenuModule.CanteenStoreFragment
 import com.example.fyp.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -30,6 +32,7 @@ class CanteenFireStoreRecyclerAdapter(options: FirestoreRecyclerOptions<Canteen>
 
     override fun onBindViewHolder(holder: CanteenViewHolder, position: Int, model: Canteen) {
         holder.setCanteenState(model, onListClick2)
+
     }
 
 }
@@ -41,7 +44,7 @@ class CanteenViewHolder internal constructor(private val view: View, var context
         val canteenName = view.findViewById<TextView>(R.id.txtCanteen)
         canteenName.text = canteen.canteenName
         val canteenDesciption = view.findViewById<TextView>(R.id.txtDescription)
-        canteenDesciption.text = canteen.type.toString()
+        canteenDesciption.text = canteen.time.toString()
 
 
         view.setOnClickListener{
@@ -60,5 +63,9 @@ class CanteenViewHolder internal constructor(private val view: View, var context
 }
 
 interface onListClick{
-    fun onItemClick(canteen : Canteen, position : Int)
+    fun onItemClick(canteen : Canteen, position : Int){
+
+
+
+    }
 }
