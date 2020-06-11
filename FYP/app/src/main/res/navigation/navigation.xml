@@ -42,7 +42,8 @@
             app:destination="@+id/fragment_home" />
         <action
             android:id="@+id/action_login_to_registration"
-            app:destination="@id/fragment_sign_up" />
+            app:destination="@id/fragment_sign_up"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_destination_login_to_destination_home"
             app:destination="@id/fragment_home"
@@ -59,7 +60,9 @@
         tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_fragment_sign_up_to_fragment_login"
-            app:destination="@id/fragment_login" />
+            app:destination="@id/fragment_login"
+            app:popUpTo="@+id/fragment_home"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

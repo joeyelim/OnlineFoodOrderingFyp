@@ -6,23 +6,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Adapter.CanteenFireStoreRecyclerAdapter
 import com.example.fyp.Adapter.onListClick
 import com.example.fyp.Class.Canteen
 import com.example.fyp.MainActivity
+import com.example.fyp.MenuModule.CanteenStoreFragment
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentHomeBinding
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
-import java.lang.reflect.Member
+
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -30,10 +33,11 @@ import java.lang.reflect.Member
 class HomeFragment : Fragment(), onListClick {
 
 
-
     private lateinit var binding: FragmentHomeBinding
     private lateinit var dataListener: ListenerRegistration
     private var adapter: CanteenFireStoreRecyclerAdapter? = null
+    private lateinit var mAuth : FirebaseAuth
+
 
     companion object {
 
@@ -47,19 +51,21 @@ class HomeFragment : Fragment(), onListClick {
         // Inflate the layout for this fragment
 
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_home, container, false
+            inflater, com.example.fyp.R.layout.fragment_home, container, false
         )
 
         (activity as MainActivity).setNavVisible()
 
+
 //        binding.textView4.text = "123"
 //        initializeFirebase()
         initRecycleView()
-
+        mAuth = FirebaseAuth.getInstance()
 
 
         return binding.root
     }
+
 
     /******************RecycleView 的第一个方法 start*************/
     /*
@@ -85,9 +91,6 @@ class HomeFragment : Fragment(), onListClick {
     /******************RecycleView 的第一个方法 end*************/
 
 
-
-
-
     /******************RecycleView 的第二个方法 start*************/
 ///*
 //    RecycleView 的第二个方法 --> 直接接 firebase 的 这个是 attach listener 的，
@@ -96,7 +99,7 @@ class HomeFragment : Fragment(), onListClick {
 //
     fun initRecycleView() {
         val db = FirebaseFirestore.getInstance()
-        val query = db.collection(("Canteen")).orderBy("type",Query.Direction.ASCENDING)
+        val query = db.collection(("Canteen")).orderBy("type", Query.Direction.ASCENDING)
 
 
         val options =
@@ -104,7 +107,7 @@ class HomeFragment : Fragment(), onListClick {
                 .setQuery(query, Canteen::class.java).build()
 
 
-        adapter = CanteenFireStoreRecyclerAdapter(options, this)
+        adapter = CanteenFireStoreRecyclerAdapter(options, this, context!!)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.adapter = adapter
 
@@ -112,9 +115,15 @@ class HomeFragment : Fragment(), onListClick {
 
     override fun onItemClick(canteen: Canteen, position: Int) {
         Log.i("123", canteen.canteenName)
+
+        val activity=view!!.context as AppCompatActivity
+        val canteenStoreFragment = CanteenStoreFragment()
+        activity.supportFragmentManager.beginTransaction().replace(R.id.recyclerView, canteenStoreFragment)
+            .addToBackStack(null).commit()
+
     }
 
-//    private inner class CanteenViewHolder internal constructor(private val view: View) :
+    //    private inner class CanteenViewHolder internal constructor(private val view: View) :
 //        RecyclerView.ViewHolder(view) {
 //        internal fun setCanteenState(canteen: Canteen) {
 //            val canteenName = view.findViewById<TextView>(R.id.txtCanteen)
@@ -140,14 +149,14 @@ class HomeFragment : Fragment(), onListClick {
 //    }
     override fun onStart() {
         super.onStart()
-        adapter!!.startListening()
+        adapter?.startListening()
     }
 
     override fun onStop() {
         super.onStop()
 
         if (adapter != null) {
-            adapter!!.stopListening()
+            adapter?.stopListening()
         }
     }
 

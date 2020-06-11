@@ -45,6 +45,8 @@ class LoginFragment : Fragment() {
 
         binding.btnSignUp.paintFlags = binding.btnSignUp.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
+        (activity as MainActivity).setNavInvisible()
+
         binding.btnSignUp.setOnClickListener {
 
             it.findNavController()
