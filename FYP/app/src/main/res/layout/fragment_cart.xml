@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    tools:context=".fragments.CartFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cartRecyclerView"
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        tools:context=".fragments.CartFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCheckOut"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        style="?attr/materialButtonOutlinedStyle"
-        android:text="@string/check_out"
-        android:textColor="@color/colorAccent"
-        app:backgroundTint="@android:color/darker_gray"
-        app:strokeColor="@color/colorPrimary"
-        app:strokeWidth="2dp"
-        android:shadowColor="@color/colorPrimaryDark"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/cartRecyclerView"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cartRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCheckOut"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            style="?attr/materialButtonOutlinedStyle"
+            android:text="@string/check_out"
+            android:textColor="@color/colorAccent"
+            app:backgroundTint="@android:color/darker_gray"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="2dp"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/cartRecyclerView"/>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>
