@@ -1,7 +1,6 @@
 package com.example.fyp.FirestoreAdapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +14,9 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 
-class StoreFirestoreAdapter(options: FirestoreRecyclerOptions<CanteenStore>, var onListClick: onListClick1
-                            , var context : Context
+class StoreFirestoreAdapter(
+    options: FirestoreRecyclerOptions<CanteenStore>, var onListClick: onListClick1
+    , var context: Context
 ) :
     FirestoreRecyclerAdapter<CanteenStore, CanteenStoreViewHolder>(options) {
 
@@ -28,25 +28,33 @@ class StoreFirestoreAdapter(options: FirestoreRecyclerOptions<CanteenStore>, var
         return CanteenStoreViewHolder(view, context)
     }
 
-    override fun onBindViewHolder(holder: CanteenStoreViewHolder, position: Int, model: CanteenStore) {
+    override fun onBindViewHolder(
+        holder: CanteenStoreViewHolder,
+        position: Int,
+        model: CanteenStore
+    ) {
         holder.setCanteenState(model, onListClick, holder)
 
     }
 
 }
 
-class CanteenStoreViewHolder internal constructor(private val view: View, var context : Context) :
+class CanteenStoreViewHolder internal constructor(private val view: View, var context: Context) :
     RecyclerView.ViewHolder(view) {
 
-    internal fun setCanteenState(store: CanteenStore, onListClick: onListClick1, holder : CanteenStoreViewHolder) {
+    internal fun setCanteenState(
+        store: CanteenStore,
+        onListClick: onListClick1,
+        holder: CanteenStoreViewHolder
+    ) {
         val storeName = view.findViewById<TextView>(R.id.txtStoreName)
         storeName.text = store.storeName
 
 
-
         val image = view.findViewById<ImageView>(R.id.imgStore)
 
-        val a = FirebaseStorage.getInstance().getReference(store.storeImage!!)
+        val a = FirebaseStorage.getInstance()
+            .getReference("Store/" + store.storeImage!!)
 
         image.setOnClickListener {
             onListClick.onItemClick(store, adapterPosition)
@@ -61,8 +69,8 @@ class CanteenStoreViewHolder internal constructor(private val view: View, var co
     }
 }
 
-interface onListClick1{
-    fun onItemClick(store : CanteenStore, position : Int){
+interface onListClick1 {
+    fun onItemClick(store: CanteenStore, position: Int) {
 
     }
 }
