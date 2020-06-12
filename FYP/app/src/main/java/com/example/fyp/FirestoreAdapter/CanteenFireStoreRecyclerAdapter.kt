@@ -1,22 +1,18 @@
-package com.example.fyp.Adapter
+package com.example.fyp.FirestoreAdapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.fyp.Class.Canteen
-import com.example.fyp.MenuModule.CanteenStoreFragment
 import com.example.fyp.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 
 class CanteenFireStoreRecyclerAdapter(options: FirestoreRecyclerOptions<Canteen>, var onListClick2: onListClick
@@ -31,7 +27,7 @@ class CanteenFireStoreRecyclerAdapter(options: FirestoreRecyclerOptions<Canteen>
     }
 
     override fun onBindViewHolder(holder: CanteenViewHolder, position: Int, model: Canteen) {
-        holder.setCanteenState(model, onListClick2)
+        holder.setCanteenState(model, onListClick2, holder)
 
     }
 
@@ -40,19 +36,34 @@ class CanteenFireStoreRecyclerAdapter(options: FirestoreRecyclerOptions<Canteen>
 class CanteenViewHolder internal constructor(private val view: View, var context : Context) :
     RecyclerView.ViewHolder(view) {
 
-    internal fun setCanteenState(canteen: Canteen, onListClick2: onListClick) {
+    internal fun setCanteenState(canteen: Canteen, onListClick2: onListClick, holder : CanteenViewHolder) {
         val canteenName = view.findViewById<TextView>(R.id.txtCanteen)
         canteenName.text = canteen.canteenName
         val canteenDesciption = view.findViewById<TextView>(R.id.txtDescription)
         canteenDesciption.text = canteen.time.toString()
+        
 
+//        view.setOnClickListener{
+//            onListClick2.onItemClick(canteen, adapterPosition)
+//        }
 
-        view.setOnClickListener{
+        val icon = view.findViewById<ImageView>(R.id.imgIcon)
+        val title = view.findViewById<RelativeLayout>(R.id.cardTitle)
+        val image = view.findViewById<ImageView>(R.id.imgCanteen)
+
+        val a = FirebaseStorage.getInstance().getReference(canteen.image!!)
+
+        title.setOnClickListener {
             onListClick2.onItemClick(canteen, adapterPosition)
         }
 
-        val image = view.findViewById<ImageView>(R.id.imgCanteen)
-        val a = FirebaseStorage.getInstance().getReference(canteen.image!!)
+        icon.setOnClickListener {
+            onListClick2.onItemClick(canteen, adapterPosition)
+        }
+        image.setOnClickListener {
+            onListClick2.onItemClick(canteen, adapterPosition)
+        }
+
 
         a.downloadUrl.addOnSuccessListener {
             Picasso.get()

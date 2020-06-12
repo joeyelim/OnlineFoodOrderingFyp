@@ -67,37 +67,48 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
-                    android:text="Noodle" />
+                    android:icon="@drawable/ic_noodles1"
+                    android:text="  Noodle  " />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
-                    android:text="Rice" />
+                    android:icon="@drawable/ic_rice"
+                    android:text="   Rice   " />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
-                    android:text="Spicy" />
+                    android:icon="@drawable/ic_hot_chili"
+                    android:text="  Spicy  " />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
+                    android:icon="@drawable/ic_hot_soup"
+                    android:text="Soup" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_vegetarian"
                     android:text="Vegetarian" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
-                    android:text="Beverage" />
+                    android:icon="@drawable/ic_beverage"
+                    android:text=" Beverage " />
 
             </com.google.android.material.tabs.TabLayout>
 
-
         </androidx.core.widget.NestedScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@+id/nestedScrollView" />
 
 
         <androidx.recyclerview.widget.RecyclerView

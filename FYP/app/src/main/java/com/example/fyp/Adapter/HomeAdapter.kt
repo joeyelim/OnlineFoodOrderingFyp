@@ -1,9 +1,8 @@
-package com.example.fyp.fragments
+package com.example.fyp.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.Canteen
 import kotlinx.android.synthetic.main.canteen_row.view.*
@@ -17,7 +16,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater
             .inflate(com.example.fyp.R.layout.canteen_row, parent, false) as View
@@ -29,7 +28,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         return data.size
     }
 
-    override fun onBindViewHolder(holder: HomeAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 //        val item: Canteen = data[position]
 //        var content: String = ""
         holder.bindItems(data[position])

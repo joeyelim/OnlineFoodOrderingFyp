@@ -25,7 +25,7 @@ class CanteenStoreFragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding = DataBindingUtil.inflate(
-            inflater, com.example.fyp.R.layout.fragment_home, container, false
+            inflater, com.example.fyp.R.layout.fragment_canteen_store, container, false
         )
 
         (activity as MainActivity).setNavVisible()

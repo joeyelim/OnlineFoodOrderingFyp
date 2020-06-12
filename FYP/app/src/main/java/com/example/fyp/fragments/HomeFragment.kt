@@ -6,17 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fyp.Adapter.CanteenFireStoreRecyclerAdapter
-import com.example.fyp.Adapter.onListClick
+import com.example.fyp.FirestoreAdapter.CanteenFireStoreRecyclerAdapter
+import com.example.fyp.FirestoreAdapter.onListClick
 import com.example.fyp.Class.Canteen
 import com.example.fyp.MainActivity
-import com.example.fyp.MenuModule.CanteenStoreFragment
-import com.example.fyp.R
 import com.example.fyp.databinding.FragmentHomeBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -116,10 +113,8 @@ class HomeFragment : Fragment(), onListClick {
     override fun onItemClick(canteen: Canteen, position: Int) {
         Log.i("123", canteen.canteenName)
 
-        val activity=view!!.context as AppCompatActivity
-        val canteenStoreFragment = CanteenStoreFragment()
-        activity.supportFragmentManager.beginTransaction().replace(R.id.recyclerView, canteenStoreFragment)
-            .addToBackStack(null).commit()
+        this.findNavController()
+            .navigate(HomeFragmentDirections.actionFragmentHomeToCanteenStoreFragment())
 
     }
 
