@@ -105,7 +105,7 @@
     <fragment
         android:id="@+id/foodFragment"
         android:name="com.example.fyp.MenuModule.FoodFragment"
-        android:label="fragment_food"
+        android:label="FOOD"
         tools:layout="@layout/fragment_food" />
     <fragment
         android:id="@+id/foodDetailFragment"
@@ -144,6 +144,10 @@
     <fragment
         android:id="@+id/canteenStoreFragment"
         android:name="com.example.fyp.MenuModule.CanteenStoreFragment"
-        android:label="fragment_canteen_store"
-        tools:layout="@layout/fragment_canteen_store" />
+        android:label="CANTEEN STORE"
+        tools:layout="@layout/fragment_canteen_store">
+        <action
+            android:id="@+id/action_canteenStoreFragment_to_foodFragment"
+            app:destination="@+id/foodFragment" />
+    </fragment>
 </navigation>

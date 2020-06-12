@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MenuModule.CanteenStoreFragment">
@@ -67,38 +72,49 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
-                    android:text="Noodle" />
+                    android:icon="@drawable/ic_noodles1"
+                    android:text="  Noodle  " />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
-                    android:text="Rice" />
+                    android:icon="@drawable/ic_rice"
+                    android:text="   Rice   " />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
-                    android:text="Spicy" />
+                    android:icon="@drawable/ic_hot_chili"
+                    android:text="  Spicy  " />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
+                    android:icon="@drawable/ic_hot_soup"
+                    android:text="Soup" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_vegetarian"
                     android:text="Vegetarian" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_profile"
-                    android:text="Beverage" />
+                    android:icon="@drawable/ic_beverage"
+                    android:text=" Beverage " />
 
             </com.google.android.material.tabs.TabLayout>
 
-
         </androidx.core.widget.NestedScrollView>
 
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@+id/nestedScrollView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCanteenStore"
@@ -106,8 +122,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+            app:layout_constraintTop_toBottomOf="@+id/line" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </ScrollView>
 </layout>
