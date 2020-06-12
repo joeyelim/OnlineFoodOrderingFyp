@@ -16,8 +16,6 @@ class Canteen{
 
     ) {
         this.time = time
-
-
         this.image = image
         this.type = type
         this.canteenName = canteenName
