@@ -50,12 +50,6 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
-//        appBarConfiguration = AppBarConfiguration(
-//            topLevelDestinationIds = setOf (
-//                R.id.cartFragment
-//            )
-//
-//        )
 
         initRecycleView()
 
@@ -66,26 +60,6 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//
-//        val inflater = menuInflater
-//        inflater.inflate(R.menu.food_app_bar, menu)
-//
-//        return true
-//    }
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId) {
-//            R.id.profileFragment -> {
-//                Toast.makeText(this, "You haven't login...", Toast.LENGTH_LONG).show()
-//                item.onNavDestinationSelected(navController)
-//                return true
-//            }else -> {
-//                return super.onOptionsItemSelected(item)
-//            }
-//        }
-//    }
-//
 
     fun initRecycleView() {
         Log.i("123","123")
@@ -106,7 +80,7 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
     }
 
     override fun onItemClick(store: CanteenStore, position: Int) {
-        Log.i("123", store.storeName)
+        Log.i("123", store.store_name)
         this.findNavController()
             .navigate(CanteenStoreFragmentDirections.actionCanteenStoreFragmentToFoodFragment())
 

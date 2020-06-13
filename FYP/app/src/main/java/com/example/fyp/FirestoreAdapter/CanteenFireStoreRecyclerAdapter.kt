@@ -51,7 +51,7 @@ class CanteenViewHolder internal constructor(private val view: View, var context
         val title = view.findViewById<RelativeLayout>(R.id.cardTitle)
         val image = view.findViewById<ImageView>(R.id.imgCanteen)
 
-        val a = FirebaseStorage.getInstance().getReference(canteen.image!!)
+        val a = FirebaseStorage.getInstance().getReference("Canteen/" + canteen.image!!)
 
         title.setOnClickListener {
             onListClick2.onItemClick(canteen, adapterPosition)

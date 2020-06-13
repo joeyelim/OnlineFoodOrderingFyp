@@ -40,13 +40,13 @@ class CanteenStoreViewHolder internal constructor(private val view: View, var co
 
     internal fun setCanteenState(store: CanteenStore, onListClick: onListClick1, holder : CanteenStoreViewHolder) {
         val storeName = view.findViewById<TextView>(R.id.txtStoreName)
-        storeName.text = store.storeName
+        storeName.text = store.store_name
 
 
 
         val image = view.findViewById<ImageView>(R.id.imgStore)
 
-        val a = FirebaseStorage.getInstance().getReference(store.storeImage!!)
+        val a = FirebaseStorage.getInstance().getReference("Store/" + store.store_image!!)
 
         image.setOnClickListener {
             onListClick.onItemClick(store, adapterPosition)
