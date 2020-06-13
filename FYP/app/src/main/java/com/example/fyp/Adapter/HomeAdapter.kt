@@ -37,8 +37,8 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(canteen: Canteen) {
-            itemView.txtCanteen.text = canteen.canteenName
-            itemView.txtDescription.text = canteen.type.toString()
+            itemView.txtCanteen.text = canteen.canteen_name
+            itemView.txtDescription.text = canteen.time.toString()
         }
 
     }

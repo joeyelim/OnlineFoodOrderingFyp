@@ -96,7 +96,7 @@ class HomeFragment : Fragment(), onListClick {
 //
     fun initRecycleView() {
         val db = FirebaseFirestore.getInstance()
-        val query = db.collection(("Canteen")).orderBy("type", Query.Direction.ASCENDING)
+        val query = db.collection(("Canteen")).orderBy("canteen_name", Query.Direction.ASCENDING)
 
 
 
@@ -112,7 +112,7 @@ class HomeFragment : Fragment(), onListClick {
     }
 
     override fun onItemClick(canteen: Canteen, position: Int) {
-        Log.i("123", canteen.canteenName)
+        Log.i("123", canteen.canteen_name)
 
         this.findNavController()
             .navigate(HomeFragmentDirections.actionFragmentHomeToCanteenStoreFragment())

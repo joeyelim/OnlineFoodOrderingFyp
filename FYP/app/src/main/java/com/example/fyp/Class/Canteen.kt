@@ -1,8 +1,7 @@
 package com.example.fyp.Class
 
 class Canteen{
-    var canteenName : String? = ""
-    var type : Int? = 0
+    var canteen_name : String? = ""
     var image : String? = ""
     var time : String? = ""
 
@@ -11,13 +10,11 @@ class Canteen{
     constructor(
         time: String?,
         image: String?,
-        type: Int?,
-        canteenName : String?
+        canteen_name : String?
 
     ) {
         this.time = time
         this.image = image
-        this.type = type
-        this.canteenName = canteenName
+        this.canteen_name = canteen_name
     }
 }

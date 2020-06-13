@@ -38,7 +38,7 @@ class CanteenViewHolder internal constructor(private val view: View, var context
 
     internal fun setCanteenState(canteen: Canteen, onListClick2: onListClick, holder : CanteenViewHolder) {
         val canteenName = view.findViewById<TextView>(R.id.txtCanteen)
-        canteenName.text = canteen.canteenName
+        canteenName.text = canteen.canteen_name
         val canteenDesciption = view.findViewById<TextView>(R.id.txtDescription)
         canteenDesciption.text = canteen.time.toString()
         
