@@ -51,7 +51,6 @@ class CanteenViewHolder internal constructor(private val view: View, var context
         val title = view.findViewById<RelativeLayout>(R.id.cardTitle)
         val image = view.findViewById<ImageView>(R.id.imgCanteen)
 
-        val a = FirebaseStorage.getInstance().getReference(canteen.image!!)
 
         title.setOnClickListener {
             onListClick2.onItemClick(canteen, adapterPosition)
@@ -64,6 +63,7 @@ class CanteenViewHolder internal constructor(private val view: View, var context
             onListClick2.onItemClick(canteen, adapterPosition)
         }
 
+        val a = FirebaseStorage.getInstance().getReference(canteen.image!!)
 
         a.downloadUrl.addOnSuccessListener {
             Picasso.get()

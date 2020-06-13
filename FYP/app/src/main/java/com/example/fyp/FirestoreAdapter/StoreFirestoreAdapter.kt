@@ -11,6 +11,7 @@ import com.example.fyp.Class.CanteenStore
 import com.example.fyp.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 
@@ -48,17 +49,23 @@ class CanteenStoreViewHolder internal constructor(private val view: View, var co
         holder: CanteenStoreViewHolder
     ) {
         val storeName = view.findViewById<TextView>(R.id.txtStoreName)
-        storeName.text = store.storeName
+        storeName.text = store.store_name
+
+//        val canteen = view.findViewById<TextView>(R.id.canteen)
+//        canteen.text = store.canteen
 
 
         val image = view.findViewById<ImageView>(R.id.imgStore)
+//        val imgcanteen = view.findViewById<ImageView>(R.id.canteenImage)
 
-        val a = FirebaseStorage.getInstance()
-            .getReference("Store/" + store.storeImage!!)
+        val a = FirebaseStorage.getInstance().getReference(store.store_image!!)
+
 
         image.setOnClickListener {
             onListClick.onItemClick(store, adapterPosition)
         }
+
+
 
 
         a.downloadUrl.addOnSuccessListener {

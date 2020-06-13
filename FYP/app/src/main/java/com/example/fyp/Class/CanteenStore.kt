@@ -1,14 +1,17 @@
 package com.example.fyp.Class
 
 class CanteenStore {
-    var storeName : String? = ""
-    var storeImage : String? = ""
+    var store_name : String? = ""
+    var store_image : String? = ""
+    var canteen: String? = ""
 
     constructor()
 
-    constructor(storeName: String?, storeImage: String?) {
-        this.storeName = storeName
-        this.storeImage = storeImage
+    constructor(store_name: String?, store_image: String?, canteen: String?) {
+        this.store_name = store_name
+        this.store_image = store_image
+        this.canteen = canteen
     }
+
 
 }

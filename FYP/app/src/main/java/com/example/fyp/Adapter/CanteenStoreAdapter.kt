@@ -8,6 +8,7 @@ import com.example.fyp.Class.Canteen
 import com.example.fyp.Class.CanteenStore
 import kotlinx.android.synthetic.main.canteen_row.view.*
 import kotlinx.android.synthetic.main.canteen_store_row.view.*
+import kotlinx.android.synthetic.main.fragment_canteen_store.view.*
 
 
 class CanteenStoreAdapter: RecyclerView.Adapter<CanteenStoreAdapter.ViewHolder>() {
@@ -20,7 +21,8 @@ class CanteenStoreAdapter: RecyclerView.Adapter<CanteenStoreAdapter.ViewHolder>(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(store: CanteenStore) {
-            itemView.txtStoreName.text = store.storeName
+            itemView.txtStoreName.text = store.store_name
+//            itemView.canteen.text = store.canteen
         }
 
     }
