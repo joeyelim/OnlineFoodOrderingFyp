@@ -64,4 +64,10 @@
     <string name="cancel">Cancel</string>
     <string name="canteen_name"><u>Canteen Name</u></string>
     <string name="profile_image">profile image</string>
+    <string name="noodle">Noodle</string>
+    <string name="rice">Rice</string>
+    <string name="spicy">Spicy</string>
+    <string name="soup">Soup</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="beverage">Beverage</string>
 </resources>
