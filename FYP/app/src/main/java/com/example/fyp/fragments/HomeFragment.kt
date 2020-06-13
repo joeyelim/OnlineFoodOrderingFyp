@@ -99,6 +99,7 @@ class HomeFragment : Fragment(), onListClick {
         val query = db.collection(("Canteen")).orderBy("type", Query.Direction.ASCENDING)
 
 
+
         val options =
             FirestoreRecyclerOptions.Builder<Canteen>()
                 .setQuery(query, Canteen::class.java).build()

@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="14dp"
         android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="14dp"
         android:clickable="true"
         android:clipChildren="false"
@@ -26,11 +27,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
             <TextView
+                android:id="@+id/box"
                 android:layout_width="126dp"
                 android:layout_height="127dp"
                 android:background="@drawable/card_bg" />
@@ -42,7 +46,7 @@
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="3dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/citc_cafe" />
+                android:src="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/txtStoreName"
@@ -59,7 +63,7 @@
                 android:id="@+id/imgIcon"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/double_arrow" />

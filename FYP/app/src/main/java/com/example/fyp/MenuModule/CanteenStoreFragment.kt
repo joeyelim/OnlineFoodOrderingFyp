@@ -65,8 +65,7 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
         Log.i("123","123")
         val db = FirebaseFirestore.getInstance()
         val query = db.collection("Canteen").document("1groVeeLm07ilrWRo0il")
-            .collection("Store").orderBy("storeName", Query.Direction.ASCENDING)
-
+            .collection("Store").orderBy("store_name", Query.Direction.ASCENDING)
 
         val options =
             FirestoreRecyclerOptions.Builder<CanteenStore>()
