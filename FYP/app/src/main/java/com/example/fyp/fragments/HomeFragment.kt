@@ -112,7 +112,6 @@ class HomeFragment : Fragment(), onListClick {
     }
 
     override fun onItemClick(canteen: Canteen, position: Int) {
-        Log.i("123", canteen.canteen_name)
 
         this.findNavController()
             .navigate(HomeFragmentDirections.actionFragmentHomeToCanteenStoreFragment())

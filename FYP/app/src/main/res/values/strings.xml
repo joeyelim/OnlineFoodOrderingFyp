@@ -64,4 +64,18 @@
     <string name="cancel">Cancel</string>
     <string name="canteen_name"><u>Canteen Name</u></string>
     <string name="profile_image">profile image</string>
+    <string name="noodle">Noodle</string>
+    <string name="rice">Rice</string>
+    <string name="spicy">Spicy</string>
+    <string name="soup">Soup</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="beverage">Beverage</string>
+    <string name="content_description_media">content_description_media</string>
+    <string name="rm_xxx">RM xxx</string>
+    <string name="xx_review">(xx review)</string>
+    <string name="price">Price:</string>
+    <string name="large">(Large)</string>
+    <string name="small">(Small)</string>
+    <string name="store_name">store name</string>
+
 </resources>
