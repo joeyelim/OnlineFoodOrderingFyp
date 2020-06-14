@@ -42,10 +42,8 @@ class FoodViewHolder internal constructor(private val view: View, var context: C
         foodName.text = food.food_name
 
         val price = view.findViewById<TextView >(R.id.tvPrice)
-//        price.text = food.small_price
-
-
-
+        price.text = food.price.toString()
+        
         val image = view.findViewById<ImageView>(R.id.imgFood)
         val a = FirebaseStorage.getInstance().getReference(food.food_image!!)
 
