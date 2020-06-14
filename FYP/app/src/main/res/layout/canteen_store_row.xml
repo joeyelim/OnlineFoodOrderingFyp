@@ -30,6 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/boxlayout"
+                android:layout_width="match_parent"
+                android:layout_height="106dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/box"
@@ -50,6 +58,9 @@
                 android:layout_marginBottom="3dp"
                 android:scaleType="centerCrop"
                 android:src="@color/colorAccent"
+                android:background="@drawable/frame_image_view"
+                android:cropToPadding="true"
+                android:adjustViewBounds="true"
                 app:layout_constraintBottom_toBottomOf="@+id/box"
                 app:layout_constraintEnd_toEndOf="@+id/box"
                 app:layout_constraintStart_toStartOf="@+id/box"

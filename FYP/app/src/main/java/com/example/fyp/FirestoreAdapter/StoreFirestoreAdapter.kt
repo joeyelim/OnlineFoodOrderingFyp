@@ -16,9 +16,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 
 class StoreFirestoreAdapter(
-    options: FirestoreRecyclerOptions<CanteenStore>, var onListClick: onListClick1
-    , var context: Context
-) :
+    options: FirestoreRecyclerOptions<CanteenStore>, var onListClick: onListClick1, var context: Context) :
     FirestoreRecyclerAdapter<CanteenStore, CanteenStoreViewHolder>(options) {
 
 
@@ -51,17 +49,18 @@ class CanteenStoreViewHolder internal constructor(private val view: View, var co
         val storeName = view.findViewById<TextView>(R.id.txtStoreName)
         storeName.text = store.store_name
 
-//        val canteen = view.findViewById<TextView>(R.id.canteen)
-//        canteen.text = store.canteen
-
-
+        val textlayout = view.findViewById<TextView >(R.id.boxlayout)
         val image = view.findViewById<ImageView>(R.id.imgStore)
-//        val imgcanteen = view.findViewById<ImageView>(R.id.canteenImage)
+
 
         val a = FirebaseStorage.getInstance().getReference(store.store_image!!)
 
 
         image.setOnClickListener {
+            onListClick.onItemClick(store, adapterPosition)
+        }
+
+        textlayout.setOnClickListener {
             onListClick.onItemClick(store, adapterPosition)
         }
 

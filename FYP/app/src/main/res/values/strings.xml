@@ -70,4 +70,7 @@
     <string name="soup">Soup</string>
     <string name="vegetarian">Vegetarian</string>
     <string name="beverage">Beverage</string>
+    <string name="content_description_media">content_description_media</string>
+    <string name="rm_xxx">RM xxx</string>
+
 </resources>
