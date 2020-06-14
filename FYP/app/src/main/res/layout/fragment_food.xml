@@ -31,8 +31,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-
             <TextView
                 android:id="@+id/txtStore"
                 android:layout_width="wrap_content"
@@ -63,7 +61,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <HorizontalScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/storelayout">
@@ -75,7 +73,7 @@
 
                 />
 
-        </HorizontalScrollView>
+        </ScrollView>
 
     </RelativeLayout>
 </layout>
