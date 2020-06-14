@@ -72,5 +72,10 @@
     <string name="beverage">Beverage</string>
     <string name="content_description_media">content_description_media</string>
     <string name="rm_xxx">RM xxx</string>
+    <string name="xx_review">(xx review)</string>
+    <string name="price">Price:</string>
+    <string name="large">(Large)</string>
+    <string name="small">(Small)</string>
+    <string name="store_name">store name</string>
 
 </resources>
