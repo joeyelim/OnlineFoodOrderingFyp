@@ -332,7 +332,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtFoodDescTitle" />
 
-                <ScrollView
+                <androidx.core.widget.NestedScrollView
                     android:id="@+id/scrollView2"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
@@ -353,7 +353,7 @@
                         android:text="Vegetarian/vegan cuisine can be delicious, creative and healthy too. The wanton noodle is does not have meat / fish and no egg.  All whole-grain flour in baking, mostly vegan. Some diary would replace with non diary-milk, vegan cheese, and butter."
                         android:textSize="18sp" />
 
-                </ScrollView>
+                </androidx.core.widget.NestedScrollView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
