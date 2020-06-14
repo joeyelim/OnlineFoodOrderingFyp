@@ -41,8 +41,8 @@ class FoodViewHolder internal constructor(private val view: View, var context: C
         val foodName = view.findViewById<TextView>(R.id.tvFoodName)
         foodName.text = food.food_name
 
-        val price = view.findViewById<TextView >(R.id.tvPrice)
-//        price.text = food.small_price
+        val price = view.findViewById<TextView>(R.id.tvPrice)
+        price.text = food.price.toString()
 
 
 
