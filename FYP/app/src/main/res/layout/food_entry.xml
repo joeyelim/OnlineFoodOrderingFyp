@@ -28,7 +28,7 @@
     <ImageView
         android:id="@+id/imgFood"
         android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_height="180dp"
         app:layout_constraintBottom_toTopOf="@+id/tvPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
