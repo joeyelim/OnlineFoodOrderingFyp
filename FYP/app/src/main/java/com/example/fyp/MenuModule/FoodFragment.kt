@@ -45,7 +45,6 @@ class FoodFragment : Fragment(), onListClick2 {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
-        Log.i("123","123")
         initRecycleView()
 
 
@@ -57,7 +56,6 @@ class FoodFragment : Fragment(), onListClick2 {
     }
 
     fun initRecycleView() {
-        Log.i("123","123")
         val db = FirebaseFirestore.getInstance()
         val query = db.collection("Canteen").document("Canteen1")
             .collection("Store").document("Noodle").collection("Food")
@@ -75,9 +73,8 @@ class FoodFragment : Fragment(), onListClick2 {
     }
 
     override fun onItemClick(food: Food, position: Int) {
-
-//        this.findNavController()
-//            .navigate()
+        this.findNavController()
+            .navigate(FoodFragmentDirections.actionFoodFragmentToFoodDetailFragment())
 
     }
 
