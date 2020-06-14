@@ -13,6 +13,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import java.text.DecimalFormat
 
 class FoodFirestoreAdapter(
     options: FirestoreRecyclerOptions<Food>, var onListClick1: onListClick2, var context: Context
@@ -41,8 +42,9 @@ class FoodViewHolder internal constructor(private val view: View, var context: C
         val foodName = view.findViewById<TextView>(R.id.tvFoodName)
         foodName.text = food.food_name
 
+        val dec = DecimalFormat("RM ###.00")
         val price = view.findViewById<TextView >(R.id.tvPrice)
-        price.text = food.price.toString()
+        price.text = dec.format(food.price).toString()
         
         val image = view.findViewById<ImageView>(R.id.imgFood)
         val a = FirebaseStorage.getInstance().getReference(food.food_image!!)
