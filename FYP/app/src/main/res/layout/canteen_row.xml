@@ -91,8 +91,8 @@
 
                 <ImageView
                     android:id="@+id/imgCanteen"
-                    android:layout_width="310dp"
-                    android:layout_height="150dp"
+                    android:layout_width="320dp"
+                    android:layout_height="160dp"
                     android:layout_margin="8dp"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="parent"
