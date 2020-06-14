@@ -63,7 +63,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <HorizontalScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/storelayout">
@@ -75,7 +75,7 @@
 
                 />
 
-        </HorizontalScrollView>
+        </ScrollView>
 
     </RelativeLayout>
 </layout>

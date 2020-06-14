@@ -1,6 +1,7 @@
 package com.example.fyp.FirestoreAdapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +44,9 @@ class FoodViewHolder internal constructor(private val view: View, var context: C
 
         val price = view.findViewById<TextView >(R.id.tvPrice)
         price.text = food.price.toString()
-        
+
+
+
         val image = view.findViewById<ImageView>(R.id.imgFood)
         val a = FirebaseStorage.getInstance().getReference(food.food_image!!)
 
