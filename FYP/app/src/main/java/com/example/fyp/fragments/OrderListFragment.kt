@@ -12,10 +12,12 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.fyp.MainActivity
 import com.example.fyp.MyAdapter
+import com.example.fyp.OrderingModule.CurrentOrderFragment
 
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentOrderListBinding
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.fragment_order_list.*
 
 /**
  * A simple [Fragment] subclass.
@@ -35,8 +37,13 @@ class OrderListFragment : Fragment() {
         (activity as MainActivity).setNavVisible()
 
 
+        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
 
-        tabLayout()
+        viewPagerAdapter.addFragment(CurrentOrderFragment(), "Current Order")
+        viewPagerAdapter.addFragment(CurrentOrderFragment(), "Order History")
+
+        viewPagerAdapter.adapter = viewPagerAdapter
+        binding.tabLayout.setupWithViewPager(viewPager)
 
 
         return binding.root
@@ -49,39 +56,30 @@ class OrderListFragment : Fragment() {
         private val titles: ArrayList<String>
 
         init {
-            fagments= ArrayList()
+            fragments= ArrayList<Fragment>()
+            titles= ArrayList<String>()
         }
 
         override fun getItem(position: Int): Fragment {
-
+            return fragments[position]
         }
 
         override fun getCount(): Int {
+            return fragments.size
+        }
 
+        fun addFragment(fragment:Fragment, title:String){
+            fragments.add(fragment)
+            titles.add(title)
+        }
+
+        override fun getPageTitle(i: Int):CharSequence?{
+            return titles[i]
         }
 
     }
 
-    fun tabLayout(){
-        binding.tabLayout!!.addTab(binding.tabLayout!!.newTab().setText("Current Order"))
-        binding.tabLayout!!.addTab(binding.tabLayout!!.newTab().setText("Order History"))
 
-        binding.tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-
-        binding.viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout))
-
-        binding.tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                binding.viewPager!!.currentItem = tab.position
-            }
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
-        })
-    }
 
 
 
