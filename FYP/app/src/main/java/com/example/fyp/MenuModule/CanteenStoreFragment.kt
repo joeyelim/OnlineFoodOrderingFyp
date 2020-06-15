@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.CanteenStore
@@ -42,6 +43,11 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
+        binding.btnCart.setOnClickListener{
+            it.requestFocus()
+            it.findNavController()
+                .navigate(FoodFragmentDirections.actionFoodFragmentToCartFragment())
+        }
 
         initRecycleView()
 

@@ -46,7 +46,7 @@ class OrderListFragment : Fragment() {
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
 
         viewPagerAdapter.addFragment(CurrentOrderFragment(), "Current Order")
-        viewPagerAdapter.addFragment(CurrentOrderFragment(), "Order History")
+        viewPagerAdapter.addFragment(OrderHistoryFragment(), "Order History")
 
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
