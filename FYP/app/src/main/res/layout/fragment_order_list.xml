@@ -1,101 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:gravity="center|bottom"
-    tools:context=".fragments.OrderListFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        style="@style/Theme.App2"
-        app:tabBackground="@drawable/tabs_bgcolor"
-        app:tabSelectedTextColor="@color/colorPrimaryDark"
-        app:tabTextColor="@color/colorPrimaryDark"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabMode="fixed">
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:gravity="center|bottom"
+        tools:context=".fragments.OrderListFragment">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="120dp"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            style="@style/Theme.App2"
+            app:tabBackground="@drawable/tabs_bgcolor"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextColor="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Current History" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabMode="fixed">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="120dp"
+
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabs" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Order History"
-            />
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <View
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/tabProgress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabs" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabProgress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line"
-        app:tabMode="fixed"
-        app:tabTextAppearance="@style/MyCustomTabText">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Pending"
-            />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Preparing"
-            />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Ready"
-            />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Taken"
-            />
-    </com.google.android.material.tabs.TabLayout>
-
-    <View
-        android:id="@+id/line2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabProgress" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
-        android:layout_width="409dp"
-        android:layout_height="505dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabProgress" />
+            android:background="#00a294"
+            app:tabTextColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.viewpager.widget.ViewPager>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+<!--<com.google.android.material.tabs.TabItem-->
+<!--android:layout_width="120dp"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="Current Order" />-->
+
+<!--<com.google.android.material.tabs.TabItem-->
+<!--android:layout_width="120dp"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="Order History"-->
+<!--    />-->
