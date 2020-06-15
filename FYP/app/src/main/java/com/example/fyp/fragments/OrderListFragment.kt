@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.fyp.MainActivity
 import com.example.fyp.OrderingModule.CurrentOrderFragment
+import com.example.fyp.OrderingModule.OrderHistoryFragment
+import com.example.fyp.R
 import com.example.fyp.databinding.FragmentOrderListBinding
 
 
@@ -46,6 +48,7 @@ class OrderListFragment : Fragment() {
 //        viewPager.adapter = viewPagerAdapter
 //        binding.tabProgress.setupWithViewPager(viewPager)
 //        tabLayout.setupWithViewPager(viewPager)
+
 
 
         return binding.root
@@ -88,9 +91,6 @@ class OrderListFragment : Fragment() {
 //        }
 //
 //    }
-
-
-
 
 
 

@@ -38,13 +38,10 @@ class FoodDetailFragment : Fragment() {
             it.findNavController()
                 .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToCartFragment())
         }
-        binding.icCategory.setOnClickListener{
-            it.findNavController()
-                .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToRatingFragment())
-        }
+
         binding.imgStar.setOnClickListener{
             it.findNavController()
-                .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToProfileFragment())
+                .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToRatingFragment())
         }
 
         return binding.root

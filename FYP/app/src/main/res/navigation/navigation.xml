@@ -91,7 +91,11 @@
         android:id="@+id/cartFragment"
         android:name="com.example.fyp.fragments.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_placeOrderFragment"
+            app:destination="@id/placeOrderFragment" />
+    </fragment>
     <fragment
         android:id="@+id/orderListFragment"
         android:name="com.example.fyp.fragments.OrderListFragment"
@@ -170,4 +174,8 @@
             android:id="@+id/action_canteenStoreFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/placeOrderFragment"
+        android:name="com.example.fyp.OrderingModule.PlaceOrderFragment"
+        android:label="PLACE ORDER" />
 </navigation>
