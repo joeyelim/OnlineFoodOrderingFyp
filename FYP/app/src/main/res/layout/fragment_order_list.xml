@@ -6,25 +6,48 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center|bottom"
+        android:orientation="vertical"
         tools:context=".fragments.OrderListFragment">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             style="@style/Theme.App2"
-            app:tabBackground="@drawable/tabs_bgcolor"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tabMode="fixed">
+            app:tabBackground="@drawable/tabs_bgcolor"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextColor="@color/colorPrimaryDark">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CurrentOrder" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OrderHistory" />
 
 
         </com.google.android.material.tabs.TabLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+            app:tabMode="fixed"
+            app:tabTextAppearance="@style/MyCustomTabText">
+
+        </com.google.android.material.tabs.TabLayout>
+
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
@@ -33,22 +56,23 @@
             android:background="#00a294"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+            app:layout_constraintTop_toBottomOf="@+id/tabProgress">
 
 
         </androidx.viewpager.widget.ViewPager>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
 
-<!--<com.google.android.material.tabs.TabItem-->
-<!--android:layout_width="120dp"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="Current Order" />-->
+    <!--<com.google.android.material.tabs.TabItem-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Current Order" />-->
 
-<!--<com.google.android.material.tabs.TabItem-->
-<!--android:layout_width="120dp"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="Order History"-->
-<!--    />-->
+    <!--<com.google.android.material.tabs.TabItem-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Order History"-->
+    <!--    />-->

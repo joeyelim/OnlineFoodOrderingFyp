@@ -9,16 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.example.fyp.MainActivity
-import com.example.fyp.MyAdapter
 import com.example.fyp.OrderingModule.CurrentOrderFragment
 import com.example.fyp.databinding.FragmentOrderListBinding
-import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fragment_order_list.*
-import androidx.fragment.app.FragmentActivity
-import android.app.Activity
-import android.content.Context
 
 
 /**
@@ -42,44 +35,56 @@ class OrderListFragment : Fragment() {
 
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
 
-        viewPagerAdapter.addFragment(CurrentOrderFragment(), "Current Order")
-        viewPagerAdapter.addFragment(CurrentOrderFragment(), "Order History")
+        viewPagerAdapter.setFragment()
 
         val viewPager = binding.viewPager
-        val tabLayout = binding.tabLayout
+        val tabLayout = binding.tabProgress
 
         viewPager.adapter = viewPagerAdapter
-        binding.tabLayout.setupWithViewPager(viewPager)
+        binding.tabProgress.setupWithViewPager(viewPager)
         tabLayout.setupWithViewPager(viewPager)
 
 
         return binding.root
     }
 
-    internal class ViewPagerAdapter(fragmentManager: FragmentManager):
-        FragmentPagerAdapter(fragmentManager){
+    // can pass in arrayList of String for maintainability
+    internal class ViewPagerAdapter(fragmentManager: FragmentManager) :
+        FragmentPagerAdapter(fragmentManager) {
 
         private val fragments: ArrayList<Fragment> = ArrayList()
         private val titles: ArrayList<String> = ArrayList()
 
         override fun getItem(position: Int): Fragment {
-            return fragments[position]
+            //  parameter can use arrayList, probably will
+            // just use an identifier
+            return CurrentOrderFragment().newInstance(position.toString())
         }
 
         override fun getCount(): Int {
-            return fragments.size
+            return 4
         }
 
-        fun addFragment(fragment:Fragment, title:String){
+        fun addFragment(fragment: Fragment, title: String) {
             fragments.add(fragment)
             titles.add(title)
         }
 
-        override fun getPageTitle(i: Int):CharSequence?{
+
+        fun setFragment() {
+            titles.add("Pending")
+            titles.add("Preparing")
+            titles.add("Completed")
+            titles.add("Taken")
+        }
+
+        override fun getPageTitle(i: Int): CharSequence? {
             return titles[i]
         }
 
     }
+
+
 
 
 
