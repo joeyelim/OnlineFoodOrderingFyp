@@ -13,11 +13,13 @@ import androidx.viewpager.widget.ViewPager
 import com.example.fyp.MainActivity
 import com.example.fyp.MyAdapter
 import com.example.fyp.OrderingModule.CurrentOrderFragment
-
-import com.example.fyp.R
 import com.example.fyp.databinding.FragmentOrderListBinding
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_order_list.*
+import androidx.fragment.app.FragmentActivity
+import android.app.Activity
+import android.content.Context
+
 
 /**
  * A simple [Fragment] subclass.
@@ -36,14 +38,19 @@ class OrderListFragment : Fragment() {
 
         (activity as MainActivity).setNavVisible()
 
+        val supportFragmentManager = this.activity!!.supportFragmentManager
 
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
 
         viewPagerAdapter.addFragment(CurrentOrderFragment(), "Current Order")
         viewPagerAdapter.addFragment(CurrentOrderFragment(), "Order History")
 
-        viewPagerAdapter.adapter = viewPagerAdapter
+        val viewPager = binding.viewPager
+        val tabLayout = binding.tabLayout
+
+        viewPager.adapter = viewPagerAdapter
         binding.tabLayout.setupWithViewPager(viewPager)
+        tabLayout.setupWithViewPager(viewPager)
 
 
         return binding.root
@@ -52,13 +59,8 @@ class OrderListFragment : Fragment() {
     internal class ViewPagerAdapter(fragmentManager: FragmentManager):
         FragmentPagerAdapter(fragmentManager){
 
-        private val fragments: ArrayList<Fragment>
-        private val titles: ArrayList<String>
-
-        init {
-            fragments= ArrayList<Fragment>()
-            titles= ArrayList<String>()
-        }
+        private val fragments: ArrayList<Fragment> = ArrayList()
+        private val titles: ArrayList<String> = ArrayList()
 
         override fun getItem(position: Int): Fragment {
             return fragments[position]
