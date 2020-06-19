@@ -77,5 +77,14 @@
     <string name="large">(Large)</string>
     <string name="small">(Small)</string>
     <string name="store_name">store name</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="paid">Paid</string>
+    <string name="_15_mar_2020">15 Mar, 2020</string>
+    <string name="current_order">Current Order</string>
+    <string name="order_history">Order History</string>
+    <string name="select_option">Select Option</string>
+    <string name="take_away">TAKE AWAY</string>
+    <string name="dine_in">DINE-IN</string>
+
 
 </resources>

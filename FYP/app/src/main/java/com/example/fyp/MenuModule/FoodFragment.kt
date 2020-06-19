@@ -9,7 +9,9 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
+import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,6 +49,11 @@ class FoodFragment : Fragment(), onListClick2 {
 
         initRecycleView()
 
+        binding.btnCart.setOnClickListener{
+            it.requestFocus()
+            it.findNavController()
+                .navigate(FoodFragmentDirections.actionFoodFragmentToCartFragment())
+        }
 
         return binding.root
     }
@@ -75,7 +82,6 @@ class FoodFragment : Fragment(), onListClick2 {
     override fun onItemClick(food: Food, position: Int) {
         this.findNavController()
             .navigate(FoodFragmentDirections.actionFoodFragmentToFoodDetailFragment())
-
     }
 
     override fun onStart() {

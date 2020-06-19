@@ -91,7 +91,11 @@
         android:id="@+id/cartFragment"
         android:name="com.example.fyp.fragments.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_placeOrderFragment"
+            app:destination="@id/placeOrderFragment" />
+    </fragment>
     <fragment
         android:id="@+id/orderListFragment"
         android:name="com.example.fyp.fragments.OrderListFragment"
@@ -110,16 +114,29 @@
         <action
             android:id="@+id/action_foodFragment_to_foodDetailFragment"
             app:destination="@id/foodDetailFragment" />
+        <action
+            android:id="@+id/action_foodFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/foodDetailFragment"
         android:name="com.example.fyp.MenuModule.FoodDetailFragment"
         android:label="FOOD DETAILS"
-        tools:layout="@layout/fragment_food_detail" />
+        tools:layout="@layout/fragment_food_detail" >
+        <action
+            android:id="@+id/action_foodDetailFragment_to_ratingFragment"
+            app:destination="@id/ratingFragment" />
+        <action
+            android:id="@+id/action_foodDetailFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_foodDetailFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ratingFragment"
         android:name="com.example.fyp.MenuModule.RatingFragment"
-        android:label="fragment_rating"
+        android:label="RATING FOOD"
         tools:layout="@layout/fragment_rating" />
     <fragment
         android:id="@+id/addToCartFragment"
@@ -153,5 +170,12 @@
         <action
             android:id="@+id/action_canteenStoreFragment_to_foodFragment"
             app:destination="@+id/foodFragment" />
+        <action
+            android:id="@+id/action_canteenStoreFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/placeOrderFragment"
+        android:name="com.example.fyp.OrderingModule.PlaceOrderFragment"
+        android:label="PLACE ORDER" />
 </navigation>

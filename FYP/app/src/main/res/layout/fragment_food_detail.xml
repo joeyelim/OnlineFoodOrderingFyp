@@ -5,7 +5,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/imgCart"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
@@ -351,7 +352,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Vegetarian/vegan cuisine can be delicious, creative and healthy too. The wanton noodle is does not have meat / fish and no egg.  All whole-grain flour in baking, mostly vegan. Some diary would replace with non diary-milk, vegan cheese, and butter."
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/content" />
 
                 </androidx.core.widget.NestedScrollView>
 

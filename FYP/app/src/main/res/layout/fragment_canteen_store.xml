@@ -52,15 +52,17 @@
                 app:layout_constraintTop_toTopOf="@+id/canteenImage" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btnCart"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_corner_button"
-                app:cornerRadius="180dp"
                 android:tint="@color/colorYellow"
+                android:clickable="true"
+                android:focusable="true"
+                app:cornerRadius="180dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_shopping_cart"
