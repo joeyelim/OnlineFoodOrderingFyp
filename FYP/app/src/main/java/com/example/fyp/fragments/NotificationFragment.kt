@@ -34,8 +34,8 @@ class NotificationFragment : Fragment() {
         )
 
         binding.btnUploadFirestore.setOnClickListener {
-            //            uploadData()
-            updateData()
+            uploadData()
+//            updateData()
         }
 
         binding.btnDeleteFirestore.setOnClickListener {
@@ -82,20 +82,36 @@ class NotificationFragment : Fragment() {
 
         val db = FirebaseFirestore.getInstance()
 
-        for ((index, data) in dataList.withIndex()) {
-            db.collection("Test3").document("Canteen$index")
-                .collection("nested1").document("Food$index")
-                .set(data)
-                .addOnSuccessListener {
-                    Log.i("upload", "success")
-                }
-                .addOnFailureListener {
-                    Log.i("upload", "Error adding document", it)
-                }
-                .addOnCompleteListener {
-                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show();
-                }
-        }
+//        for ((index, data) in dataList.withIndex()) {
+//            db.collection("Canteen").document("Canteen$index")
+//                .collection("nested1").document("Food$index")
+//                .set(data)
+//                .addOnSuccessListener {
+//                    Log.i("upload", "success")
+//                }
+//                .addOnFailureListener {
+//                    Log.i("upload", "Error adding document", it)
+//                }
+//                .addOnCompleteListener {
+//                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show();
+//                }
+//        }
+
+
+
+        db.collection("Canteen").document("Canteen1")
+            .collection("Store").document("Noodle")
+            .collection("Order").document("Order1")
+            .set()
+            .addOnSuccessListener {
+                Log.i("upload", "success")
+            }
+            .addOnFailureListener {
+                Log.i("upload", "Error adding document", it)
+            }
+            .addOnCompleteListener {
+                Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show();
+            }
 
 
     }
