@@ -104,17 +104,17 @@ class NotificationFragment : Fragment() {
 
         var orderFoodList = ArrayList<Order_Food>()
 
-        for (x in 1 until 3) {
+        for (x in 8 until 10) {
             val orderFood = Order_Food(
-                "Food_Name_Complete", x + 2.5, "Completed", x,
-                "Completed", "CanteenName", "StoreName"
+                "Food_Name_Complete", x + 2.5, "Ready", x,
+                "Ready", "CanteenName", "StoreName"
             )
 
             orderFoodList.add(orderFood)
         }
 
         for ((index, item) in orderFoodList.withIndex()) {
-            val foodInt = (index + 4)
+            val foodInt = (index + 8)
             db.collection("User").document("Yong Boon")
                 .collection("Order").document("Order$foodInt")
                 .set(item)

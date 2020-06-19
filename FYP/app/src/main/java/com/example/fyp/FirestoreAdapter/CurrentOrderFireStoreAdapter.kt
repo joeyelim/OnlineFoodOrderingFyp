@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.Order_Food
 import com.example.fyp.R
@@ -44,6 +45,7 @@ class CurrentOrderViewHolder internal constructor(private val view: View, var co
         holder.view.txtPrice.text = "RM " + food.each_Price.toString()
         holder.view.txtProgress.text = food.status
 
+        Toast.makeText(context, food.status, Toast.LENGTH_SHORT).show()
 
         when(food.status) {
             "Pending" -> holder.view.txtProgress.setTextColor(Color.RED)

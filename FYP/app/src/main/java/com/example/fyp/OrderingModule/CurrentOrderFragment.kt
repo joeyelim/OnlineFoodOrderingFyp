@@ -26,7 +26,7 @@ import com.google.firebase.firestore.Query
 
 
 class CurrentOrderFragment : Fragment(), onListClick2 {
-    
+
     private lateinit var binding: FragmentCurrentOrderBinding
     private lateinit var adapter: CurrentOrderFireStoreAdapter
     private val ARG_PLAYERS = "arg_player"
@@ -64,7 +64,6 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
 
 //        var b: TextView = view.findViewById(com.example.fyp.R.id.textView5)
 //        b.text = abba1
-        Toast.makeText(activity, player, Toast.LENGTH_SHORT).show()
 
         initRecycleView()
 
@@ -87,14 +86,16 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
         val query = db.collection("User").document("Yong Boon")
             .collection("Order").whereEqualTo("status", player)
 
-        query
-            .get()
-            .addOnCompleteListener {
-                Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(activity, it.toString(), Toast.LENGTH_SHORT).show()
-            }
+//        Toast.makeText(activity, player, Toast.LENGTH_SHORT).show()
+
+//        query
+//            .get()
+//            .addOnCompleteListener {
+//                Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
+//            }
+//            .addOnFailureListener {
+//                Toast.makeText(activity, it.toString(), Toast.LENGTH_SHORT).show()
+//            }
 
         val options =
             FirestoreRecyclerOptions.Builder<Order_Food>()

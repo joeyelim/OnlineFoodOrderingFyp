@@ -2,9 +2,11 @@ package com.example.fyp.fragments
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -36,12 +38,12 @@ class OrderListFragment : Fragment() {
 
 
 
-
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
+
 
         /* --------this is for viewpage------------------*/
 
@@ -75,6 +77,8 @@ class OrderListFragment : Fragment() {
         override fun getItem(position: Int): Fragment {
             //  parameter can use arrayList, probably will
             // just use an identifier
+            Log.i("test", position.toString())
+            Log.i("test", titles[position])
             return CurrentOrderFragment().newInstance(titles[position])
         }
 
@@ -89,9 +93,10 @@ class OrderListFragment : Fragment() {
 
 
         fun setFragment() {
+
             titles.add("Pending")
             titles.add("Preparing")
-            titles.add("Completed")
+            titles.add("Ready")
             titles.add("Taken")
         }
 
