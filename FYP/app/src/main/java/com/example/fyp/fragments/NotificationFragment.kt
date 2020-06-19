@@ -3,25 +3,26 @@ package com.example.fyp.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.fyp.Class.Canteen
-
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentNotificationBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import io.opencensus.tags.Tag
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 
 /**
  * A simple [Fragment] subclass.
  */
 class NotificationFragment : Fragment() {
-    private lateinit var binding : FragmentNotificationBinding
+    private lateinit var binding: FragmentNotificationBinding
+    private lateinit var storage: FirebaseStorage
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,8 +34,25 @@ class NotificationFragment : Fragment() {
         )
 
         binding.btnUploadFirestore.setOnClickListener {
-            uploadData()
+            //            uploadData()
+            updateData()
         }
+
+        binding.btnDeleteFirestore.setOnClickListener {
+            deleteData()
+        }
+
+//        binding.btnUploadFirestorage.setOnClickListener {
+//            uploadPhoto()
+//        }
+//
+//        binding.btnUploadFirestorage.setOnClickListener {
+//            deletePhoto()
+//        }
+
+        // [START storage_field_initialization]
+        storage = Firebase.storage
+        // [END storage_field_initialization]
 
         return binding.root
     }
@@ -54,7 +72,7 @@ class NotificationFragment : Fragment() {
 //    }
 
     // upload multuple data
-    private fun uploadData(){
+    private fun uploadData() {
         var dataList = ArrayList<Canteen>()
 
         for (x in 10 until 20) {
@@ -64,9 +82,10 @@ class NotificationFragment : Fragment() {
 
         val db = FirebaseFirestore.getInstance()
 
-        for ((index, data) in dataList.withIndex())
-        {
-            db.collection("Test2").document("Canteen$index").set(data)
+        for ((index, data) in dataList.withIndex()) {
+            db.collection("Test3").document("Canteen$index")
+                .collection("nested1").document("Food$index")
+                .set(data)
                 .addOnSuccessListener {
                     Log.i("upload", "success")
                 }
@@ -74,12 +93,59 @@ class NotificationFragment : Fragment() {
                     Log.i("upload", "Error adding document", it)
                 }
                 .addOnCompleteListener {
-                    Toast.makeText(getActivity(),"Finish Upload Data!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show();
                 }
         }
 
 
     }
+
+
+    private fun deleteData() {
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("Test2").document("Canteen0")
+            .delete()
+            .addOnSuccessListener { Log.d("delete", "DocumentSnapshot successfully deleted!") }
+            .addOnFailureListener { e -> Log.w("delete", "Error deleting document", e) }
+    }
+
+    private fun updateData() {
+        val db = FirebaseFirestore.getInstance()
+
+
+        db.collection("Test2").document("Canteen0")
+            .update("time", "lllllllllll")
+            .addOnSuccessListener {
+                Log.i("upload", "success")
+            }
+            .addOnFailureListener {
+                Log.i("upload", "Error adding document", it)
+            }
+            .addOnCompleteListener {
+                Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show();
+            }
+    }
+
+//    private fun uploadPhoto() {
+//
+//// Create a storage reference from our app
+//        val storageRef = storage.reference
+//
+//// Create a reference to "mountains.jpg"
+//        val mountainsRef = storageRef.child("mountains.jpg")
+//
+//// Create a reference to 'images/mountains.jpg'
+//        val mountainImagesRef = storageRef.child("test/mountains.jpg")
+//
+//// While the file names are the same, the references point to different files
+//        mountainsRef.name == mountainImagesRef.name // true
+//        mountainsRef.path == mountainImagesRef.path // false
+//    }
+//
+//    private fun deletePhoto() {
+//
+//    }
 
 
 }
