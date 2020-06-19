@@ -20,6 +20,7 @@ import com.example.fyp.databinding.FragmentOrderListBinding
  * A simple [Fragment] subclass.
  */
 class OrderListFragment : Fragment() {
+
     private lateinit var binding: FragmentOrderListBinding
 
 
@@ -34,8 +35,16 @@ class OrderListFragment : Fragment() {
         (activity as MainActivity).setNavVisible()
 
 
+
+
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         /* --------this is for viewpage------------------*/
-        
+
         val supportFragmentManager = this.activity!!.supportFragmentManager
 
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
@@ -49,9 +58,9 @@ class OrderListFragment : Fragment() {
         binding.tabProgress.setupWithViewPager(viewPager)
         tabLayout.setupWithViewPager(viewPager)
 
-
-
-        return binding.root
+        tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_one)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_one)
+        tabLayout.getTabAt(2)?.setIcon(R.drawable.ic_one)
     }
 
     /* --------this is for viewpage------------------*/

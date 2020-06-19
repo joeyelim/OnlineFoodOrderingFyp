@@ -44,7 +44,7 @@ class CurrentOrderViewHolder internal constructor(private val view: View, var co
         holder.view.txtPrice.text = "RM " + food.each_Price.toString()
         holder.view.txtProgress.text = food.status
 
-       
+
         when(food.status) {
             "Pending" -> holder.view.txtProgress.setTextColor(Color.RED)
             "Preparing" -> holder.view.txtProgress.setTextColor(Color.BLUE)

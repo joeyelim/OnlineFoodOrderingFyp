@@ -26,7 +26,7 @@ import com.google.firebase.firestore.Query
 
 
 class CurrentOrderFragment : Fragment(), onListClick2 {
-
+    
     private lateinit var binding: FragmentCurrentOrderBinding
     private lateinit var adapter: CurrentOrderFireStoreAdapter
     private val ARG_PLAYERS = "arg_player"
@@ -60,7 +60,7 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
         )
 
         setHasOptionsMenu(true)
-        (activity as MainActivity).setNavInvisible()
+        (activity as MainActivity).setNavVisible()
 
 //        var b: TextView = view.findViewById(com.example.fyp.R.id.textView5)
 //        b.text = abba1
@@ -82,14 +82,23 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
     }
 
     private fun initRecycleView() {
+
         val db = FirebaseFirestore.getInstance()
         val query = db.collection("User").document("Yong Boon")
             .collection("Order").whereEqualTo("status", player)
 
+        query
+            .get()
+            .addOnCompleteListener {
+                Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(activity, it.toString(), Toast.LENGTH_SHORT).show()
+            }
+
         val options =
             FirestoreRecyclerOptions.Builder<Order_Food>()
                 .setQuery(query, Order_Food::class.java).build()
-
 
         adapter = CurrentOrderFireStoreAdapter(options, this, context!!)
         binding.currentOrderRecycle.layoutManager = LinearLayoutManager(activity)
