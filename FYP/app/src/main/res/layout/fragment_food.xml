@@ -23,15 +23,23 @@
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/citc_cafe"
-                android:background="@drawable/frame_image_view"
                 android:cropToPadding="true"
                 android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_collapseMode="parallax"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/canteenImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/txtStore"
@@ -47,13 +55,14 @@
                 app:layout_constraintTop_toTopOf="@+id/canteenImage" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btnCart"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_corner_button"
+                android:elevation="10dp"
                 app:cornerRadius="180dp"
                 android:tint="@color/colorYellow"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -72,5 +72,19 @@
     <string name="beverage">Beverage</string>
     <string name="content_description_media">content_description_media</string>
     <string name="rm_xxx">RM xxx</string>
+    <string name="xx_review">(xx review)</string>
+    <string name="price">Price:</string>
+    <string name="large">(Large)</string>
+    <string name="small">(Small)</string>
+    <string name="store_name">store name</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="paid">Paid</string>
+    <string name="_15_mar_2020">15 Mar, 2020</string>
+    <string name="current_order">Current Order</string>
+    <string name="order_history">Order History</string>
+    <string name="select_option">Select Option</string>
+    <string name="take_away">TAKE AWAY</string>
+    <string name="dine_in">DINE-IN</string>
+
 
 </resources>

@@ -9,7 +9,9 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
+import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,9 +47,13 @@ class FoodFragment : Fragment(), onListClick2 {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
-        Log.i("123","123")
         initRecycleView()
 
+        binding.btnCart.setOnClickListener{
+            it.requestFocus()
+            it.findNavController()
+                .navigate(FoodFragmentDirections.actionFoodFragmentToCartFragment())
+        }
 
         return binding.root
     }
@@ -57,7 +63,6 @@ class FoodFragment : Fragment(), onListClick2 {
     }
 
     fun initRecycleView() {
-        Log.i("123","123")
         val db = FirebaseFirestore.getInstance()
         val query = db.collection("Canteen").document("Canteen1")
             .collection("Store").document("Noodle").collection("Food")
@@ -75,10 +80,8 @@ class FoodFragment : Fragment(), onListClick2 {
     }
 
     override fun onItemClick(food: Food, position: Int) {
-
-//        this.findNavController()
-//            .navigate()
-
+        this.findNavController()
+            .navigate(FoodFragmentDirections.actionFoodFragmentToFoodDetailFragment())
     }
 
     override fun onStart() {

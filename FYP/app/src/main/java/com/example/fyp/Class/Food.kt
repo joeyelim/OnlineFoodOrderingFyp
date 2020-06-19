@@ -8,10 +8,10 @@ class Food {
     constructor(){
 
     }
-    constructor(food_name: String?, food_image: String?, small_price: Double?) {
+    constructor(food_name: String?, food_image: String?, price : Double?) {
         this.food_name = food_name
         this.food_image = food_image
-        this.price = small_price
+        this.price = price
     }
 
 
