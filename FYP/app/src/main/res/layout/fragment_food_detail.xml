@@ -54,6 +54,7 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_corner_button"
                 app:cornerRadius="180dp"
+                app:srcCompat="@drawable/ic_star"
                 android:tint="@color/colorYellow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -87,7 +88,7 @@
                     android:layout_width="23dp"
                     android:layout_height="23dp"
                     android:tint="#C4C4C4"
-                     />
+                    app:srcCompat="@drawable/ic_star" />
 
                 <ImageView
                     android:id="@+id/star2"
@@ -96,7 +97,7 @@
                     android:layout_marginStart="3dp"
                     android:layout_toEndOf="@+id/star1"
                     android:tint="#C4C4C4"
-                    />
+                    app:srcCompat="@drawable/ic_star"/>
 
                 <ImageView
                     android:id="@+id/star3"
@@ -105,7 +106,7 @@
                     android:layout_marginStart="3dp"
                     android:layout_toEndOf="@+id/star2"
                     android:tint="#C4C4C4"
-                     />
+                    app:srcCompat="@drawable/ic_star" />
 
                 <ImageView
                     android:id="@+id/star4"
@@ -114,7 +115,7 @@
                     android:layout_marginStart="3dp"
                     android:layout_toEndOf="@+id/star3"
                     android:tint="#C4C4C4"
-                     />
+                    app:srcCompat="@drawable/ic_star" />
 
                 <ImageView
                     android:id="@+id/star5"
@@ -123,7 +124,7 @@
                     android:layout_marginStart="3dp"
                     android:layout_toEndOf="@+id/star4"
                     android:tint="#C4C4C4"
-                     />
+                    app:srcCompat="@drawable/ic_star" />
 
 
             </RelativeLayout>
