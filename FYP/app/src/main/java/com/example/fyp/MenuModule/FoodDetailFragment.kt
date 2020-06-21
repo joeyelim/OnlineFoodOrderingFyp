@@ -1,11 +1,13 @@
 package com.example.fyp.MenuModule
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
@@ -40,12 +42,29 @@ class FoodDetailFragment : Fragment() {
         }
 
         binding.imgStar.setOnClickListener{
-            it.findNavController()
-                .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToRatingFragment())
+            val dialog = AlertDialog.Builder(activity)
+            val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
+
+            dialog.setView(dialogView)
+            dialog.setCancelable(true)
+            dialog.show()
         }
 
         return binding.root
     }
 
+    fun dialog(){
+        val dialog = AlertDialog.Builder(activity)
+        val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
 
+        dialog.setView(dialogView)
+        dialog.setCancelable(false)
+        dialog.show()
+
+//        val customDialog = dialog.create()
+//        customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener({
+//
+//        })
+
+    }
 }

@@ -19,6 +19,11 @@
         <item name="android:textColorSecondary">@color/colorYellow</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
     <style name="Theme.App" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
     </style>
