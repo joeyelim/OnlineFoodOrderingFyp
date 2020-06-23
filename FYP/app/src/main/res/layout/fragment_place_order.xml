@@ -87,6 +87,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:elevation="8dp"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progress_bar" >
@@ -95,7 +98,7 @@
                 android:id="@+id/optionBox"
                 android:layout_width="320dp"
                 android:layout_height="254dp"
-                android:background="@drawable/details_border">
+                android:background="@drawable/text_field_border">
 
                 <TextView
                     android:id="@+id/txtPickupTime"
@@ -115,6 +118,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
+                    android:paddingStart="8dp"
                     android:background="@drawable/details_border"
                     android:gravity="center_vertical"
                     android:text="TextView"
@@ -126,10 +130,10 @@
                     android:id="@+id/btnTime"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/details_border"
+                    android:background="@color/colorPrimary"
                     android:clickable="true"
                     android:focusable="true"
-                    android:tint="@color/colorPrimary"
+                    android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewTime"
                     app:layout_constraintEnd_toEndOf="@+id/textViewTime"
                     app:layout_constraintTop_toTopOf="@+id/textViewTime"
