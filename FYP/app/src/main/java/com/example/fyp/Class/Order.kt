@@ -1,13 +1,13 @@
 package com.example.fyp.Class
 
 class Order {
-    var PickUp_Date: String? = ""
-    var Order_Date: String? = ""
-    var Dining_Option: String? = ""
-    var Progress: String? = ""
-    var PickUp_Time: String? = ""
-    var Order_Time: String? = ""
-    var Total_Price: String? = ""
+    var pickUp_Date: String? = ""
+    var order_Date: String? = ""
+    var dining_Option: String? = ""
+    var status: String? = ""
+    var pickUp_Time: String? = ""
+    var order_Time: String? = ""
+    var total_Price: String? = ""
 
     constructor()
 
@@ -15,18 +15,18 @@ class Order {
         pickUp_Date: String?,
         order_Date: String,
         dining_Option: String?,
-        progress: String?,
+        status: String?,
         pickUp_Time: String?,
         order_Time: String?,
         total_Price: String?
 
     ) {
-        this.Dining_Option = dining_Option
-        this.Order_Date = order_Date
-        this.PickUp_Date = pickUp_Date
-        this.PickUp_Time = pickUp_Time
-        this.Order_Time = order_Time
-        this.Total_Price = total_Price
-        this.Progress = progress
+        this.dining_Option = dining_Option
+        this.order_Date = order_Date
+        this.pickUp_Date = pickUp_Date
+        this.pickUp_Time = pickUp_Time
+        this.order_Time = order_Time
+        this.total_Price = total_Price
+        this.status = status
     }
 }

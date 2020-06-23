@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.fyp.Class.Canteen
+import com.example.fyp.Class.Order_Food
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentNotificationBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -98,20 +99,35 @@ class NotificationFragment : Fragment() {
 //        }
 
 
+//        val order = Order("Pick__Date", "Order_Date", "Take_Away",
+//            "Pending", "Pick_Time", "Order_Time", "Total_Price")
 
-        db.collection("Canteen").document("Canteen1")
-            .collection("Store").document("Noodle")
-            .collection("Order").document("Order1")
-            .set()
-            .addOnSuccessListener {
-                Log.i("upload", "success")
-            }
-            .addOnFailureListener {
-                Log.i("upload", "Error adding document", it)
-            }
-            .addOnCompleteListener {
-                Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show();
-            }
+        var orderFoodList = ArrayList<Order_Food>()
+
+        for (x in 8 until 10) {
+            val orderFood = Order_Food(
+                "Food_Name_Complete", x + 2.5, "Ready", x,
+                "Ready", "CanteenName", "StoreName"
+            )
+
+            orderFoodList.add(orderFood)
+        }
+
+        for ((index, item) in orderFoodList.withIndex()) {
+            val foodInt = (index + 8)
+            db.collection("User").document("Yong Boon")
+                .collection("Order").document("Order$foodInt")
+                .set(item)
+                .addOnSuccessListener {
+                    Log.i("upload", "success")
+                }
+                .addOnFailureListener {
+                    Log.i("upload", "Error adding document", it)
+                }
+                .addOnCompleteListener {
+                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
+                }
+        }
 
 
     }

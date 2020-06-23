@@ -96,7 +96,7 @@
                         android:id="@+id/txtFirstN"
                         android:layout_width="155dp"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName|textCapWords"
+                        android:inputType="textCapCharacters"
                         android:scrollHorizontally="true"
                         android:singleLine="true" />
 
@@ -121,7 +121,7 @@
                         android:id="@+id/txtLastN"
                         android:layout_width="155dp"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName|textCapWords"
+                        android:inputType="textCapCharacters"
                         android:scrollHorizontally="true"
                         android:singleLine="true" />
 
