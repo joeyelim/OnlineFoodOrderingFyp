@@ -38,11 +38,11 @@ class PlaceOrderFragment : Fragment() {
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
 
-                //textViewTime.text = SimpleDateFormat("HH:mm").format(cal.time)
-                    textViewTime.text = cal.time.toString()
+                textViewTime.text = SimpleDateFormat("HH:mm").format(cal.time)
+                    //textViewTime.text = cal.time.toString()
             }
 
-            TimePickerDialog(activity, timeSetListener,
+            TimePickerDialog(activity, R.style.DialogTheme, timeSetListener,
                 cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
         }
 
