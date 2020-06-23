@@ -16,9 +16,7 @@ import com.example.fyp.MainActivity
 import com.example.fyp.OrderingModule.CurrentOrderFragment
 import com.example.fyp.OrderingModule.OrderHistoryFragment
 import com.example.fyp.databinding.FragmentOrderListBinding
-
-
-
+import kotlinx.android.synthetic.main.fragment_food_detail.view.*
 
 
 /**
@@ -63,9 +61,17 @@ class OrderListFragment : Fragment() {
         binding.tabProgress.setupWithViewPager(viewPager)
         tabLayout.setupWithViewPager(viewPager)
 
-        tabLayout.getTabAt(0)?.setIcon(com.example.fyp.R.drawable.ic_one)
-        tabLayout.getTabAt(1)?.setIcon(com.example.fyp.R.drawable.ic_one)
-        tabLayout.getTabAt(2)?.setIcon(com.example.fyp.R.drawable.ic_one)
+        val tabIcons = intArrayOf(
+            com.example.fyp.R.drawable.ic_circled_1,
+            com.example.fyp.R.drawable.ic_circled_2,
+            com.example.fyp.R.drawable.ic_circled_3,
+            com.example.fyp.R.drawable.ic_circled_4
+        )
+
+        tabLayout.getTabAt(0)?.setIcon(tabIcons[0])
+        tabLayout.getTabAt(1)?.setIcon(tabIcons[1])
+        tabLayout.getTabAt(2)?.setIcon(tabIcons[2])
+        tabLayout.getTabAt(3)?.setIcon(tabIcons[3])
 
 //        val badge = tabLayout.getTabAt(0)?.orCreateBadge
 //        badge?.isVisible = true
