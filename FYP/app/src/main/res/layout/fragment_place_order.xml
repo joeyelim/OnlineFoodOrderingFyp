@@ -7,7 +7,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/AppTheme3"
         tools:context=".OrderingModule.PlaceOrderFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -95,7 +94,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/optionBox"
                 android:layout_width="320dp"
-                android:layout_height="254dp">
+                android:layout_height="254dp"
+                android:background="@drawable/details_border">
 
                 <TextView
                     android:id="@+id/txtPickupTime"
@@ -103,62 +103,72 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Pick up Time:"
+                    android:text="@string/pick_up_time"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/sub_title"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/editTxtTimeLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <TextView
+                    android:id="@+id/textViewTime"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginStart="24dp"
-                    android:hint="@string/booking_time"
-                    app:boxBackgroundMode="outline"
-                    app:endIconMode="clear_text"
-                    app:helperText=""
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/details_border"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="@dimen/sub_title"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtPickupTime">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTxtTime"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_order_list"
-                        android:inputType="time"
-                        android:scrollHorizontally="true"
-                        android:singleLine="true" />
-
-                </com.google.android.material.textfield.TextInputLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/txtPickupTime" />
 
                 <ImageButton
                     android:id="@+id/btnTime"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:adjustViewBounds="true"
-                    android:tint="@color/colorPrimary"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/details_border"
                     android:clickable="true"
                     android:focusable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/editTxtTimeLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/txtPickupTime"
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="@+id/textViewTime"
+                    app:layout_constraintEnd_toEndOf="@+id/textViewTime"
+                    app:layout_constraintTop_toTopOf="@+id/textViewTime"
                     app:srcCompat="@drawable/ic_access_time"
-                    />
+                    app:strokeColor="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp" />
 
                 <TextView
-                    android:id="@+id/textViewTime"
+                    android:id="@+id/txt_options"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/dinning_option"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/sub_title"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTime" />
+
+<!--                <RadioGroup-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txt_options">-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radioButton"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/dine_in" />-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radioButton2"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/take_away" />-->
+<!--                </RadioGroup>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -171,6 +181,21 @@
 </layout>
 
 
+<!--<com.google.android.material.button.MaterialButton-->
+<!--android:id="@+id/btnTime"-->
+<!--style="?attr/materialButtonOutlinedStyle"-->
+<!--android:layout_width="50dp"-->
+<!--android:layout_height="50dp"-->
+<!--android:adjustViewBounds="true"-->
+<!--android:shadowColor="@color/colorPrimaryDark"-->
+<!--android:text=""-->
+<!--app:backgroundTint="@android:color/white"-->
+<!--app:icon="@drawable/ic_access_time"-->
+<!--app:layout_constraintBottom_toBottomOf="@+id/textViewTime"-->
+<!--app:layout_constraintEnd_toEndOf="@+id/textViewTime"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/txtPickupTime"-->
+<!--app:strokeColor="@color/colorPrimaryDark"-->
+<!--app:strokeWidth="2dp" />-->
 
 <!--<com.google.android.material.card.MaterialCardView-->
 <!--android:id="@+id/cvOption"-->
@@ -209,39 +234,39 @@
 <!--    app:layout_constraintTop_toBottomOf="@+id/txtPickupTime" />-->
 
 <!--<TextView-->
-<!--    android:id="@+id/txt_options"-->
-<!--    android:layout_width="wrap_content"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:layout_marginStart="24dp"-->
-<!--    android:layout_marginTop="16dp"-->
-<!--    android:text="Dinning Option"-->
-<!--    android:textColor="@color/colorPrimaryDark"-->
-<!--    android:textSize="@dimen/sub_title"-->
-<!--    app:layout_constraintStart_toStartOf="parent"-->
-<!--    app:layout_constraintTop_toBottomOf="@+id/timePicker1" />-->
+<!--android:id="@+id/txt_options"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginStart="24dp"-->
+<!--android:layout_marginTop="16dp"-->
+<!--android:text="@string/dinning_option"-->
+<!--android:textColor="@color/colorPrimaryDark"-->
+<!--android:textSize="@dimen/sub_title"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/textViewTime" />-->
 
 <!--<RadioGroup-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginTop="8dp"-->
+<!--android:orientation="horizontal"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/txt_options">-->
+
+<!--<RadioButton-->
+<!--    android:id="@+id/radio_dine_in"-->
 <!--    android:layout_width="wrap_content"-->
 <!--    android:layout_height="wrap_content"-->
-<!--    android:layout_marginTop="8dp"-->
-<!--    android:orientation="horizontal"-->
-<!--    app:layout_constraintEnd_toEndOf="parent"-->
-<!--    app:layout_constraintStart_toStartOf="parent"-->
-<!--    app:layout_constraintTop_toBottomOf="@+id/txt_options">-->
+<!--    android:onClick="onRadioButtonClicked"-->
+<!--    android:text="@string/dine_in" />-->
 
-<!--    <RadioButton-->
-<!--        android:id="@+id/radio_dine_in"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:onClick="onRadioButtonClicked"-->
-<!--        android:text="@string/dine_in" />-->
-
-<!--    <RadioButton-->
-<!--        android:id="@+id/radio_take_away"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:onClick="onRadioButtonClicked"-->
-<!--        android:text="@string/take_away" />-->
+<!--<RadioButton-->
+<!--    android:id="@+id/radio_take_away"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:onClick="onRadioButtonClicked"-->
+<!--    android:text="@string/take_away" />-->
 <!--</RadioGroup>-->
 
 
