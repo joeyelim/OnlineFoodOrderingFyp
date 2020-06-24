@@ -95,6 +95,7 @@
     <string name="_3">3</string>
     <string name="dinning_option">Dinning Option:</string>
     <string name="pick_up_time">Pick up Time:</string>
+    <string name="confirmation">Confirmation</string>
 
 
 </resources>

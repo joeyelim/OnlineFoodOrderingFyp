@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         style="@style/AppTheme"
-        tools:context=".OrderingModule.PlaceOrderFragment">
+        tools:context=".OrderingModule.PlaceOrderProgress3Fragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/progress_bar"
@@ -49,7 +49,7 @@
                 android:layout_width="111dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
-                android:background="@color/lightGray"
+                android:background="@color/blue"
                 app:layout_constraintStart_toEndOf="@+id/img_1"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -235,10 +235,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+</ScrollView>
 
 </layout>
-
-
-
-

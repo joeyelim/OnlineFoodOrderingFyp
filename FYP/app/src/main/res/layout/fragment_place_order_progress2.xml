@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/AppTheme"
+            tools:context=".OrderingModule.PlaceOrderProgress2Fragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_1"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:layout_marginStart="6dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_one" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="111dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/blue"
+                    app:layout_constraintStart_toEndOf="@+id/img_1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_2"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:layout_marginStart="6dp"
+                    app:layout_constraintStart_toEndOf="@+id/line1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_two" />
+
+                <TextView
+                    android:id="@+id/txtOption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/confirmation"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_2" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="111dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/lightGray"
+                    app:layout_constraintStart_toEndOf="@+id/img_2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_3"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:background="@drawable/rounded_textview"
+                    android:gravity="center"
+                    android:text="@string/_3"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/line2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:elevation="8dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_bar" >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/optionBox"
+                    android:layout_width="320dp"
+                    android:layout_height="254dp"
+                    android:background="@drawable/text_field_border">
+
+                    <TextView
+                        android:id="@+id/txtPickupTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/pick_up_time"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/sub_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textViewTime"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:paddingStart="8dp"
+                        android:background="@drawable/details_border"
+                        android:gravity="center_vertical"
+                        android:text="@string/pick_up_time"
+                        android:textSize="@dimen/sub_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtPickupTime" />
+
+                    <ImageButton
+                        android:id="@+id/btnTime"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorPrimary"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:tint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@+id/textViewTime"
+                        app:layout_constraintEnd_toEndOf="@+id/textViewTime"
+                        app:layout_constraintTop_toTopOf="@+id/textViewTime"
+                        app:srcCompat="@drawable/ic_access_time"
+                        app:strokeColor="@color/colorPrimaryDark"
+                        app:strokeWidth="2dp" />
+
+                    <TextView
+                        android:id="@+id/txt_options"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/dinning_option"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/sub_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewTime" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:checkedButton="@+id/radio_button_1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_options">
+
+                        <RadioButton
+                            android:id="@+id/radio_button_1"
+                            style="@style/Widget.App.RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:enabled="true"
+                            android:focusable="true"
+                            android:text="@string/dine_in" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_2"
+                            style="@style/Widget.App.RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:enabled="true"
+                            android:focusable="true"
+                            android:text="@string/take_away" />
+
+                    </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="60dp"
+                android:layout_weight="1"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:text="@string/back"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvOption"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="60dp"
+                android:text="@string/next"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvOption" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
+
+
+
+
+
+
