@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -22,6 +23,7 @@ import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentLoginBinding
 import com.example.fyp.databinding.FragmentSignUpBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 //import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
@@ -77,22 +79,21 @@ class SignUpFragment : Fragment() {
         }
         val email = binding.txtEmail.text.toString()
         val password = binding.txtPassword.text.toString()
-        val firstName = binding.txtFirstN.text.toString()
-        val lastName = binding.txtLastN.text.toString()
-        val phone = binding.txtPhone.text.toString()
 
-        auth.createUserWithEmailAndPassword(
-            txtEmail.text.toString(),
-            txtPassword.text.toString()
-        )
+
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("Game", "createUserWithEmail:success")
-                    Toast.makeText(
-                        activity, "Successful create an account",
-                        Toast.LENGTH_SHORT
-                    ).show()
+
+                    val snackbar = Snackbar.make(
+                        root_layout,"Register Successful!", Snackbar.LENGTH_INDEFINITE)
+                    snackbar.setAction("Close", View.OnClickListener {
+                        snackbar.dismiss()
+                    })
+                    (snackbar.getView()).getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT
+                    snackbar.show()
 
                     var user = auth.currentUser
 
@@ -100,44 +101,61 @@ class SignUpFragment : Fragment() {
                 else {
                     // If sign in fails, display a message to the user.
                     Log.w("Game", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        activity, "Wrong Email or Email Being Registered",
-                        Toast.LENGTH_SHORT
-                    ).show()
+
+                    val snackbar = Snackbar.make(
+                        root_layout,"Wrong Email or Email Being Registered!", Snackbar.LENGTH_LONG)
+                    (snackbar.getView()).getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT
+                    snackbar.show()
+
                 }
             }
     }
 
     private fun validation() : Boolean{
-        if (binding.txtFirstN.text.toString().isEmpty()) {
-            binding.txtFirstN.error = "Please enter value"
-            binding.txtFirstN.requestFocus()
-            return false
-        }
-        else if (binding.txtLastN.text.toString().isEmpty()) {
-            binding.txtLastN.error = "Please enter value"
-            binding.txtLastN.requestFocus()
-            return false
-        }
-        else if (binding.txtPhone.text.toString().isEmpty()) {
-            binding.txtPhone.error = "Please enter phone number"
-            binding.txtPhone.requestFocus()
-            return false
-        }
-        else if (binding.txtEmail.text.toString().isEmpty()) {
-            binding.txtEmail.error = "Please enter email"
-            binding.txtEmail.requestFocus()
-            return false
-        }
-        else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
-            binding.txtEmail.error = "Please enter a valid email"
-            binding.txtEmail.requestFocus()
-            return false
-        }
 
-        else if (binding.txtPassword.text.toString().isEmpty()) {
-            binding.txtPassword.error = "Please enter password"
-            binding.txtPassword.requestFocus()
+        val email = binding.txtEmail.text.toString()
+        val password = binding.txtPassword.text.toString()
+        val firstName = binding.txtFirstN.text.toString()
+        val lastName = binding.txtLastN.text.toString()
+        val phone = binding.txtPhone.text.toString()
+
+        if (email.isEmpty() || password.isEmpty()|| firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()) {
+
+            if (firstName.isEmpty()) {
+                binding.txtFirstNLayout.error = "*Please enter your first name."
+                // binding.txtFirstN.requestFocus()
+            } else {
+                binding.txtFirstNLayout.isErrorEnabled = false
+            }
+
+            if (lastName.isEmpty()) {
+                binding.txtLastNLayout.error = "*Please enter your last name."
+                // binding.txtLastN.requestFocus()
+            } else {
+                binding.txtLastNLayout.isErrorEnabled = false
+            }
+
+            if (phone.isEmpty()) {
+                binding.txtPhoneLayout.error = "*Please enter phone number"
+                //  binding.txtPhone.requestFocus()
+            } else {
+                binding.txtPhoneLayout.isErrorEnabled = false
+            }
+
+            if (email.isEmpty()) {
+                binding.txtEmailLayout.error = "*Please enter email"
+                // binding.txtEmail.requestFocus()
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
+                binding.txtEmailLayout.error = "*Please enter a valid email"
+                // binding.txtEmail.requestFocus()
+            } else {
+                binding.txtEmailLayout.isErrorEnabled = false
+            }
+
+            if (password.isEmpty()) {
+                binding.txtPasswordLayout.error = "*Please enter password"
+                // binding.txtPassword.requestFocus()
+            }
             return false
         }
         return true

@@ -65,6 +65,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtNewPwdLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:theme="@style/MyEditTextTheme"
                 android:layout_width="@dimen/signUp_field_length"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_password"
@@ -79,7 +80,7 @@
                     android:id="@+id/txtNewPwd"
                     android:layout_width="@dimen/signUp_field_length"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_lock"
+                    android:drawableStart="@drawable/ic_lock_black"
                     android:inputType="textPassword"
                     android:scrollHorizontally="true"
                     android:singleLine="true" />
@@ -100,6 +101,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtConfirmPwdLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:theme="@style/MyEditTextTheme"
                 android:layout_width="@dimen/signUp_field_length"
                 android:layout_height="wrap_content"
                 android:hint="@string/confirm_password"
@@ -114,7 +116,7 @@
                     android:id="@+id/txtConfirmPwd"
                     android:layout_width="@dimen/signUp_field_length"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_lock"
+                    android:drawableStart="@drawable/ic_lock_black"
                     android:inputType="textPassword"
                     android:scrollHorizontally="true"
                     android:singleLine="true" />

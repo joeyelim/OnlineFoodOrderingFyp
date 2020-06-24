@@ -65,7 +65,7 @@
                 android:layout_marginBottom="24dp"
                 android:contentDescription="@string/logo"
                 android:src="@drawable/logo3"
-                app:layout_constraintBottom_toTopOf="@+id/txtEmail"
+                app:layout_constraintBottom_toTopOf="@+id/txtEmailLy"
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -82,13 +82,13 @@
                 android:text="@string/login"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtEmail"
+                app:layout_constraintBottom_toTopOf="@+id/txtEmailLy"
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtEmail"
+                android:id="@+id/txtEmailLy"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/login_field_length"
                 android:layout_height="wrap_content"
@@ -98,13 +98,15 @@
                 android:hint="@string/email_address"
                 app:boxBackgroundMode="outline"
                 app:endIconMode="clear_text"
+                android:theme="@style/MyEditTextTheme"
                 app:helperText="@string/email_helperText"
-                app:layout_constraintBottom_toTopOf="@+id/txtPassword"
+                app:layout_constraintBottom_toTopOf="@+id/txtPasswordLy"
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/txtLogin">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtEmail"
                     android:layout_width="290dp"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_email"
@@ -115,7 +117,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtPassword"
+                android:id="@+id/txtPasswordLy"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="290dp"
                 android:layout_height="wrap_content"
@@ -123,17 +125,19 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/password"
+                android:theme="@style/MyEditTextTheme"
                 app:boxBackgroundMode="outline"
                 app:endIconMode="password_toggle"
                 app:helperText="@string/password_helperText"
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/txtEmail">
+                app:layout_constraintTop_toBottomOf="@+id/txtEmailLy">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtPassword"
                     android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_lock"
+                    android:drawableStart="@drawable/ic_lock_black"
                     android:inputType="textPassword"
                     android:scrollHorizontally="true"
                     android:singleLine="true" />
@@ -155,7 +159,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
                 app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/txtPasswordLy" />
 
             <Button
                 android:id="@+id/btnSignUp"
@@ -166,13 +170,13 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="32dp"
                 android:text="@string/sign_up"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorAccent12"
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/txtPasswordLy" />
 
             <Button
-                android:id="@+id/containedButton"
+                android:id="@+id/btnLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"

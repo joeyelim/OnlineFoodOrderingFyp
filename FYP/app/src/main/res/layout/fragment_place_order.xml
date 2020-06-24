@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/AppTheme"
         tools:context=".OrderingModule.PlaceOrderFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +49,7 @@
                 android:layout_width="111dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
-                android:background="@color/green"
+                android:background="@color/blue"
                 app:layout_constraintStart_toEndOf="@+id/img_1"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,7 +127,7 @@
                     android:paddingStart="8dp"
                     android:background="@drawable/details_border"
                     android:gravity="center_vertical"
-                    android:text="TextView"
+                    android:text="@string/pick_up_time"
                     android:textSize="@dimen/sub_title"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtPickupTime" />
@@ -159,32 +160,34 @@
                     app:layout_constraintTop_toBottomOf="@+id/textViewTime" />
 
                 <RadioGroup
-                    android:layout_width="wrap_content"
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="left"
-                    android:layout_margin="25dp"
-                    android:background="#FF0"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="50dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
+                    android:checkedButton="@+id/radio_button_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_options">
 
                     <RadioButton
-                        android:id="@+id/radioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="onRadioButtonClicked"
+                        android:id="@+id/radio_button_1"
+                        style="@style/Widget.App.RadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:enabled="true"
+                        android:focusable="true"
                         android:text="@string/dine_in" />
 
                     <RadioButton
-                        android:id="@+id/radioButton2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="onRadioButtonClicked"
+                        android:id="@+id/radio_button_2"
+                        style="@style/Widget.App.RadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:enabled="true"
+                        android:focusable="true"
                         android:text="@string/take_away" />
+
                 </RadioGroup>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
