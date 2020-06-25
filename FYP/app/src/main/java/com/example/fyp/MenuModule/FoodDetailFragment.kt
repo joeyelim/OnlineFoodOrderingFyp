@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
 import com.example.fyp.R
+import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentFoodDetailBinding
 
 /**
@@ -16,6 +18,7 @@ import com.example.fyp.databinding.FragmentFoodDetailBinding
  */
 class FoodDetailFragment : Fragment() {
     private lateinit var binding: FragmentFoodDetailBinding
+    private lateinit var viewModel: CanteenViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +28,12 @@ class FoodDetailFragment : Fragment() {
             inflater, com.example.fyp.R.layout.fragment_food_detail, container, false
         )
 
+        viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
+
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
+
+        intiUI()
 
         binding.imgCart.setOnClickListener{
             it.requestFocus()
@@ -47,7 +54,17 @@ class FoodDetailFragment : Fragment() {
     }
 
 
-    //custom dialog use in delete pop up message
+    private fun intiUI() {
+        binding.txtFood.text = viewModel.food.food_name
+        binding.txtFoodDesc.text = viewModel.food.recipe_info
+        binding.txtLocation.text = viewModel.canteen.canteen_name
+        binding.txtStoreName.text = viewModel.store.store_name
+        binding.txtReview.text = "( " + viewModel.food.total_review.toString() + " review)"
+        binding.txtSmallPrice.text = "RM: " + viewModel.food.price.toString()
+        binding.txtLargePrice.text = "RM: " + viewModel.food.price.toString()
+    }
+  
+  //custom dialog use in delete pop up message
     fun dialog(){
         val dialog = AlertDialog.Builder(activity)
         val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)

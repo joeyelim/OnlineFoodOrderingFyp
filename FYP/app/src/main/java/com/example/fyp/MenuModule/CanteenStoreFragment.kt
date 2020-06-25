@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import com.example.fyp.FirestoreAdapter.onListClick
 import com.example.fyp.FirestoreAdapter.onListClick1
 import com.example.fyp.MainActivity
 import com.example.fyp.R
+import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentCanteenStoreBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,6 +32,7 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
 
     private lateinit var binding: FragmentCanteenStoreBinding
     private var adapter: StoreFirestoreAdapter? = null
+    private lateinit var viewModel : CanteenViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,8 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
             inflater, com.example.fyp.R.layout.fragment_canteen_store, container, false
         )
 
+        viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
+
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
@@ -50,6 +55,7 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
                 .navigate(FoodFragmentDirections.actionFoodFragmentToCartFragment())
         }
 
+        setUpUI()
         initRecycleView()
 
 
@@ -60,10 +66,15 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
         menu.clear()
     }
 
+    private fun setUpUI() {
+        binding.canteen.text = viewModel.canteen.canteen_name
+    }
+
     fun initRecycleView() {
         Log.i("123","123")
+        val canteenType = viewModel.canteen.type!!
         val db = FirebaseFirestore.getInstance()
-        val query = db.collection("Canteen").document("Canteen1")
+        val query = db.collection("Canteen").document(canteenType)
             .collection("Store").orderBy("store_name", Query.Direction.ASCENDING)
 
         val options =
@@ -78,7 +89,7 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
     }
 
     override fun onItemClick(store: CanteenStore, position: Int) {
-        Log.i("123", store.store_name)
+        viewModel.store = store
         this.findNavController()
             .navigate(CanteenStoreFragmentDirections.actionCanteenStoreFragmentToFoodFragment())
 
