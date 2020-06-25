@@ -264,8 +264,10 @@
 
             <LinearLayout
                 android:id="@+id/container"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtStoret">
@@ -278,39 +280,38 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-<!--                <RelativeLayout-->
-<!--                    android:id="@+id/rlCategory"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:background="@drawable/card_bg"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:padding="1dp" >-->
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/rlCategory"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="16dp"-->
+                <!--                    android:layout_marginTop="16dp"-->
+                <!--                    android:background="@drawable/card_bg"-->
+                <!--                    android:orientation="vertical"-->
+                <!--                    android:padding="1dp" >-->
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/ic_category"-->
-<!--                        android:layout_width="31dp"-->
-<!--                        android:layout_height="31dp"-->
-<!--                        android:layout_centerHorizontal="true"-->
-<!--                        android:layout_margin="3dp"-->
-<!--                        android:background="@drawable/ic_noodles1"-->
-<!--                        android:textColor="@color/colorPrimaryDark"-->
-<!--                        android:textSize="20sp" />-->
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/ic_category"-->
+                <!--                        android:layout_width="31dp"-->
+                <!--                        android:layout_height="31dp"-->
+                <!--                        android:layout_centerHorizontal="true"-->
+                <!--                        android:layout_margin="3dp"-->
+                <!--                        android:background="@drawable/ic_noodles1"-->
+                <!--                        android:textColor="@color/colorPrimaryDark"-->
+                <!--                        android:textSize="20sp" />-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/ic_category"-->
-<!--                        android:layout_centerHorizontal="true"-->
-<!--                        android:layout_marginBottom="3dp"-->
-<!--                        android:text="@string/text_view"-->
-<!--                        android:textColor="@color/colorPrimaryDark"-->
-<!--                        android:textSize="11sp" />-->
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_below="@+id/ic_category"-->
+                <!--                        android:layout_centerHorizontal="true"-->
+                <!--                        android:layout_marginBottom="3dp"-->
+                <!--                        android:text="@string/text_view"-->
+                <!--                        android:textColor="@color/colorPrimaryDark"-->
+                <!--                        android:textSize="11sp" />-->
 
 
-
-<!--                </RelativeLayout>-->
+                <!--                </RelativeLayout>-->
             </LinearLayout>
 
 
@@ -319,7 +320,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/rlFoodDecs"
                 android:layout_width="match_parent"
-                android:layout_height="156dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="24dp"
@@ -331,7 +332,7 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardElevation="10dp"
-                app:cardCornerRadius="8dp"
+                app:cardCornerRadius="0dp"
                 app:cardPreventCornerOverlap="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -340,7 +341,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/text_field_border">
+                android:background="@drawable/details_border">
 
                 <TextView
                     android:id="@+id/txtFoodDescTitle"
@@ -359,6 +360,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
+                    android:id="@+id/line"
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
                     android:background="@color/colorPrimaryDark"
@@ -366,37 +368,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtFoodDescTitle" />
 
-                <TextView
-                    android:id="@+id/txtFoodDescBorder"
-                    android:layout_width="match_parent"
-                    android:layout_height="119dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtFoodDescTitle" />
-
-                <androidx.core.widget.NestedScrollView
-                    android:id="@+id/scrollView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="24dp"
-
-                    app:layout_constraintBottom_toBottomOf="@+id/txtFoodDescBorder"
-                    app:layout_constraintEnd_toEndOf="@+id/txtFoodDescBorder"
-                    app:layout_constraintStart_toStartOf="@+id/txtFoodDescBorder"
-                    app:layout_constraintTop_toTopOf="@+id/txtFoodDescBorder">
-
                     <TextView
                         android:id="@+id/txtFoodDesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Vegetarian/vegan cuisine can be delicious, creative and healthy too. The wanton noodle is does not have meat / fish and no egg.  All whole-grain flour in baking, mostly vegan. Some diary would replace with non diary-milk, vegan cheese, and butter."
-                        android:textSize="@dimen/content" />
-
-                </androidx.core.widget.NestedScrollView>
+                        android:text="description"
+                        android:textSize="@dimen/content"
+                        android:padding="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
