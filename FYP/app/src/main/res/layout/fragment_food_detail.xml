@@ -262,39 +262,59 @@
                 app:layout_constraintStart_toEndOf="@+id/txtStoret"
                 app:layout_constraintTop_toBottomOf="@+id/txtLocation" />
 
-            <RelativeLayout
-                android:id="@+id/rlCategory"
-                android:layout_width="59dp"
+            <LinearLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/card_bg"
-                android:orientation="vertical"
-                android:padding="1dp"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtStoret">
 
-                <ImageView
-                    android:id="@+id/ic_category"
-                    android:layout_width="31dp"
-                    android:layout_height="31dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="3dp"
-                    android:background="@drawable/ic_noodles1"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCat"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ic_category"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="3dp"
-                    android:text="@string/text_view"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="11sp" />
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            </RelativeLayout>
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/rlCategory"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:background="@drawable/card_bg"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:padding="1dp" >-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ic_category"-->
+<!--                        android:layout_width="31dp"-->
+<!--                        android:layout_height="31dp"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_margin="3dp"-->
+<!--                        android:background="@drawable/ic_noodles1"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        android:textSize="20sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/ic_category"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_marginBottom="3dp"-->
+<!--                        android:text="@string/text_view"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        android:textSize="11sp" />-->
+
+
+
+<!--                </RelativeLayout>-->
+            </LinearLayout>
+
+
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/rlFoodDecs"
@@ -306,7 +326,7 @@
                 android:background="@drawable/text_field_border"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rlCategory">
+                app:layout_constraintTop_toBottomOf="@+id/container">
 
                 <TextView
                     android:id="@+id/txtFoodDescTitle"
