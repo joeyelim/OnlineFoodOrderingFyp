@@ -54,7 +54,7 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_corner_button"
                 app:cornerRadius="180dp"
-                app:srcCompat="@drawable/ic_star"
+                app:srcCompat="@drawable/ic_star_black"
                 android:tint="@color/colorYellow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

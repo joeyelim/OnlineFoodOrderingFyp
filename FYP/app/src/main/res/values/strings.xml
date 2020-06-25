@@ -98,6 +98,9 @@
     <string name="confirmation">Confirmation</string>
     <string name="sucess">Sucess</string>
     <string name="date">date</string>
+    <string name="rated_foods">Rated Foods</string>
+    <string name="lim_yi_en">LIM YI EN</string>
+    <string name="log_out">Log Out</string>
 
 
 </resources>

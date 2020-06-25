@@ -65,6 +65,7 @@
                     android:numStars="5"
                     android:saveEnabled="true"
                     android:stepSize="1"
+                    android:backgroundTint="@color/white"
                     android:theme="@style/RatingBar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

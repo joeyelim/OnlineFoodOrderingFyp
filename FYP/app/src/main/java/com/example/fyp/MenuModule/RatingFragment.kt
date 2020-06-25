@@ -9,6 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.fyp.databinding.FragmentRatingBinding
+import android.graphics.PorterDuff
+import android.graphics.drawable.LayerDrawable
+import android.R
+import android.graphics.Color
+import android.widget.RatingBar
+
+
 
 
 
@@ -27,6 +34,7 @@ class RatingFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, com.example.fyp.R.layout.fragment_rating, container, false
         )
+
 
         return binding.root
     }
