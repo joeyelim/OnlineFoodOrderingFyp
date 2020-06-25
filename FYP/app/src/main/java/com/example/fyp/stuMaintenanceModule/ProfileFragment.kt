@@ -93,7 +93,7 @@ class ProfileFragment : Fragment() {
         }
 
 
-
+        (activity as MainActivity).setNavVisible()
 
         return binding.root
     }

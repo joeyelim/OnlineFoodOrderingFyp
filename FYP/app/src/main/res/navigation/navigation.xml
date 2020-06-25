@@ -19,7 +19,9 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_destination_home_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:popUpTo="@+id/fragment_home"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_destination_home_to_cartFragment"
             app:destination="@id/cartFragment" />
