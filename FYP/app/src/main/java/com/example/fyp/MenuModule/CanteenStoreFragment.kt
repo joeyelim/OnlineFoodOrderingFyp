@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -24,6 +25,12 @@ import com.example.fyp.databinding.FragmentCanteenStoreBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.canteen_row.view.*
+import kotlinx.android.synthetic.main.fragment_canteen_store.view.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -67,7 +74,16 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
     }
 
     private fun setUpUI() {
-        binding.canteen.text = viewModel.canteen.canteen_name
+        binding.canteen.text = viewModel.canteen.type
+
+//        val image = view?.findViewById<ImageView>(R.id.canteenImage)
+//        val a = FirebaseStorage.getInstance().getReference(viewModel.canteen.image!!)
+//
+//        a.downloadUrl.addOnSuccessListener {
+//            Picasso.get()
+//                .load(it)
+//                .into(image)
+//        }
     }
 
     fun initRecycleView() {

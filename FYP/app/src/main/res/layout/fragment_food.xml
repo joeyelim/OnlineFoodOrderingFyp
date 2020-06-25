@@ -41,6 +41,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:background="@drawable/details_border"
+                app:layout_constraintBottom_toBottomOf="@+id/canteenImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/canteenImage">
+
             <TextView
                 android:id="@+id/txtStore"
                 android:layout_width="wrap_content"
@@ -49,10 +59,13 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/canteenImage"
+                android:padding="8dp"
+                android:background="@drawable/details_border"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/canteenImage" />
+                app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageButton
                 android:id="@+id/btnCart"
