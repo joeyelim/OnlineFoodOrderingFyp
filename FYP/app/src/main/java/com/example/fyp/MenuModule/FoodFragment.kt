@@ -2,26 +2,22 @@ package com.example.fyp.MenuModule
 
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
-import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.Food
 import com.example.fyp.FirestoreAdapter.FoodFirestoreAdapter
 import com.example.fyp.FirestoreAdapter.onListClick2
 import com.example.fyp.MainActivity
-import com.example.fyp.R
+import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentFoodBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
@@ -34,6 +30,7 @@ class FoodFragment : Fragment(), onListClick2 {
 
     private lateinit var binding: FragmentFoodBinding
     private var adapter: FoodFirestoreAdapter? = null
+    private lateinit var viewModel: CanteenViewModel
 
 
     override fun onCreateView(
@@ -44,16 +41,23 @@ class FoodFragment : Fragment(), onListClick2 {
             inflater, com.example.fyp.R.layout.fragment_food, container, false
         )
 
+        viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
+
+
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
         initRecycleView()
 
-        binding.btnCart.setOnClickListener{
+        binding.btnCart.setOnClickListener {
             it.requestFocus()
             it.findNavController()
                 .navigate(FoodFragmentDirections.actionFoodFragmentToCartFragment())
         }
+
+        updateUI()
+
+
 
         return binding.root
     }
@@ -62,10 +66,16 @@ class FoodFragment : Fragment(), onListClick2 {
         menu.clear()
     }
 
+    private fun updateUI() {
+        binding.txtStore.text = viewModel.store.store_name
+    }
+
     fun initRecycleView() {
         val db = FirebaseFirestore.getInstance()
-        val query = db.collection("Canteen").document("Canteen1")
-            .collection("Store").document("Noodle").collection("Food")
+        val canteenType = viewModel.canteen.type!!
+        val storeType = viewModel.store.id!!
+        val query = db.collection("Canteen").document(canteenType)
+            .collection("Store").document(storeType).collection("Food")
             .orderBy("food_name", Query.Direction.ASCENDING)
 
         val options =
@@ -74,12 +84,14 @@ class FoodFragment : Fragment(), onListClick2 {
 
 
         adapter = FoodFirestoreAdapter(options, this, context!!)
-        binding.gvFoods.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+        binding.gvFoods.layoutManager =
+            LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
         binding.gvFoods.adapter = adapter
 
     }
 
     override fun onItemClick(food: Food, position: Int) {
+        viewModel.food = food
         this.findNavController()
             .navigate(FoodFragmentDirections.actionFoodFragmentToFoodDetailFragment())
     }

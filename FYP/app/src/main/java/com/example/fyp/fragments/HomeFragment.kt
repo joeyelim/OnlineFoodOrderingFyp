@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.FirestoreAdapter.CanteenFireStoreRecyclerAdapter
 import com.example.fyp.FirestoreAdapter.onListClick
 import com.example.fyp.Class.Canteen
 import com.example.fyp.MainActivity
+import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentHomeBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -34,7 +36,7 @@ class HomeFragment : Fragment(), onListClick {
     private lateinit var dataListener: ListenerRegistration
     private var adapter: CanteenFireStoreRecyclerAdapter? = null
     private lateinit var mAuth : FirebaseAuth
-
+    private lateinit var viewModel : CanteenViewModel
 
     companion object {
 
@@ -50,6 +52,9 @@ class HomeFragment : Fragment(), onListClick {
         binding = DataBindingUtil.inflate(
             inflater, com.example.fyp.R.layout.fragment_home, container, false
         )
+
+        viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
+
 
         (activity as MainActivity).setNavVisible()
 
@@ -94,7 +99,7 @@ class HomeFragment : Fragment(), onListClick {
 //    就是说有什么东i都是直接 update 的， 会 浪费流量
 //*/
 //
-    fun initRecycleView() {
+    private fun initRecycleView() {
         val db = FirebaseFirestore.getInstance()
         val query = db.collection(("Canteen")).orderBy("canteen_name", Query.Direction.ASCENDING)
 
@@ -112,6 +117,9 @@ class HomeFragment : Fragment(), onListClick {
     }
 
     override fun onItemClick(canteen: Canteen, position: Int) {
+        viewModel.setCurrentCanteen(canteen)
+
+        Log.i("Canteen", viewModel.canteen.canteen_name)
 
         this.findNavController()
             .navigate(HomeFragmentDirections.actionFragmentHomeToCanteenStoreFragment())
