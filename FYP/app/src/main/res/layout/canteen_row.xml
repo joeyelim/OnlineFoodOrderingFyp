@@ -76,8 +76,6 @@
                         android:src="@drawable/double_arrow" />
                 </RelativeLayout>
 
-
-
                 <View
                     android:id="@+id/view2"
                     android:layout_width="match_parent"

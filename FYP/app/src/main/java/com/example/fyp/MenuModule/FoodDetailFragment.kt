@@ -3,11 +3,8 @@ package com.example.fyp.MenuModule
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
@@ -27,10 +24,6 @@ class FoodDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, com.example.fyp.R.layout.fragment_food_detail, container, false
         )
-
-//        binding.imgCart.setOnClickListener(){
-//            it.findNavController().navigate()
-//        }
 
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
@@ -53,6 +46,8 @@ class FoodDetailFragment : Fragment() {
         return binding.root
     }
 
+
+    //custom dialog use in delete pop up message
     fun dialog(){
         val dialog = AlertDialog.Builder(activity)
         val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
@@ -66,5 +61,9 @@ class FoodDetailFragment : Fragment() {
 //
 //        })
 
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
     }
 }
