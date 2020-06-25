@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -86,6 +87,7 @@
                     android:layout_marginTop="16dp"
                     android:hint="@string/first_name"
                     app:endIconMode="clear_text"
+                    android:theme="@style/MyEditTextTheme"
                     app:helperText="@string/firstN_helperText"
                     app:layout_constraintBottom_toTopOf="@+id/txtPhoneLayout"
                     app:layout_constraintEnd_toStartOf="@+id/txtLastNLayout"
@@ -111,6 +113,7 @@
                     android:layout_marginEnd="8dp"
                     android:hint="@string/last_name"
                     app:endIconMode="clear_text"
+                    android:theme="@style/MyEditTextTheme"
                     app:helperText="@string/lastN_helperText"
                     app:layout_constraintBottom_toTopOf="@+id/txtPhoneLayout"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
@@ -135,6 +138,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:hint="@string/phone_number"
+                    android:theme="@style/MyEditTextTheme"
                     app:endIconMode="clear_text"
                     app:helperText="@string/phone_helperText"
                     app:layout_constraintBottom_toTopOf="@+id/txtEmailLayout"
@@ -158,12 +162,14 @@
                     android:layout_width="@dimen/signUp_field_length"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:hint="@string/email_address"
+                    android:theme="@style/MyEditTextTheme"
                     app:boxBackgroundMode="outline"
                     app:endIconMode="clear_text"
                     app:helperText="@string/email_helperText"
-                    app:layout_constraintBottom_toTopOf="@+id/textPasswordLayout"
+                    app:layout_constraintBottom_toTopOf="@+id/txtPasswordLayout"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout"
                     app:layout_constraintTop_toBottomOf="@+id/txtPhoneLayout">
@@ -179,7 +185,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textPasswordLayout"
+                    android:id="@+id/txtPasswordLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="@dimen/signUp_field_length"
                     android:layout_height="wrap_content"
@@ -187,6 +193,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:hint="@string/password"
+                    android:theme="@style/MyEditTextTheme"
                     app:boxBackgroundMode="outline"
                     app:endIconMode="password_toggle"
                     app:helperText="@string/password_helperText"
@@ -213,7 +220,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="@string/already_have_an_account"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/textPasswordLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtPasswordLayout" />
 
                 <Button
                     android:id="@+id/btnLogin"
@@ -222,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:text="@string/login"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorAccent12"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
                     app:layout_constraintStart_toStartOf="@+id/textView2"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />

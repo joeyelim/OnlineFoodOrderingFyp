@@ -115,7 +115,7 @@
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="24dp"
                         android:text="@string/login"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorAccent12"
                         android:layout_below="@+id/txtContent2"
                         android:layout_alignParentRight="true"/>
 

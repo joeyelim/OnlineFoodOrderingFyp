@@ -45,6 +45,7 @@
     <string name="plus_button">Plus Button</string>
     <string name="number">1</string>
     <string name="food_name">Food Name</string>
+    <string name="food_name_underline"><u>Food Name</u></string>
 
     <!--    Reset & Forgot Pwd-->
     <string name="next">Next</string>
@@ -66,6 +67,7 @@
     <string name="sucess_content">Welcome to <b>TARUC Online Food Ordering App</b>. Click the below link and login to our system to place an order. Enjoy for your lunch time^^</string>
     <string name="booking_time">Booking Time:</string>
     <string name="cancel">Cancel</string>
+    <string name="canteen_name_nou">Canteen Name</string>
     <string name="canteen_name"><u>Canteen Name</u></string>
     <string name="profile_image">profile image</string>
     <string name="noodle">Noodle</string>
@@ -95,6 +97,12 @@
     <string name="_3">3</string>
     <string name="dinning_option">Dinning Option:</string>
     <string name="pick_up_time">Pick up Time:</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="sucess">Sucess</string>
+    <string name="date">date</string>
+    <string name="rated_foods">Rated Foods</string>
+    <string name="lim_yi_en">LIM YI EN</string>
+    <string name="log_out">Log Out</string>
 
 
 </resources>

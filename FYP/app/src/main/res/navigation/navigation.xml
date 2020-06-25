@@ -177,5 +177,31 @@
     <fragment
         android:id="@+id/placeOrderFragment"
         android:name="com.example.fyp.OrderingModule.PlaceOrderFragment"
-        android:label="PLACE ORDER" />
+        android:label="PLACE ORDER" >
+        <action
+            android:id="@+id/action_placeOrderFragment_to_placeOrderProgress2Fragment"
+            app:destination="@id/placeOrderProgress2Fragment" />
+        <action
+            android:id="@+id/action_placeOrderFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/placeOrderProgress2Fragment"
+        android:name="com.example.fyp.OrderingModule.PlaceOrderProgress2Fragment"
+        android:label="CONFIRM ORDER">
+        <action
+            android:id="@+id/action_placeOrderProgress2Fragment_to_placeOrderProgress3Fragment"
+            app:destination="@id/placeOrderProgress3Fragment" />
+        <action
+            android:id="@+id/action_placeOrderProgress2Fragment_to_placeOrderFragment"
+            app:destination="@id/placeOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/placeOrderProgress3Fragment"
+        android:name="com.example.fyp.OrderingModule.PlaceOrderProgress3Fragment"
+        android:label="ORDER SUCCESSFUL" >
+        <action
+            android:id="@+id/action_placeOrderProgress3Fragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
+    </fragment>
 </navigation>

@@ -4,6 +4,7 @@ package com.example.fyp.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -118,6 +119,10 @@ class OrderListFragment : Fragment() {
             return titles[i]
         }
 
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
     }
 
 

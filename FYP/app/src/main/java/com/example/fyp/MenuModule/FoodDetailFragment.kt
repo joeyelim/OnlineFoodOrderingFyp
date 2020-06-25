@@ -3,11 +3,8 @@ package com.example.fyp.MenuModule
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -33,7 +30,6 @@ class FoodDetailFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
 
-
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
@@ -57,6 +53,7 @@ class FoodDetailFragment : Fragment() {
         return binding.root
     }
 
+
     private fun intiUI() {
         binding.txtFood.text = viewModel.food.food_name
         binding.txtFoodDesc.text = viewModel.food.recipe_info
@@ -66,7 +63,8 @@ class FoodDetailFragment : Fragment() {
         binding.txtSmallPrice.text = "RM: " + viewModel.food.price.toString()
         binding.txtLargePrice.text = "RM: " + viewModel.food.price.toString()
     }
-
+  
+  //custom dialog use in delete pop up message
     fun dialog(){
         val dialog = AlertDialog.Builder(activity)
         val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
@@ -80,5 +78,9 @@ class FoodDetailFragment : Fragment() {
 //
 //        })
 
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
     }
 }

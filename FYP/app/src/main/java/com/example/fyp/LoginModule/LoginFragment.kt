@@ -12,15 +12,21 @@ package com.example.fyp.LoginModule
 
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
 import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
-import com.example.fyp.R
 import com.example.fyp.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import android.graphics.drawable.GradientDrawable
+import android.graphics.Color
+import com.example.fyp.R
+
 
 /**
  * A simple [Fragment] subclass.
@@ -37,7 +43,7 @@ class LoginFragment : Fragment() {
 
         // use for binding, remember to set the layout cover by <layout> tag
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_login, container, false
+            inflater, com.example.fyp.R.layout.fragment_login, container, false
         )
 
         // option menu
@@ -59,8 +65,93 @@ class LoginFragment : Fragment() {
                 .navigate(LoginFragmentDirections.actionFragmentLoginToForgotPasswordFragment())
         }
 
+        binding.btnLogin.setOnClickListener{
+            login()
+        }
         return binding.root
     }
+
+    private fun login() {
+
+        if (!validation()) {
+            return
+        }
+
+        val email = binding.txtEmail.text.toString()
+        val password = binding.txtPassword.text.toString()
+
+        binding.btnLogin.isEnabled = false
+
+        Toast.makeText(
+            activity, "Logging In... Please Wait",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("Game", "signInWithEmail:success")
+
+                    val user = FirebaseAuth.getInstance().currentUser
+
+                    //findNavController().navigate(com.example.drugassignment.R.id.action_login_to_homeFragment)
+
+                    user?.let {
+                        if (!user.isEmailVerified) {
+                            FirebaseAuth.getInstance().signOut()
+                            binding.btnLogin.isEnabled = true
+                            Toast.makeText(
+                                activity, "Please Verify Your Email First",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                activity, "Welcome, Directing To Profile Page..",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+                    }
+                } else {
+                    // If sign in fails, display a message to the user.
+                    binding.btnLogin.isEnabled = true
+                    Log.w("Game", "signInWithEmail:failure", task.exception)
+
+                    Toast.makeText(
+                        activity, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
+    private fun validation() : Boolean {
+
+        if (binding.txtEmail.text.isNullOrBlank() || binding.txtPassword.text.isNullOrBlank()) {
+            if(binding.txtEmail.text.isNullOrBlank()) {
+                binding.txtEmailLy.error = "*Please enter your email."
+            }
+            else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
+                binding.txtEmailLy.error = "*Please enter a valid email"
+            }
+            else {
+                binding.txtEmailLy.isErrorEnabled = false
+            }
+
+            if (binding.txtPassword.text.isNullOrBlank()) {
+                binding.txtPasswordLy.error = "*Please enter your password."
+            }
+            else {
+                binding.txtPasswordLy.isErrorEnabled = false
+            }
+
+            return false
+        }
+
+        return true
+    }
+
 
     override fun onStart() {
         super.onStart()

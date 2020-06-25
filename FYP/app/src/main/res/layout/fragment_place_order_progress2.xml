@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/AppTheme"
+            tools:context=".OrderingModule.PlaceOrderProgress2Fragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_1"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_one" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="111dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/blue"
+                    app:layout_constraintStart_toEndOf="@+id/img_1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_2"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    app:layout_constraintStart_toEndOf="@+id/line1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_two" />
+
+                <TextView
+                    android:id="@+id/txtConfirmation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/confirmation"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_2" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="111dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/lightGray"
+                    app:layout_constraintStart_toEndOf="@+id/img_2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_3"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:background="@drawable/rounded_textview"
+                    android:gravity="center"
+                    android:text="@string/_3"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/line2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_bar">
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="Date                :"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_toEndOf="@+id/date"
+                    android:text="@string/date" />
+
+                <TextView
+                    android:id="@+id/pickupTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/date"
+                    android:layout_margin="4dp"
+                    android:text="Pick Up Time:"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/txtPickupTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtDate"
+                    android:layout_margin="4dp"
+                    android:layout_toEndOf="@+id/pickupTime"
+                    android:text="pick Up Time" />
+
+                <TextView
+                    android:id="@+id/option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pickupTime"
+                    android:layout_margin="4dp"
+                    android:text="Option            :"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/txtOption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtPickupTime"
+                    android:layout_margin="4dp"
+                    android:layout_toEndOf="@+id/option"
+                    android:text="option" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutInformation">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="320dp"
+                    android:layout_height="250dp"
+                    android:background="@drawable/details_border">
+
+                    <RelativeLayout
+                        android:id="@+id/title"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/food"
+                            android:layout_width="175dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Food"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                            android:id="@+id/qty"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_toEndOf="@+id/food"
+                            android:text="QTY"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                            android:id="@+id/price"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_toEndOf="@+id/qty"
+                            android:text="Price (RM)"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view2">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/orderFoodList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </ScrollView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <RelativeLayout
+                android:id="@+id/totalPriceLy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvOption">
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="Total: "
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txttotalPrice"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/total"
+                    android:text="@string/price"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold|italic" />
+
+            </RelativeLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:text="@string/back"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalPriceLy"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/confirm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalPriceLy" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
+
+
+
+
+
+

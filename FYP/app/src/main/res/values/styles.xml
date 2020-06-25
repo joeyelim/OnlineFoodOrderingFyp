@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorSecondary">@color/colorYellow</item>
+        <item name="radioButtonStyle">@style/Widget.App.RadioButton</item>
 <!--        <item name="android:popupMenuStyle">@style/CustomOverflowBack</item>-->
 <!--        <item name="android:itemTextAppearance">@style/CustomTextColor</item>-->
     </style>
@@ -18,17 +19,32 @@
 
     </style>
 
-    <style name="AppTheme2" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColorSecondary">@color/colorYellow</item>
+    <style name="Widget.App.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.RadioButton</item>
+
     </style>
 
-    <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/gray</item>
+    <style name="ThemeOverlay.App.RadioButton" parent="">
+<!--        <item name="colorOnSurface">@color/colorPink</item>-->
+<!--        <item name="colorSecondary">@color/colorPink</item>-->
+        <item name="buttonTint">@color/radio_button_tint</item>
+
+    </style>
+
+    <style name="MyEditTextTheme" >
+        <!-- General theme colors -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorSecondary">@color/blue</item>
+        <item name="colorAccent">@color/colorPink</item>
+
+        <item name="colorOnSurface">@color/gray</item><!--inputtext unfocused color-->
+    </style>
+
+
+    <style name="RatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
+<!--        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>-->
     </style>
 
     <style name="Theme.App" parent="Theme.MaterialComponents.NoActionBar">

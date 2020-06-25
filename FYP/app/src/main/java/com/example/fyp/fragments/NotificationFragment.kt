@@ -4,6 +4,7 @@ package com.example.fyp.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -157,6 +158,10 @@ class NotificationFragment : Fragment() {
             .addOnCompleteListener {
                 Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show();
             }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
     }
 
 //    private fun uploadPhoto() {
