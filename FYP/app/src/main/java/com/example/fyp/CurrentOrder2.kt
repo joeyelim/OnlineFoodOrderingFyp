@@ -72,8 +72,6 @@ class CurrentOrder2 : Fragment() {
         override fun getItem(position: Int): Fragment {
             //  parameter can use arrayList, probably will
             // just use an identifier
-            Log.i("test", position.toString())
-            Log.i("test", titles[position])
             return CurrentOrderFragment().newInstance(titles[position])
         }
 
