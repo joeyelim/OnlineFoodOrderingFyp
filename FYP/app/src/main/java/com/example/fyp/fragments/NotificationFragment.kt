@@ -77,7 +77,7 @@ class NotificationFragment : Fragment() {
         var dataList = ArrayList<Canteen>()
 
         for (x in 10 until 20) {
-            var testData = Canteen("time", "image", x.toString())
+            var testData = Canteen("time", "image", x.toString(),"Canteen")
             dataList.add(testData)
         }
 
