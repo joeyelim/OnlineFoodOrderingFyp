@@ -86,7 +86,9 @@
                     android:drawableStart="@drawable/ic_star_black"
                     android:drawablePadding="15dp"
                     android:drawableTint="@color/colorPrimary"
-                    android:padding="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:paddingLeft="16dp"
                     android:text="@string/rated_foods"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/title_text_size"
@@ -158,6 +160,15 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <View
+                    android:id="@+id/viewL1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/expandableRated" />
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/personalInfo"
                     android:layout_width="match_parent"
@@ -166,7 +177,7 @@
                     app:cardCornerRadius="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/expandableRated">
+                    app:layout_constraintTop_toBottomOf="@+id/viewL1">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/linearLayout1"
@@ -180,7 +191,9 @@
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/ic_person"
                             android:drawablePadding="15dp"
-                            android:padding="16dp"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:paddingLeft="16dp"
                             android:text="@string/personal_information"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/title_text_size"
@@ -339,8 +352,8 @@
                 <View
                     android:id="@+id/viewL"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGray"
                     app:layout_constraintBottom_toBottomOf="@+id/personalInfo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -397,8 +410,8 @@
                 <View
                     android:id="@+id/viewE"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/logout" />

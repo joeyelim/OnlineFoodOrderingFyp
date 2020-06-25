@@ -42,9 +42,9 @@
 
 
     <style name="RatingBar" parent="@android:style/Widget.RatingBar">
-<!--        <item name="colorControlNormal">@color/colorPink</item>-->
-<!--        <item name="colorControlActivated">@color/colorYellow</item>-->
-        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+<!--        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>-->
     </style>
 
     <style name="Theme.App" parent="Theme.MaterialComponents.NoActionBar">
