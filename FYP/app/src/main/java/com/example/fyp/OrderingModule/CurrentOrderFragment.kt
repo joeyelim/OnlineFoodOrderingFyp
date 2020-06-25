@@ -88,14 +88,6 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
 
 //        Toast.makeText(activity, player, Toast.LENGTH_SHORT).show()
 
-        query
-            .get()
-            .addOnCompleteListener {
-                Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(activity, it.toString(), Toast.LENGTH_SHORT).show()
-            }
 
         val options =
             FirestoreRecyclerOptions.Builder<Order_Food>()
