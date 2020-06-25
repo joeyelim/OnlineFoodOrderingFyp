@@ -21,7 +21,7 @@
                 android:contentDescription="@string/content_description_media"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/citc_cafe"
+                android:src="@drawable/hainanese_chicken_rice"
                 android:background="@drawable/frame_image_view"
                 android:cropToPadding="true"
                 android:adjustViewBounds="true"
