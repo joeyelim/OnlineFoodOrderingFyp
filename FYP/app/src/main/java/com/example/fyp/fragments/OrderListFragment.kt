@@ -6,17 +6,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.example.fyp.CurrentOrder2
 import com.example.fyp.MainActivity
 import com.example.fyp.OrderingModule.CurrentOrderFragment
 import com.example.fyp.OrderingModule.OrderHistoryFragment
 import com.example.fyp.databinding.FragmentOrderListBinding
-import kotlinx.android.synthetic.main.fragment_food_detail.view.*
+import kotlinx.android.synthetic.main.fragment_order_list.*
 
 
 /**
@@ -45,33 +44,43 @@ class OrderListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        val supportFragmentManager = this.activity!!.supportFragmentManager
+
+        /* -------- outer tab layout ------------------*/
+        val outTab = binding.tabLayout
+        val outterViewPager = OutterViePagerAdapter(supportFragmentManager)
+        val viewPager = binding.orderListViewPager
+
+        viewPager.adapter = outterViewPager
+        outTab.setupWithViewPager(viewPager)
+        tabLayout.setupWithViewPager(viewPager)
 
         /* --------this is for viewpage------------------*/
 
-        val supportFragmentManager = this.activity!!.supportFragmentManager
 
-        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
 
-        viewPagerAdapter.setFragment()
-
-        val viewPager = binding.viewPager
-        val tabLayout = binding.tabProgress
-
-        viewPager.adapter = viewPagerAdapter
-        binding.tabProgress.setupWithViewPager(viewPager)
-        tabLayout.setupWithViewPager(viewPager)
-
-        val tabIcons = intArrayOf(
-            com.example.fyp.R.drawable.ic_circled_1,
-            com.example.fyp.R.drawable.ic_circled_2,
-            com.example.fyp.R.drawable.ic_circled_3,
-            com.example.fyp.R.drawable.ic_circled_4
-        )
-
-        tabLayout.getTabAt(0)?.setIcon(tabIcons[0])
-        tabLayout.getTabAt(1)?.setIcon(tabIcons[1])
-        tabLayout.getTabAt(2)?.setIcon(tabIcons[2])
-        tabLayout.getTabAt(3)?.setIcon(tabIcons[3])
+//        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+//
+//        viewPagerAdapter.setFragment()
+//
+//        val viewPager = binding.viewPager
+//        val tabLayout = binding.tabProgress
+//
+//        viewPager.adapter = viewPagerAdapter
+//        binding.tabProgress.setupWithViewPager(viewPager)
+//        tabLayout.setupWithViewPager(viewPager)
+//
+//        val tabIcons = intArrayOf(
+//            com.example.fyp.R.drawable.ic_circled_1,
+//            com.example.fyp.R.drawable.ic_circled_2,
+//            com.example.fyp.R.drawable.ic_circled_3,
+//            com.example.fyp.R.drawable.ic_circled_4
+//        )
+//
+//        tabLayout.getTabAt(0)?.setIcon(tabIcons[0])
+//        tabLayout.getTabAt(1)?.setIcon(tabIcons[1])
+//        tabLayout.getTabAt(2)?.setIcon(tabIcons[2])
+//        tabLayout.getTabAt(3)?.setIcon(tabIcons[3])
 
 //        val badge = tabLayout.getTabAt(0)?.orCreateBadge
 //        badge?.isVisible = true
@@ -82,44 +91,70 @@ class OrderListFragment : Fragment() {
     /* --------this is for viewpage------------------*/
 
     // can pass in arrayList of String for maintainability
-    internal class ViewPagerAdapter(fragmentManager: FragmentManager) :
+//    internal class ViewPagerAdapter(fragmentManager: FragmentManager) :
+//        FragmentStatePagerAdapter(fragmentManager) {
+//
+//        private val fragments: ArrayList<Fragment> = ArrayList()
+//        private val titles: ArrayList<String> = ArrayList()
+//
+//        override fun getItem(position: Int): Fragment {
+//            //  parameter can use arrayList, probably will
+//            // just use an identifier
+//            Log.i("test", position.toString())
+//            Log.i("test", titles[position])
+//            return CurrentOrderFragment().newInstance(titles[position])
+//        }
+//
+//        override fun getCount(): Int {
+//            return 4
+//        }
+//
+//        fun addFragment(fragment: Fragment, title: String) {
+//            fragments.add(fragment)
+//            titles.add(title)
+//        }
+//
+//
+//        fun setFragment() {
+//
+//            titles.add("Pending")
+//            titles.add("Preparing")
+//            titles.add("Ready")
+//            titles.add("Taken")
+//        }
+//
+//        override fun getPageTitle(i: Int): CharSequence? {
+//            return titles[i]
+//        }
+//
+//    }
+
+    internal class OutterViePagerAdapter(fragmentManager: FragmentManager) :
         FragmentStatePagerAdapter(fragmentManager) {
-
-        private val fragments: ArrayList<Fragment> = ArrayList()
-        private val titles: ArrayList<String> = ArrayList()
-
         override fun getItem(position: Int): Fragment {
-            //  parameter can use arrayList, probably will
-            // just use an identifier
-            Log.i("test", position.toString())
-            Log.i("test", titles[position])
-            return CurrentOrderFragment().newInstance(titles[position])
+
+            return if (position == 0) {
+                CurrentOrder2()
+            } else {
+                OrderHistoryFragment()
+            }
+
         }
 
         override fun getCount(): Int {
-            return 4
+            return 2
         }
 
-        fun addFragment(fragment: Fragment, title: String) {
-            fragments.add(fragment)
-            titles.add(title)
+        override fun getPageTitle(position: Int): CharSequence? {
+            return if (position == 0) {
+                "Current Order"
+            } else {
+                "Order History"
+            }
         }
 
 
-        fun setFragment() {
-
-            titles.add("Pending")
-            titles.add("Preparing")
-            titles.add("Ready")
-            titles.add("Taken")
-        }
-
-        override fun getPageTitle(i: Int): CharSequence? {
-            return titles[i]
-        }
 
     }
-
-
 
 }
