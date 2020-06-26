@@ -23,6 +23,7 @@ import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentFoodDetailBinding
+import com.google.firebase.storage.FirebaseStorage
 
 /**
  * A simple [Fragment] subclass.
@@ -78,19 +79,9 @@ class FoodDetailFragment : Fragment() {
         binding.rvCat.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
         binding.rvCat.adapter = adapter
 
-//        for (item in viewModel.food.category) {
-//            val newText = TextView(activity)
-//            newText.text = item
-//            newText.textSize = 11f
-//            val imageView = ImageView(activity)
-////            imageView.requestLayout()
-////            imageView.layoutParams.height = 31
-////            imageView.layoutParams.width = 31
-//
-//
-////            binding.rlCategory.addView(imageView)
-//            binding.container.addView(newText)
-//        }
+        val image = binding.canteenImage
+        val a = FirebaseStorage.getInstance().getReference(viewModel.food.food_image!!)
+        viewModel.setImage(image, a)
     }
 
   //custom dialog use in delete pop up message

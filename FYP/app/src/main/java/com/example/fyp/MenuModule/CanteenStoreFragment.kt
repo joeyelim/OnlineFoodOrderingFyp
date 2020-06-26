@@ -76,14 +76,14 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
     private fun setUpUI() {
         binding.canteen.text = viewModel.canteen.type
 
-//        val image = view?.findViewById<ImageView>(R.id.canteenImage)
-//        val a = FirebaseStorage.getInstance().getReference(viewModel.canteen.image!!)
-//
-//        a.downloadUrl.addOnSuccessListener {
-//            Picasso.get()
-//                .load(it)
-//                .into(image)
-//        }
+        val image = binding.canteenImage
+        val a = FirebaseStorage.getInstance().getReference(viewModel.canteen.image!!)
+
+        a.downloadUrl.addOnSuccessListener {
+            Picasso.get()
+                .load(it)
+                .into(image)
+        }
     }
 
     fun initRecycleView() {

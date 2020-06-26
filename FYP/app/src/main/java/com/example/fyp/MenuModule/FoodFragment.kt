@@ -22,6 +22,8 @@ import com.example.fyp.databinding.FragmentFoodBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 
 /**
  * A simple [Fragment] subclass.
@@ -68,6 +70,17 @@ class FoodFragment : Fragment(), onListClick2 {
 
     private fun updateUI() {
         binding.txtStore.text = viewModel.store.store_name
+
+        val image = binding.canteenImage
+        val a = FirebaseStorage.getInstance().getReference(viewModel.store.store_image!!)
+        viewModel.setImage(image, a)
+
+
+//        a.downloadUrl.addOnSuccessListener {
+//            Picasso.get()
+//                .load(it)
+//                .into(image)
+//        }
     }
 
     fun initRecycleView() {
