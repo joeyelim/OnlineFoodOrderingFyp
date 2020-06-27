@@ -17,7 +17,7 @@
                 android:id="@+id/canteenImage"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:alpha="0.2"
+                android:alpha="0.3"
                 android:contentDescription="@string/content_description_media"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
@@ -69,62 +69,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_shopping_cart"
                 app:strokeColor="@color/colorPrimary" />
-
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/nestedScrollView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/canteenImage">
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:tabMode="scrollable">
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:icon="@drawable/ic_noodles1"
-                        android:text="@string/noodle" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:icon="@drawable/ic_rice"
-                        android:text="@string/rice" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:icon="@drawable/ic_hot_chili"
-                        android:text="@string/spicy" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:icon="@drawable/ic_hot_soup"
-                        android:text="@string/soup" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:icon="@drawable/ic_vegetarian"
-                        android:text="@string/vegetarian" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:icon="@drawable/ic_beverage"
-                        android:text="@string/beverage" />
-
-                </com.google.android.material.tabs.TabLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
