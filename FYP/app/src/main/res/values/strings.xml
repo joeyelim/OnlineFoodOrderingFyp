@@ -103,6 +103,14 @@
     <string name="rated_foods">Rated Foods</string>
     <string name="lim_yi_en">LIM YI EN</string>
     <string name="log_out">Log Out</string>
+    <string name="minus_button">Minus Button</string>
+    <string name="available_stock">Available Stock:</string>
+    <string name="large_nobracket">Large</string>
+    <string name="small_nobracket">Small</string>
+    <string name="remarks">Remarks:</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="go_to_shop_now">Go to Shop Now</string>
+    <string name="there_is_empty_items_yet">There is empty items yet.</string>
 
 
 </resources>

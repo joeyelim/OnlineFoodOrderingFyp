@@ -59,7 +59,7 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
         binding.btnCart.setOnClickListener{
             it.requestFocus()
             it.findNavController()
-                .navigate(FoodFragmentDirections.actionFoodFragmentToCartFragment())
+                .navigate(CanteenStoreFragmentDirections.actionCanteenStoreFragmentToCartFragment())
         }
 
         setUpUI()

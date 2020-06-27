@@ -40,16 +40,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/imgvBorder"
-                android:layout_width="267dp"
-                android:layout_height="182dp"
-                android:layout_marginTop="32dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/details_border"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <TextView-->
+<!--                android:id="@+id/imgvBorder"-->
+<!--                android:layout_width="267dp"-->
+<!--                android:layout_height="182dp"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:background="@drawable/details_border"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
                 <ImageView
                     android:id="@+id/imgFood"
@@ -58,7 +58,7 @@
                     android:layout_marginTop="32dp"
                     android:padding="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/hainanese_chicken_rice"
+                    android:src="@drawable/frame_image_view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

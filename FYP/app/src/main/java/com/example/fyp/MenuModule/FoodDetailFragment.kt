@@ -2,17 +2,13 @@ package com.example.fyp.MenuModule
 
 
 import android.app.AlertDialog
-import android.icu.text.MeasureFormat
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -20,10 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.FirestoreAdapter.catAdapter
 import com.example.fyp.MainActivity
-import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentFoodDetailBinding
 import com.google.firebase.storage.FirebaseStorage
+import android.text.style.UnderlineSpan
+import android.text.SpannableString
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -56,11 +55,16 @@ class FoodDetailFragment : Fragment() {
 
         binding.imgStar.setOnClickListener{
             val dialog = AlertDialog.Builder(activity)
-            val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
+            val dialogView = layoutInflater.inflate(com.example.fyp.R.layout.fragment_rating, null)
 
             dialog.setView(dialogView)
             dialog.setCancelable(true)
             dialog.show()
+        }
+
+        binding.btnAddToCart.setOnClickListener{
+            it.findNavController()
+                .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToAddToCartFragment())
         }
 
         return binding.root
@@ -68,6 +72,8 @@ class FoodDetailFragment : Fragment() {
 
     private fun intiUI() {
         binding.txtFood.text = viewModel.food.food_name
+        binding.txtFood.setPaintFlags( binding.txtFood.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
+
         binding.txtFoodDesc.text = viewModel.food.recipe_info
         binding.txtLocation.text = viewModel.canteen.type
         binding.txtStoreName.text = viewModel.store.store_name
@@ -84,23 +90,26 @@ class FoodDetailFragment : Fragment() {
         viewModel.setImage(image, a)
     }
 
-  //custom dialog use in delete pop up message
-    fun dialog(){
-        val dialog = AlertDialog.Builder(activity)
-        val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
 
-        dialog.setView(dialogView)
-        dialog.setCancelable(false)
-        dialog.show()
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
+    }
+
+  //custom dialog use in delete pop up message
+//    fun dialog(){
+//        val dialog = AlertDialog.Builder(activity)
+//        val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
+//
+//        dialog.setView(dialogView)
+//        dialog.setCancelable(false)
+//        dialog.show()
 
 //        val customDialog = dialog.create()
 //        customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener({
 //
 //        })
 
-    }
+//    }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.clear()
-    }
+
 }
