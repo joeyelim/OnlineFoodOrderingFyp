@@ -18,11 +18,11 @@
                 android:id="@+id/canteenImage"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:alpha="0.4"
+                android:alpha="0.2"
                 android:contentDescription="@string/content_description_media"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/citc_cafe"
+                android:src="@drawable/frame_image_view"
                 android:cropToPadding="true"
                 android:adjustViewBounds="true"
                 android:clickable="true"
@@ -41,16 +41,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:background="@drawable/details_border"
-                app:layout_constraintBottom_toBottomOf="@+id/canteenImage"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/canteenImage">
-
             <TextView
                 android:id="@+id/txtStore"
                 android:layout_width="wrap_content"
@@ -60,12 +50,10 @@
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold"
                 android:padding="8dp"
-                android:background="@drawable/details_border"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageButton
                 android:id="@+id/btnCart"

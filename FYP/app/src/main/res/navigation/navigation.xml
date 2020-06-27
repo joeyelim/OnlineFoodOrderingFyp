@@ -132,8 +132,8 @@
             android:id="@+id/action_foodDetailFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
         <action
-            android:id="@+id/action_foodDetailFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_foodDetailFragment_to_addToCartFragment"
+            app:destination="@id/addToCartFragment" />
     </fragment>
     <fragment
         android:id="@+id/ratingFragment"
@@ -143,7 +143,7 @@
     <fragment
         android:id="@+id/addToCartFragment"
         android:name="com.example.fyp.OrderingModule.AddToCartFragment"
-        android:label="fragment_add_to_cart"
+        android:label="ADD TO CART"
         tools:layout="@layout/fragment_add_to_cart" />
     <fragment
         android:id="@+id/resetPwdFragment"
