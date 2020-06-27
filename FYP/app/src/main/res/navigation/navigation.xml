@@ -92,11 +92,14 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.fyp.fragments.CartFragment"
-        android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" >
+        android:label="CART"
+        tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cartFragment_to_placeOrderFragment"
             app:destination="@id/placeOrderFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_fragment_home"
+            app:destination="@+id/fragment_home" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"

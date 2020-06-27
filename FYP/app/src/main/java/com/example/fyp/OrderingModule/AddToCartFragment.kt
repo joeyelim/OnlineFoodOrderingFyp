@@ -64,6 +64,9 @@ class AddToCartFragment : Fragment() {
         viewModel.setImage(image, a)
     }
 
+    private fun calQuantity(qty: Int){
+        
+    }
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
     }

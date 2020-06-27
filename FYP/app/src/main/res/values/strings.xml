@@ -109,6 +109,8 @@
     <string name="small_nobracket">Small</string>
     <string name="remarks">Remarks:</string>
     <string name="add_to_cart">Add To Cart</string>
+    <string name="go_to_shop_now">Go to Shop Now</string>
+    <string name="there_is_empty_items_yet">There is empty items yet.</string>
 
 
 </resources>

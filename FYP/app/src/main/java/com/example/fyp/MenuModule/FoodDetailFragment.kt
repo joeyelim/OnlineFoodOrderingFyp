@@ -90,12 +90,6 @@ class FoodDetailFragment : Fragment() {
         viewModel.setImage(image, a)
     }
 
-    fun underlineText(){
-        val textView = binding.txtFood
-        val content = SpannableString("Content")
-        content.setSpan(UnderlineSpan(), 0, content.length, 0)
-        textView.text = content
-    }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
