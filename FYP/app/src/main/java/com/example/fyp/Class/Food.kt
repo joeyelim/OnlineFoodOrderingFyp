@@ -10,10 +10,12 @@ class Food {
     var total_stock : Int? = 0
     var category : MutableList<String> = ArrayList()
 
+
     constructor()
 
     constructor(food_name: String?, food_image: String?, price : Double?, recipe_info : String?,
-    total_star : Int?, total_review : Int?, total_stock : Int?, category : MutableList<String>) {
+    total_star : Int?, total_review : Int?, total_stock : Int?, category : MutableList<String>
+    ) {
         this.food_name = food_name
         this.food_image = food_image
         this.price = price
@@ -22,6 +24,7 @@ class Food {
         this.total_review = total_review
         this.total_star = total_star
         this.total_stock = total_stock
+
     }
 
 
