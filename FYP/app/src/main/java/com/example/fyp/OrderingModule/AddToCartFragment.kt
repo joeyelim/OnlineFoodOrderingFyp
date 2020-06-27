@@ -52,8 +52,8 @@ class AddToCartFragment : Fragment() {
         binding.txtFoodName.setPaintFlags( binding.txtFoodName.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
 
         binding.txtStockQty.text = viewModel.food.total_stock.toString()
-        binding.txtSmallPrice.text = "RM: " + viewModel.food.price.toString()
-        binding.txtLargePrice.text = "RM: " + viewModel.food.price.toString()
+        binding.txtSmallPrice.text = "RM: " + viewModel.food.small_price.toString()
+        binding.txtLargePrice.text = "RM: " + viewModel.food.large_price.toString()
 
         val adapter = catAdapter(viewModel.food.category)
         binding.rvCat.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
@@ -64,9 +64,6 @@ class AddToCartFragment : Fragment() {
         viewModel.setImage(image, a)
     }
 
-    private fun calQuantity(qty: Int){
-
-    }
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
     }

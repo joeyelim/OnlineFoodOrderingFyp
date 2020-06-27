@@ -78,8 +78,8 @@ class FoodDetailFragment : Fragment() {
         binding.txtLocation.text = viewModel.canteen.type
         binding.txtStoreName.text = viewModel.store.store_name
         binding.txtReview.text = "( " + viewModel.food.total_review.toString() + " review)"
-        binding.txtSmallPrice.text = "RM: " + viewModel.food.price.toString()
-        binding.txtLargePrice.text = "RM: " + viewModel.food.price.toString()
+        binding.txtSmallPrice.text = "RM: " + viewModel.food.small_price.toString()
+        binding.txtLargePrice.text = "RM: " + viewModel.food.large_price.toString()
 
         val adapter = catAdapter(viewModel.food.category)
         binding.rvCat.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
