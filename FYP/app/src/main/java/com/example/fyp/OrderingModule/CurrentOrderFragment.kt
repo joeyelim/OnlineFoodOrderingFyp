@@ -16,8 +16,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.CanteenStore
+import com.example.fyp.Class.Order
 import com.example.fyp.Class.Order_Food
-import com.example.fyp.FirestoreAdapter.CurrentOrderFireStoreAdapter
+import com.example.fyp.FirestoreAdapter.CurrentOrderOuterAdapter
 import com.example.fyp.FirestoreAdapter.StoreFirestoreAdapter
 import com.example.fyp.FirestoreAdapter.onListClick2
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -28,7 +29,8 @@ import com.google.firebase.firestore.Query
 class CurrentOrderFragment : Fragment(), onListClick2 {
 
     private lateinit var binding: FragmentCurrentOrderBinding
-    private lateinit var adapter: CurrentOrderFireStoreAdapter
+//    private lateinit var adapter: CurrentOrderFireStoreAdapter
+    private lateinit var adapter: CurrentOrderOuterAdapter
     private val ARG_PLAYERS = "arg_player"
     private var player : String = "13"
 
@@ -74,27 +76,22 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
 
     /* --------this is for viewpage------------------*/
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        (view.findViewById(com.example.fyp.R.id.textView5) as TextView).text = player
-    }
-
     private fun initRecycleView() {
 
         val db = FirebaseFirestore.getInstance()
         val query = db.collection("User").document("Yong Boon")
-            .collection("Order").whereEqualTo("status", player)
+            .collection("Order").orderBy("id",Query.Direction.ASCENDING)
+            .whereEqualTo("status", player)
 
 //        Toast.makeText(activity, player, Toast.LENGTH_SHORT).show()
 
 
         val options =
-            FirestoreRecyclerOptions.Builder<Order_Food>()
-                .setQuery(query, Order_Food::class.java).build()
+            FirestoreRecyclerOptions.Builder<Order>()
+                .setQuery(query, Order::class.java).build()
 
-        adapter = CurrentOrderFireStoreAdapter(options, this, context!!)
-        binding.currentOrderRecycle.layoutManager = LinearLayoutManager(activity)
+        adapter = CurrentOrderOuterAdapter(options, this, context!!)
+        binding.currentOrderRecycle.layoutManager = LinearLayoutManager(context)
         binding.currentOrderRecycle.adapter = adapter
 
     }

@@ -8,6 +8,7 @@ class Order_Food {
     var remark: String? = ""
     var canteen_Name: String? = ""
     var store_Name: String? = ""
+    var option : String? = ""
 
     constructor()
 
@@ -18,7 +19,8 @@ class Order_Food {
         quantity: Int?,
         remark: String?,
         canteen_Name: String?,
-        store_Name: String?
+        store_Name: String?,
+        option : String?
 
     ) {
         this.food_Name = food_Name
@@ -28,5 +30,6 @@ class Order_Food {
         this.canteen_Name = canteen_Name
         this.store_Name = store_Name
         this.status = status
+        this.option = option
     }
 }

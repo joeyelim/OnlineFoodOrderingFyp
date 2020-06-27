@@ -78,12 +78,7 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
 
         val image = binding.canteenImage
         val a = FirebaseStorage.getInstance().getReference(viewModel.canteen.image!!)
-
-        a.downloadUrl.addOnSuccessListener {
-            Picasso.get()
-                .load(it)
-                .into(image)
-        }
+        viewModel.setImage(image, a)
     }
 
     fun initRecycleView() {

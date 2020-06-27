@@ -11,13 +11,18 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.fyp.Class.Canteen
+import com.example.fyp.Class.Order
 import com.example.fyp.Class.Order_Food
-import com.example.fyp.R
 import com.example.fyp.databinding.FragmentNotificationBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.fragment_place_order_progress2.*
+import java.util.*
+import kotlin.collections.ArrayList
+import java.text.SimpleDateFormat
+
 
 /**
  * A simple [Fragment] subclass.
@@ -32,7 +37,7 @@ class NotificationFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_notification, container, false
+            inflater, com.example.fyp.R.layout.fragment_notification, container, false
         )
 
         binding.btnUploadFirestore.setOnClickListener {
@@ -103,21 +108,49 @@ class NotificationFragment : Fragment() {
 //        val order = Order("Pick__Date", "Order_Date", "Take_Away",
 //            "Pending", "Pick_Time", "Order_Time", "Total_Price")
 
+//        var orderFood = ArrayList<Order>()
+//
+//        for (x in 1 until 3) {
+//            val order = Order(
+//                "12/12/2020", "15/12/2020", "Option", "status",
+//                "15:00", "12:00", "Total_Order"
+//            )
+//
+//            orderFood.add(order)
+//        }
+//
+//        for ((index, item) in orderFood.withIndex()) {
+//            var foodIndex = index + 5
+//            db.collection("User").document("Yong Boon")
+//                .collection("Order").document("Order$foodIndex")
+//                .set(item)
+//                .addOnSuccessListener {
+//                    Log.i("upload", "success")
+//                }
+//                .addOnFailureListener {
+//                    Log.i("upload", "Error adding document", it)
+//                }
+//                .addOnCompleteListener {
+//                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
+//                }
+//        }
+
         var orderFoodList = ArrayList<Order_Food>()
 
-        for (x in 8 until 10) {
+        for (x in 1 until 3) {
             val orderFood = Order_Food(
-                "Food_Name_Complete", x + 2.5, "Ready", x,
-                "Ready", "CanteenName", "StoreName"
+                "Food_Name_Preparing", x + 6.5, "Ready", x,
+                "Ready", "CanteenName", "StoreName", "Dine In"
             )
 
             orderFoodList.add(orderFood)
         }
 
         for ((index, item) in orderFoodList.withIndex()) {
-            val foodInt = (index + 8)
+            val foodInt = (index)
             db.collection("User").document("Yong Boon")
-                .collection("Order").document("Order$foodInt")
+                .collection("Order").document("Order5")
+                .collection("Order_Food").document("OrderFood$foodInt")
                 .set(item)
                 .addOnSuccessListener {
                     Log.i("upload", "success")

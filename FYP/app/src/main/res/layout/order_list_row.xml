@@ -6,43 +6,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp">
-
-        <TextView
-            android:id="@+id/txtBooking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/booking_time"
-            android:textColor="@color/colorPrimaryDark"/>
-
-        <TextView
-            android:id="@+id/txtTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_view"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginLeft="4dp"
-            android:layout_toEndOf="@+id/txtBooking"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardOrderList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            app:cardPreventCornerOverlap="false"
-            android:dividerHeight="0.0px"
-            android:clipToPadding="true"
-            android:clipChildren="true"
-            android:divider="@android:color/transparent"
-            android:elevation="8dp"
-            app:cardElevation="10dp"
             android:clickable="true"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0.0px"
+            android:elevation="8dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:layout_below="@+id/txtBooking">
+            app:cardElevation="10dp"
+            app:cardPreventCornerOverlap="false">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -54,8 +35,8 @@
                     android:id="@+id/txtCanteenName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/canteen_name"
                     android:layout_marginTop="8dp"
+                    android:text="@string/canteen_name"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -77,8 +58,8 @@
                     android:id="@+id/view"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorPrimary"
                     android:layout_marginTop="8dp"
+                    android:background="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtStore" />
@@ -201,7 +182,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/txtRemarks" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnBack"
+                        android:id="@+id/btnOrderCancel"
                         style="?attr/materialButtonOutlinedStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -209,10 +190,10 @@
                         android:shadowColor="@color/colorPrimaryDark"
                         android:text="@string/cancel"
                         android:textAppearance="@style/MyCustomTabText"
+                        app:cornerRadius="0dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtProgress"
-                        app:cornerRadius="0dp"
-                        app:strokeColor="@color/colorPrimary"/>
+                        app:strokeColor="@color/colorPrimary" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
