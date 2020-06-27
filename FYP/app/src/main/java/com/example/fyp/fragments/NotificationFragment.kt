@@ -10,10 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.fyp.Class.Canteen
-import com.example.fyp.Class.Cart
-import com.example.fyp.Class.Order
-import com.example.fyp.Class.Order_Food
+import com.example.fyp.Class.*
 import com.example.fyp.databinding.FragmentNotificationBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -136,14 +133,44 @@ class NotificationFragment : Fragment() {
 //                }
 //        }
 
-        var cartList = ArrayList<Cart>()
+//        var cartList = ArrayList<Cart>()
+//
+//        val date = Calendar.getInstance().time
+//        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
+//        val formatedDate = formatter.format(date)
+//
+//        cartList.add(Cart("Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
+//            "Canteen1", "Noodle", formatedDate ))
 
-        val date = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
-        val formatedDate = formatter.format(date)
+        //--------------------------------------------yien----------------------------------------------------------
 
-        cartList.add(Cart("Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
-            "Canteen1", "Noodle", formatedDate ))
+//        var food = ArrayList<Food>()
+//
+//        food.add(Food("Chicken Rice", "Food/hainanese_chicken_rice.jpg", 4.5, 5.5,
+//            "Nice chicken rice",
+//            2, 3, 20))
+//
+
+
+
+
+
+//        var store = ArrayList<CanteenStore>()
+//
+//        store.add(CanteenStore("Fort Margherita Cafe", "Store/citc_cafe.jpeg",
+//            "Fort Margherita Cafe"))
+
+
+//        var cartList = ArrayList<Cart>()
+//
+//        val date = Calendar.getInstance().time
+//        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
+//        val formatedDate = formatter.format(date)
+//
+//        cartList.add(Cart("Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
+//            "Canteen1", "Noodle", formatedDate ))
+
+
 
 
 //        var orderFoodList = ArrayList<Order_Food>()
@@ -157,21 +184,42 @@ class NotificationFragment : Fragment() {
 //            orderFoodList.add(orderFood)
 //        }
 
-        for ((index, item) in cartList.withIndex()) {
-            val foodInt = (index)
-            db.collection("User").document("Yong Boon")
-                .collection("Cart").document(item.Cart_ID!!)
-                .set(item)
-                .addOnSuccessListener {
-                    Log.i("upload", "success")
-                }
-                .addOnFailureListener {
-                    Log.i("upload", "Error adding document", it)
-                }
-                .addOnCompleteListener {
-                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
-                }
-        }
+
+//        for ((index, item) in cartList.withIndex()) {
+//            val foodInt = (index)
+//            db.collection("User").document("Yong Boon")
+//                .collection("Cart").document(item.Cart_ID!!)
+//                .set(item)
+//                .addOnSuccessListener {
+//                    Log.i("upload", "success")
+//                }
+//                .addOnFailureListener {
+//                    Log.i("upload", "Error adding document", it)
+//                }
+//                .addOnCompleteListener {
+//                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
+//                }
+//        }
+
+//--------------------------------------------yien----------------------------------------------------------
+
+//        for ((index, item) in food.withIndex()) {
+//            val foodInt = (index)
+//            db.collection("Canteen").document("Yum Yum Cafeteria")
+//                .collection("Store").document("Chicken Rice")
+//                .collection("Food").document(item.food_name!!)
+//                .set(item)
+//                .addOnSuccessListener {
+//                    Log.i("upload", "success")
+//                }
+//                .addOnFailureListener {
+//                    Log.i("upload", "Error adding document", it)
+//                }
+//                .addOnCompleteListener {
+//                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
+//                }
+//        }
+
 
 
     }

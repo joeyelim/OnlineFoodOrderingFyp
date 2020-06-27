@@ -7,17 +7,12 @@ class Canteen{
     var type : String? = ""
 
     constructor()
-
-    constructor(
-        time: String?,
-        image: String?,
-        canteen_name : String?,
-        type : String?
-
-    ) {
-        this.time = time
-        this.image = image
+    constructor(canteen_name: String?, image: String?, time: String?, type: String?) {
         this.canteen_name = canteen_name
+        this.image = image
+        this.time = time
         this.type = type
     }
+
+
 }

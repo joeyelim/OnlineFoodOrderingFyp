@@ -44,7 +44,7 @@ class FoodViewHolder internal constructor(private val view: View, var context: C
 
         val dec = DecimalFormat("RM ###.00")
         val price = view.findViewById<TextView >(R.id.tvPrice)
-        price.text = dec.format(food.price).toString()
+        price.text = dec.format(food.small_price).toString()
         
         val image = view.findViewById<ImageView>(R.id.imgFood)
         val a = FirebaseStorage.getInstance().getReference(food.food_image!!)
