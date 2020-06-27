@@ -4,31 +4,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:context=".MenuModule.FoodFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/storelayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/canteenImage"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:alpha="0.2"
+                android:layout_height="141dp"
+                android:adjustViewBounds="true"
+                android:alpha="0.3"
+                android:clickable="true"
                 android:contentDescription="@string/content_description_media"
+                android:cropToPadding="true"
                 android:fitsSystemWindows="true"
+                android:focusable="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/frame_image_view"
-                android:cropToPadding="true"
-                android:adjustViewBounds="true"
-                android:clickable="true"
-                android:focusable="true"
                 app:layout_collapseMode="parallax"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,11 +49,11 @@
                 android:id="@+id/txtStore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:text="@string/text_view"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold"
-                android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,8 +68,8 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_corner_button"
                 android:elevation="10dp"
-                app:cornerRadius="180dp"
                 android:tint="@color/colorYellow"
+                app:cornerRadius="180dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_shopping_cart"
@@ -74,20 +78,86 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
+            android:id="@+id/svFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/storelayout">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/storelayout">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/gvFoods"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"/>
 
         </ScrollView>
 
-    </RelativeLayout>
+        <View
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="scrollable">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_noodles1"
+                    android:text="@string/noodle" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_rice"
+                    android:text="@string/rice" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_hot_chili"
+                    android:text="@string/spicy" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_hot_soup"
+                    android:text="@string/soup" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_vegetarian"
+                    android:text="@string/vegetarian" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_beverage"
+                    android:text="@string/beverage" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
 <!--    android:columnWidth="150dp"-->
