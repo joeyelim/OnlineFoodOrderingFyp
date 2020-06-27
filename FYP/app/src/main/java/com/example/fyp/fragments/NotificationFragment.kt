@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.fyp.Class.Canteen
+import com.example.fyp.Class.Cart
 import com.example.fyp.Class.Order
 import com.example.fyp.Class.Order_Food
 import com.example.fyp.databinding.FragmentNotificationBinding
@@ -135,22 +136,31 @@ class NotificationFragment : Fragment() {
 //                }
 //        }
 
-        var orderFoodList = ArrayList<Order_Food>()
+        var cartList = ArrayList<Cart>()
 
-        for (x in 1 until 3) {
-            val orderFood = Order_Food(
-                "Food_Name_Preparing", x + 6.5, "Ready", x,
-                "Ready", "CanteenName", "StoreName", "Dine In"
-            )
+        val date = Calendar.getInstance().time
+        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
+        val formatedDate = formatter.format(date)
 
-            orderFoodList.add(orderFood)
-        }
+        cartList.add(Cart("Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
+            "Canteen1", "Noodle", formatedDate ))
 
-        for ((index, item) in orderFoodList.withIndex()) {
+
+//        var orderFoodList = ArrayList<Order_Food>()
+//
+//        for (x in 1 until 3) {
+//            val orderFood = Order_Food(
+//                "Food_Name_Preparing", x + 6.5, "Ready", x,
+//                "Ready", "CanteenName", "StoreName", "Dine In"
+//            )
+//
+//            orderFoodList.add(orderFood)
+//        }
+
+        for ((index, item) in cartList.withIndex()) {
             val foodInt = (index)
             db.collection("User").document("Yong Boon")
-                .collection("Order").document("Order5")
-                .collection("Order_Food").document("OrderFood$foodInt")
+                .collection("Cart").document(item.Cart_ID!!)
                 .set(item)
                 .addOnSuccessListener {
                     Log.i("upload", "success")
