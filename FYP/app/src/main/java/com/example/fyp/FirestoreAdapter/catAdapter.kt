@@ -1,12 +1,9 @@
 package com.example.fyp.FirestoreAdapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fyp.MyAdapter
 import com.example.fyp.R
 import kotlinx.android.synthetic.main.food_category_row.view.*
 
