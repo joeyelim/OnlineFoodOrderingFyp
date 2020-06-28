@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
-        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/LoginScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -12,8 +13,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:background="@drawable/login_background"
+            android:orientation="vertical"
             tools:context=".LoginModule.LoginFragment">
 
             <TextView
@@ -96,9 +97,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/email_address"
+                android:theme="@style/MyEditTextTheme"
                 app:boxBackgroundMode="outline"
                 app:endIconMode="clear_text"
-                android:theme="@style/MyEditTextTheme"
                 app:helperText="@string/email_helperText"
                 app:layout_constraintBottom_toTopOf="@+id/txtPasswordLy"
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
@@ -185,8 +186,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnSignUp" />
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
