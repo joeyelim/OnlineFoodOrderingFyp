@@ -79,12 +79,21 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
     private fun initRecycleView() {
 
         val db = FirebaseFirestore.getInstance()
-        val query = db.collection("User").document("Yong Boon")
-            .collection("Order").orderBy("id",Query.Direction.ASCENDING)
+        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
+            .collection("Order").orderBy("id", Query.Direction.ASCENDING)
             .whereEqualTo("status", player)
 
-//        Toast.makeText(activity, player, Toast.LENGTH_SHORT).show()
 
+        query.get()
+            .addOnSuccessListener {
+                for (item in it.documents) {
+                    Log.i("Test", item.id)
+                }
+            }
+            .addOnFailureListener {
+                Log.i("Test", player)
+                Log.i("Test", "Fail")
+            }
 
         val options =
             FirestoreRecyclerOptions.Builder<Order>()

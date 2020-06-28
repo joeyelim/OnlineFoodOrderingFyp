@@ -10,6 +10,7 @@ package com.example.fyp.LoginModule
 *
 * */
 
+import android.content.Context
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import android.graphics.drawable.GradientDrawable
 import android.graphics.Color
+import android.view.inputmethod.InputMethodManager
+import androidx.navigation.fragment.findNavController
+import com.example.fyp.MenuModule.CanteenStoreFragmentDirections
 import com.example.fyp.R
 
 
@@ -54,10 +58,8 @@ class LoginFragment : Fragment() {
         (activity as MainActivity).setNavInvisible()
 
         binding.btnSignUp.setOnClickListener {
-
             it.findNavController()
                 .navigate(LoginFragmentDirections.actionLoginToRegistration())
-
         }
 
         binding.btnForgotPassword.setOnClickListener {
@@ -68,6 +70,11 @@ class LoginFragment : Fragment() {
         binding.btnLogin.setOnClickListener{
             login()
         }
+
+        binding.textView2.setOnClickListener{
+            hideKeyboard()
+        }
+
         return binding.root
     }
 
@@ -91,28 +98,37 @@ class LoginFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d("Game", "signInWithEmail:success")
+
+                    Toast.makeText(
+                        activity, "Welcome, Directing To Profile Page..",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    this.findNavController()
+                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+
+
 
                     val user = FirebaseAuth.getInstance().currentUser
 
                     //findNavController().navigate(com.example.drugassignment.R.id.action_login_to_homeFragment)
 
-                    user?.let {
-                        if (!user.isEmailVerified) {
-                            FirebaseAuth.getInstance().signOut()
-                            binding.btnLogin.isEnabled = true
-                            Toast.makeText(
-                                activity, "Please Verify Your Email First",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                activity, "Welcome, Directing To Profile Page..",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                        }
-                    }
+//                    user?.let {
+//                        if (!user.isEmailVerified) {
+//                            FirebaseAuth.getInstance().signOut()
+//                            binding.btnLogin.isEnabled = true
+//                            Toast.makeText(
+//                                activity, "Please Verify Your Email First",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        } else {
+//                            Toast.makeText(
+//                                activity, "Welcome, Directing To Profile Page..",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//
+//                        }
+//                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     binding.btnLogin.isEnabled = true
@@ -168,11 +184,16 @@ class LoginFragment : Fragment() {
     // 这个是 display bottom navbar, 当你退出这个 fragment 的时候
     override fun onDestroyView() {
         super.onDestroyView()
-//        (activity as MainActivity).setNavVisible()
+        hideKeyboard()
     }
 
     fun updateUI(currentUser: FirebaseUser?) {
 
+    }
+
+    private fun hideKeyboard() {
+        (activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .hideSoftInputFromWindow(view?.windowToken,0)
     }
 
 }

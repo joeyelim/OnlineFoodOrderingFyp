@@ -1,38 +1,30 @@
 package com.example.fyp.stuMaintenanceModule
 
 
+//import com.google.firebase.auth.FirebaseAuth
 import android.content.Context
-import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.example.fyp.LoginModule.LoginFragment
+import com.example.fyp.Class.User
 import com.example.fyp.MainActivity
 import com.example.fyp.R
-import com.example.fyp.databinding.FragmentLoginBinding
 import com.example.fyp.databinding.FragmentSignUpBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-//import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
-import kotlinx.android.synthetic.main.fragment_sign_up.txtEmail
-import kotlinx.android.synthetic.main.fragment_sign_up.txtPassword
-import java.util.*
-import java.util.regex.Pattern
 
 /**
  * A simple [Fragment] subclass.
@@ -40,7 +32,7 @@ import java.util.regex.Pattern
 class SignUpFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: FragmentSignUpBinding
-
+    private lateinit var user: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,12 +66,14 @@ class SignUpFragment : Fragment() {
     }
 
     private fun signUpUser() {
-        if(!validation()) {
+        if (!validation()) {
             return
         }
         val email = binding.txtEmail.text.toString()
         val password = binding.txtPassword.text.toString()
 
+        hideKeyboard()
+        assignUser()
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -88,30 +82,32 @@ class SignUpFragment : Fragment() {
                     Log.d("Game", "createUserWithEmail:success")
 
                     val snackbar = Snackbar.make(
-                        root_layout,"Register Successful!", Snackbar.LENGTH_INDEFINITE)
+                        root_layout, "Register Successful! Please Verify Your Email" +
+                                "Before Login", Snackbar.LENGTH_LONG
+                    )
                     snackbar.setAction("Close", View.OnClickListener {
                         snackbar.dismiss()
                     })
-                    (snackbar.getView()).getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT
+                    (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
                     snackbar.show()
 
-                    var user = auth.currentUser
+                    addUserToDatabase()
 
-                }
-                else {
+                } else {
                     // If sign in fails, display a message to the user.
                     Log.w("Game", "createUserWithEmail:failure", task.exception)
 
                     val snackbar = Snackbar.make(
-                        root_layout,"Wrong Email or Email Being Registered!", Snackbar.LENGTH_LONG)
-                    (snackbar.getView()).getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT
+                        root_layout, "Wrong Email or Email Being Registered!", Snackbar.LENGTH_LONG
+                    )
+                    (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
                     snackbar.show()
 
                 }
             }
     }
 
-    private fun validation() : Boolean{
+    private fun validation(): Boolean {
 
         val email = binding.txtEmail.text.toString()
         val password = binding.txtPassword.text.toString()
@@ -119,7 +115,7 @@ class SignUpFragment : Fragment() {
         val lastName = binding.txtLastN.text.toString()
         val phone = binding.txtPhone.text.toString()
 
-        if (email.isEmpty() || password.isEmpty()|| firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()) {
 
             if (firstName.isEmpty()) {
                 binding.txtFirstNLayout.error = "*Please enter your first name."
@@ -161,10 +157,42 @@ class SignUpFragment : Fragment() {
         return true
     }
 
+    private fun assignUser() {
+        user = User("Photo",binding.txtFirstN.text.toString(),binding.txtLastN.text.toString()
+        ,binding.txtPhone.text.toString(),"student",binding.txtPassword.text.toString()
+            ,binding.txtEmail.text.toString())
+    }
+
+    private fun addUserToDatabase() {
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("User").document(user.email!!)
+            .set(user)
+            .addOnSuccessListener {
+                Log.i("upload", "success")
+            }
+            .addOnFailureListener {
+                Log.i("upload", "Error adding document", it)
+            }
+            .addOnCompleteListener {
+                Toast.makeText(activity, "Successfully Added", Toast.LENGTH_SHORT).show();
+            }
+    }
+
 
     //clear option menu
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        hideKeyboard()
+    }
+
+    private fun hideKeyboard() {
+        (activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .hideSoftInputFromWindow(view?.windowToken,0)
     }
 
 }

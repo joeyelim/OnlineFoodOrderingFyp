@@ -72,14 +72,16 @@ class FoodDetailFragment : Fragment() {
 
     private fun intiUI() {
         binding.txtFood.text = viewModel.food.food_name
-        binding.txtFood.setPaintFlags( binding.txtFood.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
+        binding.txtFood.paintFlags = binding.txtFood.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         binding.txtFoodDesc.text = viewModel.food.recipe_info
         binding.txtLocation.text = viewModel.canteen.type
         binding.txtStoreName.text = viewModel.store.store_name
         binding.txtReview.text = "( " + viewModel.food.total_review.toString() + " review)"
-        binding.txtSmallPrice.text = "RM: " + viewModel.food.small_price.toString()
-        binding.txtLargePrice.text = "RM: " + viewModel.food.large_price.toString()
+//        binding.txtSmallPrice.text = "RM: " + viewModel.food.small_price.toString()
+//        binding.txtLargePrice.text = "RM: " + viewModel.food.large_price.toString()
+        binding.txtSmallPrice.text = viewModel.getPrice(viewModel.food.small_price!!)
+        binding.txtLargePrice.text = viewModel.getPrice(viewModel.food.large_price!!)
 
         val adapter = catAdapter(viewModel.food.category)
         binding.rvCat.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
