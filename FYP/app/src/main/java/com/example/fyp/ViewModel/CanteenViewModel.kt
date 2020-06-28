@@ -7,6 +7,9 @@ import com.example.fyp.Class.CanteenStore
 import com.example.fyp.Class.Food
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import java.text.DecimalFormat
+
 
 class CanteenViewModel : ViewModel() {
     var canteen : Canteen = Canteen()
@@ -23,6 +26,11 @@ class CanteenViewModel : ViewModel() {
                 .load(it)
                 .into(view)
         }
+    }
+
+    fun getPrice(price : Double) : String {
+        val formatter = DecimalFormat("RM ###,###,##0.00")
+        return formatter.format(price)
     }
 }
 

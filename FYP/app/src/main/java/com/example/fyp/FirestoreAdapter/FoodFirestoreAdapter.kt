@@ -1,6 +1,7 @@
 package com.example.fyp.FirestoreAdapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,9 @@ class FoodViewHolder internal constructor(private val view: View, var context: C
     RecyclerView.ViewHolder(view) {
 
     internal fun setCanteenState(food: Food, onListClick1: onListClick2, holder: FoodViewHolder) {
+
+        Log.i("Test", "Here")
+
         val foodName = view.findViewById<TextView>(R.id.tvFoodName)
         foodName.text = food.food_name
 
