@@ -10,10 +10,18 @@
         android:layout_height="wrap_content"
         android:fillViewport="true">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:context=".OrderingModule.OrderHistoryFragment">
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:dividerHeight="0.0px"
             android:clipToPadding="false"
             android:clipChildren="false"
@@ -23,20 +31,20 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardElevation="10dp"
             app:cardPreventCornerOverlap="false"
-            xmlns:tools="http://schemas.android.com/tools"
-            tools:context=".OrderingModule.OrderHistoryFragment">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="16dp"
                 android:background="@drawable/frame_image_view">
 
                 <TextView
                     android:id="@+id/txtfoodName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
                     android:text="@string/food_name"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/sub_title"
@@ -48,9 +56,6 @@
                     android:id="@+id/txtStatusPaid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:text="@string/paid"
                     android:textColor="@color/blue"
                     android:visibility="visible"
@@ -72,8 +77,6 @@
                     android:id="@+id/txtPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
                     android:text="@string/price"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/sub_title"
@@ -85,17 +88,13 @@
                     android:id="@+id/txtDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="16dp"
                     android:text="@string/_15_mar_2020"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.google.android.material.card.MaterialCardView>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
