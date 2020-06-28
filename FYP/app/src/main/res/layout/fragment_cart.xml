@@ -15,7 +15,7 @@
             android:id="@+id/cartLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcCart"
@@ -48,7 +48,7 @@
             android:id="@+id/emptyLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/emptyWords"

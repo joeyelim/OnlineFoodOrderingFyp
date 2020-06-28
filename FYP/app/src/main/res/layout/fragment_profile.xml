@@ -85,12 +85,12 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_star_black"
                     android:drawablePadding="15dp"
-                    android:drawableTint="@color/colorPrimary"
+                    android:drawableTint="@color/colorPrimaryDark"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
                     android:paddingLeft="16dp"
                     android:text="@string/rated_foods"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/title_text_size"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -373,7 +373,6 @@
                         android:layout_height="28dp"
                         android:layout_marginStart="16dp"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/frame_image_view"
                         android:cropToPadding="true"
                         android:scaleType="fitXY"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -415,6 +414,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/logout" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/viewE"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

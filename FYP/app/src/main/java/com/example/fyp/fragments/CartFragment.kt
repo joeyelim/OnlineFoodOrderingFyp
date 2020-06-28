@@ -3,25 +3,39 @@ package com.example.fyp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fyp.Class.Cart
+import com.example.fyp.FirestoreAdapter.CartFirestoreAdapter
+import com.example.fyp.FirestoreAdapter.FoodFirestoreAdapter
+import com.example.fyp.FirestoreAdapter.onListClick3
+import com.example.fyp.MainActivity
 import com.example.fyp.R
+import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentCartBinding
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.cart_row.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class CartFragment : Fragment() {
+class CartFragment : Fragment(), onListClick3 {
 
     private lateinit var binding: FragmentCartBinding
-
+    private var adapter: CartFirestoreAdapter? = null
+    private lateinit var viewModel : CanteenViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +46,11 @@ class CartFragment : Fragment() {
             inflater, R.layout.fragment_cart, container, false
         )
 
+        setHasOptionsMenu(true)
+        (activity as MainActivity).setNavVisible()
+
+        viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
+        initRecycleView()
 
 
         val storage = Firebase.storage
@@ -56,8 +75,44 @@ class CartFragment : Fragment() {
         return binding.root
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.clear()
+
+    private fun initRecycleView() {
+
+        val db = FirebaseFirestore.getInstance()
+
+        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
+            .collection("Cart")
+            .orderBy("cart_ID", Query.Direction.ASCENDING)
+
+        val options =
+            FirestoreRecyclerOptions.Builder<Cart>()
+                .setQuery(query, Cart::class.java).build()
+
+
+        adapter = CartFirestoreAdapter(options, this, context!!)
+        binding.rcCart.layoutManager = LinearLayoutManager(activity)
+        binding.rcCart.adapter = adapter
+
+    }
+
+    override fun onItemClick(cart: Cart, position: Int) {
+//        viewModel.food =
+//        this.findNavController()
+//            .navigate(CartFragmentDirections.)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        adapter?.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        if (adapter != null) {
+            adapter?.stopListening()
+        }
     }
 
 
