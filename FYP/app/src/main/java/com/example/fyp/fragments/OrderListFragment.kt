@@ -52,7 +52,7 @@ class OrderListFragment : Fragment() {
 
         /* -------- outer tab layout ------------------*/
         val outTab = binding.tabLayout
-        val outterViewPager = OutterViePagerAdapter(supportFragmentManager)
+        val outterViewPager = OutterViePagerAdapter(childFragmentManager)
         val viewPager = binding.orderListViewPager
 
         viewPager.adapter = outterViewPager

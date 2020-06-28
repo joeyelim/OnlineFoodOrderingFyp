@@ -65,7 +65,7 @@ class CurrentOrderOuterViewHolder internal constructor( val view: View, var cont
 //        holder.view.InnerRecycleView.adapter = adapter
 
         val db = FirebaseFirestore.getInstance()
-        val query = db.collection("User").document("Yong Boon")
+        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
             .collection("Order").document(order.id!!)
             .collection("Order_Food")
 

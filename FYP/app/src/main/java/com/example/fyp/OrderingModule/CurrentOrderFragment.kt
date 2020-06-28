@@ -79,8 +79,8 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
     private fun initRecycleView() {
 
         val db = FirebaseFirestore.getInstance()
-        val query = db.collection("User").document("Yong Boon")
-            .collection("Order").orderBy("id",Query.Direction.ASCENDING)
+        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
+            .collection("Order")
             .whereEqualTo("status", player)
 
 //        Toast.makeText(activity, player, Toast.LENGTH_SHORT).show()

@@ -75,7 +75,7 @@
 
                     <TextView
                         android:id="@+id/food"
-                        android:layout_width="wrap_content"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:text="@string/text_view"
                         android:textColor="@color/colorPrimaryDark"
@@ -112,7 +112,7 @@
                         android:id="@+id/txtProgress"
                         android:layout_width="87dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:text="@string/text_view"
                         android:textAlignment="center"
                         android:textColor="@color/colorPink"
@@ -144,7 +144,7 @@
 
                     <TextView
                         android:id="@+id/txtRemarks"
-                        android:layout_width="wrap_content"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:text="@string/text_view"
@@ -156,28 +156,27 @@
                         android:id="@+id/txtTotalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="64dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:text="Total Price: "
                         android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txtPrice"
                         app:layout_constraintTop_toBottomOf="@+id/txtRemarks" />
 
                     <TextView
                         android:id="@+id/txtPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:text="@string/text_view"
                         android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/txtTotalPrice"
+                        app:layout_constraintEnd_toStartOf="@+id/btnOrderCancel"
                         app:layout_constraintTop_toBottomOf="@+id/txtRemarks" />
 
                     <com.google.android.material.button.MaterialButton
@@ -190,6 +189,7 @@
                         android:text="@string/cancel"
                         android:textAppearance="@style/MyCustomTabText"
                         app:cornerRadius="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtProgress"
                         app:strokeColor="@color/colorPrimary" />
