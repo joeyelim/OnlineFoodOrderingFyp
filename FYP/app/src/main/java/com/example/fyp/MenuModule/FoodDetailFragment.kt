@@ -21,7 +21,7 @@ import com.example.fyp.databinding.FragmentFoodDetailBinding
 import com.google.firebase.storage.FirebaseStorage
 import android.text.style.UnderlineSpan
 import android.text.SpannableString
-
+import java.text.DecimalFormat
 
 
 /**
@@ -71,6 +71,8 @@ class FoodDetailFragment : Fragment() {
     }
 
     private fun intiUI() {
+        val dec = DecimalFormat("RM ###.00")
+
         binding.txtFood.text = viewModel.food.food_name
         binding.txtFood.paintFlags = binding.txtFood.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
@@ -78,10 +80,8 @@ class FoodDetailFragment : Fragment() {
         binding.txtLocation.text = viewModel.canteen.type
         binding.txtStoreName.text = viewModel.store.store_name
         binding.txtReview.text = "( " + viewModel.food.total_review.toString() + " review)"
-//        binding.txtSmallPrice.text = "RM: " + viewModel.food.small_price.toString()
-//        binding.txtLargePrice.text = "RM: " + viewModel.food.large_price.toString()
-        binding.txtSmallPrice.text = viewModel.getPrice(viewModel.food.small_price!!)
-        binding.txtLargePrice.text = viewModel.getPrice(viewModel.food.large_price!!)
+        binding.txtSmallPrice.text = dec.format(viewModel.food.small_price).toString()
+        binding.txtLargePrice.text = dec.format(viewModel.food.large_price).toString()
 
         val adapter = catAdapter(viewModel.food.category)
         binding.rvCat.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)

@@ -18,6 +18,7 @@ import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentAddToCartBinding
 import com.google.firebase.storage.FirebaseStorage
+import java.text.DecimalFormat
 
 /**
  * A simple [Fragment] subclass.
@@ -46,14 +47,16 @@ class AddToCartFragment : Fragment() {
 
 
     private fun intiUI() {
+        val dec = DecimalFormat("RM ###.00")
+
         binding.txtCanteenName.text = viewModel.canteen.type
         binding.txtStoreName.text = viewModel.store.store_name
         binding.txtFoodName.text = viewModel.food.food_name
         binding.txtFoodName.setPaintFlags( binding.txtFoodName.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
 
         binding.txtStockQty.text = viewModel.food.total_stock.toString()
-        binding.txtSmallPrice.text = "RM: " + viewModel.food.small_price.toString()
-        binding.txtLargePrice.text = "RM: " + viewModel.food.large_price.toString()
+        binding.txtSmallPrice.text = dec.format(viewModel.food.small_price).toString()
+        binding.txtLargePrice.text = dec.format(viewModel.food.large_price).toString()
 
         val adapter = catAdapter(viewModel.food.category)
         binding.rvCat.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
