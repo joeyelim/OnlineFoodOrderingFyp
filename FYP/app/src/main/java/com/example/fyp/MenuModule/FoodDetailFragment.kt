@@ -74,7 +74,7 @@ class FoodDetailFragment : Fragment() {
         val dec = DecimalFormat("RM ###.00")
 
         binding.txtFood.text = viewModel.food.food_name
-        binding.txtFood.setPaintFlags( binding.txtFood.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
+        binding.txtFood.paintFlags = binding.txtFood.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         binding.txtFoodDesc.text = viewModel.food.recipe_info
         binding.txtLocation.text = viewModel.canteen.type
