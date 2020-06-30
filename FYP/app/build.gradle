@@ -17,6 +17,10 @@ android {
         enabled = true
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
         applicationId "com.example.fyp"
@@ -96,6 +100,12 @@ dependencies {
 ////    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
+    // Firebase auth
+    implementation 'com.google.firebase:firebase-auth-ktx:19.3.1'
 
 
 }
