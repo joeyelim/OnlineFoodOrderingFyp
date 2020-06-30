@@ -111,6 +111,14 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="go_to_shop_now">Go to Shop Now</string>
     <string name="there_is_empty_items_yet">There is empty items yet.</string>
+    <string name="date_colon">Date:</string>
+    <string name="canteen_name_colon">Canteen Name:</string>
+    <string name="quantity">Quantity:</string>
+    <string name="unit_price">Unit Price:</string>
+    <string name="progress">Progress:</string>
+    <string name="store_name_colon">Store Name:</string>
+    <string name="total_payment">Total Payment:</string>
+    <string name="view_food_details">View Food Details</string>
 
 
 </resources>

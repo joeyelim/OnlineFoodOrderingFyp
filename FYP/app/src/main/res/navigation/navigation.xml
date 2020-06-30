@@ -76,6 +76,15 @@
             app:destination="@id/fragment_home"
             app:popUpTo="@+id/fragment_home"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editRatingFragment"
+            app:destination="@id/editRatingFragment" />
+        <action
+            android:id="@+id/action_profileFragment_self"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_forgot_password"
@@ -105,7 +114,11 @@
         android:id="@+id/orderListFragment"
         android:name="com.example.fyp.fragments.OrderListFragment"
         android:label="ORDER LIST"
-        tools:layout="@layout/fragment_order_list" />
+        tools:layout="@layout/fragment_order_list" >
+        <action
+            android:id="@+id/action_orderListFragment_to_orderHistoryFragment"
+            app:destination="@id/orderHistoryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.example.fyp.fragments.NotificationFragment"
@@ -209,4 +222,29 @@
             android:id="@+id/action_placeOrderProgress3Fragment_to_orderListFragment"
             app:destination="@id/orderListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editRatingFragment"
+        android:name="com.example.fyp.stuMaintenanceModule.EditRatingFragment"
+        android:label="EditRatingFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.fyp.stuMaintenanceModule.EditProfileFragment"
+        android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.example.fyp.OrderingModule.OrderDetailsFragment"
+        android:label="OrderDetailsFragment" />
+    <fragment
+        android:id="@+id/orderHistoryFragment"
+        android:name="com.example.fyp.OrderingModule.OrderHistoryFragment"
+        android:label="OrderHistoryFragment" >
+        <action
+            android:id="@+id/action_orderHistoryFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePwdFragment"
+        android:name="com.example.fyp.stuMaintenanceModule.ChangePwdFragment"
+        android:label="fragment_change_pwd"
+        tools:layout="@layout/fragment_change_pwd" />
 </navigation>

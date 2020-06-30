@@ -1,25 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".OrderingModule.OrderDetailsFragment">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".OrderingModule.OrderDetailsFragment">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="130dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/hainanese_chicken_rice"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="170dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/card_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtFoodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/food_name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/tvDateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/date_colon"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtFoodName" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/date"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toEndOf="@+id/tvDateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txtFoodName" />
+
+        <TextView
+            android:id="@+id/tvTimeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/pick_up_time"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/content"
+            app:layout_constraintEnd_toStartOf="@+id/txtPickupTime"
+            app:layout_constraintTop_toBottomOf="@+id/txtFoodName" />
+
+        <TextView
+            android:id="@+id/txtPickupTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/pick_up_time"
+            android:textSize="@dimen/content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtFoodName" />
+
+        <TextView
+            android:id="@+id/tvCanteen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/canteen_name_colon"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDateTitle" />
+
+        <TextView
+            android:id="@+id/txtCanteenName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/canteen_name"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toEndOf="@+id/tvCanteen"
+            app:layout_constraintTop_toBottomOf="@+id/txtDate" />
+
+        <TextView
+            android:id="@+id/tvStore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/store_name_colon"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCanteen" />
+
+        <TextView
+            android:id="@+id/txtStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/store_name"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toEndOf="@+id/tvStore"
+            app:layout_constraintTop_toBottomOf="@+id/txtCanteenName" />
+
+        <TextView
+            android:id="@+id/tvQty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/quantity"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStore" />
+
+        <TextView
+            android:id="@+id/txtQty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/quantity"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toEndOf="@+id/tvQty"
+            app:layout_constraintTop_toBottomOf="@+id/txtStoreName" />
+
+        <TextView
+            android:id="@+id/tvUnitPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/unit_price"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvQty" />
+
+        <TextView
+            android:id="@+id/txtUnitPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/unit_price"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toEndOf="@+id/tvUnitPrice"
+            app:layout_constraintTop_toBottomOf="@+id/txtQty" />
+
+        <TextView
+            android:id="@+id/tvDiningOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/dinning_option"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvUnitPrice" />
+
+        <TextView
+            android:id="@+id/txtDiningOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/dinning_option"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toEndOf="@+id/tvDiningOption"
+            app:layout_constraintTop_toBottomOf="@+id/txtUnitPrice" />
+
+        <TextView
+            android:id="@+id/tvRemark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/remarks"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiningOption" />
+
+        <TextView
+            android:id="@+id/txtRemark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/remarks"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toEndOf="@+id/tvRemark"
+            app:layout_constraintTop_toBottomOf="@+id/txtDiningOption" />
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/progress"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRemark" />
+
+        <TextView
+            android:id="@+id/txtProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/progress"
+            android:textSize="@dimen/content"
+            app:layout_constraintStart_toEndOf="@+id/tvProgress"
+            app:layout_constraintTop_toBottomOf="@+id/txtRemark" />
+
+        <TextView
+            android:id="@+id/tvTotalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/total_payment"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProgress" />
+
+        <TextView
+            android:id="@+id/txtPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/price"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProgress" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_weight="1"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:text="@string/view_food_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalPrice"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="2dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
