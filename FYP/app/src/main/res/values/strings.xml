@@ -119,6 +119,9 @@
     <string name="store_name_colon">Store Name:</string>
     <string name="total_payment">Total Payment:</string>
     <string name="view_food_details">View Food Details</string>
+    <string name="change_password">Change Password</string>
+    <string name="old_password">Old Password:</string>
+    <string name="old_password_n">Old Password</string>
 
 
 </resources>

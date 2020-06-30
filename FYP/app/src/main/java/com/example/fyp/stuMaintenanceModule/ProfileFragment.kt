@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentProfileBinding
@@ -35,6 +36,17 @@ class ProfileFragment : Fragment() {
         )
 
         setHasOptionsMenu(true)
+
+        binding.btnEdit.setOnClickListener {
+            it.findNavController()
+                .navigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
+        }
+
+//        binding.btnChangePwd.setOnClickListener {
+//            it.findNavController()
+//                .navigate(ProfileFragmentDirections.)
+//        }
+
 
         binding.btnDownArrow.setOnClickListener{
             if(expandableRated.visibility == View.GONE) {
