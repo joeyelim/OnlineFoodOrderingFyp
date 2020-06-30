@@ -29,7 +29,7 @@ class LoginViewModel : ViewModel() {
                 AuthenticationState.AUTHENTICATED
             } else {
                 AuthenticationState.UNAUTHENTICATED
-            }
+        }
 
         }
 

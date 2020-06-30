@@ -150,6 +150,7 @@ class MainActivity : AppCompatActivity() {
                     loginViewModel.changeOption(false)
                     userViewModel.user = User()
                     Firebase.auth.signOut()
+                    navController.navigate(R.id.fragment_home)
                 } else {
                     item.onNavDestinationSelected(navController)
                     setNavInvisible()
