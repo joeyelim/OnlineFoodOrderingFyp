@@ -203,6 +203,8 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.visibility = View.VISIBLE
     }
 
+
+
 //    private fun loadFragment(fragment:Fragment){
 //        supportFragmentManager.beginTransaction().also { fragmentTransaction ->
 //            fragmentTransaction.replace(R.id.fragmentContainer,fragment)

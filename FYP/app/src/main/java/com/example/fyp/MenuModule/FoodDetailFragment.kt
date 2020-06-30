@@ -97,21 +97,6 @@ class FoodDetailFragment : Fragment() {
         menu.clear()
     }
 
-  //custom dialog use in delete pop up message
-//    fun dialog(){
-//        val dialog = AlertDialog.Builder(activity)
-//        val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
-//
-//        dialog.setView(dialogView)
-//        dialog.setCancelable(false)
-//        dialog.show()
-
-//        val customDialog = dialog.create()
-//        customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener({
-//
-//        })
-
-//    }
 
 
 }

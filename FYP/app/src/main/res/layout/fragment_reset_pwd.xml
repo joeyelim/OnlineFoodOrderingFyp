@@ -54,7 +54,7 @@
             <TextView
                 android:id="@+id/txtNewPwdTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="50dp"
                 android:text="@string/new_password_colon"
@@ -90,7 +90,7 @@
             <TextView
                 android:id="@+id/txtConfirmPwdTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/confirm_password_colon"

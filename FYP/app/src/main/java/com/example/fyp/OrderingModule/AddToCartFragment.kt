@@ -1,6 +1,7 @@
 package com.example.fyp.OrderingModule
 
 
+import android.app.AlertDialog
 import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,12 +22,15 @@ import com.example.fyp.databinding.FragmentAddToCartBinding
 import com.google.firebase.storage.FirebaseStorage
 import java.text.DecimalFormat
 
+
+
 /**
  * A simple [Fragment] subclass.
  */
 class AddToCartFragment : Fragment() {
     private lateinit var binding: FragmentAddToCartBinding
     private lateinit var viewModel: CanteenViewModel
+    var counter = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +45,40 @@ class AddToCartFragment : Fragment() {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
+        binding.btnPlus.setOnClickListener {
+            counter++
+            val quantity = binding.quantity
+            val totalStock = viewModel.food.total_stock!!
+            quantity.text = "$counter"
+
+            if (counter > totalStock) {
+               // custom dialog use in delete pop up message
+                Toast.makeText(activity, "exceed total stock $totalStock",Toast.LENGTH_SHORT).show()
+
+            }
+
+        }
+
+        binding.btnMinus.setOnClickListener {
+            counter--
+
+            val quantity = binding.quantity
+            quantity.text = "$counter"
+
+//            if (counter < 2) {
+//                buttonDisable()
+//                counter = 1
+//                quantity.text = "$counter"
+//            }
+
+
+        }
+
+
         intiUI()
 
         return binding.root
     }
-
 
     private fun intiUI() {
         val dec = DecimalFormat("RM ###.00")
@@ -65,6 +99,27 @@ class AddToCartFragment : Fragment() {
         val image = binding.imgFood
         val a = FirebaseStorage.getInstance().getReference(viewModel.food.food_image!!)
         viewModel.setImage(image, a)
+    }
+
+    fun buttonDisable(){
+        binding.btnMinus.isEnabled = false
+    }
+
+
+
+    fun dialog(){
+        val dialog = AlertDialog.Builder(activity)
+        val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
+
+        dialog.setView(dialogView)
+        dialog.setCancelable(false)
+        dialog.show()
+
+        val customDialog = dialog.create()
+        customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener({
+
+        })
+
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
