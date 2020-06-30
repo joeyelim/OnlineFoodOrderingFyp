@@ -42,10 +42,10 @@ class ProfileFragment : Fragment() {
                 .navigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
         }
 
-//        binding.btnChangePwd.setOnClickListener {
-//            it.findNavController()
-//                .navigate(ProfileFragmentDirections.)
-//        }
+        binding.btnChangePwd.setOnClickListener {
+            it.findNavController()
+                .navigate(ProfileFragmentDirections.actionProfileFragmentToChangePwdFragment())
+        }
 
 
         binding.btnDownArrow.setOnClickListener{

@@ -53,6 +53,8 @@ class CartFragment : Fragment(), onListClick3 {
         initRecycleView()
 
 
+        //----------------------------------------------------------------------------------------
+
         val storage = Firebase.storage
         // Create a storage reference from our app
         var storageRef = storage.reference
@@ -74,6 +76,8 @@ class CartFragment : Fragment(), onListClick3 {
 
         return binding.root
     }
+
+
 
 
     private fun initRecycleView() {
