@@ -3,9 +3,7 @@ package com.example.fyp.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -14,16 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.FirestoreAdapter.CanteenFireStoreRecyclerAdapter
 import com.example.fyp.FirestoreAdapter.onListClick
 import com.example.fyp.Class.Canteen
+import com.example.fyp.Class.CanteenStore
+import com.example.fyp.Class.User
 import com.example.fyp.MainActivity
+import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
+import com.example.fyp.ViewModel.LoginViewModel
+import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentHomeBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
-
-
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 /**
@@ -37,6 +41,8 @@ class HomeFragment : Fragment(), onListClick {
     private var adapter: CanteenFireStoreRecyclerAdapter? = null
     private lateinit var mAuth : FirebaseAuth
     private lateinit var viewModel : CanteenViewModel
+    private lateinit var userViewModel : UserViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
     companion object {
 
@@ -54,18 +60,45 @@ class HomeFragment : Fragment(), onListClick {
         )
 
         viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+        loginViewModel = ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
 
-
-        (activity as MainActivity).setNavVisible()
-
-
-//        binding.textView4.text = "123"
-//        initializeFirebase()
         initRecycleView()
         mAuth = FirebaseAuth.getInstance()
-
+        setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        iniUserViewModel()
+        (activity as MainActivity).setNavVisible()
+    }
+
+    private fun iniUserViewModel() {
+        val currentUser = Firebase.auth.currentUser
+
+        if (currentUser != null) {
+            val email = currentUser.email
+
+            // change the title
+            loginViewModel.changeOption(true)
+
+            // find the userEmail and assign into userViewModel
+            val db = FirebaseFirestore.getInstance()
+            db.collection("User").document(email!!)
+                .get()
+                .addOnSuccessListener {
+                    userViewModel.user = it.toObject(User::class.java)
+                }
+                .addOnCompleteListener {
+                    Log.i("Test", "Initial usermodel complete")
+                }
+        } else {
+            userViewModel.user = User()
+            loginViewModel.changeOption(false)
+        }
     }
 
 
@@ -102,14 +135,9 @@ class HomeFragment : Fragment(), onListClick {
     private fun initRecycleView() {
         val db = FirebaseFirestore.getInstance()
         val query = db.collection(("Canteen")).orderBy("canteen_name", Query.Direction.ASCENDING)
-
-
-
         val options =
             FirestoreRecyclerOptions.Builder<Canteen>()
                 .setQuery(query, Canteen::class.java).build()
-
-
         adapter = CanteenFireStoreRecyclerAdapter(options, this, context!!)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.adapter = adapter
@@ -125,6 +153,7 @@ class HomeFragment : Fragment(), onListClick {
             .navigate(HomeFragmentDirections.actionFragmentHomeToCanteenStoreFragment())
 
     }
+
 
     //    private inner class CanteenViewHolder internal constructor(private val view: View) :
 //        RecyclerView.ViewHolder(view) {
