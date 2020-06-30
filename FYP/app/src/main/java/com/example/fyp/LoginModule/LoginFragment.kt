@@ -27,9 +27,14 @@ import com.google.firebase.auth.FirebaseUser
 import android.graphics.drawable.GradientDrawable
 import android.graphics.Color
 import android.view.inputmethod.InputMethodManager
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.example.fyp.Class.User
 import com.example.fyp.MenuModule.CanteenStoreFragmentDirections
 import com.example.fyp.R
+import com.example.fyp.ViewModel.LoginViewModel
+import com.example.fyp.ViewModel.UserViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 /**
@@ -38,6 +43,8 @@ import com.example.fyp.R
 class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var userViewModel : UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +54,7 @@ class LoginFragment : Fragment() {
 
         // use for binding, remember to set the layout cover by <layout> tag
         binding = DataBindingUtil.inflate(
-            inflater, com.example.fyp.R.layout.fragment_login, container, false
+            inflater, R.layout.fragment_login, container, false
         )
 
         // option menu
@@ -56,6 +63,9 @@ class LoginFragment : Fragment() {
         binding.btnSignUp.paintFlags = binding.btnSignUp.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         (activity as MainActivity).setNavInvisible()
+
+        loginViewModel = ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
 
         binding.btnSignUp.setOnClickListener {
             it.findNavController()
@@ -74,6 +84,8 @@ class LoginFragment : Fragment() {
         binding.textView2.setOnClickListener{
             hideKeyboard()
         }
+
+
 
         return binding.root
     }
@@ -104,10 +116,16 @@ class LoginFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    this.findNavController()
-                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
-
-
+                    val db = FirebaseFirestore.getInstance()
+                    db.collection("User").document(email!!)
+                        .get()
+                        .addOnSuccessListener {
+                            userViewModel.user = it.toObject(User::class.java)
+                        }
+                        .addOnCompleteListener {
+                            this.findNavController()
+                                .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                        }
 
                     val user = FirebaseAuth.getInstance().currentUser
 

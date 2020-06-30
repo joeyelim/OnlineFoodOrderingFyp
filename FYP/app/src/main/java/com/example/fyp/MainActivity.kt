@@ -1,27 +1,29 @@
 package com.example.fyp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.fragment.app.Fragment
-import com.example.fyp.fragments.CartFragment
-import com.example.fyp.fragments.HomeFragment
-import com.example.fyp.fragments.NotificationFragment
-import com.example.fyp.fragments.OrderListFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
+import com.example.fyp.Class.User
 import com.example.fyp.LoginModule.LoginFragment
+import com.example.fyp.LoginModule.LoginFragmentDirections
+import com.example.fyp.ViewModel.LoginViewModel
+import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.fragment_login.*
-
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +31,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         // Pass the IDs of top-level destinations in AppBarConfiguration
         appBarConfiguration = AppBarConfiguration(
-            topLevelDestinationIds = setOf (
+            topLevelDestinationIds = setOf(
                 R.id.fragment_home,
                 R.id.cartFragment,
                 R.id.orderListFragment,
@@ -49,7 +53,9 @@ class MainActivity : AppCompatActivity() {
 
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        bottomNavigationView.setItemBackgroundResource(R.drawable.menu_background);
+        bottomNavigationView.setItemBackgroundResource(R.drawable.menu_background)
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
 //        setSupportActionBar(toolbar)
 
@@ -92,7 +98,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    private fun setupBottomNavMenu(navController: NavController){
+    //    private fun setupBottomNavMenu(navController: NavController){
 //        bottomNavigationView?.let {
 //            NavigationUI.setupWithNavController(it,navController)
 //        }
@@ -101,11 +107,26 @@ class MainActivity : AppCompatActivity() {
 //    private fun setupActionBar(navController: NavController){
 //        NavigationUI.setupActionBarWithNavController(this, navController)
 //    }
+    override fun onResume() {
+        super.onResume()
+        observeAuthenticationState()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         val inflater = menuInflater
         inflater.inflate(R.menu.top_option_menu, menu)
+
+
+        loginViewModel.changeMenuOption.observe(this, Observer {
+            if (it) {
+                menu?.findItem(R.id.fragment_login)?.title = "Logout"
+            } else {
+                menu?.findItem(R.id.fragment_login)?.title = "Login"
+            }
+        })
+
+        observeChangeOption(menu)
 
         return true
     }
@@ -113,16 +134,27 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        val navController = Navigation.findNavController(this,R.id.fragmentContainer)
 //        val navigated = NavigationUI.onNavDestinationSelected(item!!, navController)
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.profileFragment -> {
-                Toast.makeText(this, "You haven't login...",Toast.LENGTH_LONG).show()
-                item.onNavDestinationSelected(navController)
-                setNavInvisible()
+                if (Firebase.auth.currentUser != null) {
+                    item.onNavDestinationSelected(navController)
+                    setNavInvisible()
+                } else {
+                    Toast.makeText(this, "You haven't login...", Toast.LENGTH_LONG).show()
+                    navController.navigate(R.id.fragment_login)
+                }
                 return true
             }
             R.id.fragment_login -> {
-                item.onNavDestinationSelected(navController)
-                setNavInvisible()
+                if (Firebase.auth.currentUser != null) {
+                    loginViewModel.changeOption(false)
+                    userViewModel.user = User()
+                    Firebase.auth.signOut()
+                    navController.navigate(R.id.fragment_home)
+                } else {
+                    item.onNavDestinationSelected(navController)
+                    setNavInvisible()
+                }
                 return true
             }
             else -> {
@@ -140,13 +172,34 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    private fun observeChangeOption(menu : Menu?) {
+//        loginViewModel.changeMenuOption?.observe(this, Observer {
+//            if (it) {
+//                menu.findItem(R.id.fragment_login).title = "Logout"
+//            } else {
+//                menu.findItem(R.id.fragment_login).title = "Login"
+//            }
+//        })
+    }
+
+    public fun changeTitle() {
+
+    }
+
+    private fun observeAuthenticationState() {
+        loginViewModel.authenticationState?.observe(this, Observer { authenticationState ->
+            if (authenticationState == LoginViewModel.AuthenticationState.AUTHENTICATED) {
+                loginViewModel.setCurrentUser()
+            }
+        })
+    }
 
 
-    fun setNavInvisible(){
+    fun setNavInvisible() {
         binding.bottomNavigationView.visibility = View.GONE
     }
 
-    fun setNavVisible(){
+    fun setNavVisible() {
         binding.bottomNavigationView.visibility = View.VISIBLE
     }
 
