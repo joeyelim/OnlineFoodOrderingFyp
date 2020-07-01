@@ -2,6 +2,7 @@ package com.example.fyp.OrderingModule
 
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -46,30 +47,31 @@ class AddToCartFragment : Fragment() {
         (activity as MainActivity).setNavInvisible()
 
         binding.btnPlus.setOnClickListener {
-            counter++
             val quantity = binding.quantity
             val totalStock = viewModel.food.total_stock!!
-            quantity.text = "$counter"
 
-            if (counter > totalStock) {
-               // custom dialog use in delete pop up message
-                Toast.makeText(activity, "exceed total stock $totalStock",Toast.LENGTH_SHORT).show()
-
+            if (counter >= totalStock){
+                // custom dialog
+                openDialog()
+                quantity.text = totalStock.toString()
+            }
+            else{
+                counter++
+                quantity.text = "$counter"
             }
 
         }
 
         binding.btnMinus.setOnClickListener {
-            counter--
-
             val quantity = binding.quantity
-            quantity.text = "$counter"
 
-//            if (counter < 2) {
-//                buttonDisable()
-//                counter = 1
-//                quantity.text = "$counter"
-//            }
+            if (counter <= 1){
+                quantity.text = "1"
+            }
+            else{
+                counter--
+                quantity.text = "$counter"
+            }
 
 
         }
@@ -107,19 +109,13 @@ class AddToCartFragment : Fragment() {
 
 
 
-    fun dialog(){
+    fun openDialog(){
         val dialog = AlertDialog.Builder(activity)
-        val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
 
-        dialog.setView(dialogView)
-        dialog.setCancelable(false)
+        dialog.setTitle("Oops, sorry!")
+        dialog.setMessage("Your order quantity has exceeded the maximum inventory, please select again.")
+        dialog.setPositiveButton("OK", { dialogInterface: DialogInterface, i: Int -> })
         dialog.show()
-
-        val customDialog = dialog.create()
-        customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener({
-
-        })
-
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

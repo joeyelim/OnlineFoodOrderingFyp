@@ -122,8 +122,12 @@
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.example.fyp.fragments.NotificationFragment"
-        android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification" />
+        android:label="NOTIFICATION"
+        tools:layout="@layout/fragment_notification">
+        <action
+            android:id="@+id/action_notificationFragment_to_notificationDetailsFragment"
+            app:destination="@id/notificationDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/foodFragment"
         android:name="com.example.fyp.MenuModule.FoodFragment"
@@ -247,4 +251,9 @@
         android:name="com.example.fyp.stuMaintenanceModule.ChangePwdFragment"
         android:label="CHANGE PASSWORD"
         tools:layout="@layout/fragment_change_pwd" />
+    <fragment
+        android:id="@+id/notificationDetailsFragment"
+        android:name="com.example.fyp.NotificationDetailsFragment"
+        android:label="NOTIFICATION"
+        tools:layout="@layout/fragment_notification_details" />
 </navigation>

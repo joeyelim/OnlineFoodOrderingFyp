@@ -8,6 +8,7 @@ class Cart {
     var canteen_name : String? = ""
     var store_name : String? = ""
     var cart_ID : String? = ""
+    var image : String? = ""
 
     constructor()
 
@@ -18,7 +19,8 @@ class Cart {
         remark: String?,
         canteen_name: String?,
         store_name: String?,
-        cart_ID: String?
+        cart_ID: String?,
+        image: String?
     ) {
         this.food_name = food_name
         this.each_price = each_price
@@ -27,6 +29,7 @@ class Cart {
         this.canteen_name = canteen_name
         this.store_name = store_name
         this.cart_ID = cart_ID
+        this.image = image
     }
 
 
