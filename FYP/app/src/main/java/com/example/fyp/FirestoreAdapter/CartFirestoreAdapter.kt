@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
@@ -78,40 +79,41 @@ class CartViewHolder internal constructor(private val view: View, var context: C
                 .into(image)
         }
 
-//        val foodName = view.findViewById<TextView>(R.id.foodName)
-//
-//        val btnAdd = view.findViewById<ImageButton>(R.id.btnPlus)
-//        val btnMinus = view.findViewById<ImageButton>(R.id.btnMinus)
-//        val qty = view.findViewById<TextView>(R.id.quantity)
-//        var counter = cart.quantity
+        val foodName = view.findViewById<TextView>(R.id.foodName)
+
+        val btnAdd = view.findViewById<ImageButton>(R.id.btnPlus)
+        val btnMinus = view.findViewById<ImageButton>(R.id.btnMinus)
+        val qty = view.findViewById<TextView>(R.id.quantity)
+        var counter = cart.quantity!!
 
 
 
-//        btnAdd.setOnClickListener {
-//            counter++
-//            val quantity = qty
-//            quantity.text = "$counter"
-//            val totalStock = viewModel.food.total_stock
-//            if (counter > totalStock) {
-//                // custom dialog use in delete pop up message
+        btnAdd.setOnClickListener {
+            counter++
+            val quantity = qty
+            quantity.text = "$counter"
+            val totalStock = 5
+
+            if (counter > totalStock) {
+                // custom dialog use in delete pop up message
 //                qtyDialog()
-////                Toast.makeText(activity, "exceed total stock $totalStock",Toast.LENGTH_SHORT).show()
-//
-//            }
-//        }
-//
-//        btnMinus.setOnClickListener {
-//            counter--
-//            val quantity = qty
-//            quantity.text = "$counter"
-//
-//        }
+//                Toast.makeText(activity, "exceed total stock $totalStock",Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+        btnMinus.setOnClickListener {
+            counter--
+            val quantity = qty
+            quantity.text = "$counter"
+
+        }
 
 
 
-//        foodName.setOnClickListener {
-//            onListClick.onItemClick(cart, adapterPosition)
-//        }
+        foodName.setOnClickListener {
+            onListClick.onItemClick(cart, adapterPosition)
+        }
 
 
 

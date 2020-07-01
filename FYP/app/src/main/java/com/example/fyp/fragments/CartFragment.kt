@@ -25,10 +25,9 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import kotlinx.android.synthetic.main.cart_row.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -105,24 +104,16 @@ class CartFragment : Fragment(), onListClick3 {
     }
 
     override fun onItemClick(cart: Cart, position: Int) {
-        delDialog()
+        delDialog(cart)
     }
 
-    fun qtyDialog(){
-        val dialog = AlertDialog.Builder(activity)
 
-        dialog.setTitle("Oops, sorry!")
-        dialog.setMessage("Your order quantity has exceeded the maximum inventory, please select again.")
-        dialog.setPositiveButton("OK", { dialogInterface: DialogInterface, i: Int -> })
-        dialog.show()
-    }
-
-    fun delDialog(){
+    fun delDialog(cart: Cart){
         val dialog = AlertDialog.Builder(activity)
-        val foodName = viewModel.food.food_name
+        val foodName: String? = cart.food_name
 
         dialog.setTitle("Confirmation")
-        dialog.setMessage("Are you sure want to delete the order?" + "\n* "+"$foodName")
+        dialog.setMessage("Are you sure want to delete the order?" + "\n* $foodName")
         dialog.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> })
         dialog.setNegativeButton("No",{ dialogInterface: DialogInterface, i: Int -> })
         dialog.show()

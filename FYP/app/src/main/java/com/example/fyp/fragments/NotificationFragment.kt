@@ -118,6 +118,7 @@ class NotificationFragment : Fragment(), onListClick4 {
     }
 
     override fun onItemClick(notif: Notification, position: Int) {
+        userViewModel.notification = notif
         this.findNavController()
             .navigate(NotificationFragmentDirections.actionNotificationFragmentToNotificationDetailsFragment())
     }
