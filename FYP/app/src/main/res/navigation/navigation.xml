@@ -254,6 +254,6 @@
     <fragment
         android:id="@+id/notificationDetailsFragment"
         android:name="com.example.fyp.NotificationDetailsFragment"
-        android:label="fragment_notification_details"
+        android:label="NOTIFICATION"
         tools:layout="@layout/fragment_notification_details" />
 </navigation>

@@ -48,10 +48,11 @@ class NotificationFragment : Fragment(), onListClick4 {
         )
 
         userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+        initRecycleView()
 
-        if (userViewModel.user!!.email != "") {
-            initRecycleView()
-        }
+//        if (userViewModel.user!!.email != "") {
+//
+//        }
 //--------------------------------------------------------------------------------------------------
 
         binding.btnUploadFirestore.setOnClickListener {
@@ -100,20 +101,21 @@ class NotificationFragment : Fragment(), onListClick4 {
 
     }
 
-//    override fun onStart() {
-//        super.onStart()
+    override fun onStart() {
+        super.onStart()
 //        if (userViewModel.user!!.email != "") {
 //            adapter.startListening()
 //        }
-//
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
+        adapter?.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
 //        if (userViewModel.user!!.email != "") {
 //            adapter.stopListening()
 //        }
-//    }
+        adapter?.stopListening()
+    }
 
     override fun onItemClick(notif: Notification, position: Int) {
         this.findNavController()

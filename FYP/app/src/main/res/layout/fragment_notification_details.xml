@@ -18,7 +18,7 @@
             android:fontFamily="serif"
             android:text="@string/text_view"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/title_text_size"
+            android:textSize="@dimen/sub_title"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/line"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,6 @@
             android:layout_marginTop="16dp"
             android:text="@string/text_view"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/sub_title"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/line" />
@@ -67,7 +66,6 @@
             android:layout_marginTop="16dp"
             android:text="@string/text_view"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/sub_title"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line" />
@@ -86,9 +84,8 @@
             android:id="@+id/txtNotifContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="14dp"
             android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line2" />
     </androidx.constraintlayout.widget.ConstraintLayout>

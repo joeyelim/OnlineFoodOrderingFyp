@@ -8,6 +8,7 @@ import com.example.fyp.Class.Food
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.example.fyp.Class.Notification
 import java.text.DecimalFormat
 
 
@@ -15,6 +16,7 @@ class CanteenViewModel : ViewModel() {
     var canteen : Canteen = Canteen()
     var store : CanteenStore = CanteenStore()
     var food : Food = Food()
+
 
     fun setCurrentCanteen(currentCanteen: Canteen) {
         canteen = currentCanteen

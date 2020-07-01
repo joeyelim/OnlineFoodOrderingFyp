@@ -4,21 +4,54 @@ package com.example.fyp
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import com.example.fyp.Class.Notification
+import com.example.fyp.ViewModel.CanteenViewModel
+import com.example.fyp.ViewModel.UserViewModel
+
+import com.example.fyp.databinding.FragmentNotificationDetailsBinding
 
 /**
  * A simple [Fragment] subclass.
  */
 class NotificationDetailsFragment : Fragment() {
+    private lateinit var binding: FragmentNotificationDetailsBinding
+    private lateinit var viewModel : UserViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification_details, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater, com.example.fyp.R.layout.fragment_notification_details, container, false
+        )
+
+        setHasOptionsMenu(true)
+        (activity as MainActivity).setNavInvisible()
+        viewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+
+        intiUI()
+
+        return binding.root
     }
 
+    private fun intiUI() {
 
+        binding.txtNotifTitle.text = viewModel.notification.title
+
+        binding.txtStaffName.text = viewModel.notification.sender
+        binding.txtDate.text = viewModel.notification.date
+        binding.txtNotifContent.text = viewModel.notification.content
+
+
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
+    }
 }
