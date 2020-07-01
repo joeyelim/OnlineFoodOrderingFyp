@@ -10,14 +10,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.*
+import com.example.fyp.FirestoreAdapter.NotificationFirestoreAdapter
+import com.example.fyp.FirestoreAdapter.onListClick4
+import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentNotificationBinding
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import kotlinx.android.synthetic.main.fragment_place_order_progress2.*
-import java.util.*
 import kotlin.collections.ArrayList
 import java.text.SimpleDateFormat
 
@@ -25,9 +31,12 @@ import java.text.SimpleDateFormat
 /**
  * A simple [Fragment] subclass.
  */
-class NotificationFragment : Fragment() {
+class NotificationFragment : Fragment(), onListClick4 {
     private lateinit var binding: FragmentNotificationBinding
     private lateinit var storage: FirebaseStorage
+    private var adapter: NotificationFirestoreAdapter? = null
+    private lateinit var userViewModel: UserViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +46,13 @@ class NotificationFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, com.example.fyp.R.layout.fragment_notification, container, false
         )
+
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+
+        if (userViewModel.user!!.email != "") {
+            initRecycleView()
+        }
+//--------------------------------------------------------------------------------------------------
 
         binding.btnUploadFirestore.setOnClickListener {
             uploadData()
@@ -61,6 +77,54 @@ class NotificationFragment : Fragment() {
 
         return binding.root
     }
+
+
+//---------------------------------------------------------------------------------------
+
+    private fun initRecycleView() {
+
+        val db = FirebaseFirestore.getInstance()
+
+        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
+            .collection("Notification")
+            .orderBy("notif_ID", Query.Direction.ASCENDING)
+
+        val options =
+            FirestoreRecyclerOptions.Builder<Notification>()
+                .setQuery(query, Notification::class.java).build()
+
+
+        adapter = NotificationFirestoreAdapter(options, this, context!!)
+        binding.rvNotification.layoutManager = LinearLayoutManager(activity)
+        binding.rvNotification.adapter = adapter
+
+    }
+
+//    override fun onStart() {
+//        super.onStart()
+//        if (userViewModel.user!!.email != "") {
+//            adapter.startListening()
+//        }
+//
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        if (userViewModel.user!!.email != "") {
+//            adapter.stopListening()
+//        }
+//    }
+
+    override fun onItemClick(notif: Notification, position: Int) {
+        this.findNavController()
+            .navigate(NotificationFragmentDirections.actionNotificationFragmentToNotificationDetailsFragment())
+    }
+
+
+//-----------------------------------------------------------------------------------------------------------
+
+
+
 
     // upload single data
 //    private fun uploadData(){
@@ -144,61 +208,17 @@ class NotificationFragment : Fragment() {
 
         //--------------------------------------------yien----------------------------------------------------------
 
-        var order = ArrayList<Order>()
 
-        order.add(Order("26 June 2020", "26 June 2020", "Dine-In", "Pending",
-            "2:30 PM", "2:30 PM", 9.0, "O100001"))
+        var notif = ArrayList<Notification>()
 
-        order.add(Order("26 June 2020", "26 June 2020", "Take Away", "Pending",
-            "2:40 PM", "2:40 PM", 13.0, "O100002"))
-
-        var cartList = ArrayList<Cart>()
-
-        val date = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
-        val formatedDate = formatter.format(date)
-
-        cartList.add(Cart("Spicy Prawn and Tofu Ramen Noodle Soup", 5.50, 1, "NO.",
-            "Red Bricks Cafeteria", "Noodle", formatedDate ))
-
-//        cartList.add(Cart("Ayam Goreng Berempah", 5.50, 1, "NO.",
-//            "Yum Yum Cafeteria", "Masakan Malaysia", formatedDate ))
-//
-//        cartList.add(Cart("Bihun Goreng", 3.90, 1, "NO.",
-//            "Red Bricks Cafeteria", "Mamak", formatedDate ))
-
-//        cartList.add(Cart("Cafe Americano", 4.80, 2, "NO.",
-//            "Red Bricks Cafeteria", "Cafe", formatedDate ))
-
-
-        var orderfood = ArrayList<Order_Food>()
-
-        orderfood.add(Order_Food("Stewed Sweet and Sour Pork (咕噜肉饭)", 5.5, "Pending", 2,
-            "Add-on tomato source", "Red Bricks Cafeteria", "Mixed Rice", "Dine-In"))
-
-        var orderfood2 = ArrayList<Order_Food>()
-        orderfood2.add(Order_Food("Ristetto Coffee Latte", 6.5, "Pending", 2,
-            "need 3 tsp. sugar & milk", "Red Bricks Cafeteria", "Cafe", "Dine-In"))
-
-
-//        var store = ArrayList<CanteenStore>()
-//
-//        store.add(CanteenStore("Cafe", "Store/cafe.jpg", "Cafe"))
-//        store.add(CanteenStore("Vegeterian", "Store/vegeterian.png", "Vegeterian"))
-
-
-
-
-
-
-//        var cartList = ArrayList<Cart>()
-//
-//        val date = Calendar.getInstance().time
-//        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
-//        val formatedDate = formatter.format(date)
-//
-//        cartList.add(Cart("Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
-//            "Canteen1", "Noodle", formatedDate ))
+        notif.add(Notification("N000002", "Vegetarian", "Ready to pick your food", "Hello",
+                "12 May 2020", "12:00 pm",false ))
+        notif.add(Notification("N000003", "Mamak", "Change Operation Time", "Hi:)",
+            "12 May 2020", "12:00 pm",false ))
+        notif.add(Notification("N000004", "Mamak", "Ready to pick your food", "Hello",
+            "12 May 2020", "12:00 pm",false ))
+        notif.add(Notification("N000005", "Vegetarian", "Ready to pick your food", "Hello",
+            "12 May 2020", "12:00 pm",false ))
 
 
 
@@ -232,27 +252,10 @@ class NotificationFragment : Fragment() {
 //        }
 
 //--------------------------------------------yien----------------------------------------------------------
-
-//        for ((index, item) in order.withIndex()) {
+//        for ((index, item) in notif.withIndex()) {
 //            val foodInt = (index)
 //            db.collection("User").document("limye-wm18@student.tarc.edu.my")
-//                .collection("Order").document(item.id!!)
-//                .set(item)
-//                .addOnSuccessListener {
-//                    Log.i("upload", "success")
-//                }
-//                .addOnFailureListener {
-//                    Log.i("upload", "Error adding document", it)
-//                }
-//                .addOnCompleteListener {
-//                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
-//                }
-//        }
-//
-//        for ((index, item) in cartList.withIndex()) {
-//            val foodInt = (index)
-//            db.collection("User").document("limye-wm18@student.tarc.edu.my")
-//                .collection("Cart").document(item.cart_ID!!)
+//                .collection("Notification").document(item.notif_ID!!)
 //                .set(item)
 //                .addOnSuccessListener {
 //                    Log.i("upload", "success")
@@ -265,40 +268,6 @@ class NotificationFragment : Fragment() {
 //                }
 //        }
 
-        for ((index, item) in orderfood.withIndex()) {
-            val foodInt = (index)
-            db.collection("User").document("limye-wm18@student.tarc.edu.my")
-                .collection("Order").document("O100001")
-                .collection("Order_Food").document(item.food_Name!!)
-                .set(item)
-                .addOnSuccessListener {
-                    Log.i("upload", "success")
-                }
-                .addOnFailureListener {
-                    Log.i("upload", "Error adding document", it)
-                }
-                .addOnCompleteListener {
-                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
-                }
-        }
-
-
-        for ((index, item) in orderfood2.withIndex()) {
-            val foodInt = (index)
-            db.collection("User").document("limye-wm18@student.tarc.edu.my")
-                .collection("Order").document("O100002")
-                .collection("Order_Food").document(item.food_Name!!)
-                .set(item)
-                .addOnSuccessListener {
-                    Log.i("upload", "success")
-                }
-                .addOnFailureListener {
-                    Log.i("upload", "Error adding document", it)
-                }
-                .addOnCompleteListener {
-                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
-                }
-        }
 
 
     }

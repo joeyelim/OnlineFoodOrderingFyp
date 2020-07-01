@@ -1,6 +1,8 @@
 package com.example.fyp.fragments
 
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +38,7 @@ class CartFragment : Fragment(), onListClick3 {
     private lateinit var binding: FragmentCartBinding
     private var adapter: CartFirestoreAdapter? = null
     private lateinit var viewModel : CanteenViewModel
+    var counter = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +56,7 @@ class CartFragment : Fragment(), onListClick3 {
         initRecycleView()
 
 
+
         //----------------------------------------------------------------------------------------
 
         val storage = Firebase.storage
@@ -68,6 +72,7 @@ class CartFragment : Fragment(), onListClick3 {
 
 //        binding.imageView2.setImageResource(spaceRef)
 
+//---------------------------------------------------------------------------------------------------------------
 
         binding.btnCheckOut.setOnClickListener {
             it.findNavController()
@@ -100,10 +105,27 @@ class CartFragment : Fragment(), onListClick3 {
     }
 
     override fun onItemClick(cart: Cart, position: Int) {
-//        viewModel.food =
-//        this.findNavController()
-//            .navigate(CartFragmentDirections.)
+        delDialog()
+    }
 
+    fun qtyDialog(){
+        val dialog = AlertDialog.Builder(activity)
+
+        dialog.setTitle("Oops, sorry!")
+        dialog.setMessage("Your order quantity has exceeded the maximum inventory, please select again.")
+        dialog.setPositiveButton("OK", { dialogInterface: DialogInterface, i: Int -> })
+        dialog.show()
+    }
+
+    fun delDialog(){
+        val dialog = AlertDialog.Builder(activity)
+        val foodName = viewModel.food.food_name
+
+        dialog.setTitle("Confirmation")
+        dialog.setMessage("Are you sure want to delete the order?" + "\n* "+"$foodName")
+        dialog.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> })
+        dialog.setNegativeButton("No",{ dialogInterface: DialogInterface, i: Int -> })
+        dialog.show()
     }
 
     override fun onStart() {

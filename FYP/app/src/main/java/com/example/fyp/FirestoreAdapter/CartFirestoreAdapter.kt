@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
@@ -62,11 +63,55 @@ class CartViewHolder internal constructor(private val view: View, var context: C
         holder.view.quantity.text = cart.quantity.toString()
         holder.view.txtFoodPrice.text = dec.format(cart.each_price).toString()
 
-        val foodName = view.findViewById<TextView>(R.id.foodName)
+        val image = view.findViewById<ImageView>(R.id.imgFood)
+        val a = FirebaseStorage.getInstance().getReference(cart.image!!)
 
-        foodName.setOnClickListener {
+        val btnDel = view.findViewById<ImageButton>(R.id.imgBtnDelete)
+
+        btnDel.setOnClickListener {
             onListClick.onItemClick(cart, adapterPosition)
         }
+
+        a.downloadUrl.addOnSuccessListener {
+            Picasso.get()
+                .load(it)
+                .into(image)
+        }
+
+//        val foodName = view.findViewById<TextView>(R.id.foodName)
+//
+//        val btnAdd = view.findViewById<ImageButton>(R.id.btnPlus)
+//        val btnMinus = view.findViewById<ImageButton>(R.id.btnMinus)
+//        val qty = view.findViewById<TextView>(R.id.quantity)
+//        var counter = cart.quantity
+
+
+
+//        btnAdd.setOnClickListener {
+//            counter++
+//            val quantity = qty
+//            quantity.text = "$counter"
+//            val totalStock = viewModel.food.total_stock
+//            if (counter > totalStock) {
+//                // custom dialog use in delete pop up message
+//                qtyDialog()
+////                Toast.makeText(activity, "exceed total stock $totalStock",Toast.LENGTH_SHORT).show()
+//
+//            }
+//        }
+//
+//        btnMinus.setOnClickListener {
+//            counter--
+//            val quantity = qty
+//            quantity.text = "$counter"
+//
+//        }
+
+
+
+//        foodName.setOnClickListener {
+//            onListClick.onItemClick(cart, adapterPosition)
+//        }
 
 
 

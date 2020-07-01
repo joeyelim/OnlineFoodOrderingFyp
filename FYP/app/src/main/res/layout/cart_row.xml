@@ -11,7 +11,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:divider="@android:color/transparent"
@@ -31,13 +31,15 @@
 
                 <ImageView
                     android:id="@+id/imgFood"
-                    android:layout_width="120dp"
+                    android:layout_width="110dp"
                     android:layout_height="120dp"
                     android:contentDescription="@string/food_image"
+                    android:padding="1dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/frame_image_view" />
+                    app:srcCompat="@color/white"
+                    android:background="@drawable/frame_image_view"  />
 
                 <ImageButton
                     android:id="@+id/imgBtnDelete"
@@ -54,12 +56,13 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_toEndOf="@+id/imgFood"
+
                     app:layout_constraintStart_toEndOf="@+id/imgFood"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/canteenName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/canteen_name"
                         android:textColor="@color/colorPrimaryDark"
@@ -69,7 +72,7 @@
 
                     <TextView
                         android:id="@+id/shop"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Shop"
                         android:textColor="@color/colorPrimaryDark"
@@ -79,7 +82,7 @@
 
                     <TextView
                         android:id="@+id/foodName"
-                        android:layout_width="200dp"
+                        android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="@string/food_name"

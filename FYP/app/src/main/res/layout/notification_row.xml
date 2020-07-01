@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -14,7 +14,6 @@
         android:clipToPadding="false"
         android:clipChildren="false"
         android:divider="@android:color/transparent"
-        android:elevation="8dp"
         app:cardElevation="10dp"
         android:clickable="true"
         android:focusable="true"
@@ -24,17 +23,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:elevation="16dp"
             android:layout_margin="16dp">
 
-
-            <ImageView
-                android:id="@+id/imgProfile"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginBottom="12dp"
-                app:srcCompat="@drawable/fui_ic_googleg_color_24dp"
-                android:contentDescription="@string/profile_image"/>
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="25dp">
+
+                <ImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/citc_cafe"
+                    android:contentDescription="@string/profile_image"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
 
             <TextView
                 android:id="@+id/txtStore"
@@ -45,7 +52,7 @@
                 android:textSize="@dimen/sub_title"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
-                android:layout_toEndOf="@+id/imgProfile"/>
+                android:layout_toEndOf="@+id/cv_image"/>
 
             <TextView
                 android:id="@+id/txtNotifTitle"
@@ -56,7 +63,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
-                android:layout_toEndOf="@+id/imgProfile"
+                android:layout_toEndOf="@+id/cv_image"
                 android:layout_below="@+id/txtStore"/>
 
             <TextView
@@ -66,7 +73,7 @@
                 android:layout_marginStart="15dp"
                 android:text="@string/text_view"
                 android:textSize="@dimen/content"
-                android:layout_toEndOf="@+id/imgProfile"
+                android:layout_toEndOf="@+id/cv_image"
                 android:layout_below="@+id/txtNotifTitle"/>
 
             <TextView

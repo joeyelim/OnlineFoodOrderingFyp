@@ -2,6 +2,7 @@ package com.example.fyp.OrderingModule
 
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -53,7 +54,8 @@ class AddToCartFragment : Fragment() {
 
             if (counter > totalStock) {
                // custom dialog use in delete pop up message
-                Toast.makeText(activity, "exceed total stock $totalStock",Toast.LENGTH_SHORT).show()
+                openDialog()
+//                Toast.makeText(activity, "exceed total stock $totalStock",Toast.LENGTH_SHORT).show()
 
             }
 
@@ -107,19 +109,13 @@ class AddToCartFragment : Fragment() {
 
 
 
-    fun dialog(){
+    fun openDialog(){
         val dialog = AlertDialog.Builder(activity)
-        val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
 
-        dialog.setView(dialogView)
-        dialog.setCancelable(false)
+        dialog.setTitle("Oops, sorry!")
+        dialog.setMessage("Your order quantity has exceeded the maximum inventory, please select again.")
+        dialog.setPositiveButton("OK", { dialogInterface: DialogInterface, i: Int -> })
         dialog.show()
-
-        val customDialog = dialog.create()
-        customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener({
-
-        })
-
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
