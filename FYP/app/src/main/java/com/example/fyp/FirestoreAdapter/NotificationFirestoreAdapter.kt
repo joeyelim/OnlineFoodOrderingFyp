@@ -42,9 +42,9 @@ class NotificationViewHolder internal constructor(private val view: View, var co
         holder.view.txtDate.text = notif.date
         holder.view.txtNotifTitle.text = notif.title
 
-        val msgtitle = view.findViewById<TextView>(R.id.txtNotifTitle)
 
-        msgtitle.setOnClickListener {
+
+        holder.view.cvNotification.setOnClickListener {
             onListClick2.onItemClick(notif, adapterPosition)
         }
 
@@ -53,8 +53,6 @@ class NotificationViewHolder internal constructor(private val view: View, var co
 
 interface onListClick4{
     fun onItemClick(notif: Notification, position: Int){
-
-
 
     }
 }

@@ -8,8 +8,6 @@ class UserViewModel : ViewModel() {
     var user : User? = User()
     var notification : Notification = Notification()
 
-    fun setCurrentUser(currentUser: User) {
-        user = currentUser
-    }
+
 
 }
