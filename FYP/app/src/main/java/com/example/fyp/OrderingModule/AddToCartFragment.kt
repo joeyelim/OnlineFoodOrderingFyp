@@ -47,31 +47,31 @@ class AddToCartFragment : Fragment() {
         (activity as MainActivity).setNavInvisible()
 
         binding.btnPlus.setOnClickListener {
-            counter++
             val quantity = binding.quantity
             val totalStock = viewModel.food.total_stock!!
-            quantity.text = "$counter"
 
-            if (counter > totalStock) {
-               // custom dialog use in delete pop up message
+            if (counter > totalStock){
+                // custom dialog
                 openDialog()
-//                Toast.makeText(activity, "exceed total stock $totalStock",Toast.LENGTH_SHORT).show()
-
+                quantity.text = totalStock.toString()
+            }
+            else{
+                counter++
+                quantity.text = "$counter"
             }
 
         }
 
         binding.btnMinus.setOnClickListener {
-            counter--
-
             val quantity = binding.quantity
-            quantity.text = "$counter"
 
-//            if (counter < 2) {
-//                buttonDisable()
-//                counter = 1
-//                quantity.text = "$counter"
-//            }
+            if (counter <= 1){
+                quantity.text = "1"
+            }
+            else{
+                counter--
+                quantity.text = "$counter"
+            }
 
 
         }
