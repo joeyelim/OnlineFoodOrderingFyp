@@ -50,7 +50,7 @@ class AddToCartFragment : Fragment() {
             val quantity = binding.quantity
             val totalStock = viewModel.food.total_stock!!
 
-            if (counter > totalStock){
+            if (counter >= totalStock){
                 // custom dialog
                 openDialog()
                 quantity.text = totalStock.toString()
