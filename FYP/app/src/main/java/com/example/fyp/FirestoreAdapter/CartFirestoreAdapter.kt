@@ -1,6 +1,8 @@
 package com.example.fyp.FirestoreAdapter
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.CanteenStore
 import com.example.fyp.Class.Cart
 import com.example.fyp.MainActivity
+import com.example.fyp.OrderingModule.AddToCartFragment
 import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
+import com.example.fyp.fragments.CartFragment
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -67,58 +71,58 @@ class CartViewHolder internal constructor(private val view: View, var context: C
         val image = view.findViewById<ImageView>(R.id.imgFood)
         val a = FirebaseStorage.getInstance().getReference(cart.image!!)
 
-        val btnDel = view.findViewById<ImageButton>(R.id.imgBtnDelete)
-
-        btnDel.setOnClickListener {
-            onListClick.onItemClick(cart, adapterPosition)
-        }
-
         a.downloadUrl.addOnSuccessListener {
             Picasso.get()
                 .load(it)
                 .into(image)
         }
 
-        val foodName = view.findViewById<TextView>(R.id.foodName)
+        var cartFragment:CartFragment? = null
+        var addToCartFragment:AddToCartFragment? = null
 
-        val btnAdd = view.findViewById<ImageButton>(R.id.btnPlus)
-        val btnMinus = view.findViewById<ImageButton>(R.id.btnMinus)
-        val qty = view.findViewById<TextView>(R.id.quantity)
+        holder.view.imgBtnDelete.setOnClickListener {
+            cartFragment?.delDialog(cart)
+        }
+
         var counter = cart.quantity!!
 
-
-
-        btnAdd.setOnClickListener {
-            counter++
-            val quantity = qty
-            quantity.text = "$counter"
+        holder.view.btnPlus.setOnClickListener {
+            val quantity = holder.view.quantity
             val totalStock = 5
 
-            if (counter > totalStock) {
-                // custom dialog use in delete pop up message
-//                qtyDialog()
-//                Toast.makeText(activity, "exceed total stock $totalStock",Toast.LENGTH_SHORT).show()
-
+            if (counter >= totalStock){
+                // custom dialog
+                addToCartFragment?.openDialog()
+                quantity.text = totalStock.toString()
             }
-        }
-
-        btnMinus.setOnClickListener {
-            counter--
-            val quantity = qty
-            quantity.text = "$counter"
+            else{
+                counter++
+                quantity.text = "$counter"
+            }
 
         }
 
 
 
-        foodName.setOnClickListener {
-            onListClick.onItemClick(cart, adapterPosition)
+        holder.view.btnMinus.setOnClickListener {
+            val quantity = holder.view.quantity
+            if (counter < 1){
+                quantity.text = "1"
+            }
+            else{
+                counter--
+                quantity.text = "$counter"
+            }
+
         }
+
 
 
 
     }
 }
+
+
 
 interface onListClick3 {
     fun onItemClick(cart: Cart, position: Int) {

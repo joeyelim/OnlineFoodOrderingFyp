@@ -104,7 +104,7 @@ class CartFragment : Fragment(), onListClick3 {
     }
 
     override fun onItemClick(cart: Cart, position: Int) {
-        delDialog(cart)
+
     }
 
 
