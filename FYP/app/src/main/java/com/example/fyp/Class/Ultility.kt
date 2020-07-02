@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Ultility {
 
@@ -24,11 +26,13 @@ class Ultility {
 
             dialog.setTitle("Confirmation")
             dialog.setMessage("Are you sure want to delete the order?\n* $foodName")
-            dialog.setPositiveButton("Yes") { _: DialogInterface, i: Int -> }
+            dialog.setPositiveButton("Yes") { _: DialogInterface, i: Int ->
+            }
             dialog.setNegativeButton("No") { _: DialogInterface, i: Int -> }
             dialog.show()
         }
     }
+
 
 
 }
