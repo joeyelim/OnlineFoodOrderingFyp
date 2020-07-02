@@ -109,17 +109,19 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        intiUI(user)
+        intiUI()
 
         (activity as MainActivity).setNavVisible()
 
         return binding.root
     }
 
-    private fun intiUI(user: User) {
-        binding.txtFullName.text = user.first_name + user.last_name
-        binding.txtEmail.text = user.email
-        binding.txtPhone.text = user.phone_number
+    private fun intiUI() {
+        binding.txtname.text = userViewModel.user?.first_name + " " + userViewModel.user?.last_name
+        binding.txtemail.text = userViewModel.user?.email
+        binding.txtFullName.text = userViewModel.user?.first_name + " " + userViewModel.user?.last_name
+        binding.txtEmail.text = userViewModel.user?.email
+        binding.txtPhone.text = userViewModel.user?.phone_number
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
