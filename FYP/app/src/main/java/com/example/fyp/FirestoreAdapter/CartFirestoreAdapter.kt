@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.CanteenStore
 import com.example.fyp.Class.Cart
+import com.example.fyp.Class.Ultility.Companion.delDialog
+import com.example.fyp.Class.Ultility.Companion.openDialog
 import com.example.fyp.MainActivity
 import com.example.fyp.OrderingModule.AddToCartFragment
 import com.example.fyp.R
@@ -77,11 +79,11 @@ class CartViewHolder internal constructor(private val view: View, var context: C
                 .into(image)
         }
 
-        var cartFragment:CartFragment? = null
-        var addToCartFragment:AddToCartFragment? = null
+//        var cartFragment:CartFragment? = null
+//        var addToCartFragment:AddToCartFragment? = null
 
         holder.view.imgBtnDelete.setOnClickListener {
-            cartFragment?.delDialog(cart)
+            delDialog(context, cart)
         }
 
         var counter = cart.quantity!!
@@ -92,7 +94,7 @@ class CartViewHolder internal constructor(private val view: View, var context: C
 
             if (counter >= totalStock){
                 // custom dialog
-                addToCartFragment?.openDialog()
+                openDialog(context)
                 quantity.text = totalStock.toString()
             }
             else{
@@ -102,12 +104,10 @@ class CartViewHolder internal constructor(private val view: View, var context: C
 
         }
 
-
-
         holder.view.btnMinus.setOnClickListener {
             val quantity = holder.view.quantity
             if (counter < 1){
-                quantity.text = "1"
+                quantity.text = "0"
             }
             else{
                 counter--
@@ -115,11 +115,28 @@ class CartViewHolder internal constructor(private val view: View, var context: C
             }
 
         }
-
-
-
-
     }
+
+//    fun delDialog(cart: Cart){
+//        val dialog = AlertDialog.Builder(context)
+//        val foodName: String? = cart.food_name
+//
+//        dialog.setTitle("Confirmation")
+//        dialog.setMessage("Are you sure want to delete the order?\n* $foodName")
+//        dialog.setPositiveButton("Yes") { _: DialogInterface, i: Int -> }
+//        dialog.setNegativeButton("No") { _: DialogInterface, i: Int -> }
+//        dialog.show()
+//    }
+//
+//    fun openDialog(){
+//        val dialog = AlertDialog.Builder(context)
+//
+//        dialog.setTitle("Oops, sorry!")
+//        dialog.setMessage("Your order quantity has exceeded the maximum inventory, please select again.")
+//        dialog.setPositiveButton("OK") { _: DialogInterface, i: Int -> }
+//        dialog.show()
+//    }
+
 }
 
 

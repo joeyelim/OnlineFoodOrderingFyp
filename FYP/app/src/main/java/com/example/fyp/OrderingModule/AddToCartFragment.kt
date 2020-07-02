@@ -22,7 +22,8 @@ import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentAddToCartBinding
 import com.google.firebase.storage.FirebaseStorage
 import java.text.DecimalFormat
-
+import com.example.fyp.Class.Ultility
+import com.example.fyp.Class.Ultility.Companion.openDialog
 
 
 /**
@@ -52,7 +53,7 @@ class AddToCartFragment : Fragment() {
 
             if (counter >= totalStock){
                 // custom dialog
-                openDialog()
+                openDialog(activity!!)
                 quantity.text = totalStock.toString()
             }
             else{
@@ -61,7 +62,6 @@ class AddToCartFragment : Fragment() {
             }
 
         }
-
         binding.btnMinus.setOnClickListener {
             val quantity = binding.quantity
 
@@ -75,8 +75,6 @@ class AddToCartFragment : Fragment() {
 
 
         }
-
-
         intiUI()
 
         return binding.root
@@ -105,17 +103,6 @@ class AddToCartFragment : Fragment() {
 
     fun buttonDisable(){
         binding.btnMinus.isEnabled = false
-    }
-
-
-
-    fun openDialog(){
-        val dialog = AlertDialog.Builder(activity)
-
-        dialog.setTitle("Oops, sorry!")
-        dialog.setMessage("Your order quantity has exceeded the maximum inventory, please select again.")
-        dialog.setPositiveButton("OK", { dialogInterface: DialogInterface, i: Int -> })
-        dialog.show()
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

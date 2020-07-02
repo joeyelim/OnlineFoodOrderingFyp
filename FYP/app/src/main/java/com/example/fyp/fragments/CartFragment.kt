@@ -113,9 +113,9 @@ class CartFragment : Fragment(), onListClick3 {
         val foodName: String? = cart.food_name
 
         dialog.setTitle("Confirmation")
-        dialog.setMessage("Are you sure want to delete the order?" + "\n* $foodName")
-        dialog.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> })
-        dialog.setNegativeButton("No",{ dialogInterface: DialogInterface, i: Int -> })
+        dialog.setMessage("Are you sure want to delete the order?\n* $foodName")
+        dialog.setPositiveButton("Yes") { _: DialogInterface, i: Int -> }
+        dialog.setNegativeButton("No") { _: DialogInterface, i: Int -> }
         dialog.show()
     }
 
