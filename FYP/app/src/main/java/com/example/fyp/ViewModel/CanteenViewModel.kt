@@ -18,6 +18,7 @@ class CanteenViewModel : ViewModel() {
     var food : Food = Food()
 
 
+
     fun setCurrentCanteen(currentCanteen: Canteen) {
         canteen = currentCanteen
     }

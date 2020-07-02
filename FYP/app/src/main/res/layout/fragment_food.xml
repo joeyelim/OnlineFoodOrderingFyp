@@ -116,43 +116,44 @@
                 android:id="@+id/Food_Filter_Tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:tabGravity="fill"
                 app:tabMode="scrollable">
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_noodles1"
-                    android:text="@string/noodle" />
+                <!--                <com.google.android.material.tabs.TabItem-->
+                <!--                    android:layout_width="120dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:icon="@drawable/ic_noodles1"-->
+                <!--                    android:text="@string/noodle" />-->
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_rice"
-                    android:text="@string/rice" />
+                <!--                <com.google.android.material.tabs.TabItem-->
+                <!--                    android:layout_width="120dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:icon="@drawable/ic_rice"-->
+                <!--                    android:text="@string/rice" />-->
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_hot_chili"
-                    android:text="@string/spicy" />
+                <!--                <com.google.android.material.tabs.TabItem-->
+                <!--                    android:layout_width="120dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:icon="@drawable/ic_hot_chili"-->
+                <!--                    android:text="@string/spicy" />-->
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_hot_soup"
-                    android:text="@string/soup" />
+                <!--                <com.google.android.material.tabs.TabItem-->
+                <!--                    android:layout_width="120dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:icon="@drawable/ic_hot_soup"-->
+                <!--                    android:text="@string/soup" />-->
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_vegetarian"
-                    android:text="@string/vegetarian" />
+                <!--                <com.google.android.material.tabs.TabItem-->
+                <!--                    android:layout_width="120dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:icon="@drawable/ic_vegetarian"-->
+                <!--                    android:text="@string/vegetarian" />-->
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_beverage"
-                    android:text="@string/beverage" />
+                <!--                <com.google.android.material.tabs.TabItem-->
+                <!--                    android:layout_width="120dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:icon="@drawable/ic_beverage"-->
+                <!--                    android:text="@string/beverage" />-->
 
             </com.google.android.material.tabs.TabLayout>
 

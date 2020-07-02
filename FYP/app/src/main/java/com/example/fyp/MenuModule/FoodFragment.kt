@@ -65,9 +65,8 @@ class FoodFragment : Fragment(), onListClick2 {
         canteenType = viewModel.canteen.type!!
         storeType = viewModel.store.id!!
 
-
-        initTab()
         initRecycleView()
+        initTab()
         updateUI()
 
         binding.FoodFilterTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -91,6 +90,10 @@ class FoodFragment : Fragment(), onListClick2 {
 
     private fun initTab() {
         binding.FoodFilterTab.addTab(binding.FoodFilterTab.newTab().setText("all"))
+
+        for (item in viewModel.store.category) {
+            binding.FoodFilterTab.addTab(binding.FoodFilterTab.newTab().setText(item))
+        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
