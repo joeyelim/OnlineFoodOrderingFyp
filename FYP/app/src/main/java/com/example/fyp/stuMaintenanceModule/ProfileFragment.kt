@@ -12,9 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.example.fyp.Class.User
 import com.example.fyp.MainActivity
 import com.example.fyp.R
+import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentProfileBinding
 import com.firebase.ui.auth.AuthUI.getApplicationContext
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
  */
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +40,7 @@ class ProfileFragment : Fragment() {
         )
 
         setHasOptionsMenu(true)
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
 
         binding.btnEdit.setOnClickListener {
             it.findNavController()
@@ -104,10 +109,17 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        intiUI(user)
 
         (activity as MainActivity).setNavVisible()
 
         return binding.root
+    }
+
+    private fun intiUI(user: User) {
+        binding.txtFullName.text = user.first_name + user.last_name
+        binding.txtEmail.text = user.email
+        binding.txtPhone.text = user.phone_number
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
