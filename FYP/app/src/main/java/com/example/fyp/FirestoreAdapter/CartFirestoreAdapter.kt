@@ -1,35 +1,26 @@
 package com.example.fyp.FirestoreAdapter
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fyp.Class.CanteenStore
 import com.example.fyp.Class.Cart
-import com.example.fyp.MainActivity
-import com.example.fyp.OrderingModule.AddToCartFragment
+import com.example.fyp.Class.OnAdapterItemClick
 import com.example.fyp.R
-import com.example.fyp.ViewModel.CanteenViewModel
-import com.example.fyp.fragments.CartFragment
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cart_row.view.*
 import java.text.DecimalFormat
 
 class CartFirestoreAdapter(
-    options: FirestoreRecyclerOptions<Cart>, var onListClick: onListClick3, var context: Context
+    options: FirestoreRecyclerOptions<Cart>,
+    var onListClick: OnAdapterItemClick,
+    var context: Context
 ) :
     FirestoreRecyclerAdapter<Cart, CartViewHolder>(options) {
 
@@ -52,14 +43,28 @@ class CartFirestoreAdapter(
 
 }
 
-class CartViewHolder internal constructor(private val view: View, var context: Context) : RecyclerView.ViewHolder(view) {
+class CartViewHolder internal constructor(private val view: View, var context: Context) :
+    RecyclerView.ViewHolder(view) {
 
     internal fun setCanteenState(
         cart: Cart,
-        onListClick: onListClick3,
+        onListClick: OnAdapterItemClick,
         holder: CartViewHolder
     ) {
         val dec = DecimalFormat("RM ###.00")
+        var totalQuantity = 1
+
+        FirebaseFirestore.getInstance()
+            .collection("Canteen").document(cart.canteen_name!!)
+            .collection("Store").document(cart.store_name!!)
+            .collection("Food").document(cart.food_name!!)
+            .get()
+            .addOnSuccessListener {
+                val a = it.get("total_stock")
+                if (a is Int) {
+                    totalQuantity = a.toInt()
+                }
+            }
 
         holder.view.canteenName.text = cart.canteen_name
         holder.view.shop.text = cart.store_name
@@ -77,56 +82,43 @@ class CartViewHolder internal constructor(private val view: View, var context: C
                 .into(image)
         }
 
-        var cartFragment:CartFragment? = null
-        var addToCartFragment:AddToCartFragment? = null
+//        var cartFragment:CartFragment? = null
+//        var addToCartFragment:AddToCartFragment? = null
 
         holder.view.imgBtnDelete.setOnClickListener {
-            cartFragment?.delDialog(cart)
+            //            delDialog(context, cart)
+            onListClick.deleteBtnClick(cart)
         }
 
         var counter = cart.quantity!!
 
+//        holder.view.btnPlus.setOnClickListener {
+//            val quantity = holder.view.quantity
+//            val totalStock = 5
+//
+//            if (counter >= totalQuantity){
+//                // custom dialog
+//                openDialog(context)
+//                quantity.text = totalQuantity.toString()
+//            }
+//            else{
+//                counter++
+//                quantity.text = "$counter"
+//            }
+//
+//        }
         holder.view.btnPlus.setOnClickListener {
-            val quantity = holder.view.quantity
-            val totalStock = 5
-
-            if (counter >= totalStock){
-                // custom dialog
-                addToCartFragment?.openDialog()
-                quantity.text = totalStock.toString()
-            }
-            else{
-                counter++
-                quantity.text = "$counter"
-            }
-
+            onListClick.addBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice)
         }
-
-
 
         holder.view.btnMinus.setOnClickListener {
-            val quantity = holder.view.quantity
-            if (counter < 1){
-                quantity.text = "1"
-            }
-            else{
-                counter--
-                quantity.text = "$counter"
-            }
-
+            onListClick.minusBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice)
         }
-
-
-
-
-    }
-}
-
-
-
-interface onListClick3 {
-    fun onItemClick(cart: Cart, position: Int) {
-
     }
 
 }
+
+//interface onListClick3 {
+//    fun onItemClick(cart: Cart, position: Int) {}
+//
+//}
