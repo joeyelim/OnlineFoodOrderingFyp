@@ -109,6 +109,9 @@
         <action
             android:id="@+id/action_cartFragment_to_fragment_home"
             app:destination="@+id/fragment_home" />
+        <action
+            android:id="@+id/action_cartFragment_to_fragment_home2"
+            app:destination="@id/fragment_home" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
@@ -118,6 +121,9 @@
         <action
             android:id="@+id/action_orderListFragment_to_orderHistoryFragment"
             app:destination="@id/orderHistoryFragment" />
+        <action
+            android:id="@+id/action_orderListFragment_to_fragment_home"
+            app:destination="@id/fragment_home" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
@@ -127,6 +133,9 @@
         <action
             android:id="@+id/action_notificationFragment_to_notificationDetailsFragment"
             app:destination="@id/notificationDetailsFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_to_fragment_home"
+            app:destination="@id/fragment_home" />
     </fragment>
     <fragment
         android:id="@+id/foodFragment"

@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Cart
 import com.example.fyp.Class.Food
@@ -25,11 +26,13 @@ import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentCartBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import java.lang.Exception
 import java.text.DecimalFormat
 
 
@@ -55,8 +58,10 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavVisible()
 
+
         viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
         userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+        checkLogin()
         initRecycleView()
 
 
@@ -86,22 +91,40 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         return binding.root
     }
 
+    private fun checkLogin() {
+        if (Firebase.auth.currentUser == null || userViewModel.user?.email == "") {
+            findNavController().navigate(CartFragmentDirections.actionCartFragmentToFragmentHome())
+        }
+    }
+
     private fun initRecycleView() {
 
         val db = FirebaseFirestore.getInstance()
 
-        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
-            .collection("Cart")
-            .orderBy("cart_ID", Query.Direction.ASCENDING)
+        try {
+            val query = db.collection("User").document(userViewModel.user?.email!!)
+                .collection("Cart")
+                .orderBy("cart_ID", Query.Direction.ASCENDING)
 
-        val options =
-            FirestoreRecyclerOptions.Builder<Cart>()
-                .setQuery(query, Cart::class.java).build()
+            val options =
+                FirestoreRecyclerOptions.Builder<Cart>()
+                    .setQuery(query, Cart::class.java).build()
 
 
-        adapter = CartFirestoreAdapter(options, this, context!!)
-        binding.rcCart.layoutManager = LinearLayoutManager(activity)
-        binding.rcCart.adapter = adapter
+            adapter = CartFirestoreAdapter(options, this, context!!)
+            binding.rcCart.layoutManager = LinearLayoutManager(activity)
+            binding.rcCart.adapter = adapter
+        }catch (e : Exception) {
+            return
+        }
+
+
+
+//        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
+//            .collection("Cart")
+//            .orderBy("cart_ID", Query.Direction.ASCENDING)
+
+
 
     }
 
@@ -111,9 +134,6 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             .collection("Store").document(cart.store_name!!)
             .collection("Food").document(cart.food_name!!)
             .get()
-            .addOnSuccessListener {
-                Log.i("Test", it.get("total_stock").toString())
-            }
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     var counter = (view.text).toString().toInt()
@@ -194,13 +214,16 @@ class CartFragment : Fragment(), OnAdapterItemClick {
 
     override fun onStart() {
         super.onStart()
-        adapter?.startListening()
+
+        if (userViewModel.user!!.email != "") {
+            adapter?.startListening()
+        }
     }
 
     override fun onStop() {
         super.onStop()
 
-        if (adapter != null) {
+        if (userViewModel.user!!.email != "") {
             adapter?.stopListening()
         }
     }
