@@ -33,21 +33,6 @@ class LoginViewModel : ViewModel() {
 
         }
 
-    //    private fun getCurrentUser(user : FirebaseUser) {
-//        var mFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-//        //var user2 : CurrentUser
-//        val email : String = user.email?:""
-//        val docRef = mFirestore.collection("User")
-//            .document(email)
-//
-//        Log.i("user", docRef.get().isSuccessful.toString())
-//
-//        docRef
-//            .get().addOnSuccessListener { documentSnapshot ->
-//                Log.i("user22", user.email)
-//                _currentUser.value = documentSnapshot.toObject(CurrentUser::class.java)
-//            }
-//    }
     fun changeOption(option: Boolean) {
         _changeMenuOption.value = option
     }
