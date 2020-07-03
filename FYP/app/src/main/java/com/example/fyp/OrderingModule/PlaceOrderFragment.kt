@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
 import com.example.fyp.R
+import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.databinding.FragmentPlaceOrderBinding
 import kotlinx.android.synthetic.main.fragment_place_order.*
 import java.text.SimpleDateFormat
@@ -23,6 +25,7 @@ import java.util.*
  */
 class PlaceOrderFragment : Fragment() {
     private lateinit var binding: FragmentPlaceOrderBinding
+    private lateinit var cartViewModel: CartViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +37,14 @@ class PlaceOrderFragment : Fragment() {
             inflater, R.layout.fragment_place_order, container, false
         )
 
+        cartViewModel = ViewModelProviders.of(activity!!).get(CartViewModel::class.java)
+
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
         binding.btnNext.setOnClickListener{
+            cartViewModel.setOrderValue("Time", "Option")
+
             it.findNavController()
                 .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
         }
@@ -73,26 +80,6 @@ class PlaceOrderFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
     }
-
-    //        fun onRadioButtonClicked(view: View) {
-//            if (view is RadioButton) {
-//                // Is the button now checked?
-//                val checked = view.isChecked
-//
-//                // Check which radio button was clicked
-//                when (view.getId()) {
-//                    R.id.radio_dine_in ->
-//                        if (checked) {
-//                            // dine in are the best
-//                        }
-//                    R.id.radio_take_away ->
-//                        if (checked) {
-//                            // take away rule
-//                        }
-//                }
-//            }
-//        }
-
 
 
 }

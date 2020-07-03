@@ -92,6 +92,14 @@ class CartFragment : Fragment(), OnAdapterItemClick {
 //---------------------------------------------------------------------------------------------------------------
 
         binding.btnCheckOut.setOnClickListener {
+
+            if (!it.isEnabled) {
+                Toast.makeText(
+                    activity, "Please Tick At Least One Item",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
             it.findNavController()
                 .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
         }
@@ -142,11 +150,6 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             } else {
                 binding.btnCheckOut.setTextColor(Color.BLUE)
                 binding.btnCheckOut.isEnabled = false
-                Toast.makeText(
-                    activity, "Please Tick At Least One Item",
-                    Toast.LENGTH_SHORT
-                ).show()
-
             }
 
         })
@@ -199,8 +202,10 @@ class CartFragment : Fragment(), OnAdapterItemClick {
     override fun checkBoxClick(cart: Cart, checkBox: CheckBox) {
         if (checkBox.isChecked) {
             cartViewModel.activateCartButton()
+            cartViewModel.addItem(cart)
         } else {
             cartViewModel.deActivateCartButton()
+            cartViewModel.removeItem(cart)
         }
     }
 
