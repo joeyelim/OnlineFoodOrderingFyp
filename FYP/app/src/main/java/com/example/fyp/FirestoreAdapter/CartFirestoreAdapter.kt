@@ -1,13 +1,14 @@
 package com.example.fyp.FirestoreAdapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.Cart
-import com.example.fyp.Class.OnAdapterItemClick
+import com.example.fyp.Interface.OnAdapterItemClick
 import com.example.fyp.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -90,29 +91,16 @@ class CartViewHolder internal constructor(private val view: View, var context: C
             onListClick.deleteBtnClick(cart)
         }
 
-        var counter = cart.quantity!!
-
-//        holder.view.btnPlus.setOnClickListener {
-//            val quantity = holder.view.quantity
-//            val totalStock = 5
-//
-//            if (counter >= totalQuantity){
-//                // custom dialog
-//                openDialog(context)
-//                quantity.text = totalQuantity.toString()
-//            }
-//            else{
-//                counter++
-//                quantity.text = "$counter"
-//            }
-//
-//        }
         holder.view.btnPlus.setOnClickListener {
             onListClick.addBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice)
         }
 
         holder.view.btnMinus.setOnClickListener {
             onListClick.minusBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice)
+        }
+
+        holder.view.checkBox.setOnClickListener {
+            onListClick.checkBoxClick(cart, holder.view.checkBox)
         }
     }
 
