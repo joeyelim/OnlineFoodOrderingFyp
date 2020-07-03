@@ -3,25 +3,30 @@ package com.example.fyp.fragments
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Cart
 import com.example.fyp.Class.Food
-import com.example.fyp.Class.OnAdapterItemClick
+import com.example.fyp.Interface.OnAdapterItemClick
 import com.example.fyp.FirestoreAdapter.CartFirestoreAdapter
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
+import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentCartBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -32,7 +37,6 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import java.lang.Exception
 import java.text.DecimalFormat
 
 
@@ -40,10 +44,12 @@ import java.text.DecimalFormat
  * A simple [Fragment] subclass.
  */
 class CartFragment : Fragment(), OnAdapterItemClick {
+
     private lateinit var binding: FragmentCartBinding
     private var adapter: CartFirestoreAdapter? = null
     private lateinit var viewModel: CanteenViewModel
     private lateinit var userViewModel: UserViewModel
+    private lateinit var cartViewModel: CartViewModel
     var counter = 1
 
     override fun onCreateView(
@@ -61,6 +67,8 @@ class CartFragment : Fragment(), OnAdapterItemClick {
 
         viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
         userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+        cartViewModel = ViewModelProviders.of(activity!!).get(CartViewModel::class.java)
+
         checkLogin()
         initRecycleView()
 
@@ -114,10 +122,9 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             adapter = CartFirestoreAdapter(options, this, context!!)
             binding.rcCart.layoutManager = LinearLayoutManager(activity)
             binding.rcCart.adapter = adapter
-        }catch (e : Exception) {
+        } catch (e: Exception) {
             return
         }
-
 
 
 //        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
@@ -125,7 +132,24 @@ class CartFragment : Fragment(), OnAdapterItemClick {
 //            .orderBy("cart_ID", Query.Direction.ASCENDING)
 
 
+    }
 
+    private fun observeCartButton() {
+        cartViewModel.activeButton.observe(this, Observer {
+            if (it > 0) {
+                binding.btnCheckOut.setTextColor(Color.GREEN)
+                binding.btnCheckOut.isEnabled = true
+            } else {
+                binding.btnCheckOut.setTextColor(Color.BLUE)
+                binding.btnCheckOut.isEnabled = false
+                Toast.makeText(
+                    activity, "Please Tick At Least One Item",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+
+        })
     }
 
     override fun addBtnClick(cart: Cart, view: TextView, txt: TextView) {
@@ -172,6 +196,13 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         delDialog(cart)
     }
 
+    override fun checkBoxClick(cart: Cart, checkBox: CheckBox) {
+        if (checkBox.isChecked) {
+            cartViewModel.activateCartButton()
+        } else {
+            cartViewModel.deActivateCartButton()
+        }
+    }
 
     fun delDialog(cart: Cart) {
         val dialog = AlertDialog.Builder(activity)
@@ -220,12 +251,24 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        observeCartButton()
+    }
+
     override fun onStop() {
         super.onStop()
+
+        cartViewModel.activeButton.removeObservers(this)
 
         if (userViewModel.user!!.email != "") {
             adapter?.stopListening()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        cartViewModel.deActivateCartButton()
     }
 
 

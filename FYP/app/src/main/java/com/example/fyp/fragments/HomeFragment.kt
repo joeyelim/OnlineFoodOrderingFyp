@@ -92,9 +92,6 @@ class HomeFragment : Fragment(), onListClick {
                 .addOnSuccessListener {
                     userViewModel.user = it.toObject(User::class.java)
                 }
-                .addOnCompleteListener {
-                    Log.i("Test", "Initial usermodel complete")
-                }
         } else {
             userViewModel.user = User()
             loginViewModel.changeOption(false)
