@@ -43,7 +43,7 @@ class PlaceOrderFragment : Fragment() {
         (activity as MainActivity).setNavInvisible()
 
         binding.btnNext.setOnClickListener{
-            cartViewModel.setOrderValue("Time", "Option")
+            cartViewModel.setOrderValue(getOption())
 
             it.findNavController()
                 .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
@@ -61,6 +61,18 @@ class PlaceOrderFragment : Fragment() {
         return binding.root
     }
 
+    private fun getPickTime() : String {
+        return binding.txtPickupTime.text.toString()
+    }
+
+    private fun getOption() : String {
+        if (binding.radioButton1.isChecked) {
+            return binding.radioButton1.text.toString()
+        } else {
+            return return binding.radioButton2.text.toString()
+        }
+    }
+
     private fun timePicker(){
         val cal:Calendar = Calendar.getInstance()
         val timeSetListener:TimePickerDialog.OnTimeSetListener =
@@ -69,6 +81,7 @@ class PlaceOrderFragment : Fragment() {
                 cal.set(Calendar.MINUTE, minute)
 
                 textViewTime.text = SimpleDateFormat("HH:mm").format(cal.time)
+                cartViewModel.setTime(SimpleDateFormat("HH:mm").format(cal.time))
                 //textViewTime.text = cal.time.toString()
             }
 

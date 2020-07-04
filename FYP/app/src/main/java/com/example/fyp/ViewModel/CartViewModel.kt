@@ -7,6 +7,10 @@ import androidx.lifecycle.ViewModel
 import com.example.fyp.Class.Cart
 import com.example.fyp.Class.Order
 import com.example.fyp.Class.Order_Food
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class CartViewModel : ViewModel() {
     private val _activeButton = MutableLiveData<Int>()
@@ -38,15 +42,25 @@ class CartViewModel : ViewModel() {
         hashMap = HashMap()
     }
 
-    fun setOrderValue(pickTime : String, option : String) {
-        order.pickUp_Time = pickTime
-        order.pickUp_Date = "Date"
-        order.id = "12345688"
+    fun setOrderValue( option : String) {
+        val date = Calendar.getInstance().time
+        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
+        val formatter2 = SimpleDateFormat("HH:mm") //or use getDateInstance()
+        val formatter3 = SimpleDateFormat("dd.MM.yyyy") //or use getDateInstance()
+        val formatedDate = formatter.format(date)
+
+
+        order.pickUp_Date = formatter3.format(date)
+        order.id = formatedDate
         order.dining_Option = option
         order.status = "Pending"
         order.total_Price = getTotal()
-        order.order_Time = "OrderTime"
-        order.order_Date = "OrderDate"
+        order.order_Time = formatter2.format(date)
+        order.order_Date = formatter3.format(date)
+    }
+
+    fun setTime(time : String) {
+        order.pickUp_Time = time
     }
 
     fun initOrderFoodList() {
@@ -58,7 +72,29 @@ class CartViewModel : ViewModel() {
     }
 
     private fun getTotal() : Double {
-        return 0.00
+        var total = 0.00
+
+        hashMap.forEach{(key, value) ->
+            total += (value.each_price !!* value.quantity!!)
+        }
+
+        return total
+    }
+
+    private fun createCanteenOrder() {
+        var canteenStoreList = ArrayList<String>()
+
+        hashMap.forEach{(key, value) ->
+            val canteenStore = value.canteen_name + value.store_name
+
+            if (!canteenStoreList.contains(canteenStore)) {
+                createNewCanteenOrder(value)
+            }
+        }
+    }
+
+    private fun createNewCanteenOrder(cart : Cart) {
+
     }
 
     init {

@@ -3,21 +3,23 @@ package com.example.fyp.OrderingModule
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import com.example.fyp.Class.Canteen
+import com.example.fyp.Class.Order_Food
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPlaceOrderProgress2Binding
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.DecimalFormat
 
 /**
  * A simple [Fragment] subclass.
@@ -41,18 +43,20 @@ class PlaceOrderProgress2Fragment : Fragment() {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
-        binding.btnConfirm.setOnClickListener{
-            updateDatabase()
+        binding.btnConfirm.setOnClickListener {
+            updateDatabase(it)
 
 //            it.findNavController()
 //                .navigate(PlaceOrderProgress2FragmentDirections
 //                    .actionPlaceOrderProgress2FragmentToPlaceOrderProgress3Fragment())
         }
 
-        binding.btnBack.setOnClickListener{
+        binding.btnBack.setOnClickListener {
             it.findNavController()
-                .navigate(PlaceOrderProgress2FragmentDirections
-                    .actionPlaceOrderProgress2FragmentToPlaceOrderFragment())
+                .navigate(
+                    PlaceOrderProgress2FragmentDirections
+                        .actionPlaceOrderProgress2FragmentToPlaceOrderFragment()
+                )
         }
 
         initUI()
@@ -65,35 +69,71 @@ class PlaceOrderProgress2Fragment : Fragment() {
         binding.txtPickupTime.text = cartViewModel.order.pickUp_Time
         binding.txtOption.text = cartViewModel.order.dining_Option
         binding.txttotalPrice.text = cartViewModel.order.total_Price.toString()
+        binding.txttotalPrice.text = DecimalFormat("RM ###.00")
+            .format(cartViewModel.order.total_Price).toString()
     }
 
-    private fun updateDatabase() {
+    private fun updateDatabase(view : View) {
         cartViewModel.initOrderFoodList()
 
-
         val db = FirebaseFirestore.getInstance()
-        db.collection("User").document(userViewModel.user?.email!!)
-            .collection("Order").document(cartViewModel.order.id!!)
-            .set(cartViewModel.order)
-            .addOnSuccessListener {
-                Log.i("Test", "success Order")
+
+        Toast.makeText(activity, "Processing Your Order ... ", Toast.LENGTH_LONG).show()
+
+        // batch write : do write at once, make sure all completed den navigate to next page
+        db.runBatch {
+
+            // write into user -> Order
+            it.set(db.collection("User").document(userViewModel.user?.email!!)
+                .collection("Order").document(cartViewModel.order.id!!),
+                cartViewModel.order)
+
+            // write into user -> Order -> Order_Food
+            for (item in cartViewModel.orderFood) {
+                it.set(db.collection("User").document(userViewModel.user?.email!!)
+                    .collection("Order").document(cartViewModel.order.id!!)
+                    .collection("Order_Food").document(item.food_Name!!)
+                , item)
             }
-            .addOnFailureListener {
-                Log.i("Test", "Fail Order", it)
-            }.addOnCompleteListener {
-                for (item in cartViewModel.orderFood) {
-                    db.collection("User").document(userViewModel.user?.email!!)
-                        .collection("Order").document(cartViewModel.order.id!!)
-                        .collection("Order_Food").document(item.food_Name!!)
-                        .set(item)
-                        .addOnSuccessListener {
-                            Log.i("Test", "success Order_Food")
-                        }
-                        .addOnFailureListener {
-                            Log.i("Test", "Fail Order_Food", it)
-                        }
+
+            // write into Canteen -> Store -> Order
+            val canteenStoreList = ArrayList<String>()
+
+            for (item in cartViewModel.orderFood) {
+                val canteenStore = item.canteen_Name + item.store_Name
+
+                if (!canteenStoreList.contains(canteenStore)) {
+                    canteenStoreList.add(canteenStore)
+                    it.set(db.collection("Canteen").document(item.canteen_Name!!)
+                        .collection("Store").document(item.store_Name!!)
+                        .collection("Order").document(cartViewModel.order.id!!),
+                        cartViewModel.order)
                 }
             }
+
+            // Write into Canteen -> Store -> Order
+            for (item in cartViewModel.orderFood) {
+                it.set(db.collection("Canteen").document(item.canteen_Name!!)
+                    .collection("Store").document(item.store_Name!!)
+                    .collection("Order").document(cartViewModel.order.id!!)
+                    .collection("Order_Food").document(item.food_Name!!)
+                    ,item)
+            }
+
+            // Delete Existing Cart
+            cartViewModel.hashMap.forEach{(key, value) ->
+                    it.delete(db.collection("User").document(userViewModel.user?.email!!)
+                        .collection("Cart").document(value.cart_ID!!))
+            }
+
+        }.addOnCompleteListener {
+            Log.i("Test", "Write Complete")
+            Toast.makeText(activity, "Order Being Placed! ", Toast.LENGTH_LONG).show()
+            cartViewModel.removeAll()
+            view.findNavController()
+                .navigate(PlaceOrderProgress2FragmentDirections
+                    .actionPlaceOrderProgress2FragmentToPlaceOrderProgress3Fragment())
+        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
