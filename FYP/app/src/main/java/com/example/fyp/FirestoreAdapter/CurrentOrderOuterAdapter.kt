@@ -56,8 +56,8 @@ class CurrentOrderOuterViewHolder internal constructor(val view: View, var conte
     ) {
         lateinit var dataListener: ListenerRegistration
 
-        holder.view.currentOrderTimeTitle.text =
-            "Booking Time : " + order.pickUp_Date + " " + order.pickUp_Time
+        holder.view.currentOrderTime.text =
+            order.pickUp_Date + " " + order.pickUp_Time
 
 //        val db = FirebaseFirestore.getInstance()
 //        val query = db.collection("User").document("Yong Boon")
