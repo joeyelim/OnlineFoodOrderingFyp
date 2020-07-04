@@ -125,7 +125,7 @@ class AddToCartFragment : Fragment() {
     {
         // save cart id
         val calForDate = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
+        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm:ss") //or use getDateInstance()
         val saveCurrentDateTime = formatter.format(calForDate)
 
         val db = FirebaseFirestore.getInstance()
@@ -136,11 +136,12 @@ class AddToCartFragment : Fragment() {
         val quantity = binding.quantity.text.toString().toInt()
         val remark = binding.txtRemarks.text.toString()
         val image = viewModel.food.food_image.toString()
+        val tolPrice = getRadiobtnValue()* quantity
 
         var cartList = ArrayList<Cart>()
         cartList.add(
             Cart(
-                foodName, getRadiobtnValue(), quantity, remark,
+                foodName, tolPrice, quantity, remark,
                 canteenName, storeName, saveCurrentDateTime, image
             )
         )

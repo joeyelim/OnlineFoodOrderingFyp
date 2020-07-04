@@ -2,7 +2,9 @@ package com.example.fyp.OrderingModule
 
 
 import android.app.TimePickerDialog
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -19,6 +21,9 @@ import com.example.fyp.databinding.FragmentPlaceOrderBinding
 import kotlinx.android.synthetic.main.fragment_place_order.*
 import java.text.SimpleDateFormat
 import java.util.*
+
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -42,11 +47,14 @@ class PlaceOrderFragment : Fragment() {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
-        binding.btnNext.setOnClickListener{
+        binding.btnNext.setOnClickListener {
             cartViewModel.setOrderValue("Time", "Option")
 
-            it.findNavController()
-                .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
+            if (!placeOrderValidation()) {
+
+            } else
+                it.findNavController()
+                    .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
         }
 
         binding.btnBack.setOnClickListener{
@@ -61,6 +69,55 @@ class PlaceOrderFragment : Fragment() {
         return binding.root
     }
 
+    private fun placeOrderValidation():Boolean {
+        Log.i("456","456")
+        val selectedtime = binding.textViewTime.text.toString()
+
+        val timeStart = "08:00"
+        val time1 = SimpleDateFormat("HH:mm").parse(timeStart)
+        val calendarStart = Calendar.getInstance()
+        calendarStart.time = time1
+        calendarStart.add(Calendar.DATE, 1)
+
+        val timeEnd = "20:00"
+        val time2 = SimpleDateFormat("HH:mm").parse(timeEnd)
+        val calendarEnd = Calendar.getInstance()
+        calendarEnd.time = time2
+        calendarEnd.add(Calendar.DATE, 1)
+
+            if (selectedtime == "Pick up time")
+            {
+                Log.i("123","123")
+                binding.errorMsg.setText("Please select your pick up time.")
+                binding.errorMsg.visibility = View.VISIBLE
+                return false
+            }
+            else if (selectedtime != "Pick up time")
+            {
+                val timeSelected = selectedtime
+                val time3 = SimpleDateFormat("HH:mm").parse(timeSelected)
+                val calendarSelect = Calendar.getInstance()
+                calendarSelect.time = time3
+                calendarSelect.add(Calendar.DATE, 1)
+
+                val x = calendarSelect.getTime()
+                if(x.before(calendarStart.getTime())||x.after(calendarEnd.getTime()))
+                {
+                    Log.i("323","323")
+                    binding.errorMsg.setText("Please select the time within the operating hours (8:00 AM to 20:00 PM).")
+                    binding.errorMsg.visibility = View.VISIBLE
+                    return false
+                }
+                else
+                {
+//                    binding.errorMsg.visibility = View.GONE
+                    return true
+                }
+            }
+            else
+                return false
+    }
+
     private fun timePicker(){
         val cal:Calendar = Calendar.getInstance()
         val timeSetListener:TimePickerDialog.OnTimeSetListener =
@@ -68,11 +125,11 @@ class PlaceOrderFragment : Fragment() {
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
 
-                textViewTime.text = SimpleDateFormat("HH:mm").format(cal.time)
-                //textViewTime.text = cal.time.toString()
+                textViewTime.text = SimpleDateFormat("HH:mm aa").format(cal.time)
+
             }
 
-        TimePickerDialog(activity, R.style.DialogTheme, timeSetListener,
+        TimePickerDialog(activity, com.example.fyp.R.style.DialogTheme, timeSetListener,
             cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
 
     }

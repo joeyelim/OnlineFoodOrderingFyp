@@ -37,7 +37,15 @@ class catAdapter(private val dataSet : MutableList<String>) : RecyclerView.Adapt
             if (view.catText.text=="Soup"){
                 view.ic_category.setBackgroundResource(R.drawable.ic_hot_soup)
             }
-
+            if (view.catText.text=="Rice"){
+                view.ic_category.setBackgroundResource(R.drawable.ic_rice)
+            }
+            if (view.catText.text=="Vegetarian"){
+                view.ic_category.setBackgroundResource(R.drawable.ic_vegetarian)
+            }
+            if (view.catText.text=="Beverage"){
+                view.ic_category.setBackgroundResource(R.drawable.ic_beverage)
+            }
         }
         
     }
