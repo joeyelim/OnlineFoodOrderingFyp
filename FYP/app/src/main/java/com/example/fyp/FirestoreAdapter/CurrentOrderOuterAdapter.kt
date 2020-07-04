@@ -77,6 +77,8 @@ class CurrentOrderOuterViewHolder internal constructor(val view: View, var conte
 //
 //        holder.view.InnerRecycleView.adapter = adapter
 
+        Log.i("Test", "3")
+
         val db = FirebaseFirestore.getInstance()
 
         val query = db.collection("User").document(userEmail!!)

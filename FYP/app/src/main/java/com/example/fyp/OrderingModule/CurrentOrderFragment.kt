@@ -1,6 +1,7 @@
 package com.example.fyp.OrderingModule
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,7 +80,7 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
         try {
             val db = FirebaseFirestore.getInstance()
             val query = db.collection("User").document(userViewModel.user?.email!!)
-                .collection("Order").orderBy("id", Query.Direction.ASCENDING)
+                .collection("Order")
                 .whereEqualTo("status", player)
 
             val options =

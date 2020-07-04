@@ -41,7 +41,7 @@ class CartViewModel : ViewModel() {
     fun setOrderValue(pickTime : String, option : String) {
         order.pickUp_Time = pickTime
         order.pickUp_Date = "Date"
-        order.id = "123456"
+        order.id = "12345688"
         order.dining_Option = option
         order.status = "Pending"
         order.total_Price = getTotal()
