@@ -87,7 +87,6 @@ class PlaceOrderFragment : Fragment() {
 
             if (selectedtime == "Pick up time")
             {
-                Log.i("123","123")
                 binding.errorMsg.setText("Please select your pick up time.")
                 binding.errorMsg.visibility = View.VISIBLE
                 return false
@@ -103,14 +102,12 @@ class PlaceOrderFragment : Fragment() {
                 val x = calendarSelect.getTime()
                 if(x.before(calendarStart.getTime())||x.after(calendarEnd.getTime()))
                 {
-                    Log.i("323","323")
                     binding.errorMsg.setText("Please select the time within the operating hours (8:00 AM to 20:00 PM).")
                     binding.errorMsg.visibility = View.VISIBLE
                     return false
                 }
                 else
                 {
-//                    binding.errorMsg.visibility = View.GONE
                     return true
                 }
             }

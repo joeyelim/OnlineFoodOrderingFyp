@@ -72,25 +72,6 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         checkLogin()
         initRecycleView()
 
-
-        //----------------------------------------------------------------------------------------
-
-        val storage = Firebase.storage
-        // Create a storage reference from our app
-        var storageRef = storage.reference
-
-        var imagesRef: StorageReference? =
-            storageRef.child("gs://fypfirebaseproject-fd994.appspot.com")
-
-// Child references can also take paths
-// spaceRef now points to "images/space.jpg
-// imagesRef still points to "images"
-        var spaceRef = storageRef.child("canteen1.jpg")
-
-//        binding.imageView2.setImageResource(spaceRef)
-
-//---------------------------------------------------------------------------------------------------------------
-
         binding.btnCheckOut.setOnClickListener {
 
             if (!it.isEnabled) {
@@ -103,6 +84,22 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             it.findNavController()
                 .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
         }
+
+        //-------------------Firebase storage-----------------------
+
+        val storage = Firebase.storage
+        // Create a storage reference from our app
+        var storageRef = storage.reference
+
+        var imagesRef: StorageReference? =
+            storageRef.child("gs://fypfirebaseproject-fd994.appspot.com")
+
+        // Child references can also take paths
+        // spaceRef now points to "images/space.jpg
+        // imagesRef still points to "images"
+        var spaceRef = storageRef.child("canteen1.jpg")
+
+        // binding.imageView2.setImageResource(spaceRef)
 
         return binding.root
     }
@@ -130,25 +127,21 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             adapter = CartFirestoreAdapter(options, this, context!!)
             binding.rcCart.layoutManager = LinearLayoutManager(activity)
             binding.rcCart.adapter = adapter
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             return
         }
-
-
-//        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
-//            .collection("Cart")
-//            .orderBy("cart_ID", Query.Direction.ASCENDING)
-
-
     }
 
     private fun observeCartButton() {
         cartViewModel.activeButton.observe(this, Observer {
             if (it > 0) {
-                binding.btnCheckOut.setTextColor(Color.GREEN)
+                binding.btnCheckOut.setTextColor(resources.getColor(R.color.white))
+                binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                 binding.btnCheckOut.isEnabled = true
             } else {
-                binding.btnCheckOut.setTextColor(Color.BLUE)
+                binding.btnCheckOut.setTextColor(resources.getColor(R.color.white))
+                binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.lightGray))
                 binding.btnCheckOut.isEnabled = false
             }
 
