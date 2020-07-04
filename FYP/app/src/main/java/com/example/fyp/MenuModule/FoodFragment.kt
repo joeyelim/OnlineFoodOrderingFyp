@@ -1,6 +1,7 @@
 package com.example.fyp.MenuModule
 
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,9 +20,11 @@ import com.example.fyp.Class.Food
 import com.example.fyp.FirestoreAdapter.FoodFirestoreAdapter
 import com.example.fyp.FirestoreAdapter.onListClick2
 import com.example.fyp.MainActivity
+import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentFoodBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.tabs.TabItem
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -65,9 +68,8 @@ class FoodFragment : Fragment(), onListClick2 {
         canteenType = viewModel.canteen.type!!
         storeType = viewModel.store.id!!
 
-
-        initTab()
         initRecycleView()
+        initTab()
         updateUI()
 
         binding.FoodFilterTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -90,7 +92,27 @@ class FoodFragment : Fragment(), onListClick2 {
     }
 
     private fun initTab() {
-        binding.FoodFilterTab.addTab(binding.FoodFilterTab.newTab().setText("all"))
+
+        binding.FoodFilterTab
+            .addTab(binding.FoodFilterTab.newTab().setText("all"))
+
+        for (item in viewModel.store.category) {
+            binding.FoodFilterTab.addTab(binding.FoodFilterTab.newTab().setText(item)
+                .setIcon(getIcon(item)))
+
+        }
+    }
+
+    private fun getIcon(cat : String) : Int {
+        return when(cat) {
+            "Noodle" -> R.drawable.ic_noodles1
+            "Rice" -> R.drawable.ic_rice
+            "Soup" -> R.drawable.ic_hot_soup
+            "Vegetarian" -> R.drawable.ic_vegetarian
+            "Beverage" -> R.drawable.ic_beverage
+            "Spicy" -> R.drawable.ic_hot_chili
+            else -> R.drawable.ic_beverage
+        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

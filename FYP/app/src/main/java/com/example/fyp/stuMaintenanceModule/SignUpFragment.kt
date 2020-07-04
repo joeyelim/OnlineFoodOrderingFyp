@@ -95,7 +95,6 @@ class SignUpFragment : Fragment() {
 
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.w("Game", "createUserWithEmail:failure", task.exception)
 
                     val snackbar = Snackbar.make(
                         root_layout, "Wrong Email or Email Being Registered!", Snackbar.LENGTH_LONG

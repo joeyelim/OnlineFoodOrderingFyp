@@ -13,12 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fyp.Class.*
+import com.example.fyp.Class.Canteen
+import com.example.fyp.Class.Notification
 import com.example.fyp.FirestoreAdapter.NotificationFirestoreAdapter
 import com.example.fyp.FirestoreAdapter.onListClick4
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentNotificationBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
@@ -27,6 +29,7 @@ import com.google.firebase.storage.ktx.storage
 import kotlin.collections.ArrayList
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 
 /**
@@ -49,6 +52,7 @@ class NotificationFragment : Fragment(), onListClick4 {
         )
 
         userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+        checkLogin()
         initRecycleView()
 
 //        if (userViewModel.user!!.email != "") {
@@ -87,35 +91,35 @@ class NotificationFragment : Fragment(), onListClick4 {
 
         val db = FirebaseFirestore.getInstance()
 
-        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
-            .collection("Notification")
-            .orderBy("notif_ID", Query.Direction.ASCENDING)
+        try {
+            val query = db.collection("User").document(userViewModel.user?.email!!)
+                .collection("Notification")
+                .orderBy("notif_ID", Query.Direction.ASCENDING)
 
-        val options =
-            FirestoreRecyclerOptions.Builder<Notification>()
-                .setQuery(query, Notification::class.java).build()
+            val options =
+                FirestoreRecyclerOptions.Builder<Notification>()
+                    .setQuery(query, Notification::class.java).build()
 
+            adapter = NotificationFirestoreAdapter(options, this, context!!)
+            binding.rvNotification.layoutManager = LinearLayoutManager(activity)
+            binding.rvNotification.adapter = adapter
+        } catch (e: Exception) {
 
-        adapter = NotificationFirestoreAdapter(options, this, context!!)
-        binding.rvNotification.layoutManager = LinearLayoutManager(activity)
-        binding.rvNotification.adapter = adapter
-
+        }
     }
 
     override fun onStart() {
         super.onStart()
-//        if (userViewModel.user!!.email != "") {
-//            adapter.startListening()
-//        }
-        adapter?.startListening()
+        if (userViewModel.user!!.email != "") {
+            adapter?.startListening()
+        }
     }
 
     override fun onStop() {
         super.onStop()
-//        if (userViewModel.user!!.email != "") {
-//            adapter.stopListening()
-//        }
-        adapter?.stopListening()
+        if (userViewModel.user!!.email != "") {
+            adapter?.stopListening()
+        }
     }
 
     override fun onItemClick(notif: Notification, position: Int) {
@@ -124,10 +128,14 @@ class NotificationFragment : Fragment(), onListClick4 {
             .navigate(NotificationFragmentDirections.actionNotificationFragmentToNotificationDetailsFragment())
     }
 
+    private fun checkLogin() {
+        if (Firebase.auth.currentUser == null || userViewModel.user?.email == "") {
+            findNavController().navigate(NotificationFragmentDirections.actionNotificationFragmentToFragmentHome())
+        }
+    }
+
 
 //-----------------------------------------------------------------------------------------------------------
-
-
 
 
     // upload single data
@@ -149,7 +157,7 @@ class NotificationFragment : Fragment(), onListClick4 {
         var dataList = ArrayList<Canteen>()
 
         for (x in 10 until 20) {
-            var testData = Canteen("time", "image", x.toString(),"Canteen")
+            var testData = Canteen("time", "image", x.toString(), "Canteen")
             dataList.add(testData)
         }
 
@@ -231,16 +239,30 @@ class NotificationFragment : Fragment(), onListClick4 {
 
         var notif = ArrayList<Notification>()
 
-        notif.add(Notification("N000002", "Vegetarian", "Ready to pick your food", "Hello",
-                "12 May 2020", "12:00 pm",false ))
-        notif.add(Notification("N000003", "Mamak", "Change Operation Time", "Hi:)",
-            "12 May 2020", "12:00 pm",false ))
-        notif.add(Notification("N000004", "Mamak", "Ready to pick your food", "Hello",
-            "12 May 2020", "12:00 pm",false ))
-        notif.add(Notification("N000005", "Vegetarian", "Ready to pick your food", "Hello",
-            "12 May 2020", "12:00 pm",false ))
-
-
+        notif.add(
+            Notification(
+                "N000002", "Vegetarian", "Ready to pick your food", "Hello",
+                "12 May 2020", "12:00 pm", false
+            )
+        )
+        notif.add(
+            Notification(
+                "N000003", "Mamak", "Change Operation Time", "Hi:)",
+                "12 May 2020", "12:00 pm", false
+            )
+        )
+        notif.add(
+            Notification(
+                "N000004", "Mamak", "Ready to pick your food", "Hello",
+                "12 May 2020", "12:00 pm", false
+            )
+        )
+        notif.add(
+            Notification(
+                "N000005", "Vegetarian", "Ready to pick your food", "Hello",
+                "12 May 2020", "12:00 pm", false
+            )
+        )
 
 
 //        var orderFoodList = ArrayList<Order_Food>()
@@ -289,7 +311,6 @@ class NotificationFragment : Fragment(), onListClick4 {
                     Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
                 }
         }
-
 
 
     }

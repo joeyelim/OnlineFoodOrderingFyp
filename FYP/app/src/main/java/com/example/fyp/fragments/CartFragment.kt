@@ -3,40 +3,53 @@ package com.example.fyp.fragments
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Cart
+import com.example.fyp.Class.Food
+import com.example.fyp.Interface.OnAdapterItemClick
 import com.example.fyp.FirestoreAdapter.CartFirestoreAdapter
-import com.example.fyp.FirestoreAdapter.FoodFirestoreAdapter
-import com.example.fyp.FirestoreAdapter.onListClick3
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
+import com.example.fyp.ViewModel.CartViewModel
+import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentCartBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import java.text.DecimalFormat
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class CartFragment : Fragment(), onListClick3 {
+class CartFragment : Fragment(), OnAdapterItemClick {
 
     private lateinit var binding: FragmentCartBinding
     private var adapter: CartFirestoreAdapter? = null
-    private lateinit var viewModel : CanteenViewModel
+    private lateinit var viewModel: CanteenViewModel
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var cartViewModel: CartViewModel
     var counter = 1
 
     override fun onCreateView(
@@ -51,9 +64,13 @@ class CartFragment : Fragment(), onListClick3 {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavVisible()
 
-        viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
-        initRecycleView()
 
+        viewModel = ViewModelProviders.of(activity!!).get(CanteenViewModel::class.java)
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+        cartViewModel = ViewModelProviders.of(activity!!).get(CartViewModel::class.java)
+
+        checkLogin()
+        initRecycleView()
 
 
         //----------------------------------------------------------------------------------------
@@ -62,7 +79,8 @@ class CartFragment : Fragment(), onListClick3 {
         // Create a storage reference from our app
         var storageRef = storage.reference
 
-        var imagesRef: StorageReference? = storageRef.child("gs://fypfirebaseproject-fd994.appspot.com")
+        var imagesRef: StorageReference? =
+            storageRef.child("gs://fypfirebaseproject-fd994.appspot.com")
 
 // Child references can also take paths
 // spaceRef now points to "images/space.jpg
@@ -74,6 +92,14 @@ class CartFragment : Fragment(), onListClick3 {
 //---------------------------------------------------------------------------------------------------------------
 
         binding.btnCheckOut.setOnClickListener {
+
+            if (!it.isEnabled) {
+                Toast.makeText(
+                    activity, "Please Tick At Least One Item",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
             it.findNavController()
                 .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
         }
@@ -81,55 +107,173 @@ class CartFragment : Fragment(), onListClick3 {
         return binding.root
     }
 
-
-
+    private fun checkLogin() {
+        if (Firebase.auth.currentUser == null || userViewModel.user?.email == "") {
+            findNavController().navigate(CartFragmentDirections.actionCartFragmentToFragmentHome())
+        }
+    }
 
     private fun initRecycleView() {
 
         val db = FirebaseFirestore.getInstance()
 
-        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
-            .collection("Cart")
-            .orderBy("cart_ID", Query.Direction.ASCENDING)
+        try {
+            val query = db.collection("User").document(userViewModel.user?.email!!)
+                .collection("Cart")
+                .orderBy("cart_ID", Query.Direction.ASCENDING)
 
-        val options =
-            FirestoreRecyclerOptions.Builder<Cart>()
-                .setQuery(query, Cart::class.java).build()
+            val options =
+                FirestoreRecyclerOptions.Builder<Cart>()
+                    .setQuery(query, Cart::class.java).build()
 
 
-        adapter = CartFirestoreAdapter(options, this, context!!)
-        binding.rcCart.layoutManager = LinearLayoutManager(activity)
-        binding.rcCart.adapter = adapter
+            adapter = CartFirestoreAdapter(options, this, context!!)
+            binding.rcCart.layoutManager = LinearLayoutManager(activity)
+            binding.rcCart.adapter = adapter
+        } catch (e: Exception) {
+            return
+        }
+
+
+//        val query = db.collection("User").document("limye-wm18@student.tarc.edu.my")
+//            .collection("Cart")
+//            .orderBy("cart_ID", Query.Direction.ASCENDING)
+
 
     }
 
-    override fun onItemClick(cart: Cart, position: Int) {
+    private fun observeCartButton() {
+        cartViewModel.activeButton.observe(this, Observer {
+            if (it > 0) {
+                binding.btnCheckOut.setTextColor(Color.GREEN)
+                binding.btnCheckOut.isEnabled = true
+            } else {
+                binding.btnCheckOut.setTextColor(Color.BLUE)
+                binding.btnCheckOut.isEnabled = false
+            }
 
+        })
     }
 
+    override fun addBtnClick(cart: Cart, view: TextView, txt: TextView) {
+        FirebaseFirestore.getInstance()
+            .collection("Canteen").document(cart.canteen_name!!)
+            .collection("Store").document(cart.store_name!!)
+            .collection("Food").document(cart.food_name!!)
+            .get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    var counter = (view.text).toString().toInt()
+                    val price = cart.each_price
+                    val food = it.result?.toObject(Food::class.java)
 
-    fun delDialog(cart: Cart){
+                    if (counter >= food?.total_stock!!) {
+                        // custom dialog
+                        openDialog()
+                        counter = food.total_stock!!
+                    } else {
+                        counter++
+                    }
+                    view.text = "$counter"
+                    txt.text = DecimalFormat("RM ###.00").format(counter * price!!).toString()
+                }
+            }
+    }
+
+    override fun minusBtnClick(cart: Cart, view: TextView, txt: TextView) {
+        var counter = (view.text).toString().toInt()
+        val price = cart.each_price
+
+        if (counter <= 1) {
+            counter = 1
+
+        } else {
+            counter--
+        }
+
+        view.text = "$counter"
+        txt.text = DecimalFormat("RM ###.00").format(counter * price!!).toString()
+    }
+
+    override fun deleteBtnClick(cart: Cart) {
+        delDialog(cart)
+    }
+
+    override fun checkBoxClick(cart: Cart, checkBox: CheckBox) {
+        if (checkBox.isChecked) {
+            cartViewModel.activateCartButton()
+            cartViewModel.addItem(cart)
+        } else {
+            cartViewModel.deActivateCartButton()
+            cartViewModel.removeItem(cart)
+        }
+    }
+
+    fun delDialog(cart: Cart) {
         val dialog = AlertDialog.Builder(activity)
         val foodName: String? = cart.food_name
 
         dialog.setTitle("Confirmation")
-        dialog.setMessage("Are you sure want to delete the order?" + "\n* $foodName")
-        dialog.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> })
-        dialog.setNegativeButton("No",{ dialogInterface: DialogInterface, i: Int -> })
+        dialog.setMessage(
+            "Are you sure want to delete the order?" +
+                    "You cannot undo this action! \n* $foodName"
+        )
+        dialog.setPositiveButton("Yes") { _: DialogInterface, _: Int ->
+            FirebaseFirestore.getInstance()
+                .collection("User").document(userViewModel.user?.email!!)
+                .collection("Cart").document("1")
+                .delete()
+                .addOnCompleteListener {
+                    val snackbar = Snackbar.make(
+                        this.requireView(),
+                        "Item Being Deleted",
+                        Snackbar.LENGTH_LONG
+                    )
+                    snackbar.setAction("Close") {
+                        snackbar.dismiss()
+                    }
+                    snackbar.show()
+                }
+        }
+        dialog.setNegativeButton("No") { _: DialogInterface, _: Int -> }
+        dialog.show()
+    }
+
+    private fun openDialog() {
+        val dialog = AlertDialog.Builder(context)
+
+        dialog.setTitle("Oops, sorry!")
+        dialog.setMessage("Your order quantity has exceeded the maximum inventory, please select again.")
+        dialog.setPositiveButton("OK") { _: DialogInterface, i: Int -> }
         dialog.show()
     }
 
     override fun onStart() {
         super.onStart()
-        adapter?.startListening()
+
+        if (userViewModel.user!!.email != "") {
+            adapter?.startListening()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeCartButton()
     }
 
     override fun onStop() {
         super.onStop()
 
-        if (adapter != null) {
+        cartViewModel.activeButton.removeObservers(this)
+
+        if (userViewModel.user!!.email != "") {
             adapter?.stopListening()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        cartViewModel.deActivateCartButton()
     }
 
 

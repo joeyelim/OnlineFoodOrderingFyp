@@ -19,8 +19,12 @@ import com.example.fyp.databinding.FragmentOrderListBinding
 import kotlinx.android.synthetic.main.fragment_order_list.*
 import android.view.MotionEvent
 import android.text.method.Touch.onTouchEvent
-
-
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import com.example.fyp.R
+import com.example.fyp.ViewModel.UserViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 /**
@@ -29,6 +33,7 @@ import android.text.method.Touch.onTouchEvent
 class OrderListFragment : Fragment() {
 
     private lateinit var binding: FragmentOrderListBinding
+    private lateinit var userViewModel : UserViewModel
 
 
     override fun onCreateView(
@@ -40,6 +45,8 @@ class OrderListFragment : Fragment() {
         )
 
         (activity as MainActivity).setNavVisible()
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+        checkLogin()
 
         return binding.root
     }
@@ -48,7 +55,6 @@ class OrderListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val supportFragmentManager = this.activity!!.supportFragmentManager
 
         /* -------- outer tab layout ------------------*/
         val outTab = binding.tabLayout
@@ -59,7 +65,7 @@ class OrderListFragment : Fragment() {
 
         // to disable swipe
         // source https://stackoverflow.com/questions/9650265/how-do-disable-paging-by-swiping-with-finger-in-viewpager-but-still-be-able-to-s/13392198#13392198
-        viewPager?.setOnTouchListener { v, event ->
+        viewPager?.setOnTouchListener { v, _ ->
             for (PAGE in 0..viewPager.adapter!!.count){
                 if (viewPager.currentItem == PAGE){
                     viewPager.setCurrentItem(PAGE-1,false)
@@ -71,6 +77,12 @@ class OrderListFragment : Fragment() {
         outTab.setupWithViewPager(viewPager)
         tabLayout.setupWithViewPager(viewPager)
 
+    }
+
+    private fun checkLogin() {
+        if (Firebase.auth.currentUser == null || userViewModel.user?.email == "") {
+            findNavController().navigate(R.id.action_orderListFragment_to_fragment_home)
+        }
     }
 
      class OutterViePagerAdapter(fragmentManager: FragmentManager) :
