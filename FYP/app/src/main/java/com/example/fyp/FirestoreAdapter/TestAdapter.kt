@@ -23,7 +23,6 @@ class TestAdapter () : RecyclerView.Adapter<TestAdapter.TestViewHolder>() {
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestAdapter.TestViewHolder {
-        Log.i("Test", "here")
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.order_list_row, parent, false)
         return TestViewHolder(view)
