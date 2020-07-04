@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Canteen
+import com.example.fyp.Class.Cart
 import com.example.fyp.Class.Notification
 import com.example.fyp.FirestoreAdapter.NotificationFirestoreAdapter
 import com.example.fyp.FirestoreAdapter.onListClick4
@@ -226,16 +227,14 @@ class NotificationFragment : Fragment(), onListClick4 {
         val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
         val formatedDate = formatter.format(date)
 
-        cartList.add(Cart("Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
-            "Canteen1", "Noodle", formatedDate, "" ))
+        cartList.add(
+            Cart(
+                "Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
+            "Canteen1", "Noodle", formatedDate, "Food/lou_Syu_Fan.jpg"
+            )
+        )
 
 
-        var orderfood = ArrayList<Order_Food>()
-
-        orderfood.add(Order_Food("Cappuccino", 5.8, "Preparing", 2,
-            "no", "Red Bricks Cafeteria","Cafe","Dine-in" ))
-        orderfood.add(Order_Food("Bihun Goreng", 4.2, "Pending", 3,
-            "add on chili", "Red Bricks Cafeteria","Mamak","Dine-in" ))
 
         var notif = ArrayList<Notification>()
 
