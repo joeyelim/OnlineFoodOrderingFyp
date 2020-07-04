@@ -173,7 +173,11 @@
         android:id="@+id/addToCartFragment"
         android:name="com.example.fyp.OrderingModule.AddToCartFragment"
         android:label="ADD TO CART"
-        tools:layout="@layout/fragment_add_to_cart" />
+        tools:layout="@layout/fragment_add_to_cart" >
+        <action
+            android:id="@+id/action_addToCartFragment_to_foodDetailFragment"
+            app:destination="@id/foodDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/resetPwdFragment"
         android:name="com.example.fyp.LoginModule.ResetPwdFragment"
