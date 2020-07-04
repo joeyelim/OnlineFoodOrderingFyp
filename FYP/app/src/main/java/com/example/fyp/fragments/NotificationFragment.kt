@@ -26,6 +26,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlin.collections.ArrayList
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -211,6 +212,22 @@ class NotificationFragment : Fragment(), onListClick4 {
 
         //--------------------------------------------yien----------------------------------------------------------
 
+        var cartList = ArrayList<Cart>()
+
+        val date = Calendar.getInstance().time
+        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
+        val formatedDate = formatter.format(date)
+
+        cartList.add(Cart("Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
+            "Canteen1", "Noodle", formatedDate, "" ))
+
+
+        var orderfood = ArrayList<Order_Food>()
+
+        orderfood.add(Order_Food("Cappuccino", 5.8, "Preparing", 2,
+            "no", "Red Bricks Cafeteria","Cafe","Dine-in" ))
+        orderfood.add(Order_Food("Bihun Goreng", 4.2, "Pending", 3,
+            "add on chili", "Red Bricks Cafeteria","Mamak","Dine-in" ))
 
         var notif = ArrayList<Notification>()
 
@@ -255,21 +272,23 @@ class NotificationFragment : Fragment(), onListClick4 {
 //        }
 
 //--------------------------------------------yien----------------------------------------------------------
-//        for ((index, item) in notif.withIndex()) {
-//            val foodInt = (index)
-//            db.collection("User").document("limye-wm18@student.tarc.edu.my")
-//                .collection("Notification").document(item.notif_ID!!)
-//                .set(item)
-//                .addOnSuccessListener {
-//                    Log.i("upload", "success")
-//                }
-//                .addOnFailureListener {
-//                    Log.i("upload", "Error adding document", it)
-//                }
-//                .addOnCompleteListener {
-//                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
-//                }
-//        }
+
+
+        for ((index, item) in cartList.withIndex()) {
+            val foodInt = (index)
+            db.collection("User").document("limye-wm18@student.tarc.edu.my")
+                .collection("Cart").document(item.cart_ID!!)
+                .set(item)
+                .addOnSuccessListener {
+                    Log.i("upload", "success")
+                }
+                .addOnFailureListener {
+                    Log.i("upload", "Error adding document", it)
+                }
+                .addOnCompleteListener {
+                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
+                }
+        }
 
 
 
