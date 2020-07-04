@@ -58,7 +58,7 @@
                     android:id="@+id/canteenName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="cursive"
+                    android:fontFamily="serif"
                     android:text="@string/canteen_name"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimaryDark"
