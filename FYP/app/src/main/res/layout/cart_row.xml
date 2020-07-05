@@ -33,12 +33,13 @@
 
             <ImageView
                 android:id="@+id/imgFood"
-                android:layout_width="110dp"
+                android:layout_width="97dp"
                 android:layout_height="120dp"
                 android:layout_marginStart="16dp"
                 android:background="@drawable/frame_image_view"
                 android:contentDescription="@string/food_image"
-                android:padding="1dp"
+                android:cropToPadding="true"
+                android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -48,9 +49,8 @@
                 android:id="@+id/constraintLayout4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_toEndOf="@+id/imgFood"
-
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toEndOf="@+id/imgFood"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -58,18 +58,22 @@
                     android:id="@+id/canteenName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif"
                     android:text="@string/canteen_name"
+                    android:textAllCaps="true"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/sub_title"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/shop"
-                    android:layout_width="match_parent"
+                    android:layout_width="165dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif"
                     android:text="Shop"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/sub_title"
                     android:textStyle="italic"
@@ -81,10 +85,11 @@
                     android:layout_width="165dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:fontFamily="serif"
                     android:text="@string/food_name"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/sub_title"
-                    android:textStyle="bold"
+                    android:textStyle="bold|italic"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shop" />
 
