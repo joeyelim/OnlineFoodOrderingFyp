@@ -18,6 +18,7 @@ class CartViewModel : ViewModel() {
         get() = _activeButton
 
     var hashMap : HashMap<String, Cart> = HashMap()
+    var cartArrayList : ArrayList<Cart> = ArrayList()
     var order : Order = Order()
     var orderFood : ArrayList<Order_Food> = ArrayList()
 
@@ -31,7 +32,8 @@ class CartViewModel : ViewModel() {
     }
 
     fun addItem(cart : Cart) {
-        hashMap.put(cart.cart_ID!!, cart)
+        hashMap[cart.cart_ID!!] = cart
+        cartArrayList.add(cart)
     }
 
     fun removeItem(cart : Cart) {
@@ -40,13 +42,15 @@ class CartViewModel : ViewModel() {
 
     fun removeAll() {
         hashMap = HashMap()
+        order = Order()
+        orderFood = ArrayList()
     }
 
     fun setOrderValue( option : String) {
         val date = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
-        val formatter2 = SimpleDateFormat("HH:mm") //or use getDateInstance()
-        val formatter3 = SimpleDateFormat("dd.MM.yyyy") //or use getDateInstance()
+        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm:ss") //get Order ID
+        val formatter2 = SimpleDateFormat("HH:mm") //get order Time
+        val formatter3 = SimpleDateFormat("dd.MM.yyyy") //get order Date
         val formatedDate = formatter.format(date)
 
 
@@ -64,11 +68,25 @@ class CartViewModel : ViewModel() {
     }
 
     fun initOrderFoodList() {
-        hashMap.forEach{(key, value) ->
-            orderFood.add(Order_Food(value.food_name, value.each_price!!, order.status,
-                value.quantity, value.remark, value.canteen_name,
-                value.store_name, order.dining_Option))
+        var i = 0
+        for (item in cartArrayList) {
+            val calForDate = Calendar.getInstance().time
+            val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm:ss") //or use getDateInstance()
+            val saveCurrentDateTime = formatter.format(calForDate)
+
+            orderFood.add(Order_Food(item.food_name, item.each_price!!, order.status,
+                item.quantity, item.remark, item.canteen_name,
+                item.store_name, order.dining_Option, ("$saveCurrentDateTime $i")))
+
+            i += 1
         }
+
+
+//        hashMap.forEach{(key, value) ->
+//            orderFood.add(Order_Food(value.food_name, value.each_price!!, order.status,
+//                value.quantity, value.remark, value.canteen_name,
+//                value.store_name, order.dining_Option))
+//        }
     }
 
     private fun getTotal() : Double {
@@ -79,22 +97,6 @@ class CartViewModel : ViewModel() {
         }
 
         return total
-    }
-
-    private fun createCanteenOrder() {
-        var canteenStoreList = ArrayList<String>()
-
-        hashMap.forEach{(key, value) ->
-            val canteenStore = value.canteen_name + value.store_name
-
-            if (!canteenStoreList.contains(canteenStore)) {
-                createNewCanteenOrder(value)
-            }
-        }
-    }
-
-    private fun createNewCanteenOrder(cart : Cart) {
-
     }
 
     init {

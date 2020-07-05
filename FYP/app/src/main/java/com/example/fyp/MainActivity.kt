@@ -50,10 +50,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.orderListFragment,
                 R.id.profileFragment
             )
-
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        bottomNavigationView.setItemBackgroundResource(R.drawable.menu_background)
+        bottomNavigationView.itemBackgroundResource = R.drawable.menu_background
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
@@ -126,8 +125,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        observeChangeOption(menu)
-
         return true
     }
 
@@ -163,28 +160,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onSupportNavigationUp():Boolean {
-//        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.fragmentContainer))
-//    }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.myNavHostFragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun observeChangeOption(menu : Menu?) {
-//        loginViewModel.changeMenuOption?.observe(this, Observer {
-//            if (it) {
-//                menu.findItem(R.id.fragment_login).title = "Logout"
-//            } else {
-//                menu.findItem(R.id.fragment_login).title = "Login"
-//            }
-//        })
-    }
-
-    public fun changeTitle() {
-
-    }
 
     private fun observeAuthenticationState() {
         loginViewModel.authenticationState?.observe(this, Observer { authenticationState ->
@@ -202,15 +182,5 @@ class MainActivity : AppCompatActivity() {
     fun setNavVisible() {
         binding.bottomNavigationView.visibility = View.VISIBLE
     }
-
-
-
-//    private fun loadFragment(fragment:Fragment){
-//        supportFragmentManager.beginTransaction().also { fragmentTransaction ->
-//            fragmentTransaction.replace(R.id.fragmentContainer,fragment)
-//            fragmentTransaction.commit()
-//        }
-//
-//    }
 
 }
