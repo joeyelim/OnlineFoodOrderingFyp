@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Canteen
 import com.example.fyp.Class.Cart
+import com.example.fyp.Class.Food
 import com.example.fyp.Class.Notification
 import com.example.fyp.FirestoreAdapter.NotificationFirestoreAdapter
 import com.example.fyp.FirestoreAdapter.onListClick4
@@ -221,47 +222,34 @@ class NotificationFragment : Fragment(), onListClick4 {
 
         //--------------------------------------------yien----------------------------------------------------------
 
-        var cartList = ArrayList<Cart>()
+        var food = ArrayList<Food>()
+        var catarray= ArrayList<String>()
+        catarray.add("Rice")
+        catarray.add("Vegetarian")
 
-        val date = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm") //or use getDateInstance()
-        val formatedDate = formatter.format(date)
+        var cat2array= ArrayList<String>()
+        cat2array.add("Noodle")
+        cat2array.add("Vegetarian")
 
-        cartList.add(
-            Cart(
-                "Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
-            "Canteen1", "Noodle", formatedDate, "Food/lou_Syu_Fan.jpg"
+        food.add(
+            Food(
+                "Stewed Mixed Vegetables Rice", "Food/vegetables_rice.jpg", 4.5,5.0,
+                "Braised assorted vegetable w/mushroom buddha′s feast（stewed mixed vegetable）vegetarian meal for buddhism",
+            2, 3, 15,catarray
+            )
+        )
+
+        food.add(
+            Food(
+                "Wonton Noodles", "Food/wanta mee.jpg", 4.8,5.2,
+                "Vegetarian/vegan cuisine can be delicious, creative and healthy too. The wanton noodle " +
+                        "is does not have meat / fish and no egg.  All whole-grain flour in baking, mostly vegan. Some diary would replace with non diary-milk, vegan cheese, and butter.",
+                2, 3, 10,cat2array
             )
         )
 
 
 
-        var notif = ArrayList<Notification>()
-
-        notif.add(
-            Notification(
-                "N000002", "Vegetarian", "Ready to pick your food", "Hello",
-                "12 May 2020", "12:00 pm", false
-            )
-        )
-        notif.add(
-            Notification(
-                "N000003", "Mamak", "Change Operation Time", "Hi:)",
-                "12 May 2020", "12:00 pm", false
-            )
-        )
-        notif.add(
-            Notification(
-                "N000004", "Mamak", "Ready to pick your food", "Hello",
-                "12 May 2020", "12:00 pm", false
-            )
-        )
-        notif.add(
-            Notification(
-                "N000005", "Vegetarian", "Ready to pick your food", "Hello",
-                "12 May 2020", "12:00 pm", false
-            )
-        )
 
 
 //        var orderFoodList = ArrayList<Order_Food>()
@@ -295,22 +283,22 @@ class NotificationFragment : Fragment(), onListClick4 {
 //--------------------------------------------yien----------------------------------------------------------
 
 
-        for ((index, item) in cartList.withIndex()) {
-            val foodInt = (index)
-            db.collection("User").document("limye-wm18@student.tarc.edu.my")
-                .collection("Cart").document(item.cart_ID!!)
-                .set(item)
-                .addOnSuccessListener {
-                    Log.i("upload", "success")
-                }
-                .addOnFailureListener {
-                    Log.i("upload", "Error adding document", it)
-                }
-                .addOnCompleteListener {
-                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
-                }
-        }
-
+//        for ((index, item) in food.withIndex()) {
+//            val foodInt = (index)
+//            db.collection("Canteen").document("Red Bricks Cafeteria")
+//                .collection("Store").document("Vegetarian")
+//                .collection("Food").document(item.food_name!!)
+//                .set(item)
+//                .addOnSuccessListener {
+//                    Log.i("upload", "success")
+//                }
+//                .addOnFailureListener {
+//                    Log.i("upload", "Error adding document", it)
+//                }
+//                .addOnCompleteListener {
+//                    Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show()
+//                }
+//        }
 
     }
 

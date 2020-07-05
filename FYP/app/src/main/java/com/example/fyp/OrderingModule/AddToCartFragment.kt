@@ -138,7 +138,7 @@ class AddToCartFragment : Fragment() {
         val image = viewModel.food.food_image.toString()
         val tolPrice = getRadiobtnValue()* quantity
 
-        var cartList = ArrayList<Cart>()
+        val cartList = ArrayList<Cart>()
         cartList.add(
             Cart(
                 foodName, tolPrice, quantity, remark,

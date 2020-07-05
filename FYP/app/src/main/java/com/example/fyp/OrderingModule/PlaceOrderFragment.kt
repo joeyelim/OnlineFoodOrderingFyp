@@ -84,34 +84,28 @@ class PlaceOrderFragment : Fragment() {
         calendarEnd.time = time2
         calendarEnd.add(Calendar.DATE, 1)
 
-            if (selectedtime == "Pick up time")
-            {
-                binding.errorMsg.setText("Please select your pick up time.")
+        if (selectedtime == "Pick up time") {
+            binding.errorMsg.setText("Please select your pick up time.")
+            binding.errorMsg.visibility = View.VISIBLE
+            return false
+        } else if (selectedtime != "Pick up time") {
+            val timeSelected = selectedtime
+            val time3 = SimpleDateFormat("HH:mm").parse(timeSelected)
+            val calendarSelect = Calendar.getInstance()
+            calendarSelect.time = time3
+            calendarSelect.add(Calendar.DATE, 1)
+
+            val x = calendarSelect.getTime()
+            if (x.before(calendarStart.getTime()) || x.after(calendarEnd.getTime())) {
+                binding.errorMsg.setText("Please select the time within the operating hours (8:00 AM to 20:00 PM).")
                 binding.errorMsg.visibility = View.VISIBLE
                 return false
+            } else {
+                return true
             }
-            else if (selectedtime != "Pick up time")
-            {
-                val timeSelected = selectedtime
-                val time3 = SimpleDateFormat("HH:mm").parse(timeSelected)
-                val calendarSelect = Calendar.getInstance()
-                calendarSelect.time = time3
-                calendarSelect.add(Calendar.DATE, 1)
-
-                val x = calendarSelect.getTime()
-                if(x.before(calendarStart.getTime())||x.after(calendarEnd.getTime()))
-                {
-                    binding.errorMsg.setText("Please select the time within the operating hours (8:00 AM to 20:00 PM).")
-                    binding.errorMsg.visibility = View.VISIBLE
-                    return false
-                }
-                else
-                {
-                    return true
-                }
-            }
-            else
-                return false
+        } else
+            return false
+    }
 
     private fun getPickTime() : String {
         return binding.txtPickupTime.text.toString()

@@ -37,6 +37,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.fragment_cart.*
 import java.text.DecimalFormat
 
 
@@ -74,15 +75,17 @@ class CartFragment : Fragment(), OnAdapterItemClick {
 
         binding.btnCheckOut.setOnClickListener {
 
+            Log.i("123","123")
             if (!it.isEnabled) {
-                Toast.makeText(
-                    activity, "Please Tick At Least One Item",
-                    Toast.LENGTH_SHORT
+                Log.i("123","123")
+                Snackbar.make(
+                    cartLayout, "Please select at least one food before you proceed to checkout!", Snackbar.LENGTH_LONG
                 ).show()
+            } else
+            {
+                it.findNavController()
+                    .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
             }
-
-            it.findNavController()
-                .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
         }
 
         //-------------------Firebase storage-----------------------
@@ -142,7 +145,8 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             } else {
                 binding.btnCheckOut.setTextColor(resources.getColor(R.color.white))
                 binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.lightGray))
-                binding.btnCheckOut.isEnabled = false
+//                binding.btnCheckOut.isEnabled = false
+
             }
 
         })

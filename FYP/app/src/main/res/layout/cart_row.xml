@@ -29,13 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/frame_image_view"
-            android:padding="14dp">
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/imgFood"
-                android:layout_width="97dp"
+                android:layout_width="100dp"
                 android:layout_height="120dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/frame_image_view"
                 android:contentDescription="@string/food_image"
                 android:cropToPadding="true"
@@ -58,7 +58,6 @@
                     android:id="@+id/canteenName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="serif"
                     android:text="@string/canteen_name"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimaryDark"
@@ -88,7 +87,7 @@
                     android:fontFamily="serif"
                     android:text="@string/food_name"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/sub_title"
+                    android:textSize="16sp"
                     android:textStyle="bold|italic"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shop" />
@@ -199,6 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:focusable="true"
                 android:text=""
                 app:buttonTint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
