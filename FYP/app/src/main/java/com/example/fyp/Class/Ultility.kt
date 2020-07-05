@@ -20,17 +20,7 @@ class Ultility {
             dialog.show()
         }
 
-        fun delDialog(context: Context, cart: Cart) {
-            val dialog = AlertDialog.Builder(context)
-            val foodName: String? = cart.food_name
 
-            dialog.setTitle("Confirmation")
-            dialog.setMessage("Are you sure want to delete the order?\n* $foodName")
-            dialog.setPositiveButton("Yes") { _: DialogInterface, i: Int ->
-            }
-            dialog.setNegativeButton("No") { _: DialogInterface, i: Int -> }
-            dialog.show()
-        }
     }
 
 

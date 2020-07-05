@@ -47,8 +47,8 @@ class PlaceOrderFragment : Fragment() {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
-        binding.btnNext.setOnClickListener {
-            cartViewModel.setOrderValue("Time", "Option")
+        binding.btnNext.setOnClickListener{
+            cartViewModel.setOrderValue(getOption())
 
             if (!placeOrderValidation()) {
 
@@ -70,7 +70,6 @@ class PlaceOrderFragment : Fragment() {
     }
 
     private fun placeOrderValidation():Boolean {
-        Log.i("456","456")
         val selectedtime = binding.textViewTime.text.toString()
 
         val timeStart = "08:00"
@@ -113,6 +112,17 @@ class PlaceOrderFragment : Fragment() {
             }
             else
                 return false
+
+    private fun getPickTime() : String {
+        return binding.txtPickupTime.text.toString()
+    }
+
+    private fun getOption() : String {
+        if (binding.radioButton1.isChecked) {
+            return binding.radioButton1.text.toString()
+        } else {
+            return return binding.radioButton2.text.toString()
+        }
     }
 
     private fun timePicker(){
@@ -123,7 +133,8 @@ class PlaceOrderFragment : Fragment() {
                 cal.set(Calendar.MINUTE, minute)
 
                 textViewTime.text = SimpleDateFormat("HH:mm aa").format(cal.time)
-
+                cartViewModel.setTime(SimpleDateFormat("HH:mm").format(cal.time))
+                //textViewTime.text = cal.time.toString()
             }
 
         TimePickerDialog(activity, com.example.fyp.R.style.DialogTheme, timeSetListener,

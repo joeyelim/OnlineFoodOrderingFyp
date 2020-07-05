@@ -53,14 +53,12 @@ class CurrentOrder2 : Fragment() {
         val tabIcons = intArrayOf(
             R.drawable.ic_circled_1,
             R.drawable.ic_circled_2,
-            R.drawable.ic_circled_3,
-            R.drawable.ic_circled_4
+            R.drawable.ic_circled_3
         )
 
         tabLayout.getTabAt(0)?.setIcon(tabIcons[0])
         tabLayout.getTabAt(1)?.setIcon(tabIcons[1])
         tabLayout.getTabAt(2)?.setIcon(tabIcons[2])
-        tabLayout.getTabAt(3)?.setIcon(tabIcons[3])
     }
 
     internal class ViewPagerAdapter(fragmentManager: FragmentManager) :
@@ -76,7 +74,7 @@ class CurrentOrder2 : Fragment() {
         }
 
         override fun getCount(): Int {
-            return 4
+            return 3
         }
 
         fun addFragment(fragment: Fragment, title: String) {
@@ -90,7 +88,6 @@ class CurrentOrder2 : Fragment() {
             titles.add("Pending")
             titles.add("Preparing")
             titles.add("Ready")
-            titles.add("Taken")
         }
 
         override fun getPageTitle(i: Int): CharSequence? {
