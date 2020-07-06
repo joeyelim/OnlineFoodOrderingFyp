@@ -161,7 +161,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="320dp"
-                    android:layout_height="250dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/details_border">
 
                     <RelativeLayout
@@ -219,9 +219,10 @@
                         android:background="@color/gray"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/title"/>
+                        app:layout_constraintTop_toBottomOf="@+id/title" />
 
                     <ScrollView
+                        android:id="@+id/rcPlaceOrderItem"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fillViewport="true"
@@ -232,11 +233,22 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/orderFoodList"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
                     </ScrollView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/box"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/fui_transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/orderFoodList" />
             </com.google.android.material.card.MaterialCardView>
 
             <RelativeLayout

@@ -9,6 +9,7 @@ class Order_Food {
     var canteen_Name: String? = ""
     var store_Name: String? = ""
     var option : String? = ""
+    var id : String? = ""
 
     constructor()
 
@@ -20,7 +21,9 @@ class Order_Food {
         remark: String?,
         canteen_Name: String?,
         store_Name: String?,
-        option : String?
+        option : String?,
+        id : String?
+
 
     ) {
         this.food_Name = food_Name
@@ -31,5 +34,6 @@ class Order_Food {
         this.store_Name = store_Name
         this.status = status
         this.option = option
+        this.id = id
     }
 }

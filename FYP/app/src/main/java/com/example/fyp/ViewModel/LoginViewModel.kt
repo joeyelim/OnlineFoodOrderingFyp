@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.fyp.Class.User
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginViewModel : ViewModel() {
 
@@ -40,6 +42,7 @@ class LoginViewModel : ViewModel() {
     fun setCurrentUser() {
         _currentUser.value = User("asd", "asd", "ads", "asd", "ad", "asd", "email")
     }
+
 
     init {
         _changeMenuOption.value = false

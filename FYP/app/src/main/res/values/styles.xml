@@ -64,6 +64,12 @@
 
     </style>
 
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
+
 
 
 <!--    <style name="CustomOverflowBack" parent="@style/Widget.AppCompat.Light.ListPopupWindow">-->

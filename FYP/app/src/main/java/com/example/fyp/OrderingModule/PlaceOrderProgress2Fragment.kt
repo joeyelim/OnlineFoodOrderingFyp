@@ -12,13 +12,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fyp.Class.Cart
 import com.example.fyp.Class.Order_Food
+import com.example.fyp.FirestoreAdapter.PlaceOrderItemAdapter
+import com.example.fyp.FirestoreAdapter.TestAdapter
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPlaceOrderProgress2Binding
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.outer_recycle_view_layout.view.*
 import java.text.DecimalFormat
 
 /**
@@ -60,6 +65,7 @@ class PlaceOrderProgress2Fragment : Fragment() {
         }
 
         initUI()
+        initRecycleView()
 
         return binding.root
     }
@@ -71,6 +77,22 @@ class PlaceOrderProgress2Fragment : Fragment() {
         binding.txttotalPrice.text = cartViewModel.order.total_Price.toString()
         binding.txttotalPrice.text = DecimalFormat("RM ###.00")
             .format(cartViewModel.order.total_Price).toString()
+    }
+
+    private fun initRecycleView() {
+        val adapter = getCartArrayList()
+        val adapter2 = PlaceOrderItemAdapter()
+        binding.orderFoodList.setHasFixedSize(true)
+        binding.orderFoodList.layoutManager = LinearLayoutManager(context)
+        binding.orderFoodList.adapter = adapter2
+        adapter2.data = adapter
+    }
+
+    private fun getCartArrayList() : ArrayList<Cart> {
+        val cartArrayList = ArrayList<Cart>()
+        cartArrayList.addAll(cartViewModel.hashMap.values)
+
+        return cartArrayList
     }
 
     private fun updateDatabase(view : View) {
@@ -92,7 +114,7 @@ class PlaceOrderProgress2Fragment : Fragment() {
             for (item in cartViewModel.orderFood) {
                 it.set(db.collection("User").document(userViewModel.user?.email!!)
                     .collection("Order").document(cartViewModel.order.id!!)
-                    .collection("Order_Food").document(item.food_Name!!)
+                    .collection("Order_Food").document(item.id!!)
                 , item)
             }
 
@@ -116,7 +138,7 @@ class PlaceOrderProgress2Fragment : Fragment() {
                 it.set(db.collection("Canteen").document(item.canteen_Name!!)
                     .collection("Store").document(item.store_Name!!)
                     .collection("Order").document(cartViewModel.order.id!!)
-                    .collection("Order_Food").document(item.food_Name!!)
+                    .collection("Order_Food").document(item.id!!)
                     ,item)
             }
 

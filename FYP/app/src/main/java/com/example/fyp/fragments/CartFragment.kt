@@ -92,7 +92,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
 
         val storage = Firebase.storage
         // Create a storage reference from our app
-        var storageRef = storage.reference
+        val storageRef = storage.reference
 
         var imagesRef: StorageReference? =
             storageRef.child("gs://fypfirebaseproject-fd994.appspot.com")
@@ -206,7 +206,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         }
     }
 
-    fun delDialog(cart: Cart) {
+    private fun delDialog(cart: Cart) {
         val dialog = AlertDialog.Builder(activity)
         val foodName: String? = cart.food_name
 
@@ -218,7 +218,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         dialog.setPositiveButton("Yes") { _: DialogInterface, _: Int ->
             FirebaseFirestore.getInstance()
                 .collection("User").document(userViewModel.user?.email!!)
-                .collection("Cart").document("1")
+                .collection("Cart").document(cart.cart_ID!!)
                 .delete()
                 .addOnCompleteListener {
                     val snackbar = Snackbar.make(

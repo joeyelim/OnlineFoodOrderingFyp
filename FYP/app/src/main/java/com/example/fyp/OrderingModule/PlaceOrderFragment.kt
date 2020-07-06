@@ -58,6 +58,7 @@ class PlaceOrderFragment : Fragment() {
         }
 
         binding.btnBack.setOnClickListener{
+            cartViewModel.removeAll()
             it.findNavController()
                 .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToCartFragment())
         }

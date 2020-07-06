@@ -91,6 +91,7 @@ class CurrentOrderFragment : Fragment(), onListClick2 {
                 CurrentOrderOuterAdapter(options, this, context!!, userViewModel.user!!.email!!)
             binding.currentOrderRecycle.layoutManager = LinearLayoutManager(context)
             binding.currentOrderRecycle.adapter = adapter
+            binding.currentOrderRecycle.isNestedScrollingEnabled = true
         } catch (e: Exception) {
 
         }
