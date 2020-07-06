@@ -41,7 +41,10 @@ class CurrentOrder2 : Fragment() {
 
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
 
-        viewPagerAdapter.setFragment()
+//        viewPagerAdapter.setFragment()
+        viewPagerAdapter.addFragment(PendingOrder(),"Pending")
+        viewPagerAdapter.addFragment(PreparingOrder(),"Preparing")
+        viewPagerAdapter.addFragment(ReadyOrder(),"Ready")
 
         val viewPager = binding.viewPager
         val tabLayout = binding.tabProgress
@@ -70,11 +73,12 @@ class CurrentOrder2 : Fragment() {
         override fun getItem(position: Int): Fragment {
             //  parameter can use arrayList, probably will
             // just use an identifier
-            return CurrentOrderFragment().newInstance(titles[position])
+//            return CurrentOrderFragment().newInstance(titles[position])
+            return fragments[position]
         }
 
         override fun getCount(): Int {
-            return 3
+            return fragments.size
         }
 
         fun addFragment(fragment: Fragment, title: String) {
@@ -84,7 +88,6 @@ class CurrentOrder2 : Fragment() {
 
 
         fun setFragment() {
-
             titles.add("Pending")
             titles.add("Preparing")
             titles.add("Ready")

@@ -28,7 +28,9 @@ import java.text.DecimalFormat
 import com.example.fyp.Class.Ultility.Companion.openDialog
 import com.example.fyp.ViewModel.UserViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_add_to_cart.*
 import kotlinx.android.synthetic.main.fragment_food_detail.*
 import java.text.SimpleDateFormat
@@ -70,7 +72,17 @@ class AddToCartFragment : Fragment() {
         }
 
         binding.btnAddToCart.setOnClickListener(View.OnClickListener {
-            addingToCartList()
+            if (Firebase.auth.currentUser != null) {
+                addingToCartList()
+            } else {
+                val dialog = AlertDialog.Builder(context)
+
+                dialog.setTitle("Oops, sorry!")
+                dialog.setMessage("You Need to Login Add Food Into Cart")
+                dialog.setPositiveButton("OK") { _: DialogInterface, i: Int -> }
+                dialog.show()
+            }
+
         })
 
         return binding.root

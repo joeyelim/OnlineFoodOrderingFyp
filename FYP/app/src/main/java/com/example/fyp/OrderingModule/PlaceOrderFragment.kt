@@ -48,7 +48,7 @@ class PlaceOrderFragment : Fragment() {
         (activity as MainActivity).setNavInvisible()
 
         binding.btnNext.setOnClickListener{
-            cartViewModel.setOrderValue(getOption())
+            cartViewModel.option = getOption()
 
             if (!placeOrderValidation()) {
 

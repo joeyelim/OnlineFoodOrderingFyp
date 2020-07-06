@@ -22,9 +22,15 @@ import com.example.fyp.R
 import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPlaceOrderProgress2Binding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_add_to_cart.*
+import kotlinx.android.synthetic.main.fragment_place_order_progress2.*
 import kotlinx.android.synthetic.main.outer_recycle_view_layout.view.*
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * A simple [Fragment] subclass.
@@ -66,17 +72,20 @@ class PlaceOrderProgress2Fragment : Fragment() {
 
         initUI()
         initRecycleView()
+        cartViewModel.initOrderFoodList()
 
         return binding.root
     }
 
     private fun initUI() {
-        binding.txtDate.text = cartViewModel.order.pickUp_Date
-        binding.txtPickupTime.text = cartViewModel.order.pickUp_Time
-        binding.txtOption.text = cartViewModel.order.dining_Option
+        val calForDate = Calendar.getInstance().time
+        val date = SimpleDateFormat("dd.MM.yyyy").format(calForDate)
+        binding.txtDate.text = date
+        binding.txtPickupTime.text = cartViewModel.pickUpTime
+        binding.txtOption.text = cartViewModel.option
         binding.txttotalPrice.text = cartViewModel.order.total_Price.toString()
         binding.txttotalPrice.text = DecimalFormat("RM ###.00")
-            .format(cartViewModel.order.total_Price).toString()
+            .format(cartViewModel.getTotalPrice()).toString()
     }
 
     private fun initRecycleView() {
@@ -86,6 +95,7 @@ class PlaceOrderProgress2Fragment : Fragment() {
         binding.orderFoodList.layoutManager = LinearLayoutManager(context)
         binding.orderFoodList.adapter = adapter2
         adapter2.data = adapter
+
     }
 
     private fun getCartArrayList() : ArrayList<Cart> {
@@ -96,48 +106,54 @@ class PlaceOrderProgress2Fragment : Fragment() {
     }
 
     private fun updateDatabase(view : View) {
-        cartViewModel.initOrderFoodList()
 
         val db = FirebaseFirestore.getInstance()
 
         Toast.makeText(activity, "Processing Your Order ... ", Toast.LENGTH_LONG).show()
 
+
         // batch write : do write at once, make sure all completed den navigate to next page
         db.runBatch {
 
             // write into user -> Order
-            it.set(db.collection("User").document(userViewModel.user?.email!!)
-                .collection("Order").document(cartViewModel.order.id!!),
-                cartViewModel.order)
+//            it.set(db.collection("User").document(userViewModel.user?.email!!)
+//                .collection("Order_Food").document(cartViewModel.order.id!!),
+//                cartViewModel.order)
+//
+//            // write into user -> Order -> Order_Food
+//            for (item in cartViewModel.orderFood) {
+//                it.set(db.collection("User").document(userViewModel.user?.email!!)
+//                    .collection("Order").document(cartViewModel.order.id!!)
+//                    .collection("Order_Food").document(item.id!!)
+//                , item)
+//            }
 
-            // write into user -> Order -> Order_Food
             for (item in cartViewModel.orderFood) {
                 it.set(db.collection("User").document(userViewModel.user?.email!!)
-                    .collection("Order").document(cartViewModel.order.id!!)
                     .collection("Order_Food").document(item.id!!)
-                , item)
+                    , item)
             }
 
-            // write into Canteen -> Store -> Order
-            val canteenStoreList = ArrayList<String>()
 
-            for (item in cartViewModel.orderFood) {
-                val canteenStore = item.canteen_Name + item.store_Name
-
-                if (!canteenStoreList.contains(canteenStore)) {
-                    canteenStoreList.add(canteenStore)
-                    it.set(db.collection("Canteen").document(item.canteen_Name!!)
-                        .collection("Store").document(item.store_Name!!)
-                        .collection("Order").document(cartViewModel.order.id!!),
-                        cartViewModel.order)
-                }
-            }
+//            // write into Canteen -> Store -> Order
+//            val canteenStoreList = ArrayList<String>()
+//
+//            for (item in cartViewModel.orderFood) {
+//                val canteenStore = item.canteen_Name + item.store_Name
+//
+//                if (!canteenStoreList.contains(canteenStore)) {
+//                    canteenStoreList.add(canteenStore)
+//                    it.set(db.collection("Canteen").document(item.canteen_Name!!)
+//                        .collection("Store").document(item.store_Name!!)
+//                        .collection("Order").document(cartViewModel.order.id!!),
+//                        cartViewModel.order)
+//                }
+//            }
 
             // Write into Canteen -> Store -> Order
             for (item in cartViewModel.orderFood) {
                 it.set(db.collection("Canteen").document(item.canteen_Name!!)
                     .collection("Store").document(item.store_Name!!)
-                    .collection("Order").document(cartViewModel.order.id!!)
                     .collection("Order_Food").document(item.id!!)
                     ,item)
             }
@@ -149,7 +165,6 @@ class PlaceOrderProgress2Fragment : Fragment() {
             }
 
         }.addOnCompleteListener {
-            Log.i("Test", "Write Complete")
             Toast.makeText(activity, "Order Being Placed! ", Toast.LENGTH_LONG).show()
             cartViewModel.removeAll()
             view.findNavController()
@@ -161,5 +176,6 @@ class PlaceOrderProgress2Fragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
     }
+
 
 }
