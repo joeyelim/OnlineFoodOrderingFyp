@@ -128,26 +128,8 @@ class LoginFragment : Fragment() {
                         }
 
                     val user = FirebaseAuth.getInstance().currentUser
-
-                    //findNavController().navigate(com.example.drugassignment.R.id.action_login_to_homeFragment)
-
-//                    user?.let {
-//                        if (!user.isEmailVerified) {
-//                            FirebaseAuth.getInstance().signOut()
-//                            binding.btnLogin.isEnabled = true
-//                            Toast.makeText(
-//                                activity, "Please Verify Your Email First",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        } else {
-//                            Toast.makeText(
-//                                activity, "Welcome, Directing To Profile Page..",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//
-//                        }
-//                    }
-                } else {
+                }
+                else {
                     // If sign in fails, display a message to the user.
                     binding.btnLogin.isEnabled = true
                     Log.w("Game", "signInWithEmail:failure", task.exception)
@@ -162,9 +144,13 @@ class LoginFragment : Fragment() {
 
     private fun validation() : Boolean {
 
-        if (binding.txtEmail.text.isNullOrBlank() || binding.txtPassword.text.isNullOrBlank()) {
+        if (binding.txtEmail.text.isNullOrBlank() ||
+            !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches() ||
+            binding.txtPassword.text.isNullOrBlank())
+        {
+
             if(binding.txtEmail.text.isNullOrBlank()) {
-                binding.txtEmailLy.error = "*Please enter your email."
+                binding.txtEmailLy.error = "*Email is require."
             }
             else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
                 binding.txtEmailLy.error = "*Please enter a valid email"
@@ -174,7 +160,7 @@ class LoginFragment : Fragment() {
             }
 
             if (binding.txtPassword.text.isNullOrBlank()) {
-                binding.txtPasswordLy.error = "*Please enter your password."
+                binding.txtPasswordLy.error = "*Password is require."
             }
             else {
                 binding.txtPasswordLy.isErrorEnabled = false

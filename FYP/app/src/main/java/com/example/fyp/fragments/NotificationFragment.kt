@@ -98,6 +98,20 @@ class NotificationFragment : Fragment(), onListClick4 {
                 .collection("Notification")
                 .orderBy("notif_ID", Query.Direction.ASCENDING)
 
+            query.addSnapshotListener { p0, _ ->
+                if (p0 != null) {
+
+                    if(p0.size() > 0) {
+                        binding.textView3.visibility = View.GONE
+                        binding.rvNotification.visibility = View.VISIBLE
+                    }else {
+                        binding.textView3.visibility = View.VISIBLE
+                        binding.rvNotification.visibility = View.GONE
+                        binding.textView3.setText("There are currently no any notification yet.")
+                    }
+                }
+            }
+
             val options =
                 FirestoreRecyclerOptions.Builder<Notification>()
                     .setQuery(query, Notification::class.java).build()

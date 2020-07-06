@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -33,6 +34,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
@@ -88,6 +90,11 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             }
         }
 
+        binding.btnViewShop.setOnClickListener {
+            it.findNavController()
+                .navigate(CartFragmentDirections.actionCartFragmentToFragmentHome())
+        }
+
         //-------------------Firebase storage-----------------------
 
         val storage = Firebase.storage
@@ -122,6 +129,19 @@ class CartFragment : Fragment(), OnAdapterItemClick {
                 .collection("Cart")
                 .orderBy("cart_ID", Query.Direction.ASCENDING)
 
+            query.addSnapshotListener { p0, _ ->
+                if (p0 != null) {
+
+                    if(p0.size() > 0) {
+                        binding.emptyLayout.visibility = View.GONE;
+                        binding.cartLayout.visibility = View.VISIBLE
+                    }else {
+                        binding.emptyLayout.visibility = View.VISIBLE;
+                        binding.cartLayout.visibility = View.GONE
+                    }
+                }
+            }
+
             val options =
                 FirestoreRecyclerOptions.Builder<Cart>()
                     .setQuery(query, Cart::class.java).build()
@@ -130,6 +150,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             adapter = CartFirestoreAdapter(options, this, context!!)
             binding.rcCart.layoutManager = LinearLayoutManager(activity)
             binding.rcCart.adapter = adapter
+
         }
         catch (e: Exception) {
             return
@@ -145,7 +166,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             } else {
                 binding.btnCheckOut.setTextColor(resources.getColor(R.color.white))
                 binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.lightGray))
-//                binding.btnCheckOut.isEnabled = false
+                binding.btnCheckOut.isEnabled = false
 
             }
 

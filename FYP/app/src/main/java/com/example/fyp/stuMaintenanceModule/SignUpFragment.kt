@@ -114,45 +114,53 @@ class SignUpFragment : Fragment() {
         val lastName = binding.txtLastN.text.toString()
         val phone = binding.txtPhone.text.toString()
 
-        if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()
+            || !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
 
             if (firstName.isEmpty()) {
-                binding.txtFirstNLayout.error = "*Please enter your first name."
+                binding.txtFirstNLayout.error = "*First name is require."
                 // binding.txtFirstN.requestFocus()
-            } else {
+            }
+            else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
+                binding.txtEmailLayout.error = "*Please enter a valid email"
+            }
+            else {
                 binding.txtFirstNLayout.isErrorEnabled = false
             }
 
             if (lastName.isEmpty()) {
-                binding.txtLastNLayout.error = "*Please enter your last name."
+                binding.txtLastNLayout.error = "*Last name is require."
                 // binding.txtLastN.requestFocus()
-            } else {
+            }
+            else {
                 binding.txtLastNLayout.isErrorEnabled = false
             }
 
             if (phone.isEmpty()) {
-                binding.txtPhoneLayout.error = "*Please enter phone number"
+                binding.txtPhoneLayout.error = "*Phone number is require."
                 //  binding.txtPhone.requestFocus()
-            } else {
+            }
+            else {
                 binding.txtPhoneLayout.isErrorEnabled = false
             }
 
             if (email.isEmpty()) {
-                binding.txtEmailLayout.error = "*Please enter email"
+                binding.txtEmailLayout.error = "*Email is require."
                 // binding.txtEmail.requestFocus()
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
-                binding.txtEmailLayout.error = "*Please enter a valid email"
-                // binding.txtEmail.requestFocus()
-            } else {
+            }
+            else {
                 binding.txtEmailLayout.isErrorEnabled = false
             }
 
             if (password.isEmpty()) {
-                binding.txtPasswordLayout.error = "*Please enter password"
+                binding.txtPasswordLayout.error = "*Password is require."
                 // binding.txtPassword.requestFocus()
             }
+
             return false
+
         }
+
         return true
     }
 

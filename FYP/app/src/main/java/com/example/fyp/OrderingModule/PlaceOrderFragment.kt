@@ -52,7 +52,7 @@ class PlaceOrderFragment : Fragment() {
 
             if (!placeOrderValidation()) {
 
-            } else
+            }else
                 it.findNavController()
                     .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
         }
@@ -71,39 +71,65 @@ class PlaceOrderFragment : Fragment() {
 
     private fun placeOrderValidation():Boolean {
         val selectedtime = binding.textViewTime.text.toString()
-
+        // store operating start time into calendarStart
         val timeStart = "08:00"
         val time1 = SimpleDateFormat("HH:mm").parse(timeStart)
         val calendarStart = Calendar.getInstance()
         calendarStart.time = time1
         calendarStart.add(Calendar.DATE, 1)
 
+        // store operating end time into calendarEnd
         val timeEnd = "20:00"
         val time2 = SimpleDateFormat("HH:mm").parse(timeEnd)
         val calendarEnd = Calendar.getInstance()
         calendarEnd.time = time2
         calendarEnd.add(Calendar.DATE, 1)
 
-        if (selectedtime == "Pick up time") {
-            binding.errorMsg.setText("Please select your pick up time.")
+        if (selectedtime == "Pick up time")
+        {
+            binding.errorMsg.setText(R.string.error_empty_time)
             binding.errorMsg.visibility = View.VISIBLE
             return false
-        } else if (selectedtime != "Pick up time") {
-            val timeSelected = selectedtime
-            val time3 = SimpleDateFormat("HH:mm").parse(timeSelected)
+        }
+        else if (selectedtime != "Pick up time")
+        {
+            Log.i("023","123")
+            // store user selected time into calendarSelect
+            val timeSe = selectedtime
+            val time3 = SimpleDateFormat("HH:mm").parse(timeSe)
             val calendarSelect = Calendar.getInstance()
             calendarSelect.time = time3
             calendarSelect.add(Calendar.DATE, 1)
-
             val x = calendarSelect.getTime()
-            if (x.before(calendarStart.getTime()) || x.after(calendarEnd.getTime())) {
-                binding.errorMsg.setText("Please select the time within the operating hours (8:00 AM to 20:00 PM).")
+
+            val date = Calendar.getInstance().time
+            val formatter = SimpleDateFormat("HH:mm aa")
+            val formatedDate = formatter.format(date)
+
+            if (x.before(calendarStart.getTime()) || x.after(calendarEnd.getTime()))
+            {
+                Log.i("123","123")
+                binding.errorMsg.setText(R.string.error_pick_time)
                 binding.errorMsg.visibility = View.VISIBLE
                 return false
-            } else {
-                return true
             }
-        } else
+            else
+            {
+                if (x.before(date))
+                {
+                    Log.i("456","4")
+                    binding.errorMsg.setText("Please selected the time after current time($formatedDate)!")
+                    binding.errorMsg.visibility = View.VISIBLE
+                    return false
+                }
+                else
+                {
+                    return true
+                }
+            }
+        }
+        else
+            Log.i("123","123")
             return false
     }
 
