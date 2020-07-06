@@ -8,8 +8,13 @@ class Order_Food {
     var remark: String? = ""
     var canteen_Name: String? = ""
     var store_Name: String? = ""
-    var option : String? = ""
+    var dining_option : String? = ""
     var id : String? = ""
+    var order_Date : String? = ""
+    var order_Time : String? = ""
+    var pickUp_Date : String? = ""
+    var pickUp_Time : String? = ""
+
 
     constructor()
 
@@ -21,10 +26,12 @@ class Order_Food {
         remark: String?,
         canteen_Name: String?,
         store_Name: String?,
-        option : String?,
-        id : String?
-
-
+        dining_option : String?,
+        id : String?,
+        order_Date : String?,
+        order_Time : String? ,
+        pickUp_Time : String? ,
+        pickUp_Date : String?
     ) {
         this.food_Name = food_Name
         this.each_Price = each_Price
@@ -33,7 +40,11 @@ class Order_Food {
         this.canteen_Name = canteen_Name
         this.store_Name = store_Name
         this.status = status
-        this.option = option
+        this.dining_option = dining_option
         this.id = id
+        this.order_Date = order_Date
+        this.order_Time = order_Time
+        this.pickUp_Time = pickUp_Time
+        this.pickUp_Date = pickUp_Date
     }
 }

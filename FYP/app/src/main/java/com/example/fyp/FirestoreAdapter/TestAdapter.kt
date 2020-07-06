@@ -40,7 +40,7 @@ class TestAdapter () : RecyclerView.Adapter<TestAdapter.TestViewHolder>() {
         holder.view.txtStore.text = food.store_Name
         holder.view.food.text = food.food_Name
         holder.view.txtQuantity.text = food.quantity.toString()
-        holder.view.txtOption.text = food.option
+        holder.view.txtOption.text = food.dining_option
         holder.view.txtPrice.text = dec.format(getPrice(food)).toString()
         holder.view.txtProgress.text = food.status
         holder.view.txtRemarks.text = food.remark

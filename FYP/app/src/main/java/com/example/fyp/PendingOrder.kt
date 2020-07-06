@@ -1,0 +1,89 @@
+package com.example.fyp
+
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fyp.Class.Order
+import com.example.fyp.Class.Order_Food
+import com.example.fyp.FirestoreAdapter.CurrentOrderOuterAdapter
+import com.example.fyp.FirestoreAdapter.OrderListFireStoreAdapter
+import com.example.fyp.FirestoreAdapter.onListClick2
+import com.example.fyp.ViewModel.UserViewModel
+import com.example.fyp.databinding.FragmentCurrentOrderBinding
+import com.example.fyp.databinding.FragmentPendingOrderBinding
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.FirebaseFirestore
+
+/**
+ * A simple [Fragment] subclass.
+ */
+class PendingOrder : Fragment(), onListClick2 {
+    private lateinit var binding: FragmentPendingOrderBinding
+    private lateinit var adapter: OrderListFireStoreAdapter
+    private lateinit var userViewModel: UserViewModel
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_pending_order, container, false
+        )
+
+        setHasOptionsMenu(true)
+        (activity as MainActivity).setNavVisible()
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+
+        if (userViewModel.user!!.email != "") {
+            initRecycleView()
+        }
+
+
+        return binding.root
+    }
+
+    private fun initRecycleView() {
+        try {
+            val db = FirebaseFirestore.getInstance()
+            val query = db.collection("User").document(userViewModel.user?.email!!)
+                .collection("Order_Food")
+                .whereEqualTo("status", "Pending")
+
+            val options =
+                FirestoreRecyclerOptions.Builder<Order_Food>()
+                    .setQuery(query, Order_Food::class.java).build()
+
+            adapter =
+                OrderListFireStoreAdapter(options, this, context!!)
+            binding.pendingOrderRecycleView.layoutManager = LinearLayoutManager(context)
+            binding.pendingOrderRecycleView.adapter = adapter
+            binding.pendingOrderRecycleView.isNestedScrollingEnabled = true
+        } catch (e: Exception) {
+
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (userViewModel.user!!.email != "") {
+            adapter.startListening()
+        }
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (userViewModel.user!!.email != "") {
+            adapter.stopListening()
+        }
+    }
+
+
+}

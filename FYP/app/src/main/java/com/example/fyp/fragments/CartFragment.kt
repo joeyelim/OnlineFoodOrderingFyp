@@ -145,7 +145,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             } else {
                 binding.btnCheckOut.setTextColor(resources.getColor(R.color.white))
                 binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.lightGray))
-//                binding.btnCheckOut.isEnabled = false
+                binding.btnCheckOut.isEnabled = false
 
             }
 
