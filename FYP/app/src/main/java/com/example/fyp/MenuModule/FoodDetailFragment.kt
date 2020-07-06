@@ -2,6 +2,7 @@ package com.example.fyp.MenuModule
 
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
@@ -28,7 +29,9 @@ import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentFoodDetailBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_rating.view.*
 import java.text.DecimalFormat
@@ -72,32 +75,42 @@ class FoodDetailFragment : Fragment() {
         })
 
         binding.imgStar.setOnClickListener {
-            val dialog = AlertDialog.Builder(activity)
-            val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
+            if (Firebase.auth.currentUser != null) {
+                val dialog = AlertDialog.Builder(activity)
+                val dialogView = layoutInflater.inflate(R.layout.fragment_rating, null)
 
-            dialog.setView(dialogView)
-            dialog.setCancelable(true)
-            val image = dialogView.findViewById<ImageView>(R.id.imgFood)
-            val a = FirebaseStorage.getInstance().getReference(viewModel.food.food_image!!)
+                dialog.setView(dialogView)
+                dialog.setCancelable(true)
+                val image = dialogView.findViewById<ImageView>(R.id.imgFood)
+                val a = FirebaseStorage.getInstance().getReference(viewModel.food.food_image!!)
 
-            // setup dialog view layout
-            viewModel.setImage(image, a)
-            dialogView.findViewById<TextView>(R.id.txtFoodName).text = viewModel.food.food_name!!
-            dialogView.findViewById<TextView>(R.id.txtFoodName).paintFlags =
-                (dialogView.findViewById<TextView>(R.id.txtFoodName).paintFlags or Paint.UNDERLINE_TEXT_FLAG)
+                // setup dialog view layout
+                viewModel.setImage(image, a)
+                dialogView.findViewById<TextView>(R.id.txtFoodName).text =
+                    viewModel.food.food_name!!
+                dialogView.findViewById<TextView>(R.id.txtFoodName).paintFlags =
+                    (dialogView.findViewById<TextView>(R.id.txtFoodName).paintFlags or Paint.UNDERLINE_TEXT_FLAG)
 
-            dialogView.ratingBar.rating = viewModel.userRating!!
+                dialogView.ratingBar.rating = viewModel.userRating!!
 
-            dialogView.findViewById<Button>(R.id.btnConfirm)
-                .setOnClickListener {
-                    val rating = dialogView.findViewById<RatingBar>(R.id.ratingBar).rating
+                dialogView.findViewById<Button>(R.id.btnConfirm)
+                    .setOnClickListener {
+                        val rating = dialogView.findViewById<RatingBar>(R.id.ratingBar).rating
 
-                    viewModel.setRating(rating)
-                    viewModel.newRating = rating
+                        viewModel.setRating(rating)
+                        viewModel.newRating = rating
 
-                    updateDatabase(rating)
-                }
-            dialog.show()
+                        updateDatabase(rating)
+                    }
+                dialog.show()
+            } else {
+                val dialog = AlertDialog.Builder(context)
+
+                dialog.setTitle("Oops, sorry!")
+                dialog.setMessage("You Need to Login To Rate Food")
+                dialog.setPositiveButton("OK") { _: DialogInterface, i: Int -> }
+                dialog.show()
+            }
         }
 
         binding.btnAddToCart.setOnClickListener {

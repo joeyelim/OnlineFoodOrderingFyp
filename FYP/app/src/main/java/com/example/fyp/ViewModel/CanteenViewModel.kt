@@ -1,6 +1,5 @@
 package com.example.fyp.ViewModel
 
-import android.util.Log
 import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,8 +18,8 @@ class CanteenViewModel : ViewModel() {
     var store: CanteenStore = CanteenStore()
     var food: Food = Food()
     var userRating: Float? = "0.00".toFloat()
-    var newRating : Float? = "0.00".toFloat()
-    var gotReviewed : Boolean = false
+    var newRating: Float? = "0.00".toFloat()
+    var gotReviewed: Boolean = false
 
 
     private val _rating = MutableLiveData<Float>()
@@ -42,22 +41,29 @@ class CanteenViewModel : ViewModel() {
 
     fun getUserRating(currentUser: String) {
         val reviewID = canteen.canteen_name + store.store_name + food.food_name
-        FirebaseFirestore.getInstance()
-            .collection("User").document(currentUser)
-            .collection("User_Review").document(reviewID)
-            .get()
-            .addOnSuccessListener {
-                if (it["star"] == null) {
-                    userRating = "0.00".toFloat()
-                    _rating.value = "0.00".toFloat()
-                    gotReviewed = false
 
-                } else {
-                    userRating = it["star"].toString().toFloat()
-                    _rating.value = it["star"].toString().toFloat()
-                    gotReviewed = true
+        try {
+            FirebaseFirestore.getInstance()
+                .collection("User").document(currentUser)
+                .collection("User_Review").document(reviewID)
+                .get()
+                .addOnSuccessListener {
+                    if (it["star"] == null) {
+                        userRating = "0.00".toFloat()
+                        _rating.value = "0.00".toFloat()
+                        gotReviewed = false
+
+                    } else {
+                        userRating = it["star"].toString().toFloat()
+                        _rating.value = it["star"].toString().toFloat()
+                        gotReviewed = true
+                    }
                 }
-            }
+        } catch (e: Exception) {
+            _rating.value = "0.00".toFloat()
+            userRating = "0.00".toFloat()
+        }
+
     }
 
     fun setImage(view: ImageView, storage: StorageReference) {
