@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/frame_image_view">
+    android:padding="5dp">
 
         <TextView
             android:id="@+id/txtOrderFoodName"
@@ -21,6 +19,7 @@
             android:id="@+id/txtOrderQty"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:text="@string/quantity"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
@@ -32,9 +31,10 @@
             android:id="@+id/txtOrderFoodPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="TextView"
             android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintStart_toEndOf="@+id/txtOrderQty"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
