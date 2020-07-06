@@ -54,6 +54,21 @@ class ReadyOrder : Fragment(), onListClick2 {
                 .collection("Order_Food")
                 .whereEqualTo("status", "Ready")
 
+            query.addSnapshotListener { p0, _ ->
+                if (p0 != null) {
+
+                    if(p0.size() > 0) {
+                        binding.txtempty.visibility = View.GONE
+                        binding.pendingOrderRecycleView.visibility = View.VISIBLE
+                    }
+                    else {
+                        binding.txtempty.visibility = View.VISIBLE
+                        binding.pendingOrderRecycleView.visibility = View.GONE
+                        binding.txtempty.setText("There are currently no orders in here.")
+                    }
+                }
+            }
+
             val options =
                 FirestoreRecyclerOptions.Builder<Order_Food>()
                     .setQuery(query, Order_Food::class.java).build()

@@ -14,6 +14,7 @@ import com.example.fyp.Class.Order_Food
 import com.example.fyp.FirestoreAdapter.CurrentOrderOuterAdapter
 import com.example.fyp.FirestoreAdapter.OrderListFireStoreAdapter
 import com.example.fyp.FirestoreAdapter.onListClick2
+import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentCurrentOrderBinding
 import com.example.fyp.databinding.FragmentPendingOrderBinding
@@ -27,6 +28,7 @@ class PendingOrder : Fragment(), onListClick2 {
     private lateinit var binding: FragmentPendingOrderBinding
     private lateinit var adapter: OrderListFireStoreAdapter
     private lateinit var userViewModel: UserViewModel
+    private lateinit var cartViewModel: CartViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +42,7 @@ class PendingOrder : Fragment(), onListClick2 {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavVisible()
         userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+        cartViewModel = ViewModelProviders.of(activity!!).get(CartViewModel::class.java)
 
         if (userViewModel.user!!.email != "") {
             initRecycleView()
@@ -55,6 +58,21 @@ class PendingOrder : Fragment(), onListClick2 {
             val query = db.collection("User").document(userViewModel.user?.email!!)
                 .collection("Order_Food")
                 .whereEqualTo("status", "Pending")
+
+            query.addSnapshotListener { p0, _ ->
+                if (p0 != null) {
+
+                    if(p0.size() > 0) {
+                        binding.txtempty.visibility = View.GONE
+                        binding.pendingOrderRecycleView.visibility = View.VISIBLE
+                    }
+                    else {
+                        binding.txtempty.visibility = View.VISIBLE
+                        binding.pendingOrderRecycleView.visibility = View.GONE
+                        binding.txtempty.setText("There are currently no orders in here.")
+                    }
+                }
+            }
 
             val options =
                 FirestoreRecyclerOptions.Builder<Order_Food>()
