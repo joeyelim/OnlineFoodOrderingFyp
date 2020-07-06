@@ -61,19 +61,17 @@ class ChangePwdFragment : Fragment() {
                 binding.txtConfirmPwdLayout.error = "*Confirm password is require."
                 binding.txtConfirmPwdLayout.requestFocus()
             }
-            return false
+
         }
-        else{
-            if (oldPwd != userViewModel.user!!.password.toString()){
+        if (oldPwd != userViewModel.user!!.password.toString()){
                 binding.txtOldPwdLayout.error = "*Old password is invalid."
                 binding.txtOldPwdLayout.requestFocus()
-            }
-            if (confirmPwd == newPwd){
+        }
+        if (confirmPwd == newPwd){
                 binding.txtConfirmPwdLayout.error = "*Confirm password is invalid."
                 binding.txtConfirmPwdLayout.requestFocus()
-            }
-            return false
         }
+
 
         return true
     }

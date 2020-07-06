@@ -165,13 +165,14 @@
                 android:id="@+id/btnConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/confirm"
-                app:layout_constraintBottom_toTopOf="@+id/btnCancel"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtConfirmPwdLayout" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCancel"
@@ -184,9 +185,9 @@
                 android:layout_weight="1"
                 android:shadowColor="@color/colorPrimaryDark"
                 android:text="@string/cancel"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnConfirm"
                 app:strokeColor="@color/colorPrimary"
                 app:strokeWidth="2dp" />
 
