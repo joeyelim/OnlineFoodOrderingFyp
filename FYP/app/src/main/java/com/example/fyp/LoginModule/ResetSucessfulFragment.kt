@@ -9,9 +9,11 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
 import com.example.fyp.R
+import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentResetSucessfulBinding
 
 /**
@@ -20,6 +22,7 @@ import com.example.fyp.databinding.FragmentResetSucessfulBinding
 class ResetSucessfulFragment : Fragment() {
 
     private lateinit var binding: FragmentResetSucessfulBinding
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +33,11 @@ class ResetSucessfulFragment : Fragment() {
             inflater, R.layout.fragment_reset_sucessful, container, false
         )
 
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
+
+        intiUI()
 
         binding.btnLogin.paintFlags = binding.btnLogin.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
@@ -41,6 +47,12 @@ class ResetSucessfulFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun intiUI() {
+        binding.txtUserName.setText(userViewModel.user?.first_name + " " + userViewModel.user?.last_name)
+        binding.txtUserEmail.setText(userViewModel.user?.email)
+
     }
 
 

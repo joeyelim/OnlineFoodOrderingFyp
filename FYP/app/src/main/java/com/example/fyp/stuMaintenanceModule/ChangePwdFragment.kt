@@ -48,29 +48,37 @@ class ChangePwdFragment : Fragment() {
         val newPwd = binding.txtNewPwd.text.toString()
         val confirmPwd = binding.txtConfirmPwd.text.toString()
 
-        if (oldPwd.isEmpty() || newPwd.isEmpty() || confirmPwd.isEmpty()) {
+        if (oldPwd.isEmpty() || newPwd.isEmpty() || confirmPwd.isEmpty()||
+            oldPwd != userViewModel.user!!.password.toString() ||
+            confirmPwd != newPwd) {
+
             if (oldPwd.isEmpty()) {
                 binding.txtOldPwdLayout.error = "*Old password is require."
-                binding.txtOldPwdLayout.requestFocus()
             }
-            if (newPwd.isEmpty()) {
-                binding.txtNewPwdLayout.error = "*New password is require."
-                binding.txtNewPwdLayout.requestFocus()
-            }
-            if (confirmPwd.isEmpty()) {
-                binding.txtConfirmPwdLayout.error = "*Confirm password is require."
-                binding.txtConfirmPwdLayout.requestFocus()
-            }
-            return false
-        }
-        else{
-            if (oldPwd != userViewModel.user!!.password.toString()){
+            else if (oldPwd != userViewModel.user!!.password.toString()){
                 binding.txtOldPwdLayout.error = "*Old password is invalid."
                 binding.txtOldPwdLayout.requestFocus()
             }
-            if (confirmPwd == newPwd){
+            else {
+                binding.txtOldPwdLayout.isErrorEnabled = false
+            }
+
+            if (newPwd.isEmpty()) {
+                binding.txtNewPwdLayout.error = "*New password is require."
+            }
+            else {
+                binding.txtNewPwdLayout.isErrorEnabled = false
+            }
+
+            if (confirmPwd.isEmpty()) {
+                binding.txtConfirmPwdLayout.error = "*Confirm password is require."
+            }
+            else if (confirmPwd != newPwd){
                 binding.txtConfirmPwdLayout.error = "*Confirm password is invalid."
                 binding.txtConfirmPwdLayout.requestFocus()
+            }
+            else {
+                binding.txtConfirmPwdLayout.isErrorEnabled = false
             }
             return false
         }

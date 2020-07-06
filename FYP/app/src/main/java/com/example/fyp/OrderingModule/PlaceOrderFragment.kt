@@ -94,7 +94,6 @@ class PlaceOrderFragment : Fragment() {
         }
         else if (selectedtime != "Pick up time")
         {
-            Log.i("023","123")
             // store user selected time into calendarSelect
             val timeSe = selectedtime
             val time3 = SimpleDateFormat("HH:mm").parse(timeSe)
@@ -109,7 +108,6 @@ class PlaceOrderFragment : Fragment() {
 
             if (x.before(calendarStart.getTime()) || x.after(calendarEnd.getTime()))
             {
-                Log.i("123","123")
                 binding.errorMsg.setText(R.string.error_pick_time)
                 binding.errorMsg.visibility = View.VISIBLE
                 return false
@@ -118,7 +116,6 @@ class PlaceOrderFragment : Fragment() {
             {
                 if (x.before(date))
                 {
-                    Log.i("456","4")
                     binding.errorMsg.setText("Please selected the time after current time($formatedDate)!")
                     binding.errorMsg.visibility = View.VISIBLE
                     return false
@@ -130,7 +127,6 @@ class PlaceOrderFragment : Fragment() {
             }
         }
         else
-            Log.i("123","123")
             return false
     }
 

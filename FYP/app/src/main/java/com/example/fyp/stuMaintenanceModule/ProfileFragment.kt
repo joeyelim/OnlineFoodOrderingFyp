@@ -52,7 +52,6 @@ class ProfileFragment : Fragment() {
                 .navigate(ProfileFragmentDirections.actionProfileFragmentToChangePwdFragment())
         }
 
-
         binding.btnDownArrow.setOnClickListener{
             if(expandableRated.visibility == View.GONE) {
                 TransitionManager.beginDelayedTransition(expandableCard, AutoTransition())

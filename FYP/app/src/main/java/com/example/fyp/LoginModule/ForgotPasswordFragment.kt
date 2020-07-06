@@ -2,6 +2,7 @@ package com.example.fyp.LoginModule
 
 
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -31,8 +32,12 @@ class ForgotPasswordFragment : Fragment() {
         (activity as MainActivity).setNavInvisible()
 
         binding.btnNext.setOnClickListener{
-            it.findNavController()
-                .navigate(ForgotPasswordFragmentDirections.actionFragmentForgotPasswordToResetPwdFragment())
+            if (!forgotPasswordValidation()){
+
+            }else
+                it.findNavController()
+                    .navigate(ForgotPasswordFragmentDirections.actionFragmentForgotPasswordToResetPwdFragment())
+
         }
 
         binding.btnBack.setOnClickListener {
@@ -42,6 +47,25 @@ class ForgotPasswordFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun forgotPasswordValidation():Boolean{
+        val email = binding.txtForgotPwdEmail.text.toString()
+
+        if (email.isEmpty()) {
+            binding.txtForgotPwdEmailLayout.error = "*Email is require."
+            binding.txtForgotPwdEmailLayout.requestFocus()
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.txtForgotPwdEmailLayout.error = "*Please enter a valid email"
+            binding.txtForgotPwdEmailLayout.requestFocus()
+        }
+        else {
+            binding.txtForgotPwdEmailLayout.isErrorEnabled = false
+            return true
+        }
+
+       return false
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
