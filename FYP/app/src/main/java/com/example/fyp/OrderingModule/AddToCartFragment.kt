@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.Cart
@@ -27,6 +28,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.text.DecimalFormat
 import com.example.fyp.Class.Ultility.Companion.openDialog
 import com.example.fyp.ViewModel.UserViewModel
+import com.example.fyp.fragments.HomeFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -207,6 +209,10 @@ class AddToCartFragment : Fragment() {
             clAddToCart, "Successfully Added into the Cart!", Snackbar.LENGTH_LONG
         )
         (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+        snackbar.setAction("View Cart") {
+            this.findNavController()
+                .navigate(R.id.cartFragment)
+        }
         snackbar.show()
     }
 

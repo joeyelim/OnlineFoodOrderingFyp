@@ -39,6 +39,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.fragment_add_to_cart.*
 import kotlinx.android.synthetic.main.fragment_cart.*
 import java.text.DecimalFormat
 
@@ -75,20 +76,17 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         checkLogin()
         initRecycleView()
 
-        binding.btnCheckOut.setOnClickListener {
-
-            Log.i("123","123")
-            if (!it.isEnabled) {
-                Log.i("123","123")
-                Snackbar.make(
-                    cartLayout, "Please select at least one food before you proceed to checkout!", Snackbar.LENGTH_LONG
-                ).show()
-            } else
-            {
-                it.findNavController()
-                    .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
-            }
-        }
+//        binding.btnCheckOut.setOnClickListener {
+//            if (!it.isEnabled) {
+//                Snackbar.make(
+//                    cartLayout, "Please select at least one food before you proceed to checkout!", Snackbar.LENGTH_LONG
+//                ).show()
+//            } else
+//            {
+//                it.findNavController()
+//                    .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
+//            }
+//        }
 
         binding.btnViewShop.setOnClickListener {
             it.findNavController()
@@ -163,13 +161,22 @@ class CartFragment : Fragment(), OnAdapterItemClick {
                 binding.btnCheckOut.setTextColor(resources.getColor(R.color.white))
                 binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                 binding.btnCheckOut.isEnabled = true
+
+                binding.btnCheckOut.setOnClickListener {view ->
+                    view.findNavController()
+                        .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
+                }
+
             } else {
                 binding.btnCheckOut.setTextColor(resources.getColor(R.color.white))
                 binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.lightGray))
-                binding.btnCheckOut.isEnabled = false
-
+//                binding.btnCheckOut.isEnabled = false
+                binding.btnCheckOut.setOnClickListener {
+                    Snackbar.make(
+                        cartLayout, "Please select at least one food before you proceed to checkout!", Snackbar.LENGTH_LONG
+                    ).show()
+                }
             }
-
         })
     }
 
