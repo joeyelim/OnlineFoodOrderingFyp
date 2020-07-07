@@ -298,7 +298,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        cartViewModel.deActivateCartButton()
+        cartViewModel.resetCartButton()
     }
 
 

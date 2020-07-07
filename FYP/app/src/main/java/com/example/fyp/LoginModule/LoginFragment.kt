@@ -112,7 +112,7 @@ class LoginFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
 
                     Toast.makeText(
-                        activity, "Welcome, Directing To Profile Page..",
+                        activity, "Welcome, Directing To Home Page..",
                         Toast.LENGTH_SHORT
                     ).show()
 

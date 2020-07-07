@@ -50,11 +50,14 @@ class PlaceOrderFragment : Fragment() {
         binding.btnNext.setOnClickListener{
             cartViewModel.option = getOption()
 
-            if (!placeOrderValidation()) {
+            it.findNavController()
+                .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
 
-            }else
-                it.findNavController()
-                    .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
+//            if (!placeOrderValidation()) {
+//
+//            }else
+//                it.findNavController()
+//                    .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
         }
 
         binding.btnBack.setOnClickListener{
