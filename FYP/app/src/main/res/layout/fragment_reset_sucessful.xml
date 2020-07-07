@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -18,7 +17,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
-                android:layout_width="350dp"
+                android:layout_width="310dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/text_field_border"
@@ -29,95 +28,88 @@
 
                 <TextView
                     android:id="@+id/txtResetSuccess"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
                     android:text="@string/password_reset_successfully"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/title_text_size"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <RelativeLayout
-                    android:layout_width="@dimen/signUp_field_length"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtResetSuccess">
 
                     <TextView
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="@string/dear"
-                         />
+                        android:text="@string/dear" />
 
                     <TextView
                         android:id="@+id/txtUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_view"
-                        android:textStyle="bold"
                         android:layout_marginLeft="4dp"
                         android:layout_toRightOf="@+id/textView4"
-                        />
+                        android:text="@string/text_view"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtComma"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" ,"
                         android:layout_toRightOf="@+id/txtUserName"
-                        />
+                        android:text=" ," />
 
                     <TextView
                         android:id="@+id/txtContent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="@string/your_email_account_is"
-                        android:layout_below="@+id/textView4" />
+                        android:layout_below="@+id/textView4"
+                        android:text="@string/your_email_account_is" />
 
                     <TextView
                         android:id="@+id/txtUserEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/textview"
-                        android:textStyle="bold"
+                        android:layout_below="@+id/textView4"
                         android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:layout_toRightOf="@+id/txtContent"
-                        android:layout_below="@+id/textView4" />
+                        android:layout_toEndOf="@+id/txtContent"
+                        android:text="@string/textview"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtSuccessContent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="Your account password has been reset successfully."
-                        android:layout_below="@+id/txtContent" />
-
-                    <TextView
-                        android:id="@+id/txtContent2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginStart="16dp"
-                        android:text="@string/sucess_content"
-                        android:layout_below="@+id/txtSuccessContent" />
+                        android:layout_below="@+id/txtContent"
+                        android:text="Your account password has been reset successfully." />
 
                     <Button
                         android:id="@+id/btnLogin"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtSuccessContent"
+                        android:layout_alignParentRight="true"
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="24dp"
                         android:text="@string/login"
-                        android:textColor="@color/colorAccent12"
-                        android:layout_below="@+id/txtContent2"
-                        android:layout_alignParentRight="true"/>
+                        android:textColor="@color/colorAccent12" />
 
                 </RelativeLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

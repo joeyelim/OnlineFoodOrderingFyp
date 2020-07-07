@@ -36,10 +36,49 @@ class ResetPwdFragment : Fragment() {
         }
 
         binding.btnConfirm.setOnClickListener {
-            it.findNavController()
-                .navigate(ResetPwdFragmentDirections.actionResetPwdFragmentToResetSucessfulFragment())
+            if (!inputValidation()){
+
+            } else {
+                it.findNavController()
+                    .navigate(ResetPwdFragmentDirections.actionResetPwdFragmentToResetSucessfulFragment())
+            }
+
         }
+
         return binding.root
+    }
+
+
+    private fun inputValidation(): Boolean {
+        val newPwd = binding.txtNewPwd.text.toString()
+        val confirmPwd = binding.txtConfirmPwd.text.toString()
+
+        if (newPwd.isEmpty() || confirmPwd.isEmpty()) {
+            if (newPwd.isEmpty()) {
+                binding.txtNewPwdLayout.error = "*New password is require."
+                binding.txtNewPwdLayout.requestFocus()
+            }
+            else {
+                binding.txtNewPwdLayout.isErrorEnabled = false
+            }
+            if (confirmPwd.isEmpty()) {
+                binding.txtConfirmPwdLayout.error = "*Confirm password is require."
+                binding.txtConfirmPwdLayout.requestFocus()
+            }
+            else if (confirmPwd == newPwd){
+                binding.txtConfirmPwdLayout.error = "*Confirm password is invalid."
+                binding.txtConfirmPwdLayout.requestFocus()
+            }
+            else {
+                binding.txtConfirmPwdLayout.isErrorEnabled = false
+            }
+        }
+        else {
+            return true
+        }
+
+
+        return false
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

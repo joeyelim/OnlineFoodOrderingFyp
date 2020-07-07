@@ -71,7 +71,6 @@ class ProfileFragment : Fragment() {
             this.findNavController().navigate(R.id.fragment_home)
         }
 
-
         binding.btnDownArrow.setOnClickListener{
             if(expandableRated.visibility == View.GONE) {
                 TransitionManager.beginDelayedTransition(expandableCard, AutoTransition())

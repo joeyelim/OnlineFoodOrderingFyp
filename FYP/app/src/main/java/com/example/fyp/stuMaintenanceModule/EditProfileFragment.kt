@@ -2,14 +2,17 @@ package com.example.fyp.stuMaintenanceModule
 
 
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.example.fyp.MainActivity
 import com.example.fyp.R
+import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentEditProfileBinding
 
 
@@ -18,6 +21,7 @@ import com.example.fyp.databinding.FragmentEditProfileBinding
  */
 class EditProfileFragment : Fragment() {
     private lateinit var binding: FragmentEditProfileBinding
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,10 +31,75 @@ class EditProfileFragment : Fragment() {
             inflater, R.layout.fragment_edit_profile, container, false
         )
 
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
+        intiUI()
+
+        binding.btnConfirm.setOnClickListener{
+            if (!validation()){
+                return@setOnClickListener
+            }
+
+        }
+
         return binding.root
+    }
+
+    private fun intiUI() {
+        binding.txtFirstN.setText(userViewModel.user?.first_name)
+        binding.txtLastN.setText(userViewModel.user?.last_name)
+        binding.txtEmail.setText(userViewModel.user?.email)
+        binding.txtPhone.setText(userViewModel.user?.phone_number)
+    }
+
+    private fun validation(): Boolean {
+
+        val email = binding.txtEmail.text.toString()
+        val firstName = binding.txtFirstN.text.toString()
+        val lastName = binding.txtLastN.text.toString()
+        val phone = binding.txtPhone.text.toString()
+
+        if (email.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()
+            || !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
+
+            if (firstName.isEmpty()) {
+                binding.txtFirstNLayout.error = "*First name is require."
+            }
+            else {
+                binding.txtFirstNLayout.isErrorEnabled = false
+            }
+
+            if (lastName.isEmpty()) {
+                binding.txtLastNLayout.error = "*Last name is require."
+            }
+            else {
+                binding.txtLastNLayout.isErrorEnabled = false
+            }
+
+            if (phone.isEmpty()) {
+                binding.txtPhoneLayout.error = "*Phone number is require."
+            }
+            else {
+                binding.txtPhoneLayout.isErrorEnabled = false
+            }
+
+            if (email.isEmpty()) {
+                binding.txtEmailLayout.error = "*Email is require."
+            }
+            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.txtEmailLayout.error = "*Please enter a valid email"
+            }
+            else {
+                binding.txtEmailLayout.isErrorEnabled = false
+            }
+
+            return false
+
+        }
+
+        return true
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
