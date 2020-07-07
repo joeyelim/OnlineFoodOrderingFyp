@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.method.TransformationMethod
 import android.transition.AutoTransition
 import android.transition.TransitionManager
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -14,12 +15,21 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fyp.Class.Notification
 import com.example.fyp.Class.User
+import com.example.fyp.Class.UserReview
+import com.example.fyp.FirestoreAdapter.NotificationFirestoreAdapter
+import com.example.fyp.FirestoreAdapter.UserProfileReviewRecycleView
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentProfileBinding
 import com.firebase.ui.auth.AuthUI.getApplicationContext
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -29,6 +39,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var userViewModel: UserViewModel
+    private lateinit var adapter: UserProfileReviewRecycleView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,11 +70,13 @@ class ProfileFragment : Fragment() {
                 expandableRated.visibility = View.VISIBLE
                 btnDownArrow.visibility = View.GONE
                 btnUpArrow.visibility =View.VISIBLE
+                iniRecycleView()
             } else {
                 TransitionManager.beginDelayedTransition(expandableCard, AutoTransition())
                 expandableRated.visibility= View.GONE
                 btnDownArrow.visibility = View.VISIBLE
                 btnUpArrow.visibility =View.GONE
+                iniRecycleView()
             }
         }
 
@@ -101,15 +114,18 @@ class ProfileFragment : Fragment() {
                 expandableRated.visibility = View.GONE
                 btnDownArrow.visibility = View.VISIBLE
                 btnUpArrow.visibility =View.GONE
+                iniRecycleView()
             } else {
                 TransitionManager.beginDelayedTransition(expandableCard, AutoTransition())
                 expandableRated.visibility= View.VISIBLE
                 btnDownArrow.visibility = View.GONE
                 btnUpArrow.visibility =View.VISIBLE
+                iniRecycleView()
             }
         }
 
         intiUI()
+        iniRecycleView()
 
         (activity as MainActivity).setNavVisible()
 
@@ -122,6 +138,37 @@ class ProfileFragment : Fragment() {
         binding.txtFullName.text = userViewModel.user?.first_name + " " + userViewModel.user?.last_name
         binding.txtEmail.text = userViewModel.user?.email
         binding.txtPhone.text = userViewModel.user?.phone_number
+    }
+
+    private fun iniRecycleView() {
+        val db = FirebaseFirestore.getInstance()
+
+        try {
+            val query = db.collection("User").document(userViewModel.user?.email!!)
+                .collection("User_Review")
+                .orderBy("reviewDate", Query.Direction.ASCENDING)
+
+            query.get()
+                .addOnSuccessListener {
+                    var adapter = it.toObjects(UserReview::class.java)
+                    val adapter2 = UserProfileReviewRecycleView()
+                    val manager = GridLayoutManager(activity, 2)
+                    binding.rvRatedFood.layoutManager = manager
+                    binding.rvRatedFood.adapter = adapter2
+                    adapter2.data = adapter
+                }
+
+//
+//            val options =
+//                FirestoreRecyclerOptions.Builder<UserReview>()
+//                    .setQuery(query, UserReview::class.java).build()
+//
+//            adapter = UserProfileReviewRecycleView(options,  context!!)
+//            binding.rvRatedFood.layoutManager = LinearLayoutManager(activity)
+//            binding.rvRatedFood.adapter = adapter
+        } catch (e: Exception) {
+
+        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
