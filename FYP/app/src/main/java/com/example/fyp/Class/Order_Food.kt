@@ -14,6 +14,7 @@ class Order_Food {
     var order_Time : String? = ""
     var pickUp_Date : String? = ""
     var pickUp_Time : String? = ""
+    var email : String? = ""
 
 
     constructor()
@@ -31,7 +32,8 @@ class Order_Food {
         order_Date : String?,
         order_Time : String? ,
         pickUp_Time : String? ,
-        pickUp_Date : String?
+        pickUp_Date : String?,
+        email : String?
     ) {
         this.food_Name = food_Name
         this.each_Price = each_Price
@@ -46,5 +48,6 @@ class Order_Food {
         this.order_Time = order_Time
         this.pickUp_Time = pickUp_Time
         this.pickUp_Date = pickUp_Date
+        this.email = email
     }
 }

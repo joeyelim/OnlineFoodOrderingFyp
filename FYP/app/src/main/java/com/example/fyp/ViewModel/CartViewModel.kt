@@ -30,7 +30,6 @@ class CartViewModel : ViewModel() {
     }
 
     fun deActivateCartButton() {
-        Log.i("Test", "Deactive")
         _activeButton.value = _activeButton.value?.minus(1)
     }
 
@@ -76,7 +75,7 @@ class CartViewModel : ViewModel() {
         this.pickUpTime = time
     }
 
-    fun initOrderFoodList() {
+    fun initOrderFoodList(email : String?) {
         var i = 0
 
         for (item in cartArrayList) {
@@ -89,7 +88,7 @@ class CartViewModel : ViewModel() {
             orderFood.add(Order_Food(item.food_name, item.each_price!!, "Pending",
                 item.quantity, item.remark, item.canteen_name,
                 item.store_name, option,("$saveCurrentDateTime $i"), currentDate
-            , currentTime, pickUpTime, currentDate))
+            , currentTime, pickUpTime, currentDate, email))
 
             i += 1
         }

@@ -86,7 +86,6 @@ class CurrentOrder2 : Fragment() {
             titles.add(title)
         }
 
-
         fun setFragment() {
             titles.add("Pending")
             titles.add("Preparing")

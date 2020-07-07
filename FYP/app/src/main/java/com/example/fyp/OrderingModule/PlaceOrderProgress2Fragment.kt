@@ -72,7 +72,7 @@ class PlaceOrderProgress2Fragment : Fragment() {
 
         initUI()
         initRecycleView()
-        cartViewModel.initOrderFoodList()
+        cartViewModel.initOrderFoodList(userViewModel.user?.email!!)
 
         return binding.root
     }
@@ -152,6 +152,7 @@ class PlaceOrderProgress2Fragment : Fragment() {
 
             // Write into Canteen -> Store -> Order
             for (item in cartViewModel.orderFood) {
+                item.email = userViewModel.user?.email
                 it.set(db.collection("Canteen").document(item.canteen_Name!!)
                     .collection("Store").document(item.store_Name!!)
                     .collection("Order_Food").document(item.id!!)

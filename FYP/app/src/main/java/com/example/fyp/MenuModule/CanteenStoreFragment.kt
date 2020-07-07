@@ -82,7 +82,6 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
     }
 
     fun initRecycleView() {
-        Log.i("123","123")
         val canteenType = viewModel.canteen.type!!
         val db = FirebaseFirestore.getInstance()
         val query = db.collection("Canteen").document(canteenType)

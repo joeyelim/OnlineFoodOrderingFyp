@@ -2,6 +2,7 @@ package com.example.fyp
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,40 +47,81 @@ class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
             initRecycleView()
         }
 
-
         return binding.root
     }
 
     private fun initRecycleView() {
         try {
-            val db = FirebaseFirestore.getInstance()
-            val query = db.collection("User").document(userViewModel.user?.email!!)
-                .collection("Order_Food")
-                .whereEqualTo("status", "Pending")
+            // staff view
+            if (userViewModel.user?.role == "staff") {
+                val db = FirebaseFirestore.getInstance()
+                val query = db.collection("Canteen").document(userViewModel.user?.canteen!!)
+                    .collection("Store").document(userViewModel.user?.store!!)
+                    .collection("Order_Food")
+                    .whereEqualTo("status", "Pending")
 
-            query.addSnapshotListener { p0, _ ->
-                if (p0 != null) {
+                query.get()
+                    .addOnFailureListener {
+                        Log.i("Test", "Fail")
+                    }
 
-                    if (p0.size() > 0) {
-                        binding.txtempty.visibility = View.GONE
-                        binding.pendingOrderRecycleView.visibility = View.VISIBLE
-                    } else {
-                        binding.txtempty.visibility = View.VISIBLE
-                        binding.pendingOrderRecycleView.visibility = View.GONE
-                        binding.txtempty.setText("There are currently no orders in here.")
+                query.addSnapshotListener { p0, _ ->
+                    if (p0 != null) {
+                        if (p0.size() > 0) {
+                            binding.txtempty.visibility = View.GONE
+                            binding.pendingOrderRecycleView.visibility = View.VISIBLE
+                        } else {
+                            binding.txtempty.visibility = View.VISIBLE
+                            binding.pendingOrderRecycleView.visibility = View.GONE
+                            binding.txtempty.setText("There are currently no orders in here.")
+                        }
                     }
                 }
+
+                val options =
+                    FirestoreRecyclerOptions.Builder<Order_Food>()
+                        .setQuery(query, Order_Food::class.java).build()
+
+                adapter =
+                    OrderListFireStoreAdapter(options, this, context!!, userViewModel.user!!)
+                binding.pendingOrderRecycleView.layoutManager = LinearLayoutManager(context)
+                binding.pendingOrderRecycleView.adapter = adapter
+                binding.pendingOrderRecycleView.isNestedScrollingEnabled = true
+            } else {
+
+                // student view
+
+                val db = FirebaseFirestore.getInstance()
+                val query = db.collection("User").document(userViewModel.user?.email!!)
+                    .collection("Order_Food")
+                    .whereEqualTo("status", "Pending")
+
+                query.addSnapshotListener { p0, _ ->
+                    if (p0 != null) {
+
+                        if (p0.size() > 0) {
+                            binding.txtempty.visibility = View.GONE
+                            binding.pendingOrderRecycleView.visibility = View.VISIBLE
+                        } else {
+                            binding.txtempty.visibility = View.VISIBLE
+                            binding.pendingOrderRecycleView.visibility = View.GONE
+                            binding.txtempty.setText("There are currently no orders in here.")
+                        }
+                    }
+                }
+
+                val options =
+                    FirestoreRecyclerOptions.Builder<Order_Food>()
+                        .setQuery(query, Order_Food::class.java).build()
+
+                adapter =
+                    OrderListFireStoreAdapter(options, this, context!!, userViewModel.user!!)
+                binding.pendingOrderRecycleView.layoutManager = LinearLayoutManager(context)
+                binding.pendingOrderRecycleView.adapter = adapter
+                binding.pendingOrderRecycleView.isNestedScrollingEnabled = true
             }
 
-            val options =
-                FirestoreRecyclerOptions.Builder<Order_Food>()
-                    .setQuery(query, Order_Food::class.java).build()
 
-            adapter =
-                OrderListFireStoreAdapter(options, this, context!!)
-            binding.pendingOrderRecycleView.layoutManager = LinearLayoutManager(context)
-            binding.pendingOrderRecycleView.adapter = adapter
-            binding.pendingOrderRecycleView.isNestedScrollingEnabled = true
         } catch (e: Exception) {
 
         }
@@ -88,21 +130,34 @@ class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
     override fun buttonClick(order: Order_Food) {
         val db = FirebaseFirestore.getInstance()
         val r1 =
-            db.collection("User").document(userViewModel.user?.email!!)
+            db.collection("User").document(order.email!!)
                 .collection("Order_Food").document(order.id!!)
         val r2 =
             db.collection("Canteen").document(order.canteen_Name!!)
                 .collection("Store").document(order.store_Name!!)
                 .collection("Order_Food").document(order.id!!)
 
+        if (userViewModel.user!!.role == "staff") {
+            db.runBatch {
+                it.update(r1,"status", "Preparing")
+                it.update(r2,"status", "Preparing")
+            }.addOnFailureListener {
+                Log.i("Test", it.toString())
+            }
 
-        db.runBatch {
-            it.delete(r1)
-            it.delete(r2)
-        }
-            .addOnCompleteListener {
+                .addOnCompleteListener {
+                Toast.makeText(activity, "Order Is Preparing! ", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            db.runBatch {
+                it.delete(r1)
+                it.delete(r2)
+            }.addOnCompleteListener {
                 Toast.makeText(activity, "Order Being Removed! ", Toast.LENGTH_LONG).show()
             }
+        }
+
+
     }
 
     override fun onStart() {
