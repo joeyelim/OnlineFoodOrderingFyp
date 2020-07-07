@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.Food
 import com.example.fyp.Class.Order
 import com.example.fyp.Class.Order_Food
+import com.example.fyp.Interface.OnCurrentOrderAdapterClick
 import com.example.fyp.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.order_list_row.view.*
 import java.text.DecimalFormat
 
 class OrderListFireStoreAdapter(
-    options: FirestoreRecyclerOptions<Order_Food>, var onListClick1: onListClick2, var context: Context
+    options: FirestoreRecyclerOptions<Order_Food>, var itemClick: OnCurrentOrderAdapterClick, var context: Context
 ) :
     FirestoreRecyclerAdapter<Order_Food, OrderListViewHolder>(options) {
 
@@ -34,7 +35,7 @@ class OrderListFireStoreAdapter(
     }
 
     override fun onBindViewHolder(holder: OrderListViewHolder, position: Int, model: Order_Food) {
-        holder.setCanteenState(model, onListClick1, holder)
+        holder.setCanteenState(model, itemClick, holder)
 
     }
 
@@ -43,7 +44,7 @@ class OrderListFireStoreAdapter(
 class OrderListViewHolder internal constructor(private val view: View, var context: Context) :
     RecyclerView.ViewHolder(view) {
 
-    internal fun setCanteenState(order: Order_Food, onListClick1: onListClick2, holder: OrderListViewHolder) {
+    internal fun setCanteenState(order: Order_Food, itemClick: OnCurrentOrderAdapterClick, holder: OrderListViewHolder) {
 //        val food : Order_Food = data[position]
         val dec = DecimalFormat("RM ###.00")
 
@@ -57,6 +58,10 @@ class OrderListViewHolder internal constructor(private val view: View, var conte
         holder.view.txtRemarks.text = order.remark
         holder.view.orderListDate.text = order.pickUp_Date
         holder.view.orderListTime.text = order.pickUp_Time
+
+        holder.view.btnOrderCancel.setOnClickListener {
+            itemClick.buttonClick(order)
+        }
 
         when(order.status) {
             "Pending" -> pendingUI(holder)

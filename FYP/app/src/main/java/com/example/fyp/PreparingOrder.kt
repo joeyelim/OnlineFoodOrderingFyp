@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Order_Food
 import com.example.fyp.FirestoreAdapter.OrderListFireStoreAdapter
 import com.example.fyp.FirestoreAdapter.onListClick2
+import com.example.fyp.Interface.OnCurrentOrderAdapterClick
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPendingOrderBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -20,7 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 /**
  * A simple [Fragment] subclass.
  */
-class PreparingOrder : Fragment(), onListClick2 {
+class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
+    override fun buttonClick(order: Order_Food) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private lateinit var binding: FragmentPendingOrderBinding
     private lateinit var adapter: OrderListFireStoreAdapter
