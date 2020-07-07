@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Notification
@@ -28,8 +29,10 @@ import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentProfileBinding
 import com.firebase.ui.auth.AuthUI.getApplicationContext
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -61,6 +64,11 @@ class ProfileFragment : Fragment() {
         binding.btnChangePwd.setOnClickListener {
             it.findNavController()
                 .navigate(ProfileFragmentDirections.actionProfileFragmentToChangePwdFragment())
+        }
+
+        binding.btnLogout.setOnClickListener {
+            Firebase.auth.signOut()
+            this.findNavController().navigate(R.id.fragment_home)
         }
 
 
