@@ -41,8 +41,6 @@ class FoodViewHolder internal constructor(private val view: View, var context: C
 
     internal fun setCanteenState(food: Food, onListClick1: onListClick2, holder: FoodViewHolder) {
 
-        Log.i("Test", "Here")
-
         val foodName = view.findViewById<TextView>(R.id.tvFoodName)
         foodName.text = food.food_name
 
