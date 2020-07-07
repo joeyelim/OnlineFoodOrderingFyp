@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Order
 import com.example.fyp.Class.Order_Food
 import com.example.fyp.FirestoreAdapter.OrderHistoryFirestoreAdapter
-import com.example.fyp.FirestoreAdapter.onListClick2
+import com.example.fyp.FirestoreAdapter.OrderHistoryViewHolder
 import com.example.fyp.MainActivity
 import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
@@ -21,7 +21,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class OrderHistoryFragment : Fragment(), onListClick2 {
+class OrderHistoryFragment : Fragment(), OrderHistoryViewHolder.onListClick5 {
 
     private lateinit var binding: FragmentOrderHistoryBinding
     private lateinit var adapter: OrderHistoryFirestoreAdapter

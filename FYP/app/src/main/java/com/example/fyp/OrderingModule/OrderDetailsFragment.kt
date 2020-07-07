@@ -47,30 +47,30 @@ class OrderDetailsFragment : Fragment() {
     }
 
     private fun intiUI() {
-        val dec = DecimalFormat("RM ###.00")
-
-        binding.txtOrderDetailsDate.text = userViewModel.order.pickUp_Date
-        binding.txtPickupTime.text = userViewModel.order.pickUp_Time
-        binding.txtCanteenName.text = userViewModel.order.canteen_Name
-        binding.txtStoreName.text = userViewModel.order.pickUp_Time
-        binding.txtQty.text = userViewModel.order.pickUp_Time
-        binding.txtUnitPrice.text = userViewModel.order.pickUp_Time
-        binding.txtDiningOption.text = userViewModel.order.pickUp_Time
-        binding.txtRemark.text = userViewModel.order.pickUp_Time
-        binding.txtProgress.text = userViewModel.order.pickUp_Time
-        binding.txtPrice.text = userViewModel.order.pickUp_Time
-
-            binding.txtFoodName.text = userViewModel.food.food_name
-        binding.txtFoodName.paintFlags = binding.txtFoodName.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-
-        binding.txtFoodDesc.text = userViewModel.food.recipe_info
-        binding.txtLocation.text = userViewModel.canteen.type
-        binding.txtStoreName.text = userViewModel.store.store_name
-        binding.txtReview.text = "( " + userViewModel.food.total_review.toString() + " reviews ; " +
-                "Average : " +
-                DecimalFormat("#.#").format(average) + " stars )"
-        binding.txtSmallPrice.text = dec.format(cartViewModel.food.small_price).toString()
-        binding.txtLargePrice.text = dec.format(cartViewModel.food.large_price).toString()
+//        val dec = DecimalFormat("RM ###.00")
+//
+//        binding.txtOrderDetailsDate.text = userViewModel.order.pickUp_Date
+//        binding.txtPickupTime.text = userViewModel.order.pickUp_Time
+//        binding.txtCanteenName.text = userViewModel.order.canteen_Name
+//        binding.txtStoreName.text = userViewModel.order.pickUp_Time
+//        binding.txtQty.text = userViewModel.order.pickUp_Time
+//        binding.txtUnitPrice.text = userViewModel.order.pickUp_Time
+//        binding.txtDiningOption.text = userViewModel.order.pickUp_Time
+//        binding.txtRemark.text = userViewModel.order.pickUp_Time
+//        binding.txtProgress.text = userViewModel.order.pickUp_Time
+//        binding.txtPrice.text = userViewModel.order.pickUp_Time
+//
+//            binding.txtFoodName.text = userViewModel.food.food_name
+//        binding.txtFoodName.paintFlags = binding.txtFoodName.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+//
+//        binding.txtFoodDesc.text = userViewModel.food.recipe_info
+//        binding.txtLocation.text = userViewModel.canteen.type
+//        binding.txtStoreName.text = userViewModel.store.store_name
+//        binding.txtReview.text = "( " + userViewModel.food.total_review.toString() + " reviews ; " +
+//                "Average : " +
+//                DecimalFormat("#.#").format(average) + " stars )"
+//        binding.txtSmallPrice.text = dec.format(cartViewModel.food.small_price).toString()
+//        binding.txtLargePrice.text = dec.format(cartViewModel.food.large_price).toString()
 
 
     }

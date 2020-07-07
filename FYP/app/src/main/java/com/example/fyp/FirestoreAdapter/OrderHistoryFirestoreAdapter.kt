@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.order_history_row.view.*
 import java.text.DecimalFormat
 
 class OrderHistoryFirestoreAdapter (
-    options: FirestoreRecyclerOptions<Order_Food>, var onListClick1: onListClick2, var context: Context
+    options: FirestoreRecyclerOptions<Order_Food>, var onListClick3: OrderHistoryViewHolder.onListClick5, var context: Context
 ) :
     FirestoreRecyclerAdapter<Order_Food, OrderHistoryViewHolder>(options) {
 
@@ -27,7 +27,7 @@ class OrderHistoryFirestoreAdapter (
     }
 
     override fun onBindViewHolder(holder: OrderHistoryViewHolder, position: Int, model: Order_Food) {
-        holder.setCanteenState(model, onListClick1, holder)
+        holder.setCanteenState(model, onListClick3, holder)
 
     }
 
@@ -41,7 +41,7 @@ private fun getPrice(food : Order_Food) : Double {
 class OrderHistoryViewHolder internal constructor(private val view: View, var context: Context) :
     RecyclerView.ViewHolder(view) {
 
-    internal fun setCanteenState(order: Order_Food, onListClick1: onListClick2, holder: OrderHistoryViewHolder) {
+    internal fun setCanteenState(order: Order_Food, onListClick3: onListClick5, holder: OrderHistoryViewHolder) {
 //        val food : Order_Food = data[position]
         val dec = DecimalFormat("RM ###.00")
 
@@ -50,15 +50,15 @@ class OrderHistoryViewHolder internal constructor(private val view: View, var co
         holder.view.txtStatus.text = order.status
         holder.view.txtOrderDate.text = order.pickUp_Date
 
-//        holder.view.rvOrderHistory.setOnClickListener {
-//            onListClick1.onItemClick(order, adapterPosition)
-//        }
+        holder.view.rvOrderHistory.setOnClickListener {
+            onListClick3.onItemClick(order, adapterPosition)
+        }
     }
 
-//    interface onListClick2 {
-//        fun onItemClick(order: Order_Food, position: Int) {
-//
-//        }
-//    }
+    interface onListClick5 {
+        fun onItemClick(order: Order_Food, position: Int) {
+
+        }
+    }
 
 }
