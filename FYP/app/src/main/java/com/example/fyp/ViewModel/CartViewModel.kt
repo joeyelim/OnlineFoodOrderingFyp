@@ -30,7 +30,12 @@ class CartViewModel : ViewModel() {
     }
 
     fun deActivateCartButton() {
+        Log.i("Test", "Deactive")
         _activeButton.value = _activeButton.value?.minus(1)
+    }
+
+    fun resetCartButton() {
+        _activeButton.value = 0
     }
 
     fun addItem(cart : Cart) {

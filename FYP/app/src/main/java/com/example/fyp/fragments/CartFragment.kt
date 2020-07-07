@@ -73,6 +73,9 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
         cartViewModel = ViewModelProviders.of(activity!!).get(CartViewModel::class.java)
 
+
+        Log.i("Test", cartViewModel.activeButton.value.toString())
+
         checkLogin()
         initRecycleView()
 
@@ -298,7 +301,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        cartViewModel.deActivateCartButton()
+        cartViewModel.resetCartButton()
     }
 
 
