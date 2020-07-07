@@ -21,6 +21,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 
 
+
 class OrderHistoryFragment : Fragment(), OrderHistoryViewHolder.onListClick5 {
 
     private lateinit var binding: FragmentOrderHistoryBinding
@@ -54,6 +55,7 @@ class OrderHistoryFragment : Fragment(), OrderHistoryViewHolder.onListClick5 {
             val query = db.collection("User").document(userViewModel.user?.email!!)
                 .collection("Order_Food")
                 .whereEqualTo("status", "Paid")
+//            val query2 = collectionRef.whereEqualTo("status", "Cancel")
 
             query.addSnapshotListener { p0, _ ->
                 if (p0 != null) {
@@ -70,6 +72,7 @@ class OrderHistoryFragment : Fragment(), OrderHistoryViewHolder.onListClick5 {
                 }
             }
 
+
             val options =
                 FirestoreRecyclerOptions.Builder<Order_Food>()
                     .setQuery(query, Order_Food::class.java).build()
@@ -84,10 +87,12 @@ class OrderHistoryFragment : Fragment(), OrderHistoryViewHolder.onListClick5 {
         }
     }
 
-//    override fun onItemClick(order: Order, position: Int) {
+//    override fun onItemClick(order: Order_Food, position: Int) {
+////        userViewModel.order = order
 //        this.findNavController()
 //            .navigate(OrderHistoryFragmentDirections.actionOrderHistoryFragmentToOrderDetailsFragment())
 //    }
+
 
     override fun onStart() {
         super.onStart()
