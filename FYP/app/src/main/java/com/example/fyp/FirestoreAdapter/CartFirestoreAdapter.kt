@@ -72,7 +72,7 @@ class CartViewHolder internal constructor(private val view: View, var context: C
         holder.view.foodName.text = cart.food_name
         holder.view.txtRemarks.text = cart.remark
         holder.view.quantity.text = cart.quantity.toString()
-        holder.view.txtFoodPrice.text = dec.format(cart.each_price).toString()
+        holder.view.txtFoodPrice.text = dec.format(cart.each_price!! * cart.quantity!!).toString()
 
         val image = view.findViewById<ImageView>(R.id.imgFood)
         val a = FirebaseStorage.getInstance().getReference(cart.image!!)
@@ -92,15 +92,15 @@ class CartViewHolder internal constructor(private val view: View, var context: C
         }
 
         holder.view.btnPlus.setOnClickListener {
-            onListClick.addBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice)
+            onListClick.addBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice, holder.view.checkBox)
         }
 
         holder.view.btnMinus.setOnClickListener {
-            onListClick.minusBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice)
+            onListClick.minusBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice, holder.view.checkBox)
         }
 
         holder.view.checkBox.setOnClickListener {
-            onListClick.checkBoxClick(cart, holder.view.checkBox)
+            onListClick.checkBoxClick(cart, holder.view.checkBox, holder.view.quantity)
         }
     }
 

@@ -66,8 +66,18 @@ class FoodDetailFragment : Fragment() {
 
         binding.imgCart.setOnClickListener {
             it.requestFocus()
-            it.findNavController()
-                .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToCartFragment())
+
+            if (Firebase.auth.currentUser != null) {
+                it.findNavController()
+                    .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToCartFragment())
+            } else {
+                val dialog = AlertDialog.Builder(context)
+                dialog.setTitle("Oops, sorry!")
+                dialog.setMessage("You Need to Login To View Cart")
+                dialog.setPositiveButton("OK") { _: DialogInterface, i: Int -> }
+                dialog.show()
+            }
+
         }
 
         viewModel.rating.observe(this, Observer {
@@ -114,8 +124,17 @@ class FoodDetailFragment : Fragment() {
         }
 
         binding.btnAddToCart.setOnClickListener {
-            it.findNavController()
-                .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToAddToCartFragment())
+            if (Firebase.auth.currentUser != null) {
+                it.findNavController()
+                    .navigate(FoodDetailFragmentDirections.actionFoodDetailFragmentToAddToCartFragment())
+            } else {
+                val dialog = AlertDialog.Builder(context)
+
+                dialog.setTitle("Oops, sorry!")
+                dialog.setMessage("You Need to Login Add Food Into Cart")
+                dialog.setPositiveButton("OK") { _: DialogInterface, i: Int -> }
+                dialog.show()
+            }
         }
 
         return binding.root

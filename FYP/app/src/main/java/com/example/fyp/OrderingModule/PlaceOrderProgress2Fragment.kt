@@ -102,6 +102,10 @@ class PlaceOrderProgress2Fragment : Fragment() {
         val cartArrayList = ArrayList<Cart>()
         cartArrayList.addAll(cartViewModel.hashMap.values)
 
+        for (item in cartArrayList) {
+            Log.i("Test", item.each_price.toString())
+        }
+
         return cartArrayList
     }
 
