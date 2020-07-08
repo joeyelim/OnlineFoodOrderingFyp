@@ -2,18 +2,21 @@ package com.example.fyp.stuMaintenanceModule
 
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentEditProfileBinding
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 /**
@@ -37,14 +40,42 @@ class EditProfileFragment : Fragment() {
 
         intiUI()
 
-        binding.btnConfirm.setOnClickListener{
-            if (!validation()){
+        binding.btnConfirm.setOnClickListener {
+            if (!validation()) {
                 return@setOnClickListener
+            } else {
+                updateDatabase()
             }
 
         }
 
         return binding.root
+    }
+
+    private fun updateDatabase() {
+        userViewModel.user?.first_name = binding.txtFirstN.text.toString()
+        userViewModel.user?.last_name = binding.txtLastN.text.toString()
+        userViewModel.user?.first_name = binding.txtPhone.text.toString()
+
+        FirebaseFirestore.getInstance()
+            .collection("User").document(userViewModel.user?.email!!)
+            .update( "first_name", binding.txtFirstN.text.toString(),
+                "last_name", binding.txtLastN.text.toString(),
+                "phone_number", binding.txtPhone.text.toString()
+
+            ).addOnSuccessListener {
+                Log.i("Test", "Success Update")
+            }.addOnCompleteListener {
+                val snackbar = Snackbar.make(
+                    this.requireView(),
+                    "Profile Being Updated",
+                    Snackbar.LENGTH_SHORT
+                )
+                snackbar.setAction("Close") {
+                    snackbar.dismiss()
+                }
+                snackbar.show()
+            }
     }
 
     private fun intiUI() {
@@ -62,36 +93,32 @@ class EditProfileFragment : Fragment() {
         val phone = binding.txtPhone.text.toString()
 
         if (email.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()
-            || !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
+            || !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()
+        ) {
 
             if (firstName.isEmpty()) {
                 binding.txtFirstNLayout.error = "*First name is require."
-            }
-            else {
+            } else {
                 binding.txtFirstNLayout.isErrorEnabled = false
             }
 
             if (lastName.isEmpty()) {
                 binding.txtLastNLayout.error = "*Last name is require."
-            }
-            else {
+            } else {
                 binding.txtLastNLayout.isErrorEnabled = false
             }
 
             if (phone.isEmpty()) {
                 binding.txtPhoneLayout.error = "*Phone number is require."
-            }
-            else {
+            } else {
                 binding.txtPhoneLayout.isErrorEnabled = false
             }
 
             if (email.isEmpty()) {
                 binding.txtEmailLayout.error = "*Email is require."
-            }
-            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 binding.txtEmailLayout.error = "*Please enter a valid email"
-            }
-            else {
+            } else {
                 binding.txtEmailLayout.isErrorEnabled = false
             }
 
