@@ -86,7 +86,7 @@ class CartViewModel : ViewModel() {
 
         return total
     }
-    
+
 
     init {
         _activeButton.value = 0
