@@ -140,12 +140,12 @@ class AddToCartFragment : Fragment() {
         val quantity = binding.quantity.text.toString().toInt()
         val remark = binding.txtRemarks.text.toString()
         val image = viewModel.food.food_image.toString()
-        val tolPrice = getRadiobtnValue()* quantity
+        val price = getRadiobtnValue()
 
         val cartList = ArrayList<Cart>()
         cartList.add(
             Cart(
-                foodName, tolPrice, quantity, remark,
+                foodName, price , quantity, remark,
                 canteenName, storeName, saveCurrentDateTime, image
             )
         )
@@ -155,13 +155,6 @@ class AddToCartFragment : Fragment() {
             db.collection("User").document(userViewModel.user?.email!!)
                 .collection("Cart").document(item.cart_ID!!)
                 .set(item)
-                .addOnSuccessListener {
-                    Log.i("upload", "success")
-
-                }
-                .addOnFailureListener {
-                    Log.i("upload", "Error adding document", it)
-                }
                 .addOnCompleteListener {
                     showSnackBar()
                 }

@@ -72,7 +72,7 @@ class CartViewHolder internal constructor(private val view: View, var context: C
         holder.view.foodName.text = cart.food_name
         holder.view.txtRemarks.text = cart.remark
         holder.view.quantity.text = cart.quantity.toString()
-        holder.view.txtFoodPrice.text = dec.format(cart.each_price).toString()
+        holder.view.txtFoodPrice.text = dec.format(cart.each_price!! * cart.quantity!!).toString()
 
         val image = view.findViewById<ImageView>(R.id.imgFood)
         val a = FirebaseStorage.getInstance().getReference(cart.image!!)
