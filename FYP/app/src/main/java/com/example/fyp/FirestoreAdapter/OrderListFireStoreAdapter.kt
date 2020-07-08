@@ -47,7 +47,7 @@ class OrderListViewHolder internal constructor(private val view: View, var conte
         val dec = DecimalFormat("RM ###.00")
 
         if (user.role == "staff") {
-            holder.view.txtCanteenName.text = user.first_name + " " + user.last_name
+            holder.view.txtCanteenName.text = order.email
         } else {
             holder.view.txtCanteenName.text = order.canteen_Name
             holder.view.txtStore.text = order.store_Name

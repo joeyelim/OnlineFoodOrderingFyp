@@ -74,17 +74,7 @@ class AddToCartFragment : Fragment() {
         }
 
         binding.btnAddToCart.setOnClickListener(View.OnClickListener {
-            if (Firebase.auth.currentUser != null) {
-                addingToCartList()
-            } else {
-                val dialog = AlertDialog.Builder(context)
-
-                dialog.setTitle("Oops, sorry!")
-                dialog.setMessage("You Need to Login Add Food Into Cart")
-                dialog.setPositiveButton("OK") { _: DialogInterface, i: Int -> }
-                dialog.show()
-            }
-
+            addingToCartList()
         })
 
         return binding.root

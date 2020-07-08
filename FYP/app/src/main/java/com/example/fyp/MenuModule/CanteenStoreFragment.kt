@@ -2,6 +2,7 @@ package com.example.fyp.MenuModule
 
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -23,8 +24,10 @@ import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.databinding.FragmentCanteenStoreBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.canteen_row.view.*
@@ -58,8 +61,17 @@ class CanteenStoreFragment : Fragment(), onListClick1 {
 
         binding.btnCart.setOnClickListener{
             it.requestFocus()
-            it.findNavController()
-                .navigate(CanteenStoreFragmentDirections.actionCanteenStoreFragmentToCartFragment())
+
+            if (Firebase.auth.currentUser != null) {
+                it.findNavController()
+                    .navigate(CanteenStoreFragmentDirections.actionCanteenStoreFragmentToCartFragment())
+            } else {
+                val dialog = AlertDialog.Builder(context)
+                dialog.setTitle("Oops, sorry!")
+                dialog.setMessage("You Need to Login To View Cart")
+                dialog.setPositiveButton("OK") { _: DialogInterface, i: Int -> }
+                dialog.show()
+            }
         }
 
         setUpUI()
