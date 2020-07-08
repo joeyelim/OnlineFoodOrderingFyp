@@ -141,7 +141,11 @@ class ReadyOrder : Fragment(), OnCurrentOrderAdapterClick {
             db.runBatch {
                 it.update(r1,"status", "Paid")
                 it.update(r2,"status", "Paid")
-            }.addOnCompleteListener {
+            }.addOnFailureListener {
+                Log.i("Test", it.toString())
+            }
+
+                .addOnCompleteListener {
                 Toast.makeText(activity, "Order Is Paid! ", Toast.LENGTH_LONG).show()
             }
         }

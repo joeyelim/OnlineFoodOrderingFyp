@@ -87,7 +87,9 @@ class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
                 binding.pendingOrderRecycleView.layoutManager = LinearLayoutManager(context)
                 binding.pendingOrderRecycleView.adapter = adapter
                 binding.pendingOrderRecycleView.isNestedScrollingEnabled = true
-            } else {
+            }
+            else
+            {
 
                 // student view
 
@@ -118,7 +120,6 @@ class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
                     OrderListFireStoreAdapter(options, this, context!!, userViewModel.user!!)
                 binding.pendingOrderRecycleView.layoutManager = LinearLayoutManager(context)
                 binding.pendingOrderRecycleView.adapter = adapter
-                binding.pendingOrderRecycleView.isNestedScrollingEnabled = true
             }
 
 

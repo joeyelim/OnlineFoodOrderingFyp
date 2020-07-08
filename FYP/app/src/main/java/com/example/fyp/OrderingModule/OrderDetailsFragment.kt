@@ -3,6 +3,7 @@ package com.example.fyp.OrderingModule
 
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -16,6 +17,7 @@ import com.example.fyp.ViewModel.CanteenViewModel
 import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentOrderDetailsBinding
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.DecimalFormat
 
 /**
@@ -47,32 +49,41 @@ class OrderDetailsFragment : Fragment() {
     }
 
     private fun intiUI() {
-//        val dec = DecimalFormat("RM ###.00")
-//
-//        binding.txtOrderDetailsDate.text = userViewModel.order.pickUp_Date
-//        binding.txtPickupTime.text = userViewModel.order.pickUp_Time
-//        binding.txtCanteenName.text = userViewModel.order.canteen_Name
-//        binding.txtStoreName.text = userViewModel.order.pickUp_Time
-//        binding.txtQty.text = userViewModel.order.pickUp_Time
-//        binding.txtUnitPrice.text = userViewModel.order.pickUp_Time
-//        binding.txtDiningOption.text = userViewModel.order.pickUp_Time
-//        binding.txtRemark.text = userViewModel.order.pickUp_Time
-//        binding.txtProgress.text = userViewModel.order.pickUp_Time
-//        binding.txtPrice.text = userViewModel.order.pickUp_Time
-//
-//            binding.txtFoodName.text = userViewModel.food.food_name
-//        binding.txtFoodName.paintFlags = binding.txtFoodName.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-//
-//        binding.txtFoodDesc.text = userViewModel.food.recipe_info
-//        binding.txtLocation.text = userViewModel.canteen.type
-//        binding.txtStoreName.text = userViewModel.store.store_name
-//        binding.txtReview.text = "( " + userViewModel.food.total_review.toString() + " reviews ; " +
-//                "Average : " +
-//                DecimalFormat("#.#").format(average) + " stars )"
-//        binding.txtSmallPrice.text = dec.format(cartViewModel.food.small_price).toString()
-//        binding.txtLargePrice.text = dec.format(cartViewModel.food.large_price).toString()
+        val dec = DecimalFormat("RM ###.00")
+
+        binding.txtOrderDetailsDate.text = userViewModel.order.pickUp_Date
+        binding.txtPickupTime.text = userViewModel.order.pickUp_Time
+        binding.txtCanteenName.text = userViewModel.order.canteen_Name
+        binding.txtStoreName.text = userViewModel.order.store_Name
+        binding.txtQty.text = userViewModel.order.quantity.toString()
+        binding.txtUnitPrice.text = dec.format(userViewModel.order.each_Price).toString()
+        binding.txtDiningOption.text = userViewModel.order.dining_option
+        binding.txtRemark.text = userViewModel.order.remark
+        binding.txtProgress.text = userViewModel.order.status
+        binding.txtPrice.text = dec.format(userViewModel.order.each_Price!!
+                                    * userViewModel.order.quantity!!).toString()
 
 
+//        FirebaseFirestore.getInstance()
+//            .collection("Canteen").document(userViewModel.order.canteen_Name!!)
+//            .collection("Store").document(userViewModel.order.store_Name!!)
+//            .collection("Food")
+//            .whereEqualTo("food_name", userViewModel.order.food_Name)
+//            .get()
+//            .addOnSuccessListener {
+//                for (item in it.documents) {
+//                    binding.txtFoodName.text = item["food_name"].toString()
+//                    binding.txtFoodName.paintFlags = binding.txtFoodName.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+//                    binding.txtFoodDesc.text = userViewModel.food.recipe_info
+//                    binding.txtLocation.text = userViewModel.canteen.type
+//                    binding.txtStoreName.text = userViewModel.store.store_name
+//                    binding.txtReview.text = "( " + userViewModel.food.total_review.toString() + " reviews ; " +
+//                            "Average : " +
+//                            DecimalFormat("#.#").format(average) + " stars )"
+//                    binding.txtSmallPrice.text = dec.format(cartViewModel.food.small_price).toString()
+//                    binding.txtLargePrice.text = dec.format(cartViewModel.food.large_price).toString()
+//                }
+//            }
     }
 
 

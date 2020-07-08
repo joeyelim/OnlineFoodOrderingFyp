@@ -13,7 +13,11 @@ import com.example.fyp.Class.Order
 import com.example.fyp.Class.Order_Food
 import com.example.fyp.FirestoreAdapter.OrderHistoryFirestoreAdapter
 import com.example.fyp.FirestoreAdapter.OrderHistoryViewHolder
+import com.example.fyp.Interface.OnCurrentOrderAdapterClick
+import com.example.fyp.Interface.OnHistoryItemClick
+import com.example.fyp.Interface.TestItemClick
 import com.example.fyp.MainActivity
+import com.example.fyp.R
 import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentOrderHistoryBinding
@@ -21,7 +25,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class OrderHistoryFragment : Fragment(), OrderHistoryViewHolder.onListClick5 {
+class OrderHistoryFragment : Fragment(), OnHistoryItemClick {
 
     private lateinit var binding: FragmentOrderHistoryBinding
     private lateinit var adapter: OrderHistoryFirestoreAdapter
@@ -88,6 +92,13 @@ class OrderHistoryFragment : Fragment(), OrderHistoryViewHolder.onListClick5 {
 //        this.findNavController()
 //            .navigate(OrderHistoryFragmentDirections.actionOrderHistoryFragmentToOrderDetailsFragment())
 //    }
+
+    override fun buttonClickNavigate(order: Order_Food, position: Int) {
+        super.buttonClickNavigate(order, position)
+        userViewModel.order = order
+        this.findNavController()
+            .navigate(R.id.orderDetailsFragment)
+    }
 
     override fun onStart() {
         super.onStart()
