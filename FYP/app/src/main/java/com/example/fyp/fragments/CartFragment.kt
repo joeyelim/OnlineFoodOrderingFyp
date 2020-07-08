@@ -4,6 +4,7 @@ package com.example.fyp.fragments
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -176,7 +177,6 @@ class CartFragment : Fragment(), OnAdapterItemClick {
     }
 
     override fun addBtnClick(cart: Cart, view: TextView, txt: TextView, cb: CheckBox) {
-
         if (cb.isChecked) {
             FirebaseFirestore.getInstance()
                 .collection("Canteen").document(cart.canteen_name!!)
@@ -199,8 +199,15 @@ class CartFragment : Fragment(), OnAdapterItemClick {
                         view.text = "$counter"
                         txt.text = DecimalFormat("RM ###.00").format(counter * price!!).toString()
                         updateCartViewModel(counter, cart)
+                    } else {
                     }
                 }
+
+            FirebaseFirestore.getInstance()
+                .collection("User").document(userViewModel.user?.email!!)
+                .collection("Cart").document(cart.cart_ID!!)
+                .update("quantity", view.text.toString().toInt())
+
         } else {
             // display dialogue
             alertDialog()

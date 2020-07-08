@@ -74,7 +74,9 @@ class FoodDetailFragment : Fragment() {
                 val dialog = AlertDialog.Builder(context)
                 dialog.setTitle("Oops, sorry!")
                 dialog.setMessage("You Need to Login To View Cart")
-                dialog.setPositiveButton("OK") { _: DialogInterface, i: Int -> }
+                dialog.setPositiveButton("OK") { _: DialogInterface, i: Int ->
+
+                }
                 dialog.show()
             }
 
