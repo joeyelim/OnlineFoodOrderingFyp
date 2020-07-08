@@ -3,7 +3,6 @@ package com.example.fyp.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +12,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.fyp.CurrentOrder2
 import com.example.fyp.MainActivity
-import com.example.fyp.OrderingModule.CurrentOrderFragment
 import com.example.fyp.OrderingModule.OrderHistoryFragment
 import com.example.fyp.databinding.FragmentOrderListBinding
 import kotlinx.android.synthetic.main.fragment_order_list.*
-import android.view.MotionEvent
-import android.text.method.Touch.onTouchEvent
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.fyp.R

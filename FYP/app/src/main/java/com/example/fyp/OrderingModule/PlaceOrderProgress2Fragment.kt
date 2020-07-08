@@ -2,7 +2,6 @@ package com.example.fyp.OrderingModule
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -13,24 +12,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fyp.Class.Cart
-import com.example.fyp.Class.Order_Food
 import com.example.fyp.FirestoreAdapter.PlaceOrderItemAdapter
-import com.example.fyp.FirestoreAdapter.TestAdapter
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPlaceOrderProgress2Binding
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_add_to_cart.*
-import kotlinx.android.synthetic.main.fragment_place_order_progress2.*
-import kotlinx.android.synthetic.main.outer_recycle_view_layout.view.*
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * A simple [Fragment] subclass.
@@ -56,10 +47,6 @@ class PlaceOrderProgress2Fragment : Fragment() {
 
         binding.btnConfirm.setOnClickListener {
             updateDatabase(it)
-
-//            it.findNavController()
-//                .navigate(PlaceOrderProgress2FragmentDirections
-//                    .actionPlaceOrderProgress2FragmentToPlaceOrderProgress3Fragment())
         }
 
         binding.btnBack.setOnClickListener {
@@ -89,7 +76,7 @@ class PlaceOrderProgress2Fragment : Fragment() {
     }
 
     private fun initRecycleView() {
-        val adapter = getCartArrayList()
+        val adapter = cartViewModel.cartArrayList
         val adapter2 = PlaceOrderItemAdapter()
         binding.orderFoodList.setHasFixedSize(true)
         binding.orderFoodList.layoutManager = LinearLayoutManager(context)
@@ -98,83 +85,51 @@ class PlaceOrderProgress2Fragment : Fragment() {
 
     }
 
-    private fun getCartArrayList() : ArrayList<Cart> {
-        val cartArrayList = ArrayList<Cart>()
-        cartArrayList.addAll(cartViewModel.hashMap.values)
-
-        for (item in cartArrayList) {
-            Log.i("Test", item.each_price.toString())
-        }
-
-        return cartArrayList
-    }
-
-    private fun updateDatabase(view : View) {
+    private fun updateDatabase(view: View) {
 
         val db = FirebaseFirestore.getInstance()
 
         Toast.makeText(activity, "Processing Your Order ... ", Toast.LENGTH_LONG).show()
 
-
         // batch write : do write at once, make sure all completed den navigate to next page
         db.runBatch {
 
-            // write into user -> Order
-//            it.set(db.collection("User").document(userViewModel.user?.email!!)
-//                .collection("Order_Food").document(cartViewModel.order.id!!),
-//                cartViewModel.order)
-//
-//            // write into user -> Order -> Order_Food
-//            for (item in cartViewModel.orderFood) {
-//                it.set(db.collection("User").document(userViewModel.user?.email!!)
-//                    .collection("Order").document(cartViewModel.order.id!!)
-//                    .collection("Order_Food").document(item.id!!)
-//                , item)
-//            }
-
             for (item in cartViewModel.orderFood) {
-                it.set(db.collection("User").document(userViewModel.user?.email!!)
-                    .collection("Order_Food").document(item.id!!)
-                    , item)
+                it.set(
+                    db.collection("User").document(userViewModel.user?.email!!)
+                        .collection("Order_Food").document(item.id!!)
+                    , item
+                )
             }
-
-
-//            // write into Canteen -> Store -> Order
-//            val canteenStoreList = ArrayList<String>()
-//
-//            for (item in cartViewModel.orderFood) {
-//                val canteenStore = item.canteen_Name + item.store_Name
-//
-//                if (!canteenStoreList.contains(canteenStore)) {
-//                    canteenStoreList.add(canteenStore)
-//                    it.set(db.collection("Canteen").document(item.canteen_Name!!)
-//                        .collection("Store").document(item.store_Name!!)
-//                        .collection("Order").document(cartViewModel.order.id!!),
-//                        cartViewModel.order)
-//                }
-//            }
 
             // Write into Canteen -> Store -> Order
             for (item in cartViewModel.orderFood) {
                 item.email = userViewModel.user?.email
-                it.set(db.collection("Canteen").document(item.canteen_Name!!)
-                    .collection("Store").document(item.store_Name!!)
-                    .collection("Order_Food").document(item.id!!)
-                    ,item)
+                it.set(
+                    db.collection("Canteen").document(item.canteen_Name!!)
+                        .collection("Store").document(item.store_Name!!)
+                        .collection("Order_Food").document(item.id!!)
+                    , item
+                )
             }
 
             // Delete Existing Cart
-            cartViewModel.hashMap.forEach{(key, value) ->
-                    it.delete(db.collection("User").document(userViewModel.user?.email!!)
-                        .collection("Cart").document(value.cart_ID!!))
+            for (item in cartViewModel.cartArrayList) {
+                it.delete(
+                    db.collection("User").document(userViewModel.user?.email!!)
+                        .collection("Cart").document(item.cart_ID!!)
+                )
             }
+
 
         }.addOnCompleteListener {
             Toast.makeText(activity, "Order Being Placed! ", Toast.LENGTH_LONG).show()
             cartViewModel.removeAll()
             view.findNavController()
-                .navigate(PlaceOrderProgress2FragmentDirections
-                    .actionPlaceOrderProgress2FragmentToPlaceOrderProgress3Fragment())
+                .navigate(
+                    PlaceOrderProgress2FragmentDirections
+                        .actionPlaceOrderProgress2FragmentToPlaceOrderProgress3Fragment()
+                )
         }
     }
 
