@@ -55,7 +55,7 @@ class EditProfileFragment : Fragment() {
     private fun updateDatabase() {
         userViewModel.user?.first_name = binding.txtFirstN.text.toString()
         userViewModel.user?.last_name = binding.txtLastN.text.toString()
-        userViewModel.user?.first_name = binding.txtPhone.text.toString()
+        userViewModel.user?.phone_number = binding.txtPhone.text.toString()
 
         FirebaseFirestore.getInstance()
             .collection("User").document(userViewModel.user?.email!!)

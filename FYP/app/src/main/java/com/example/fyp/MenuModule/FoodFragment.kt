@@ -85,6 +85,7 @@ class FoodFragment : Fragment(), onListClick2 {
         initTab()
         updateUI()
 
+        // this is filter function
         binding.FoodFilterTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
@@ -95,7 +96,6 @@ class FoodFragment : Fragment(), onListClick2 {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                Toast.makeText(activity, (tab!!.text.toString().capitalize()), Toast.LENGTH_LONG).show()
                 updateRecycleView((tab!!.text.toString()).capitalize())
             }
 
@@ -104,6 +104,7 @@ class FoodFragment : Fragment(), onListClick2 {
         return binding.root
     }
 
+    // 这个是 food cat tab 的 recycle view
     private fun initTab() {
 
         binding.FoodFilterTab

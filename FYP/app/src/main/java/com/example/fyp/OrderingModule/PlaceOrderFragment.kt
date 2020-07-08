@@ -117,15 +117,12 @@ class PlaceOrderFragment : Fragment() {
             }
             else
             {
-                if (x.before(date))
-                {
+                return if (x.before(date)) {
                     binding.errorMsg.setText("Please selected the time after current time($formatedDate)!")
                     binding.errorMsg.visibility = View.VISIBLE
-                    return false
-                }
-                else
-                {
-                    return true
+                    false
+                } else {
+                    true
                 }
             }
         }

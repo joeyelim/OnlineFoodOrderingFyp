@@ -4,18 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fyp.Class.Notification
 import com.example.fyp.Class.Order_Food
 import com.example.fyp.Interface.OnHistoryItemClick
-import com.example.fyp.Interface.TestItemClick
-import com.example.fyp.OrderingModule.OrderHistoryFragmentDirections
 import com.example.fyp.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import kotlinx.android.synthetic.main.fragment_order_history.view.*
 import kotlinx.android.synthetic.main.order_history_row.view.*
 import java.text.DecimalFormat
 

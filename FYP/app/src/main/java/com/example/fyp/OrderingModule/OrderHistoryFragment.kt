@@ -9,13 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fyp.Class.Order
 import com.example.fyp.Class.Order_Food
 import com.example.fyp.FirestoreAdapter.OrderHistoryFirestoreAdapter
-import com.example.fyp.FirestoreAdapter.OrderHistoryViewHolder
-import com.example.fyp.Interface.OnCurrentOrderAdapterClick
 import com.example.fyp.Interface.OnHistoryItemClick
-import com.example.fyp.Interface.TestItemClick
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.CartViewModel

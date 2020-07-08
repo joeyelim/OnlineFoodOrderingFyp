@@ -2,7 +2,6 @@ package com.example.fyp
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.fyp.OrderingModule.CurrentOrderFragment
 import com.example.fyp.databinding.FragmentCurrentOrder2Binding
-import com.example.fyp.databinding.FragmentOrderListBinding
-import com.example.fyp.fragments.OrderListFragment
 
 /**
  * A simple [Fragment] subclass.
@@ -84,12 +80,6 @@ class CurrentOrder2 : Fragment() {
         fun addFragment(fragment: Fragment, title: String) {
             fragments.add(fragment)
             titles.add(title)
-        }
-
-        fun setFragment() {
-            titles.add("Pending")
-            titles.add("Preparing")
-            titles.add("Ready")
         }
 
         override fun getPageTitle(i: Int): CharSequence? {
