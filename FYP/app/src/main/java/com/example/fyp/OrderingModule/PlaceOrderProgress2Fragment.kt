@@ -95,15 +95,14 @@ class PlaceOrderProgress2Fragment : Fragment() {
         db.runBatch {
 
             for (item in cartViewModel.orderFood) {
+                // Write into User -> Order_Food
                 it.set(
                     db.collection("User").document(userViewModel.user?.email!!)
                         .collection("Order_Food").document(item.id!!)
                     , item
                 )
-            }
 
-            // Write into Canteen -> Store -> Order
-            for (item in cartViewModel.orderFood) {
+                // Write into Canteen -> Store -> Order
                 item.email = userViewModel.user?.email
                 it.set(
                     db.collection("Canteen").document(item.canteen_Name!!)
@@ -112,6 +111,17 @@ class PlaceOrderProgress2Fragment : Fragment() {
                     , item
                 )
             }
+
+//            // Write into Canteen -> Store -> Order
+//            for (item in cartViewModel.orderFood) {
+//                item.email = userViewModel.user?.email
+//                it.set(
+//                    db.collection("Canteen").document(item.canteen_Name!!)
+//                        .collection("Store").document(item.store_Name!!)
+//                        .collection("Order_Food").document(item.id!!)
+//                    , item
+//                )
+//            }
 
             // Delete Existing Cart
             for (item in cartViewModel.cartArrayList) {
