@@ -87,11 +87,11 @@ class OrderHistoryFragment : Fragment(), OrderHistoryViewHolder.onListClick5 {
         }
     }
 
-//    override fun onItemClick(order: Order_Food, position: Int) {
-////        userViewModel.order = order
-//        this.findNavController()
-//            .navigate(OrderHistoryFragmentDirections.actionOrderHistoryFragmentToOrderDetailsFragment())
-//    }
+    override fun onItemClick(order: Order_Food, position: Int) {
+        userViewModel.order = order
+        this.findNavController()
+            .navigate(OrderHistoryFragmentDirections.actionOrderHistoryFragmentToOrderDetailsFragment())
+    }
 
 
     override fun onStart() {

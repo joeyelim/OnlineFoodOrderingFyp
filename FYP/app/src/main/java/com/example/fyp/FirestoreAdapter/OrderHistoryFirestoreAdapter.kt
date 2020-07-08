@@ -50,7 +50,7 @@ class OrderHistoryViewHolder internal constructor(private val view: View, var co
         holder.view.txtStatus.text = order.status
         holder.view.txtOrderDate.text = order.pickUp_Date
 
-        holder.view.rvOrderHistory.setOnClickListener {
+        holder.view.cvOrderHistory.setOnClickListener {
             onListClick3.onItemClick(order, adapterPosition)
         }
     }
