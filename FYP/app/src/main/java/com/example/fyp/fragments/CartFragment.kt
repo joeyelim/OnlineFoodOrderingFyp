@@ -3,16 +3,12 @@ package com.example.fyp.fragments
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,8 +18,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Cart
 import com.example.fyp.Class.Food
-import com.example.fyp.Interface.OnAdapterItemClick
 import com.example.fyp.FirestoreAdapter.CartFirestoreAdapter
+import com.example.fyp.Interface.OnAdapterItemClick
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.CanteenViewModel
@@ -34,12 +30,10 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import kotlinx.android.synthetic.main.fragment_add_to_cart.*
 import kotlinx.android.synthetic.main.fragment_cart.*
 import java.text.DecimalFormat
 
@@ -130,10 +124,10 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             query.addSnapshotListener { p0, _ ->
                 if (p0 != null) {
 
-                    if(p0.size() > 0) {
+                    if (p0.size() > 0) {
                         binding.emptyLayout.visibility = View.GONE;
                         binding.cartLayout.visibility = View.VISIBLE
-                    }else {
+                    } else {
                         binding.emptyLayout.visibility = View.VISIBLE;
                         binding.cartLayout.visibility = View.GONE
                     }
@@ -149,8 +143,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             binding.rcCart.layoutManager = LinearLayoutManager(activity)
             binding.rcCart.adapter = adapter
 
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             return
         }
     }
@@ -162,7 +155,7 @@ class CartFragment : Fragment(), OnAdapterItemClick {
                 binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                 binding.btnCheckOut.isEnabled = true
 
-                binding.btnCheckOut.setOnClickListener {view ->
+                binding.btnCheckOut.setOnClickListener { view ->
                     view.findNavController()
                         .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
                 }
@@ -173,65 +166,104 @@ class CartFragment : Fragment(), OnAdapterItemClick {
 //                binding.btnCheckOut.isEnabled = false
                 binding.btnCheckOut.setOnClickListener {
                     Snackbar.make(
-                        cartLayout, "Please select at least one food before you proceed to checkout!", Snackbar.LENGTH_LONG
+                        cartLayout,
+                        "Please select at least one food before you proceed to checkout!",
+                        Snackbar.LENGTH_LONG
                     ).show()
                 }
             }
         })
     }
 
-    override fun addBtnClick(cart: Cart, view: TextView, txt: TextView) {
-        FirebaseFirestore.getInstance()
-            .collection("Canteen").document(cart.canteen_name!!)
-            .collection("Store").document(cart.store_name!!)
-            .collection("Food").document(cart.food_name!!)
-            .get()
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    var counter = (view.text).toString().toInt()
-                    val price = cart.each_price
-                    val food = it.result?.toObject(Food::class.java)
+    override fun addBtnClick(cart: Cart, view: TextView, txt: TextView, cb: CheckBox) {
 
-                    if (counter >= food?.total_stock!!) {
-                        // custom dialog
-                        openDialog()
-                        counter = food.total_stock!!
-                    } else {
-                        counter++
+        if (cb.isChecked) {
+            FirebaseFirestore.getInstance()
+                .collection("Canteen").document(cart.canteen_name!!)
+                .collection("Store").document(cart.store_name!!)
+                .collection("Food").document(cart.food_name!!)
+                .get()
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        var counter = (view.text).toString().toInt()
+                        val price = cart.each_price
+                        val food = it.result?.toObject(Food::class.java)
+
+                        if (counter >= food?.total_stock!!) {
+                            // custom dialog
+                            openDialog()
+                            counter = food.total_stock!!
+                        } else {
+                            counter++
+                        }
+                        view.text = "$counter"
+                        txt.text = DecimalFormat("RM ###.00").format(counter * price!!).toString()
+                        updateCartViewModel(counter, cart)
                     }
-                    view.text = "$counter"
-                    txt.text = DecimalFormat("RM ###.00").format(counter * price!!).toString()
                 }
-            }
-    }
-
-    override fun minusBtnClick(cart: Cart, view: TextView, txt: TextView) {
-        var counter = (view.text).toString().toInt()
-        val price = cart.each_price
-
-        if (counter <= 1) {
-            counter = 1
-
         } else {
-            counter--
+            // display dialogue
+            alertDialog()
         }
 
-        view.text = "$counter"
-        txt.text = DecimalFormat("RM ###.00").format(counter * price!!).toString()
+
+    }
+
+    override fun minusBtnClick(cart: Cart, view: TextView, txt: TextView, cb: CheckBox) {
+        if (cb.isChecked) {
+            var counter = (view.text).toString().toInt()
+            val price = cart.each_price
+
+            if (counter <= 1) {
+                counter = 1
+
+            } else {
+                counter--
+            }
+
+            view.text = "$counter"
+            txt.text = DecimalFormat("RM ###.00").format(counter * price!!).toString()
+            updateCartViewModel(counter, cart)
+        } else {
+            // display dialogue
+            alertDialog()
+        }
+
+    }
+
+    private fun updateCartViewModel(quantity: Int, cart: Cart) {
+        for (item in cartViewModel.cartArrayList) {
+            if (item == cart) {
+                item.quantity = quantity
+            }
+        }
     }
 
     override fun deleteBtnClick(cart: Cart) {
         delDialog(cart)
     }
 
-    override fun checkBoxClick(cart: Cart, checkBox: CheckBox) {
+    override fun checkBoxClick(cart: Cart, checkBox: CheckBox, view: TextView) {
         if (checkBox.isChecked) {
             cartViewModel.activateCartButton()
+            updateCartViewModel(view.text.toString().toInt(), cart)
             cartViewModel.addItem(cart)
         } else {
             cartViewModel.deActivateCartButton()
             cartViewModel.removeItem(cart)
         }
+    }
+
+    private fun alertDialog() {
+        val dialog = AlertDialog.Builder(activity)
+
+        dialog.setTitle("Error !!")
+        dialog.setMessage(
+            "Please Check The Item Before Edit Quantity !"
+        )
+        dialog.setPositiveButton("OK") { _: DialogInterface, _: Int ->
+        }
+        dialog.show()
     }
 
     private fun delDialog(cart: Cart) {

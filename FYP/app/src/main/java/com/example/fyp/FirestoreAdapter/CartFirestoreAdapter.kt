@@ -92,15 +92,15 @@ class CartViewHolder internal constructor(private val view: View, var context: C
         }
 
         holder.view.btnPlus.setOnClickListener {
-            onListClick.addBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice)
+            onListClick.addBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice, holder.view.checkBox)
         }
 
         holder.view.btnMinus.setOnClickListener {
-            onListClick.minusBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice)
+            onListClick.minusBtnClick(cart, holder.view.quantity, holder.view.txtFoodPrice, holder.view.checkBox)
         }
 
         holder.view.checkBox.setOnClickListener {
-            onListClick.checkBoxClick(cart, holder.view.checkBox)
+            onListClick.checkBoxClick(cart, holder.view.checkBox, holder.view.quantity)
         }
     }
 
