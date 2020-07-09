@@ -31,6 +31,7 @@ import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.fragments.HomeFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_add_to_cart.*
@@ -151,14 +152,18 @@ class AddToCartFragment : Fragment() {
         )
 
         // upload item into cart
-        for ((index, item) in cartList.withIndex()) {
-            db.collection("User").document(userViewModel.user?.email!!)
-                .collection("Cart").document(item.cart_ID!!)
-                .set(item)
-                .addOnCompleteListener {
-                    showSnackBar()
-                }
+        db.runBatch {
+            for ((index, item) in cartList.withIndex()) {
+                it.set(db.collection("User").document(userViewModel.user?.email!!)
+                    .collection("Cart").document(item.cart_ID!!), item)
+            }
+
+        }.addOnCompleteListener {
+            if (it.isSuccessful) {
+                showSnackBar()
+            }
         }
+
 
     }
 

@@ -18,6 +18,7 @@ import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPendingOrderBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 /**
@@ -138,10 +139,17 @@ class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
                 .collection("Store").document(order.store_Name!!)
                 .collection("Order_Food").document(order.id!!)
 
+        val canteenFood =
+            db.collection("Canteen").document(order.canteen_Name!!)
+                .collection("Store").document(order.store_Name!!)
+                .collection("Food").document(order.food_Name!!)
+
+
         if (userViewModel.user!!.role == "staff") {
             db.runBatch {
                 it.update(r1,"status", "Preparing")
                 it.update(r2,"status", "Preparing")
+
             }.addOnFailureListener {
                 Log.i("Test", it.toString())
             }
@@ -153,6 +161,7 @@ class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
             db.runBatch {
                 it.delete(r1)
                 it.delete(r2)
+                it.update(canteenFood, "total_stock", FieldValue.increment(order.quantity!!.toDouble()))
             }.addOnCompleteListener {
                 Toast.makeText(activity, "Order Being Removed! ", Toast.LENGTH_LONG).show()
             }
