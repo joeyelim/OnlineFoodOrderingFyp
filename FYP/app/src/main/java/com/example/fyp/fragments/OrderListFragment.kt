@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.fyp.CurrentOrder2
+import com.example.fyp.OrderingModule.CurrentOrder2
 import com.example.fyp.MainActivity
 import com.example.fyp.OrderingModule.OrderHistoryFragment
 import com.example.fyp.databinding.FragmentOrderListBinding

@@ -48,6 +48,7 @@ class OrderListViewHolder internal constructor(private val view: View, var conte
 
         if (user.role == "staff") {
             holder.view.txtCanteenName.text = order.email
+            holder.view.txtStore.text = ""
         } else {
             holder.view.txtCanteenName.text = order.canteen_Name
             holder.view.txtStore.text = order.store_Name
@@ -112,8 +113,6 @@ class OrderListViewHolder internal constructor(private val view: View, var conte
         }
         holder.view.btnOrderCancel.setTextColor(Color.WHITE)
         holder.view.btnOrderCancel.setBackgroundColor(Color.parseColor("#04C852"))
-//        holder.view.btnOrderCancel.getPaint().setColor(Color.WHITE)
-//        holder.view.btnOrderCancel.getPaint().setStyle(Paint.Style.STROKE)
         holder.view.txtProgress.setTextColor(Color.parseColor("#04C852"))
     }
 

@@ -2,11 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".NotificationDetailsFragment">
+        tools:context=".Notification.NotificationDetailsFragment">
 
         <TextView
             android:id="@+id/txtNotifTitle"
@@ -88,6 +93,16 @@
             android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+        <Button
+            android:id="@+id/btnToStaff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="staff_notification"
+            app:layout_constraintTop_toBottomOf="@+id/txtNotifContent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>

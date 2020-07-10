@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
 
+        Toast.makeText(this,"Welcome", Toast.LENGTH_SHORT).show()
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         navController = this.findNavController(R.id.myNavHostFragment)
         bottomNavigationView.setupWithNavController(navController)

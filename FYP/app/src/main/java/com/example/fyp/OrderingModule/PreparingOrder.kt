@@ -1,4 +1,4 @@
-package com.example.fyp
+package com.example.fyp.OrderingModule
 
 
 import android.os.Bundle
@@ -13,8 +13,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Order_Food
 import com.example.fyp.FirestoreAdapter.OrderListFireStoreAdapter
-import com.example.fyp.FirestoreAdapter.onListClick2
 import com.example.fyp.Interface.OnCurrentOrderAdapterClick
+import com.example.fyp.MainActivity
+import com.example.fyp.R
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPendingOrderBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -23,8 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 /**
  * A simple [Fragment] subclass.
  */
-class ReadyOrder : Fragment(), OnCurrentOrderAdapterClick {
-
+class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
     private lateinit var binding: FragmentPendingOrderBinding
     private lateinit var adapter: OrderListFireStoreAdapter
     private lateinit var userViewModel: UserViewModel
@@ -58,7 +58,7 @@ class ReadyOrder : Fragment(), OnCurrentOrderAdapterClick {
                 val query = db.collection("Canteen").document(userViewModel.user?.canteen!!)
                     .collection("Store").document(userViewModel.user?.store!!)
                     .collection("Order_Food")
-                    .whereEqualTo("status", "Ready")
+                    .whereEqualTo("status", "Preparing")
 
                 query.get()
                     .addOnFailureListener {
@@ -94,7 +94,7 @@ class ReadyOrder : Fragment(), OnCurrentOrderAdapterClick {
                 val db = FirebaseFirestore.getInstance()
                 val query = db.collection("User").document(userViewModel.user?.email!!)
                     .collection("Order_Food")
-                    .whereEqualTo("status", "Ready")
+                    .whereEqualTo("status", "Preparing")
 
                 query.addSnapshotListener { p0, _ ->
                     if (p0 != null) {
@@ -139,14 +139,10 @@ class ReadyOrder : Fragment(), OnCurrentOrderAdapterClick {
 
         if (userViewModel.user!!.role == "staff") {
             db.runBatch {
-                it.update(r1,"status", "Paid")
-                it.update(r2,"status", "Paid")
-            }.addOnFailureListener {
-                Log.i("Test", it.toString())
-            }
-
-                .addOnCompleteListener {
-                Toast.makeText(activity, "Order Is Paid! ", Toast.LENGTH_LONG).show()
+                it.update(r1,"status", "Ready")
+                it.update(r2,"status", "Ready")
+            }.addOnCompleteListener {
+                Toast.makeText(activity, "Order Is Ready! ", Toast.LENGTH_LONG).show()
             }
         }
     }

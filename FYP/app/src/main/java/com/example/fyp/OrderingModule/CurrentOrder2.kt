@@ -1,4 +1,4 @@
-package com.example.fyp
+package com.example.fyp.OrderingModule
 
 
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.example.fyp.R
 import com.example.fyp.databinding.FragmentCurrentOrder2Binding
 
 /**
@@ -35,7 +36,8 @@ class CurrentOrder2 : Fragment() {
     private fun initUI() {
         val supportFragmentManager = this.activity!!.supportFragmentManager
 
-        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        val viewPagerAdapter =
+            ViewPagerAdapter(supportFragmentManager)
 
 //        viewPagerAdapter.setFragment()
         viewPagerAdapter.addFragment(PendingOrder(),"Pending")
