@@ -87,14 +87,13 @@ class EditProfileFragment : Fragment() {
 
     private fun validation(): Boolean {
 
-        val email = binding.txtEmail.text.toString()
         val firstName = binding.txtFirstN.text.toString()
         val lastName = binding.txtLastN.text.toString()
         val phone = binding.txtPhone.text.toString()
 
-        if (email.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()
-            || !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()
-        ) {
+
+
+        if (firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()) {
 
             if (firstName.isEmpty()) {
                 binding.txtFirstNLayout.error = "*First name is require."
@@ -112,14 +111,6 @@ class EditProfileFragment : Fragment() {
                 binding.txtPhoneLayout.error = "*Phone number is require."
             } else {
                 binding.txtPhoneLayout.isErrorEnabled = false
-            }
-
-            if (email.isEmpty()) {
-                binding.txtEmailLayout.error = "*Email is require."
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                binding.txtEmailLayout.error = "*Please enter a valid email"
-            } else {
-                binding.txtEmailLayout.isErrorEnabled = false
             }
 
             return false

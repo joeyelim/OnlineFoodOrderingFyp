@@ -1,4 +1,4 @@
-package com.example.fyp
+package com.example.fyp.Notification
 
 
 import android.os.Bundle
@@ -9,8 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.example.fyp.Class.Notification
-import com.example.fyp.ViewModel.CanteenViewModel
+import androidx.navigation.findNavController
+import com.example.fyp.MainActivity
+import com.example.fyp.R
 import com.example.fyp.ViewModel.UserViewModel
 
 import com.example.fyp.databinding.FragmentNotificationDetailsBinding
@@ -28,12 +29,17 @@ class NotificationDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, com.example.fyp.R.layout.fragment_notification_details, container, false
+            inflater, R.layout.fragment_notification_details, container, false
         )
 
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
         viewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+
+        binding.btnToStaff.setOnClickListener{
+            it.findNavController()
+                .navigate(NotificationDetailsFragmentDirections.actionNotificationDetailsFragmentToStaffNotificationFragment())
+        }
 
         intiUI()
 

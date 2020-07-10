@@ -35,6 +35,7 @@ class NotificationViewHolder internal constructor(private val view: View, var co
     RecyclerView.ViewHolder(view) {
 
     internal fun setCanteenState(notif: Notification, onListClick2: onListClick4, holder : NotificationViewHolder) {
+
         holder.view.txtStore.text = notif.sender
         holder.view.txtNotifContent.text = notif.content
         holder.view.txtDate.text = notif.date

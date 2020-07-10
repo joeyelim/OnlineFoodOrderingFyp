@@ -180,12 +180,12 @@ class LoginFragment : Fragment() {
         updateUI(currentUser)
     }
 
-    // 拿掉 option menu
+    // take out option menu
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
     }
 
-    // 这个是 display bottom navbar, 当你退出这个 fragment 的时候
+    // display bottom nav bar, when exit the fragment
     override fun onDestroyView() {
         super.onDestroyView()
         hideKeyboard()

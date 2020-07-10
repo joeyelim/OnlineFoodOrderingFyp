@@ -37,7 +37,6 @@ class HomeFragment : Fragment(), onListClick {
 
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var dataListener: ListenerRegistration
     private var adapter: CanteenFireStoreRecyclerAdapter? = null
     private lateinit var mAuth : FirebaseAuth
     private lateinit var viewModel : CanteenViewModel
