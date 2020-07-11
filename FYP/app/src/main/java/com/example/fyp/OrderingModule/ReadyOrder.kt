@@ -3,12 +3,12 @@ package com.example.fyp.OrderingModule
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.Button
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Order_Food
@@ -19,6 +19,7 @@ import com.example.fyp.R
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPendingOrderBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 
 /**
@@ -128,7 +129,8 @@ class ReadyOrder : Fragment(), OnCurrentOrderAdapterClick {
         }
     }
 
-    override fun buttonClick(order: Order_Food) {
+    override fun buttonClick(order: Order_Food, view: Button) {
+        view.requestFocus()
         val db = FirebaseFirestore.getInstance()
         val r1 =
             db.collection("User").document(order.email!!)
@@ -140,16 +142,26 @@ class ReadyOrder : Fragment(), OnCurrentOrderAdapterClick {
 
         if (userViewModel.user!!.role == "staff") {
             db.runBatch {
-                it.update(r1,"status", "Paid")
-                it.update(r2,"status", "Paid")
+                it.update(r1, "status", "Paid")
+                it.update(r2, "status", "Paid")
             }.addOnFailureListener {
                 Log.i("Test", it.toString())
-            }
-
-                .addOnCompleteListener {
-                Toast.makeText(activity, "Order Is Paid! ", Toast.LENGTH_LONG).show()
+            }.addOnCompleteListener {
+                showSnackBar("Order Is Paid! ")
             }
         }
+    }
+
+    private fun showSnackBar(message : String)
+    {
+        val snackbar = Snackbar.make(
+            this.requireView(),message , Snackbar.LENGTH_LONG
+        )
+        (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+        snackbar.setAction("Close") {
+            snackbar.dismiss()
+        }
+        snackbar.show()
     }
 
     override fun onStart() {

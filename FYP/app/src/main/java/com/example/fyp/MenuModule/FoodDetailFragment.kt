@@ -97,6 +97,8 @@ class FoodDetailFragment : Fragment() {
                 val a = FirebaseStorage.getInstance().getReference(viewModel.food.food_image!!)
 
                 // setup dialog view layout
+                val showDialog = dialog.show()
+
                 viewModel.setImage(image, a)
                 dialogView.findViewById<TextView>(R.id.txtFoodName).text =
                     viewModel.food.food_name!!
@@ -113,8 +115,8 @@ class FoodDetailFragment : Fragment() {
                         viewModel.newRating = rating
 
                         updateDatabase(rating)
+                        showDialog.dismiss()
                     }
-                dialog.show()
             } else {
                 val dialog = AlertDialog.Builder(context)
 
@@ -147,11 +149,17 @@ class FoodDetailFragment : Fragment() {
         val currentTime = SimpleDateFormat("HH:ss").format(calForDate)
         val currentDate = SimpleDateFormat("dd.MM.yyyy").format(calForDate)
         val userReviewId =
-            viewModel.canteen.canteen_name + viewModel.store.store_name + viewModel.food.food_name
+            viewModel.canteen.type + viewModel.store.store_name + viewModel.food.food_name
 
         val userReview: UserReview = UserReview(
-            rating, currentTime, currentDate, viewModel.food.food_name,
-            viewModel.food.food_image, userReviewId
+            rating,
+            currentTime,
+            currentDate,
+            viewModel.food.food_name,
+            viewModel.food.food_image,
+            userReviewId,
+            viewModel.canteen.type,
+            viewModel.store.store_name
         )
         val canteenReview: CanteenReview =
             CanteenReview(rating, currentTime, currentDate, userViewModel.user?.email)
