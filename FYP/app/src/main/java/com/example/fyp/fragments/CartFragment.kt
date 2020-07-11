@@ -69,19 +69,8 @@ class CartFragment : Fragment(), OnAdapterItemClick {
         cartViewModel = ViewModelProviders.of(activity!!).get(CartViewModel::class.java)
 
         checkLogin()
+        cartViewModel.cartArrayList = ArrayList()
         initRecycleView()
-
-//        binding.btnCheckOut.setOnClickListener {
-//            if (!it.isEnabled) {
-//                Snackbar.make(
-//                    cartLayout, "Please select at least one food before you proceed to checkout!", Snackbar.LENGTH_LONG
-//                ).show()
-//            } else
-//            {
-//                it.findNavController()
-//                    .navigate(CartFragmentDirections.actionCartFragmentToPlaceOrderFragment())
-//            }
-//        }
 
         binding.btnViewShop.setOnClickListener {
             it.findNavController()
@@ -199,24 +188,24 @@ class CartFragment : Fragment(), OnAdapterItemClick {
                         view.text = "$counter"
                         txt.text = DecimalFormat("RM ###.00").format(counter * price!!).toString()
                         updateCartViewModel(counter, cart)
-                    } else {
+
+                        FirebaseFirestore.getInstance()
+                            .collection("User").document(userViewModel.user?.email!!)
+                            .collection("Cart").document(cart.cart_ID!!)
+                            .update("quantity", view.text.toString().toInt())
                     }
                 }
 
-            FirebaseFirestore.getInstance()
-                .collection("User").document(userViewModel.user?.email!!)
-                .collection("Cart").document(cart.cart_ID!!)
-                .update("quantity", view.text.toString().toInt())
+
 
         } else {
             // display dialogue
             alertDialog()
         }
-
-
     }
 
     override fun minusBtnClick(cart: Cart, view: TextView, txt: TextView, cb: CheckBox) {
+        Log.i("Test", cb.isChecked.toString())
         if (cb.isChecked) {
             var counter = (view.text).toString().toInt()
             val price = cart.each_price
@@ -231,6 +220,11 @@ class CartFragment : Fragment(), OnAdapterItemClick {
             view.text = "$counter"
             txt.text = DecimalFormat("RM ###.00").format(counter * price!!).toString()
             updateCartViewModel(counter, cart)
+
+            FirebaseFirestore.getInstance()
+                .collection("User").document(userViewModel.user?.email!!)
+                .collection("Cart").document(cart.cart_ID!!)
+                .update("quantity", view.text.toString().toInt())
         } else {
             // display dialogue
             alertDialog()

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -19,6 +20,7 @@ import com.example.fyp.R
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPendingOrderBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 
 /**
@@ -127,7 +129,7 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
         }
     }
 
-    override fun buttonClick(order: Order_Food) {
+    override fun buttonClick(order: Order_Food, view : Button) {
         val db = FirebaseFirestore.getInstance()
         val r1 =
             db.collection("User").document(order.email!!)
@@ -142,9 +144,21 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
                 it.update(r1,"status", "Ready")
                 it.update(r2,"status", "Ready")
             }.addOnCompleteListener {
-                Toast.makeText(activity, "Order Is Ready! ", Toast.LENGTH_LONG).show()
+                showSnackBar("Order Is Ready!")
             }
         }
+    }
+
+    private fun showSnackBar(message : String)
+    {
+        val snackbar = Snackbar.make(
+            this.requireView(),message , Snackbar.LENGTH_LONG
+        )
+        (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+        snackbar.setAction("Close") {
+            snackbar.dismiss()
+        }
+        snackbar.show()
     }
 
     override fun onStart() {

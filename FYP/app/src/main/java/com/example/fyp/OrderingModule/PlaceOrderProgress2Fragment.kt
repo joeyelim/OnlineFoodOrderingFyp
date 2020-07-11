@@ -18,6 +18,7 @@ import com.example.fyp.R
 import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPlaceOrderProgress2Binding
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -88,6 +89,7 @@ class PlaceOrderProgress2Fragment : Fragment() {
     private fun updateDatabase(view: View) {
 
         val db = FirebaseFirestore.getInstance()
+        var quantity2 : Double = 0.00
 
         Toast.makeText(activity, "Processing Your Order ... ", Toast.LENGTH_LONG).show()
 
@@ -110,18 +112,17 @@ class PlaceOrderProgress2Fragment : Fragment() {
                         .collection("Order_Food").document(item.id!!)
                     , item
                 )
-            }
 
-//            // Write into Canteen -> Store -> Order
-//            for (item in cartViewModel.orderFood) {
-//                item.email = userViewModel.user?.email
-//                it.set(
-//                    db.collection("Canteen").document(item.canteen_Name!!)
-//                        .collection("Store").document(item.store_Name!!)
-//                        .collection("Order_Food").document(item.id!!)
-//                    , item
-//                )
-//            }
+                quantity2 = item.quantity?.toDouble()!!
+
+                it.update(
+                    db.collection("Canteen").document(item.canteen_Name!!)
+                        .collection("Store").document(item.store_Name!!)
+                        .collection("Food").document(item.food_Name!!)
+                    , "total_stock", FieldValue.increment(-quantity2)
+                )
+
+            }
 
             // Delete Existing Cart
             for (item in cartViewModel.cartArrayList) {
@@ -130,6 +131,8 @@ class PlaceOrderProgress2Fragment : Fragment() {
                         .collection("Cart").document(item.cart_ID!!)
                 )
             }
+
+            // update Food Quantity
 
 
         }.addOnCompleteListener {
