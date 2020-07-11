@@ -63,7 +63,7 @@ class OrderListViewHolder internal constructor(private val view: View, var conte
         holder.view.orderListTime.text = order.pickUp_Time
 
         holder.view.btnOrderCancel.setOnClickListener {
-            itemClick.buttonClick(order)
+            itemClick.buttonClick(order, holder.view.btnOrderCancel)
         }
 
         when (order.status) {

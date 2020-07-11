@@ -1,11 +1,14 @@
 package com.example.fyp
 
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -18,6 +21,7 @@ import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPendingOrderBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -88,9 +92,7 @@ class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
                 binding.pendingOrderRecycleView.layoutManager = LinearLayoutManager(context)
                 binding.pendingOrderRecycleView.adapter = adapter
                 binding.pendingOrderRecycleView.isNestedScrollingEnabled = true
-            }
-            else
-            {
+            } else {
 
                 // student view
 
@@ -129,7 +131,7 @@ class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
         }
     }
 
-    override fun buttonClick(order: Order_Food) {
+    override fun buttonClick(order: Order_Food, view : Button) {
         val db = FirebaseFirestore.getInstance()
         val r1 =
             db.collection("User").document(order.email!!)
@@ -139,36 +141,70 @@ class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
                 .collection("Store").document(order.store_Name!!)
                 .collection("Order_Food").document(order.id!!)
 
+        if (userViewModel.user!!.role == "staff") {
+            db.runBatch {
+                it.update(r1, "status", "Preparing")
+                it.update(r2, "status", "Preparing")
+
+            }.addOnCompleteListener {
+                showSnackBar("Order Is Preparing! ")
+            }
+        } else {
+            delDialog(order)
+
+        }
+    }
+
+    private fun showSnackBar(message : String)
+    {
+        val snackbar = Snackbar.make(
+            this.requireView(),message , Snackbar.LENGTH_LONG
+        )
+        (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+        snackbar.setAction("Close") {
+            snackbar.dismiss()
+        }
+        snackbar.show()
+    }
+
+    private fun delDialog(order: Order_Food) {
+        val dialog = AlertDialog.Builder(activity)
+        val foodName: String? = order.food_Name
+        val db = FirebaseFirestore.getInstance()
         val canteenFood =
             db.collection("Canteen").document(order.canteen_Name!!)
                 .collection("Store").document(order.store_Name!!)
                 .collection("Food").document(order.food_Name!!)
+        val r1 =
+            db.collection("User").document(order.email!!)
+                .collection("Order_Food").document(order.id!!)
+        val r2 =
+            db.collection("Canteen").document(order.canteen_Name!!)
+                .collection("Store").document(order.store_Name!!)
+                .collection("Order_Food").document(order.id!!)
 
-
-        if (userViewModel.user!!.role == "staff") {
-            db.runBatch {
-                it.update(r1,"status", "Preparing")
-                it.update(r2,"status", "Preparing")
-
-            }.addOnFailureListener {
-                Log.i("Test", it.toString())
-            }
-
-                .addOnCompleteListener {
-                Toast.makeText(activity, "Order Is Preparing! ", Toast.LENGTH_LONG).show()
-            }
-        } else {
+        dialog.setTitle("Confirmation")
+        dialog.setMessage(
+            "Are you sure want to delete the order? " +
+                    "You cannot undo this action! \n\n* $foodName"
+        )
+        dialog.setPositiveButton("Yes") { _: DialogInterface, _: Int ->
             db.runBatch {
                 it.delete(r1)
                 it.delete(r2)
-                it.update(canteenFood, "total_stock", FieldValue.increment(order.quantity!!.toDouble()))
+                it.update(
+                    canteenFood,
+                    "total_stock",
+                    FieldValue.increment(order.quantity!!.toDouble())
+                )
             }.addOnCompleteListener {
-                Toast.makeText(activity, "Order Being Removed! ", Toast.LENGTH_LONG).show()
+                showSnackBar("Order Being Removed! ")
             }
         }
-
-
+        dialog.setNegativeButton("No") { _: DialogInterface, _: Int -> }
+        dialog.show()
     }
+
 
     override fun onStart() {
         super.onStart()

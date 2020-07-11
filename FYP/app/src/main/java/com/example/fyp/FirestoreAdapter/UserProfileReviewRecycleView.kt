@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.UserReview
+import com.example.fyp.Interface.OnRatingClick
 import com.example.fyp.R
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.user_rating_row.view.*
 
-class UserProfileReviewRecycleView :
+class UserProfileReviewRecycleView (var itemClick : OnRatingClick) :
     RecyclerView.Adapter<UserProfileReviewRecycleView.UserReviewViewHolder>() {
 
     var data = listOf<UserReview>()
@@ -48,6 +49,10 @@ class UserProfileReviewRecycleView :
                 .load(it)
                 .fit()
                 .into(image)
+        }
+
+        holder.view.cardOrderList.setOnClickListener {
+            itemClick.OnRatingItemClick(data[position])
         }
     }
 

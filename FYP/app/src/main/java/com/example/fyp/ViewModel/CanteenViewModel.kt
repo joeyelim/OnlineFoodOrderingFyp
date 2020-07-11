@@ -1,5 +1,6 @@
 package com.example.fyp.ViewModel
 
+import android.util.Log
 import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -40,7 +41,7 @@ class CanteenViewModel : ViewModel() {
     }
 
     fun getUserRating(currentUser: String) {
-        val reviewID = canteen.canteen_name + store.store_name + food.food_name
+        val reviewID = canteen.type + store.store_name + food.food_name
 
         try {
             FirebaseFirestore.getInstance()
@@ -49,6 +50,7 @@ class CanteenViewModel : ViewModel() {
                 .get()
                 .addOnSuccessListener {
                     if (it["star"] == null) {
+                        Log.i("Test", "Fail")
                         userRating = "0.00".toFloat()
                         _rating.value = "0.00".toFloat()
                         gotReviewed = false
@@ -60,6 +62,7 @@ class CanteenViewModel : ViewModel() {
                     }
                 }
         } catch (e: Exception) {
+            Log.i("Test", "Fail")
             _rating.value = "0.00".toFloat()
             userRating = "0.00".toFloat()
         }
