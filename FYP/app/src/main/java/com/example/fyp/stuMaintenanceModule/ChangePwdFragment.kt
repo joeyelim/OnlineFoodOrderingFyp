@@ -101,9 +101,6 @@ class ChangePwdFragment : Fragment() {
 
             if (oldPwd.isEmpty()) {
                 binding.txtOldPwdLayout.error = "*Old password is require."
-            } else if (oldPwd != userViewModel.user!!.password.toString()) {
-                binding.txtOldPwdLayout.error = "*Old password is invalid."
-                binding.txtOldPwdLayout.requestFocus()
             } else {
                 binding.txtOldPwdLayout.isErrorEnabled = false
             }

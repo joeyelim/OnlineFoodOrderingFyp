@@ -207,8 +207,7 @@ class ProfileFragment : Fragment(), OnRatingClick {
 
         val z = dialog.show()
 
-        dialogView.findViewById<TextView>(R.id.txtFoodName).text =
-            review.foodName!!
+        dialogView.findViewById<TextView>(R.id.txtFoodName).text = review.foodName!!
         dialogView.findViewById<TextView>(R.id.txtFoodName).paintFlags =
             (dialogView.findViewById<TextView>(R.id.txtFoodName).paintFlags or Paint.UNDERLINE_TEXT_FLAG)
 
