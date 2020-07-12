@@ -16,13 +16,16 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.fyp.Class.User
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentSignUpBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
@@ -79,19 +82,47 @@ class SignUpFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d("Game", "createUserWithEmail:success")
-
-                    val snackbar = Snackbar.make(
-                        root_layout, "Register Successful! Please Verify Your Email" +
-                                "Before Login", Snackbar.LENGTH_LONG
-                    )
-                    snackbar.setAction("Close", View.OnClickListener {
-                        snackbar.dismiss()
-                    })
-                    (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-                    snackbar.show()
 
                     addUserToDatabase()
+
+                    var user = Firebase.auth.currentUser
+
+                    user?.sendEmailVerification()
+                        ?.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+//                                Toast.makeText(
+//                                    activity, "Sent verification Email, Please Verify " +
+//                                            "Your Email Before Login",
+//                                    Toast.LENGTH_SHORT
+//                                ).show()
+                                val snackbar = Snackbar.make(
+                                    root_layout, "Register Successful! Please Verify Your Email" +
+                                            "Before Login", Snackbar.LENGTH_LONG
+                                )
+                                snackbar.setAction("Close", View.OnClickListener {
+                                    snackbar.dismiss()
+                                })
+                                (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+                                snackbar.show()
+                            } else {
+                                Toast.makeText(
+                                    activity, "Not verification Email" + task.exception,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+//                    val snackbar = Snackbar.make(
+//                        root_layout, "Register Successful! Please Verify Your Email" +
+//                                "Before Login", Snackbar.LENGTH_LONG
+//                    )
+//                    snackbar.setAction("Close", View.OnClickListener {
+//                        snackbar.dismiss()
+//                    })
+//                    (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+//                    snackbar.show()
+
+
 
                 } else {
                     // If sign in fails, display a message to the user.

@@ -2,16 +2,22 @@ package com.example.fyp.LoginModule
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentResetPwdBinding
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 /**
  * A simple [Fragment] subclass.
@@ -30,17 +36,19 @@ class ResetPwdFragment : Fragment() {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
-        binding.btnBack.setOnClickListener{
+        binding.btnBack.setOnClickListener {
             it.findNavController()
                 .navigate(ResetPwdFragmentDirections.actionResetPwdFragmentToFragmentForgotPassword())
         }
 
         binding.btnConfirm.setOnClickListener {
-            if (!inputValidation()){
+            if (!inputValidation()) {
 
             } else {
-                it.findNavController()
+                this.findNavController()
                     .navigate(ResetPwdFragmentDirections.actionResetPwdFragmentToResetSucessfulFragment())
+
+
             }
 
         }
@@ -57,23 +65,19 @@ class ResetPwdFragment : Fragment() {
             if (newPwd.isEmpty()) {
                 binding.txtNewPwdLayout.error = "*New password is require."
                 binding.txtNewPwdLayout.requestFocus()
-            }
-            else {
+            } else {
                 binding.txtNewPwdLayout.isErrorEnabled = false
             }
             if (confirmPwd.isEmpty()) {
                 binding.txtConfirmPwdLayout.error = "*Confirm password is require."
                 binding.txtConfirmPwdLayout.requestFocus()
-            }
-            else if (confirmPwd == newPwd){
+            } else if (confirmPwd == newPwd) {
                 binding.txtConfirmPwdLayout.error = "*Confirm password is invalid."
                 binding.txtConfirmPwdLayout.requestFocus()
-            }
-            else {
+            } else {
                 binding.txtConfirmPwdLayout.isErrorEnabled = false
             }
-        }
-        else {
+        } else {
             return true
         }
 

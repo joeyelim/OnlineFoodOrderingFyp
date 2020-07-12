@@ -1,7 +1,9 @@
 package com.example.fyp.LoginModule
 
 
+import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +11,15 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentForgotPasswordBinding
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 /**
  * A simple [Fragment] subclass.
@@ -35,8 +42,23 @@ class ForgotPasswordFragment : Fragment() {
             if (!forgotPasswordValidation()){
 
             }else
-                it.findNavController()
-                    .navigate(ForgotPasswordFragmentDirections.actionFragmentForgotPasswordToResetPwdFragment())
+                Firebase.auth.sendPasswordResetEmail(binding.txtForgotPwdEmail.text.toString())
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("Test", "Email sent.")
+                            val snackbar = Snackbar.make(
+                                this.requireView(), "Please Check Your Email To Reset Password"
+                                , Snackbar.LENGTH_LONG
+                            )
+                            snackbar.setAction("Close", View.OnClickListener {
+                                snackbar.dismiss()
+                            })
+                            (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+                            snackbar.show()
+                        }
+                    }
+//                it.findNavController()
+//                    .navigate(ForgotPasswordFragmentDirections.actionFragmentForgotPasswordToResetPwdFragment())
 
         }
 

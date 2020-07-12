@@ -15,25 +15,25 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.View
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import com.example.fyp.MainActivity
-import com.example.fyp.databinding.FragmentLoginBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import android.graphics.drawable.GradientDrawable
-import android.graphics.Color
-import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.fyp.Class.User
-import com.example.fyp.MenuModule.CanteenStoreFragmentDirections
+import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.LoginViewModel
 import com.example.fyp.ViewModel.UserViewModel
+import com.example.fyp.databinding.FragmentLoginBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: FragmentLoginBinding
     private lateinit var loginViewModel: LoginViewModel
-    private lateinit var userViewModel : UserViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,11 +77,11 @@ class LoginFragment : Fragment() {
                 .navigate(LoginFragmentDirections.actionFragmentLoginToForgotPasswordFragment())
         }
 
-        binding.btnLogin.setOnClickListener{
+        binding.btnLogin.setOnClickListener {
             login()
         }
 
-        binding.textView2.setOnClickListener{
+        binding.textView2.setOnClickListener {
             hideKeyboard()
         }
 
@@ -111,28 +111,39 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
 
-                    Toast.makeText(
-                        activity, "Welcome, Directing To Home Page..",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val user2 = FirebaseAuth.getInstance().currentUser
 
-                    val db = FirebaseFirestore.getInstance()
-                    db.collection("User").document(email!!)
-                        .get()
-                        .addOnSuccessListener {
-                            userViewModel.user = it.toObject(User::class.java)
-                        }
-                        .addOnCompleteListener {
-                            this.findNavController()
-                                .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
-                        }
+                    user2?.let {
+                        if (!user2.isEmailVerified) {
+                            FirebaseAuth.getInstance().signOut()
+                            binding.btnLogin.isEnabled = true
+                            Toast.makeText(
+                                activity, "Please Verify Your Email First",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                activity, "Welcome, Directing To Home Page..",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
-                    val user = FirebaseAuth.getInstance().currentUser
-                }
-                else {
+                            val db = FirebaseFirestore.getInstance()
+                            db.collection("User").document(email!!)
+                                .get()
+                                .addOnSuccessListener {
+                                    userViewModel.user = it.toObject(User::class.java)
+                                }
+                                .addOnCompleteListener {
+                                    this.findNavController()
+                                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                                }
+
+                            val user = FirebaseAuth.getInstance().currentUser
+                        }
+                    }
+                } else {
                     // If sign in fails, display a message to the user.
                     binding.btnLogin.isEnabled = true
-                    Log.w("Game", "signInWithEmail:failure", task.exception)
 
                     Toast.makeText(
                         activity, "Authentication failed.",
@@ -142,27 +153,24 @@ class LoginFragment : Fragment() {
             }
     }
 
-    private fun validation() : Boolean {
+    private fun validation(): Boolean {
 
         if (binding.txtEmail.text.isNullOrBlank() ||
             !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches() ||
-            binding.txtPassword.text.isNullOrBlank())
-        {
+            binding.txtPassword.text.isNullOrBlank()
+        ) {
 
-            if(binding.txtEmail.text.isNullOrBlank()) {
+            if (binding.txtEmail.text.isNullOrBlank()) {
                 binding.txtEmailLy.error = "*Email is require."
-            }
-            else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
                 binding.txtEmailLy.error = "*Please enter a valid email"
-            }
-            else {
+            } else {
                 binding.txtEmailLy.isErrorEnabled = false
             }
 
             if (binding.txtPassword.text.isNullOrBlank()) {
                 binding.txtPasswordLy.error = "*Password is require."
-            }
-            else {
+            } else {
                 binding.txtPasswordLy.isErrorEnabled = false
             }
 
@@ -197,7 +205,7 @@ class LoginFragment : Fragment() {
 
     private fun hideKeyboard() {
         (activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-            .hideSoftInputFromWindow(view?.windowToken,0)
+            .hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
 }
