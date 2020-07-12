@@ -36,10 +36,6 @@ class NotificationDetailsFragment : Fragment() {
         (activity as MainActivity).setNavInvisible()
         viewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
 
-        binding.btnToStaff.setOnClickListener{
-            it.findNavController()
-                .navigate(NotificationDetailsFragmentDirections.actionNotificationDetailsFragmentToStaffNotificationFragment())
-        }
 
         intiUI()
 

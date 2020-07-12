@@ -136,6 +136,9 @@
         <action
             android:id="@+id/action_notificationFragment_to_fragment_home"
             app:destination="@id/fragment_home" />
+        <action
+            android:id="@+id/action_notificationFragment_to_staffCreatePostFragment"
+            app:destination="@id/staffCreatePostFragment" />
     </fragment>
     <fragment
         android:id="@+id/foodFragment"
@@ -268,22 +271,10 @@
         android:id="@+id/notificationDetailsFragment"
         android:name="com.example.fyp.Notification.NotificationDetailsFragment"
         android:label="NOTIFICATION"
-        tools:layout="@layout/fragment_notification_details" >
-        <action
-            android:id="@+id/action_notificationDetailsFragment_to_staffNotificationFragment"
-            app:destination="@id/staffNotificationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/staffNotificationFragment"
-        android:name="com.example.fyp.CanteenStaffNotif.StaffNotificationFragment"
-        android:label="StaffNotificationFragment" >
-        <action
-            android:id="@+id/action_staffNotificationFragment_to_staffCreatePostFragment"
-            app:destination="@id/staffCreatePostFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_notification_details" />
     <fragment
         android:id="@+id/staffCreatePostFragment"
         android:name="com.example.fyp.CanteenStaffNotif.StaffCreatePostFragment"
-        android:label="fragment_staff_create_post"
+        android:label="CREATE POST"
         tools:layout="@layout/fragment_staff_create_post" />
 </navigation>

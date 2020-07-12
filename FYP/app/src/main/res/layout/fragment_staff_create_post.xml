@@ -67,7 +67,7 @@
                 android:id="@+id/textTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:text="Title: "
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
@@ -77,12 +77,12 @@
 
             <EditText
                 android:id="@+id/editTxtTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:ems="10"
+                android:layout_marginStart="52dp"
+                android:backgroundTint="@color/gray"
+                android:hint="Title"
                 android:inputType="textCapSentences"
-                android:text="Title"
                 app:layout_constraintStart_toEndOf="@+id/textTitle"
                 app:layout_constraintTop_toBottomOf="@+id/txtReceiver" />
 
@@ -100,11 +100,14 @@
 
             <EditText
                 android:id="@+id/editTxtContent"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/card_bg"
+                android:hint="Type your content here..."
                 android:inputType="textLongMessage"
-                android:text="Title"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textContent" />
 

@@ -94,14 +94,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line2" />
 
-        <Button
-            android:id="@+id/btnToStaff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="staff_notification"
-            app:layout_constraintTop_toBottomOf="@+id/txtNotifContent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

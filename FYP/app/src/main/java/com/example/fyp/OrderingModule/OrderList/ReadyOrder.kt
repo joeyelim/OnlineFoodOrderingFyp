@@ -1,4 +1,4 @@
-package com.example.fyp.OrderingModule
+package com.example.fyp.OrderingModule.OrderList
 
 
 import android.os.Bundle
@@ -24,7 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 /**
  * A simple [Fragment] subclass.
  */
-class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
+class ReadyOrder : Fragment(), OnCurrentOrderAdapterClick {
+
     private lateinit var binding: FragmentPendingOrderBinding
     private lateinit var adapter: OrderListFireStoreAdapter
     private lateinit var userViewModel: UserViewModel
@@ -58,7 +59,7 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
                 val query = db.collection("Canteen").document(userViewModel.user?.canteen!!)
                     .collection("Store").document(userViewModel.user?.store!!)
                     .collection("Order_Food")
-                    .whereEqualTo("status", "Preparing")
+                    .whereEqualTo("status", "Ready")
 
                 query.get()
                     .addOnFailureListener {
@@ -94,7 +95,7 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
                 val db = FirebaseFirestore.getInstance()
                 val query = db.collection("User").document(userViewModel.user?.email!!)
                     .collection("Order_Food")
-                    .whereEqualTo("status", "Preparing")
+                    .whereEqualTo("status", "Ready")
 
                 query.addSnapshotListener { p0, _ ->
                     if (p0 != null) {
@@ -139,10 +140,14 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
 
         if (userViewModel.user!!.role == "staff") {
             db.runBatch {
-                it.update(r1,"status", "Ready")
-                it.update(r2,"status", "Ready")
-            }.addOnCompleteListener {
-                Toast.makeText(activity, "Order Is Ready! ", Toast.LENGTH_LONG).show()
+                it.update(r1,"status", "Paid")
+                it.update(r2,"status", "Paid")
+            }.addOnFailureListener {
+                Log.i("Test", it.toString())
+            }
+
+                .addOnCompleteListener {
+                Toast.makeText(activity, "Order Is Paid! ", Toast.LENGTH_LONG).show()
             }
         }
     }
