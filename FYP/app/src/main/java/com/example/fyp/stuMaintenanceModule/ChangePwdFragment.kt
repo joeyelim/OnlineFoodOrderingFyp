@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.UserViewModel
@@ -41,9 +42,14 @@ class ChangePwdFragment : Fragment() {
         (activity as MainActivity).setNavInvisible()
 
         binding.btnConfirm.setOnClickListener() {
-            inputValidation()
+            if(inputValidation()) {
+                resetPassword()
+            }
+        }
 
-            resetPassword()
+        binding.btnCancel.setOnClickListener(){
+            it.findNavController()
+                .navigate(ChangePwdFragmentDirections.actionChangePwdFragmentToProfileFragment())
         }
 
         return binding.root
@@ -161,7 +167,6 @@ class ChangePwdFragment : Fragment() {
         val confirmPwd = binding.txtConfirmPwd.text.toString()
 
         if (oldPwd.isEmpty() || newPwd.isEmpty() || confirmPwd.isEmpty() ||
-            oldPwd != userViewModel.user!!.password.toString() ||
             confirmPwd != newPwd
         ) {
 

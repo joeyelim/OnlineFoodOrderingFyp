@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.ViewModel.UserViewModel
@@ -46,7 +47,11 @@ class EditProfileFragment : Fragment() {
             } else {
                 updateDatabase()
             }
+        }
 
+        binding.btnCancel.setOnClickListener(){
+            it.findNavController()
+                .navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
         }
 
         return binding.root

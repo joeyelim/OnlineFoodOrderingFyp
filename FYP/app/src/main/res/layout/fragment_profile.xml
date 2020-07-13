@@ -28,6 +28,7 @@
                     android:layout_height="120dp"
                     android:layout_marginTop="16dp"
                     app:cardCornerRadius="60dp"
+                    app:cardBackgroundColor="@color/lightGray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +38,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/citc_cafe" />
+                        app:srcCompat="@drawable/ic_person" />
 
                 </com.google.android.material.card.MaterialCardView>
 

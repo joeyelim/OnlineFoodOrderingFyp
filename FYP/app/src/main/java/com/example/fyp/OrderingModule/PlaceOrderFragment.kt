@@ -50,14 +50,14 @@ class PlaceOrderFragment : Fragment() {
         binding.btnNext.setOnClickListener{
             cartViewModel.option = getOption()
 
-            it.findNavController()
-                .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
+//            it.findNavController()
+//                .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
 
-//            if (!placeOrderValidation()) {
-//
-//            }else
-//                it.findNavController()
-//                    .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
+            if (!placeOrderValidation()) {
+
+            }else
+                it.findNavController()
+                    .navigate(PlaceOrderFragmentDirections.actionPlaceOrderFragmentToPlaceOrderProgress2Fragment())
         }
 
         binding.btnBack.setOnClickListener{
@@ -117,7 +117,7 @@ class PlaceOrderFragment : Fragment() {
             }
             else
             {
-                return if (x.before(date)) {
+                return if (x.after(date)) {
                     binding.errorMsg.setText("Please selected the time after current time($formatedDate)!")
                     binding.errorMsg.visibility = View.VISIBLE
                     false

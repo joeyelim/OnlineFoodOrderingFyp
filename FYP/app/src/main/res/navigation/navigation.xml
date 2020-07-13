@@ -249,7 +249,11 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.fyp.stuMaintenanceModule.EditProfileFragment"
-        android:label="EDIT PROFILE" />
+        android:label="EDIT PROFILE" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/orderDetailsFragment"
         android:name="com.example.fyp.OrderingModule.OrderDetailsFragment"
@@ -266,7 +270,11 @@
         android:id="@+id/changePwdFragment"
         android:name="com.example.fyp.stuMaintenanceModule.ChangePwdFragment"
         android:label="CHANGE PASSWORD"
-        tools:layout="@layout/fragment_change_pwd" />
+        tools:layout="@layout/fragment_change_pwd" >
+        <action
+            android:id="@+id/action_changePwdFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationDetailsFragment"
         android:name="com.example.fyp.Notification.NotificationDetailsFragment"

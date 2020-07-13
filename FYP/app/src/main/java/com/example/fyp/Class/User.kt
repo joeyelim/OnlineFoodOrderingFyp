@@ -6,7 +6,6 @@ class User {
     var last_name : String? = ""
     var phone_number: String? = ""
     var role : String? = ""
-    var password : String? = ""
     var email : String? = ""
     var canteen : String? = ""
     var store : String? = ""
@@ -30,7 +29,6 @@ class User {
         this.last_name = last_name
         this.phone_number = phone_number
         this.role = role
-        this.password = password
         this.email = email
         this.canteen = canteen
         this.store = store
@@ -50,7 +48,6 @@ class User {
         this.last_name = last_name
         this.phone_number = phone_number
         this.role = role
-        this.password = password
         this.email = email
     }
 }

@@ -12,15 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
 import com.example.fyp.Class.User
-import com.example.fyp.LoginModule.LoginFragment
-import com.example.fyp.LoginModule.LoginFragmentDirections
 import com.example.fyp.ViewModel.LoginViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.ActivityMainBinding
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
