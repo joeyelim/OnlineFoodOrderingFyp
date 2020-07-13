@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.fyp.MainActivity
@@ -18,6 +19,8 @@ import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentOrderDetailsBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 
 /**
@@ -63,6 +66,16 @@ class OrderDetailsFragment : Fragment() {
         binding.txtPrice.text = dec.format(userViewModel.order.each_Price!!
                                     * userViewModel.order.quantity!!).toString()
 
+        val image = binding.imageView3
+        val a = FirebaseStorage.getInstance().getReference(userViewModel.order.imageUrl!!)
+
+        a.downloadUrl.addOnSuccessListener {
+            Picasso.get()
+                .load(it)
+                .fit()
+                .into(image)
+        }
+        
 
 //        FirebaseFirestore.getInstance()
 //            .collection("Canteen").document(userViewModel.order.canteen_Name!!)

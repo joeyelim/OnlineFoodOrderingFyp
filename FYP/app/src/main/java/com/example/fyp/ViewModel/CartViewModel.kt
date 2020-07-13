@@ -70,7 +70,7 @@ class CartViewModel : ViewModel() {
             orderFood.add(Order_Food(item.food_name, item.each_price!!, "Pending",
                 item.quantity, item.remark, item.canteen_name,
                 item.store_name, option,("$saveCurrentDateTime $i"), currentDate
-            , currentTime, pickUpTime, currentDate, email))
+            , currentTime, pickUpTime, currentDate, email, item.image))
 
             i += 1
         }
