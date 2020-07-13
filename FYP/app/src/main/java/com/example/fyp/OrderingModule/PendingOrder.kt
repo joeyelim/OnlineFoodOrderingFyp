@@ -1,14 +1,14 @@
-package com.example.fyp.OrderingModule.OrderList
+package com.example.fyp.OrderingModule
 
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Order_Food
@@ -16,6 +16,7 @@ import com.example.fyp.FirestoreAdapter.OrderListFireStoreAdapter
 import com.example.fyp.Interface.OnCurrentOrderAdapterClick
 import com.example.fyp.MainActivity
 import com.example.fyp.R
+import com.example.fyp.ViewModel.CartViewModel
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentPendingOrderBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -24,10 +25,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 /**
  * A simple [Fragment] subclass.
  */
-class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
+class PendingOrder : Fragment(), OnCurrentOrderAdapterClick {
     private lateinit var binding: FragmentPendingOrderBinding
     private lateinit var adapter: OrderListFireStoreAdapter
     private lateinit var userViewModel: UserViewModel
+    private lateinit var cartViewModel: CartViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +43,11 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavVisible()
         userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
+        cartViewModel = ViewModelProviders.of(activity!!).get(CartViewModel::class.java)
 
         if (userViewModel.user!!.email != "") {
             initRecycleView()
         }
-
 
         return binding.root
     }
@@ -58,7 +60,7 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
                 val query = db.collection("Canteen").document(userViewModel.user?.canteen!!)
                     .collection("Store").document(userViewModel.user?.store!!)
                     .collection("Order_Food")
-                    .whereEqualTo("status", "Preparing")
+                    .whereEqualTo("status", "Pending")
 
                 query.get()
                     .addOnFailureListener {
@@ -87,14 +89,16 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
                 binding.pendingOrderRecycleView.layoutManager = LinearLayoutManager(context)
                 binding.pendingOrderRecycleView.adapter = adapter
                 binding.pendingOrderRecycleView.isNestedScrollingEnabled = true
-            } else {
+            }
+            else
+            {
 
                 // student view
 
                 val db = FirebaseFirestore.getInstance()
                 val query = db.collection("User").document(userViewModel.user?.email!!)
                     .collection("Order_Food")
-                    .whereEqualTo("status", "Preparing")
+                    .whereEqualTo("status", "Pending")
 
                 query.addSnapshotListener { p0, _ ->
                     if (p0 != null) {
@@ -118,7 +122,6 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
                     OrderListFireStoreAdapter(options, this, context!!, userViewModel.user!!)
                 binding.pendingOrderRecycleView.layoutManager = LinearLayoutManager(context)
                 binding.pendingOrderRecycleView.adapter = adapter
-                binding.pendingOrderRecycleView.isNestedScrollingEnabled = true
             }
 
 
@@ -139,12 +142,25 @@ class PreparingOrder : Fragment(), OnCurrentOrderAdapterClick {
 
         if (userViewModel.user!!.role == "staff") {
             db.runBatch {
-                it.update(r1,"status", "Ready")
-                it.update(r2,"status", "Ready")
+                it.update(r1,"status", "Preparing")
+                it.update(r2,"status", "Preparing")
+            }.addOnFailureListener {
+                Log.i("Test", it.toString())
+            }
+
+                .addOnCompleteListener {
+                Toast.makeText(activity, "Order Is Preparing! ", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            db.runBatch {
+                it.delete(r1)
+                it.delete(r2)
             }.addOnCompleteListener {
-                Toast.makeText(activity, "Order Is Ready! ", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Order Being Removed! ", Toast.LENGTH_LONG).show()
             }
         }
+
+
     }
 
     override fun onStart() {

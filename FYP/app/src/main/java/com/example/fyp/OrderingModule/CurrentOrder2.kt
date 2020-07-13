@@ -9,9 +9,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.fyp.OrderingModule.OrderList.PendingOrder
-import com.example.fyp.OrderingModule.OrderList.PreparingOrder
-import com.example.fyp.OrderingModule.OrderList.ReadyOrder
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentCurrentOrder2Binding
 
