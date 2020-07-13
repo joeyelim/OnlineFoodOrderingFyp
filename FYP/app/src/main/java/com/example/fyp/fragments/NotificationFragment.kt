@@ -11,10 +11,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Class.Canteen
-import com.example.fyp.Class.Cart
 import com.example.fyp.Class.Food
 import com.example.fyp.Class.Notification
 import com.example.fyp.FirestoreAdapter.NotificationFirestoreAdapter
@@ -29,7 +29,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlin.collections.ArrayList
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -57,10 +56,11 @@ class NotificationFragment : Fragment(), onListClick4 {
         checkLogin()
         initRecycleView()
 
-//        if (userViewModel.user!!.email != "") {
-//
-//        }
-//--------------------------------------------------------------------------------------------------
+        binding.fabBtn.setOnClickListener{
+            it.findNavController()
+                .navigate(NotificationFragmentDirections.actionNotificationFragmentToStaffCreatePostFragment())
+        }
+
 
         binding.btnUploadFirestore.setOnClickListener {
             uploadData()
@@ -87,8 +87,6 @@ class NotificationFragment : Fragment(), onListClick4 {
     }
 
 
-//---------------------------------------------------------------------------------------
-
     private fun initRecycleView() {
 
         val db = FirebaseFirestore.getInstance()
@@ -101,10 +99,10 @@ class NotificationFragment : Fragment(), onListClick4 {
             query.addSnapshotListener { p0, _ ->
                 if (p0 != null) {
 
-                    if(p0.size() > 0) {
+                    if (p0.size() > 0) {
                         binding.textView3.visibility = View.GONE
                         binding.rvNotification.visibility = View.VISIBLE
-                    }else {
+                    } else {
                         binding.textView3.visibility = View.VISIBLE
                         binding.rvNotification.visibility = View.GONE
                         binding.textView3.setText("There are currently no any notification yet.")
@@ -119,6 +117,14 @@ class NotificationFragment : Fragment(), onListClick4 {
             adapter = NotificationFirestoreAdapter(options, this, context!!)
             binding.rvNotification.layoutManager = LinearLayoutManager(activity)
             binding.rvNotification.adapter = adapter
+
+            // Staff view
+            if (userViewModel.user?.role == "staff") {
+                binding.fabBtn.visibility = View.VISIBLE
+            }
+            else {
+                binding.fabBtn.visibility = View.GONE
+            }
         } catch (e: Exception) {
 
         }
@@ -149,6 +155,18 @@ class NotificationFragment : Fragment(), onListClick4 {
             findNavController().navigate(NotificationFragmentDirections.actionNotificationFragmentToFragmentHome())
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //-----------------------------------------------------------------------------------------------------------

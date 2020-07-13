@@ -2,75 +2,107 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center|bottom"
         tools:context=".fragments.NotificationFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNotification"
+        <ScrollView
+            android:id="@+id/svNotification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fillViewport="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView3"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/notification"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/notificationBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@color/fui_transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvNotification" />
+
+
+                <Button
+                    android:id="@+id/btnUploadFirestore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="btnUploadFirestore"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <Button
+                    android:id="@+id/btnUploadFirestorage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="btnUploadFirestorage"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/btnUploadFirestore" />
+
+                <Button
+                    android:id="@+id/btnDeleteFirestorage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="btnDeleteFirestorage"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/btnUploadFirestorage" />
+
+                <Button
+                    android:id="@+id/btnDeleteFirestore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="btnDeleteFirestore"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/btnDeleteFirestorage" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Notification"
-            android:textSize="16dp"
-            android:textStyle="bold"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="70dp"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="6dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <Button
-            android:id="@+id/btnUploadFirestore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="btnUploadFirestore"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <Button
-            android:id="@+id/btnUploadFirestorage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="btnUploadFirestorage"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/btnUploadFirestore" />
-
-        <Button
-            android:id="@+id/btnDeleteFirestorage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="btnDeleteFirestorage"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/btnUploadFirestorage" />
-
-        <Button
-            android:id="@+id/btnDeleteFirestore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="btnDeleteFirestore"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/btnDeleteFirestorage" />
-
-
-
+            app:srcCompat="@drawable/ic_add"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
 </layout>
+
+
