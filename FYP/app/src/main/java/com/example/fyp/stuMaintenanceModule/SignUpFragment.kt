@@ -150,7 +150,6 @@ class SignUpFragment : Fragment() {
 
             if (firstName.isEmpty()) {
                 binding.txtFirstNLayout.error = "*First name is require."
-                // binding.txtFirstN.requestFocus()
             }
             else {
                 binding.txtFirstNLayout.isErrorEnabled = false
@@ -158,7 +157,6 @@ class SignUpFragment : Fragment() {
 
             if (lastName.isEmpty()) {
                 binding.txtLastNLayout.error = "*Last name is require."
-                // binding.txtLastN.requestFocus()
             }
             else {
                 binding.txtLastNLayout.isErrorEnabled = false
@@ -166,7 +164,6 @@ class SignUpFragment : Fragment() {
 
             if (phone.isEmpty()) {
                 binding.txtPhoneLayout.error = "*Phone number is require."
-                //  binding.txtPhone.requestFocus()
             }
             else {
                 binding.txtPhoneLayout.isErrorEnabled = false
@@ -174,9 +171,8 @@ class SignUpFragment : Fragment() {
 
             if (email.isEmpty()) {
                 binding.txtEmailLayout.error = "*Email is require."
-                // binding.txtEmail.requestFocus()
             }
-            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            else if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
                 binding.txtEmailLayout.error = "*Please enter a valid email"
             }
             else {
@@ -185,7 +181,6 @@ class SignUpFragment : Fragment() {
 
             if (password.isEmpty()) {
                 binding.txtPasswordLayout.error = "*Password is require."
-                // binding.txtPassword.requestFocus()
             }
             else {
                 binding.txtEmailLayout.isErrorEnabled = false

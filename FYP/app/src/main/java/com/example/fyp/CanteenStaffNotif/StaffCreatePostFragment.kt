@@ -10,11 +10,13 @@ import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RemoteViews
 import androidx.core.content.getSystemService
 import androidx.databinding.DataBindingUtil
+import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentStaffCreatePostBinding
 
@@ -36,47 +38,50 @@ class StaffCreatePostFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, com.example.fyp.R.layout.fragment_staff_create_post, container, false
         )
+        setHasOptionsMenu(true)
+        (activity as MainActivity).setNavInvisible()
+        notificationManager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            notificationManager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        binding.btnSend.setOnClickListener {
 
-            binding.btnSend.setOnClickListener {
+            val intent = Intent(activity, LauncherActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(activity,0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+            val contentView = RemoteViews(context!!.packageName, R.layout.notification_layout)
+            contentView.setTextViewText(R.id.tvTitle, "Taruc Online Foods Ordering")
+            contentView.setTextViewText(R.id.tvContent, "Notification Title")
 
-                val intent = Intent(activity, LauncherActivity::class.java)
-                val pendingIntent = PendingIntent.getActivity(activity,0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
-                val contentView = RemoteViews(context!!.packageName, R.layout.notification_layout)
-                contentView.setTextViewText(R.id.tvTitle, "Taruc Online Foods Ordering")
-                contentView.setTextViewText(R.id.tvContent, "Notification Title")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationChannel = NotificationChannel(
+                    channelId,
+                    description,
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+                notificationChannel.enableLights(true)
+                notificationChannel.lightColor = Color.GREEN
+                notificationChannel.enableVibration(false)
+                notificationManager.createNotificationChannel(notificationChannel)
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    notificationChannel = NotificationChannel(
-                        channelId,
-                        description,
-                        NotificationManager.IMPORTANCE_HIGH
-                    )
-                    notificationChannel.enableLights(true)
-                    notificationChannel.lightColor = Color.GREEN
-                    notificationChannel.enableVibration(false)
-                    notificationManager.createNotificationChannel(notificationChannel)
-
-                    builder = Notification.Builder(activity, channelId)
-                        .setContent(contentView)
-                        .setSmallIcon(R.mipmap.ic_launcher_round)
-                        .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.mipmap.ic_launcher))
-                        .setContentIntent(pendingIntent)
-                }
-                else{
-
-                    builder = Notification.Builder(activity)
-                        .setContent(contentView)
-                        .setSmallIcon(R.mipmap.ic_launcher_round)
-                        .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.mipmap.ic_launcher))
-                        .setContentIntent(pendingIntent)
-                }
-                notificationManager.notify(1234, builder.build())
+                builder = Notification.Builder(activity, channelId)
+                    .setContent(contentView)
+                    .setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.mipmap.ic_launcher))
+                    .setContentIntent(pendingIntent)
             }
+            else{
+
+                builder = Notification.Builder(activity)
+                    .setContent(contentView)
+                    .setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.mipmap.ic_launcher))
+                    .setContentIntent(pendingIntent)
+            }
+                notificationManager.notify(1234, builder.build())
+        }
 
         return binding.root
     }
 
-
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
+    }
 }
