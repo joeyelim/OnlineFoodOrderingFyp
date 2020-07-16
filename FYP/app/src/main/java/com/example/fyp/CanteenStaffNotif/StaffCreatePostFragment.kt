@@ -20,12 +20,15 @@ import androidx.databinding.DataBindingUtil
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentStaffCreatePostBinding
+import com.example.fyp.firebaseNotifications.MyFirebaseMessagingService
 import com.example.fyp.firebaseNotifications.NotificationData
 import com.example.fyp.firebaseNotifications.PushNotification
 import com.example.fyp.firebaseNotifications.RetrofitInstance
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_staff_create_post.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,23 +57,25 @@ class StaffCreatePostFragment : Fragment() {
         )
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
+
         notificationManager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        MyFirebaseMessagingService.sharedPref = this.activity!!.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
-            FirebaseService.token = it.token
-            .setText(it.token)
+            MyFirebaseMessagingService.token = it.token
+            txtToken.setText(it.token)
         }
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
         binding.btnSend.setOnClickListener {
             val title = binding.editTxtTitle.text.toString()
             val content = binding.editTxtContent.text.toString()
+            val recipientToken = binding.txtToken.text.toString()
 
-            if(title.isNotEmpty()&& content.isNotEmpty()) {
+            if(title.isNotEmpty() && content.isNotEmpty() && recipientToken.isNotEmpty()) {
                 PushNotification(
                     NotificationData(title,content),
-                    TOPIC
+                    recipientToken
                 ).also {
                     sendNotification(it)
                 }

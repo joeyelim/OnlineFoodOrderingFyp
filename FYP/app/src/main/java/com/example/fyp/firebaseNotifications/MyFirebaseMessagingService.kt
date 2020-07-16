@@ -8,6 +8,7 @@ import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import android.util.Log
@@ -23,6 +24,24 @@ import kotlin.random.Random
 private const val CHANNEL_ID = "my_channel"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
+    //access the token from everywhere
+    companion object {
+        // set shared pref variable from the outside
+        var sharedPref: SharedPreferences? = null
+
+        var token:String?
+        get() {
+            return sharedPref?.getString("token", "")
+        }
+        set(value){
+            sharedPref?.edit()?.putString("token", value)?.apply()
+        }
+    }
+
+    override fun onNewToken(newToken: String) {
+        super.onNewToken(newToken)
+        token = newToken
+    }
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
@@ -59,14 +78,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.createNotificationChannel(channel)
     }
 
-    override fun onNewToken(token: String) {
-        Log.d("TAG", "Refreshed token: $token")
+//    override fun onNewToken(token: String) {
+//        Log.d("TAG", "Refreshed token: $token")
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
 //        sendRegistrationToServer(token)
-    }
+//    }
 
 
 }
