@@ -54,6 +54,7 @@ class OrderDetailsFragment : Fragment() {
     private fun intiUI() {
         val dec = DecimalFormat("RM ###.00")
 
+        binding.txtFoodName.text = userViewModel.order.food_Name
         binding.txtOrderDetailsDate.text = userViewModel.order.pickUp_Date
         binding.txtPickupTime.text = userViewModel.order.pickUp_Time
         binding.txtCanteenName.text = userViewModel.order.canteen_Name

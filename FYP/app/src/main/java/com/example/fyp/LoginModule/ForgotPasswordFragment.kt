@@ -10,14 +10,19 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.fyp.Class.User
 import com.example.fyp.MainActivity
 import com.example.fyp.R
 import com.example.fyp.databinding.FragmentForgotPasswordBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
@@ -26,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_sign_up.*
  */
 class ForgotPasswordFragment : Fragment() {
     private lateinit var binding: FragmentForgotPasswordBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +41,9 @@ class ForgotPasswordFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_forgot_password, container, false
         )
+
+        auth = FirebaseAuth.getInstance()
+
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
@@ -70,6 +79,8 @@ class ForgotPasswordFragment : Fragment() {
 
         return binding.root
     }
+
+
 
     private fun forgotPasswordValidation():Boolean{
         val email = binding.txtForgotPwdEmail.text.toString()

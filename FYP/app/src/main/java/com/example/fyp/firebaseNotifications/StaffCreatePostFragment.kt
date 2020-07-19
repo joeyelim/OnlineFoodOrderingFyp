@@ -1,12 +1,8 @@
-package com.example.fyp.CanteenStaffNotif
+package com.example.fyp.firebaseNotifications
 
 
 import android.app.*
 import android.content.Context
-import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,23 +11,25 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RemoteViews
-import androidx.core.content.getSystemService
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import com.example.fyp.Class.Notification
 import com.example.fyp.MainActivity
 import com.example.fyp.R
+import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentStaffCreatePostBinding
-import com.example.fyp.firebaseNotifications.MyFirebaseMessagingService
-import com.example.fyp.firebaseNotifications.NotificationData
-import com.example.fyp.firebaseNotifications.PushNotification
-import com.example.fyp.firebaseNotifications.RetrofitInstance
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_staff_create_post.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.random.Random
 
 /**
  * A simple [Fragment] subclass.
@@ -41,10 +39,12 @@ const val TOPIC = "/topics/myTopic"
 class StaffCreatePostFragment : Fragment() {
     private lateinit var binding: FragmentStaffCreatePostBinding
     lateinit var notificationManager: NotificationManager
-    lateinit var notificationChannel: NotificationChannel
-    lateinit var builder: Notification.Builder
-    private val channelId = "com.example.fyp.CanteenStaffNotif"
-    private val description = "Test notification"
+    private lateinit var userViewModel: UserViewModel
+//    lateinit var notificationChannel: NotificationChannel
+//    lateinit var builder: Notification.Builder
+//    private val channelId = "com.example.fyp.CanteenStaffNotif"
+//    private val description = "Test notification"
+
 
     val TAG = "StaffCreatePostFragment"
 
@@ -58,28 +58,42 @@ class StaffCreatePostFragment : Fragment() {
         setHasOptionsMenu(true)
         (activity as MainActivity).setNavInvisible()
 
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
         notificationManager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        // send to a specific single device
+        // get token
         MyFirebaseMessagingService.sharedPref = this.activity!!.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
             MyFirebaseMessagingService.token = it.token
             txtToken.setText(it.token)
         }
+
+        // pass the topic here
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
         binding.btnSend.setOnClickListener {
             val title = binding.editTxtTitle.text.toString()
             val content = binding.editTxtContent.text.toString()
             val recipientToken = binding.txtToken.text.toString()
+            val recipient = binding.editTxtReceiver.text.toString()
 
-            if(title.isNotEmpty() && content.isNotEmpty() && recipientToken.isNotEmpty()) {
+            if (title.isNotEmpty() && content.isNotEmpty() && recipientToken.isNotEmpty()) {
                 PushNotification(
-                    NotificationData(title,content),
+                    NotificationData(title, content, recipient),
+                    // to all user that have the same topic
+                    //TOPIC
+                    // to a single user with that token
                     recipientToken
+
                 ).also {
                     sendNotification(it)
+                    intiUI()
                 }
             }
+        }
+
+
 
 //            val intent = Intent(activity, LauncherActivity::class.java)
 //            val pendingIntent = PendingIntent.getActivity(activity,0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
@@ -114,10 +128,42 @@ class StaffCreatePostFragment : Fragment() {
 //                    .setContentIntent(pendingIntent)
 //            }
 //                notificationManager.notify(1234, builder.build())
+//
 
-        }
 
         return binding.root
+    }
+
+    private fun intiUI() {
+        binding.txtStaffStoreName.text = userViewModel.user?.store
+        val db = FirebaseFirestore.getInstance()
+        val notificationID = Random.nextInt().toString()
+        val calForDate = Calendar.getInstance().time
+        val currentDate = SimpleDateFormat("dd.MM.yyyy").format(calForDate)
+        val currentTime = SimpleDateFormat("HH:mm").format(calForDate)
+        val notiList = ArrayList<Notification>()
+        notiList.add(
+            Notification(
+                notificationID, userViewModel.user?.store,binding.editTxtTitle.text.toString(),
+                binding.editTxtContent.text.toString(),currentDate,currentTime,false
+            )
+        )
+
+        // upload item into cart
+        db.runBatch {
+            for ((index, item) in notiList.withIndex()) {
+                it.set(db.collection("User").document(binding.editTxtReceiver.text.toString())
+                    .collection("Notification").document(item.notif_ID!!), item)
+            }
+
+        }.addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(
+                    activity, "New notification have been created",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun sendNotification(notification:PushNotification) = CoroutineScope(Dispatchers.IO).launch {

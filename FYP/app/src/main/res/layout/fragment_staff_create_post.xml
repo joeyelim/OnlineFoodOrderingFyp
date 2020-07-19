@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
-            tools:context=".CanteenStaffNotif.StaffCreatePostFragment">
+            tools:context=".firebaseNotifications.StaffCreatePostFragment">
 
             <TextView
                 android:id="@+id/textFrom"
@@ -42,7 +42,7 @@
                 android:id="@+id/textTo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="To: "
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
@@ -50,16 +50,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textFrom" />
 
-            <TextView
-                android:id="@+id/txtReceiver"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/editTxtReceiver"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="ALL USER"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:layout_marginStart="32dp"
+                android:backgroundTint="@color/gray"
+                android:hint="receiver email address"
+                android:inputType="textEmailAddress"
                 app:layout_constraintStart_toEndOf="@+id/textTo"
                 app:layout_constraintTop_toBottomOf="@+id/txtStaffStoreName" />
 
@@ -67,7 +65,7 @@
                 android:id="@+id/textTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 android:text="Title: "
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
@@ -79,12 +77,12 @@
                 android:id="@+id/editTxtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
+                android:layout_marginStart="42dp"
                 android:backgroundTint="@color/gray"
                 android:hint="Title"
-                android:inputType="textCapSentences"
+                android:inputType="textEmailSubject"
                 app:layout_constraintStart_toEndOf="@+id/textTitle"
-                app:layout_constraintTop_toBottomOf="@+id/txtReceiver" />
+                app:layout_constraintTop_toBottomOf="@+id/editTxtReceiver" />
 
             <TextView
                 android:id="@+id/textContent"
@@ -103,19 +101,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/card_bg"
+                android:lines="10"
+                android:gravity="start|top"
+                android:backgroundTint="@color/gray"
                 android:hint="Type your content here..."
-                android:inputType="textLongMessage"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textContent" />
-
-            <EditText
-                android:id="@+id/txtToken"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/editTxtContent"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDiscard"
@@ -123,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="62dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="24dp"
                 android:layout_weight="1"
                 android:shadowColor="@color/colorPrimaryDark"
@@ -138,13 +131,19 @@
                 android:id="@+id/btnSend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="62dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="24dp"
                 android:text="Send"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTxtContent" />
+
+            <EditText
+                android:id="@+id/txtToken"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/btnDiscard"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

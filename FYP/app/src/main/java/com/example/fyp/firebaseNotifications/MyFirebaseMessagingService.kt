@@ -5,28 +5,28 @@ import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_HIGH
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_ONE_SHOT
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
-import android.util.Log
+import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import com.example.fyp.CanteenStaffNotif.StaffCreatePostFragment
 import com.example.fyp.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import java.util.*
 import kotlin.random.Random
 
 private const val CHANNEL_ID = "my_channel"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
-    //access the token from everywhere
+
+
+    //companion object- access the token from everywhere
     companion object {
-        // set shared pref variable from the outside
+        // save the token
         var sharedPref: SharedPreferences? = null
 
         var token:String?
@@ -43,6 +43,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         token = newToken
     }
 
+    // create a service to receive the notification
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
@@ -55,6 +56,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(message.data["title"])
@@ -77,15 +80,5 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
         notificationManager.createNotificationChannel(channel)
     }
-
-//    override fun onNewToken(token: String) {
-//        Log.d("TAG", "Refreshed token: $token")
-
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // Instance ID token to your app server.
-//        sendRegistrationToServer(token)
-//    }
-
 
 }

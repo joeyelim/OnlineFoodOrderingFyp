@@ -47,11 +47,15 @@ class OrderListViewHolder internal constructor(private val view: View, var conte
         val dec = DecimalFormat("RM ###.00")
 
         if (user.role == "staff") {
-            holder.view.txtCanteenName.text = order.email
-            holder.view.txtStore.text = ""
+            holder.view.txtUserEmail.text = order.email
+            holder.view.txtUserPhone.text = user.phone_number
+            holder.view.txtCanteenName.visibility = View.GONE
+            holder.view.txtStore.visibility = View.GONE
         } else {
             holder.view.txtCanteenName.text = order.canteen_Name
             holder.view.txtStore.text = order.store_Name
+            holder.view.txtUserEmail.visibility = View.GONE
+            holder.view.txtUserPhone.visibility = View.GONE
         }
 
         holder.view.food.text = order.food_Name
@@ -95,7 +99,7 @@ class OrderListViewHolder internal constructor(private val view: View, var conte
         if (user.role == "staff") {
             holder.view.btnOrderCancel.visibility = View.VISIBLE
             holder.view.btnOrderCancel.text = "Ready"
-            holder.view.btnOrderCancel.setBackgroundColor(Color.parseColor("#034AFF"))
+            holder.view.btnOrderCancel.setBackgroundColor(Color.parseColor("#04C852"))
             holder.view.btnOrderCancel.setTextColor(Color.WHITE)
         }else {
             holder.view.btnOrderCancel.visibility = View.GONE
@@ -112,7 +116,7 @@ class OrderListViewHolder internal constructor(private val view: View, var conte
             holder.view.btnOrderCancel.visibility = View.GONE
         }
         holder.view.btnOrderCancel.setTextColor(Color.WHITE)
-        holder.view.btnOrderCancel.setBackgroundColor(Color.parseColor("#04C852"))
+        holder.view.btnOrderCancel.setBackgroundColor(Color.parseColor("#034AFF"))
         holder.view.txtProgress.setTextColor(Color.parseColor("#04C852"))
     }
 

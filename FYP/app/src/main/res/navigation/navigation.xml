@@ -282,7 +282,7 @@
         tools:layout="@layout/fragment_notification_details" />
     <fragment
         android:id="@+id/staffCreatePostFragment"
-        android:name="com.example.fyp.CanteenStaffNotif.StaffCreatePostFragment"
+        android:name="com.example.fyp.firebaseNotifications.StaffCreatePostFragment"
         android:label="CREATE POST"
         tools:layout="@layout/fragment_staff_create_post" />
 </navigation>

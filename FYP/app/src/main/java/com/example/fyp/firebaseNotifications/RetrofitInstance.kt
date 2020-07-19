@@ -6,6 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitInstance {
     companion object {
+        // this var will only will inti if we need.
+        // the value that we declare will be store inside the lazy block
         private val retrofit by lazy {
             Retrofit.Builder()
                 .baseUrl(BASE_URL)
