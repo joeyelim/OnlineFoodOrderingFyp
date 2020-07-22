@@ -28,6 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 
 /**
  * A simple [Fragment] subclass.
@@ -146,7 +149,8 @@ class SignUpFragment : Fragment() {
         val phone = binding.txtPhone.text.toString()
 
         if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()
-            || !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()) {
+            || !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()
+            || !isValidPassword(password) ) {
 
             if (firstName.isEmpty()) {
                 binding.txtFirstNLayout.error = "*First name is require."
@@ -182,6 +186,9 @@ class SignUpFragment : Fragment() {
             if (password.isEmpty()) {
                 binding.txtPasswordLayout.error = "*Password is require."
             }
+            else if (!isValidPassword(password)) {
+                binding.txtPasswordLayout.error = "*Invalid password."
+            }
             else {
                 binding.txtPasswordLayout.isErrorEnabled = false
             }
@@ -191,6 +198,21 @@ class SignUpFragment : Fragment() {
         }
 
         return true
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+
+        val pattern: Pattern
+        val matcher: Matcher
+
+        // a digit, a lower case letter must occur at least once & at least six place   s though
+        val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$"
+
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(password)
+
+        return matcher.matches()
+
     }
 
     private fun assignUser() {
