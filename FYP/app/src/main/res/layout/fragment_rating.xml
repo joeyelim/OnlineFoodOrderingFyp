@@ -13,7 +13,6 @@
             android:layout_width="332dp"
             android:layout_height="460dp"
             android:padding="2dp"
-            android:background="@drawable/text_field_border"
             android:dividerHeight="0.0px"
             android:clipToPadding="false"
             android:clipChildren="false"
@@ -33,7 +32,7 @@
             android:id="@+id/layout"
             android:layout_width="330dp"
             android:layout_height="460dp"
-            android:background="@drawable/login_background"
+            android:background="@drawable/text_field_border"
             app:cardCornerRadius="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,30 +50,42 @@
 <!--                app:layout_constraintStart_toStartOf="parent"-->
 <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-                <ImageView
-                    android:id="@+id/imgFood"
-                    android:layout_width="265dp"
-                    android:layout_height="182dp"
-                    android:layout_marginTop="32dp"
-                    android:padding="2dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/frame_image_view"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="265dp"
+                android:layout_height="182dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/frame_image_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txtFoodName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/food_name_underline"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/title_text_size"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgFood" />
+            <ImageView
+                android:id="@+id/imgFood"
+                android:layout_width="263dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="33dp"
+                android:padding="4dp"
+                android:scaleType="centerCrop"
+                android:src="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtFoodName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/food_name_underline"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgFood" />
 
             <RatingBar
                 android:id="@+id/ratingBar"

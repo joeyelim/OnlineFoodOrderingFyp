@@ -67,6 +67,7 @@ class StaffCreatePostFragment : Fragment() {
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
             MyFirebaseMessagingService.token = it.token
             txtToken.setText(it.token)
+
         }
 
         // pass the topic here
