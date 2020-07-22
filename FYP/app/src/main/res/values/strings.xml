@@ -29,7 +29,8 @@
     <string name="lastN_helperText">Enter your last name here</string>
     <string name="first_name">First Name</string>
     <string name="email_helperText">Enter your email here.</string>
-    <string name="password_helperText">Create your password here.</string>
+    <string name="password_helperText">Enter your password here.</string>
+    <string name="password_helperText1">* Password must have at least 6 places though included at least 1 digit and 1 letter. *</string>
     <string name="logo">logo</string>
     <string name="taruc_logo">Taruc logo</string>
     <string name="already_have_an_account">Already have an account?</string>
