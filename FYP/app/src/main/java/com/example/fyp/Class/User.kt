@@ -18,7 +18,6 @@ class User {
         last_name: String?,
         phone_number: String?,
         role: String?,
-        password: String?,
         email: String?,
         canteen: String?,
         store : String?
@@ -39,8 +38,8 @@ class User {
         first_name: String?,
         last_name: String?,
         phone_number: String?,
-        role: String?,
         password: String?,
+        role: String?,
         email: String?
     ) {
         this.profile_pic = profile_pic

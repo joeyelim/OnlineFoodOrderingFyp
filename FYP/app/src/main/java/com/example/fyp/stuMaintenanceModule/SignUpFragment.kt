@@ -183,7 +183,7 @@ class SignUpFragment : Fragment() {
                 binding.txtPasswordLayout.error = "*Password is require."
             }
             else {
-                binding.txtEmailLayout.isErrorEnabled = false
+                binding.txtPasswordLayout.isErrorEnabled = false
             }
 
             return false
