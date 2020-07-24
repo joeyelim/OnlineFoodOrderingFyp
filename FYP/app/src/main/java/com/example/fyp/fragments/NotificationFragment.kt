@@ -38,7 +38,7 @@ import java.util.*
  */
 class NotificationFragment : Fragment(), onListClick4 {
     private lateinit var binding: FragmentNotificationBinding
-    private lateinit var storage: FirebaseStorage
+//    private lateinit var storage: FirebaseStorage
     private var adapter: NotificationFirestoreAdapter? = null
     private lateinit var userViewModel: UserViewModel
 
@@ -62,14 +62,14 @@ class NotificationFragment : Fragment(), onListClick4 {
         }
 
 
-        binding.btnUploadFirestore.setOnClickListener {
-            uploadData()
+//        binding.btnUploadFirestore.setOnClickListener {
+//            uploadData()
 //            updateData()
-        }
+//        }
 
-        binding.btnDeleteFirestore.setOnClickListener {
-            deleteData()
-        }
+//        binding.btnDeleteFirestore.setOnClickListener {
+//            deleteData()
+//        }
 
 //        binding.btnUploadFirestorage.setOnClickListener {
 //            uploadPhoto()
@@ -80,7 +80,7 @@ class NotificationFragment : Fragment(), onListClick4 {
 //        }
 
         // [START storage_field_initialization]
-        storage = Firebase.storage
+//        storage = Firebase.storage
         // [END storage_field_initialization]
 
         return binding.root
@@ -169,10 +169,9 @@ class NotificationFragment : Fragment(), onListClick4 {
 
 
 
-//-----------------------------------------------------------------------------------------------------------
 
 
-    // upload single data
+    // ---------------------------------upload single data----------------------------------------------------
 //    private fun uploadData(){
 //        var testData = Canteen("time", "image", "name")
 //
@@ -186,16 +185,16 @@ class NotificationFragment : Fragment(), onListClick4 {
 //            }
 //    }
 
-    // upload multuple data
-    private fun uploadData() {
-        var dataList = ArrayList<Canteen>()
-
-        for (x in 10 until 20) {
-            var testData = Canteen("time", "image", x.toString(), "Canteen")
-            dataList.add(testData)
-        }
-
-        val db = FirebaseFirestore.getInstance()
+    // ------------------------------------upload multiple data------------------------------------------------
+//    private fun uploadData() {
+//        var dataList = ArrayList<Canteen>()
+//
+//        for (x in 10 until 20) {
+//            var testData = Canteen("time", "image", x.toString(), "Canteen")
+//            dataList.add(testData)
+//        }
+//
+//        val db = FirebaseFirestore.getInstance()
 
 //        for ((index, data) in dataList.withIndex()) {
 //            db.collection("Canteen").document("Canteen$index")
@@ -252,36 +251,7 @@ class NotificationFragment : Fragment(), onListClick4 {
 //        cartList.add(Cart("Shredded Mushrooms Lou Syu Fan", 4.80, 1, "Remark",
 //            "Canteen1", "Noodle", formatedDate ))
 
-        //--------------------------------------------yien----------------------------------------------------------
-
-        var food = ArrayList<Food>()
-        var catarray= ArrayList<String>()
-        catarray.add("Rice")
-        catarray.add("Vegetarian")
-
-        var cat2array= ArrayList<String>()
-        cat2array.add("Noodle")
-        cat2array.add("Vegetarian")
-
-        food.add(
-            Food(
-                "Stewed Mixed Vegetables Rice", "Food/vegetables_rice.jpg", 4.5,5.0,
-                "Braised assorted vegetable w/mushroom buddha′s feast（stewed mixed vegetable）vegetarian meal for buddhism",
-            2, 3, 15,catarray
-            )
-        )
-
-        food.add(
-            Food(
-                "Wonton Noodles", "Food/wanta mee.jpg", 4.8,5.2,
-                "Vegetarian/vegan cuisine can be delicious, creative and healthy too. The wanton noodle " +
-                        "is does not have meat / fish and no egg.  All whole-grain flour in baking, mostly vegan. Some diary would replace with non diary-milk, vegan cheese, and butter.",
-                2, 3, 10,cat2array
-            )
-        )
-
-
-
+        //------------------------------------------------------------------------------------------------------
 
 
 //        var orderFoodList = ArrayList<Order_Food>()
@@ -312,7 +282,7 @@ class NotificationFragment : Fragment(), onListClick4 {
 //                }
 //        }
 
-//--------------------------------------------yien----------------------------------------------------------
+//--------------------------------------------insert data----------------------------------------------------------
 
 
 //        for ((index, item) in food.withIndex()) {
@@ -332,38 +302,41 @@ class NotificationFragment : Fragment(), onListClick4 {
 //                }
 //        }
 
-    }
+//    }
+//
+//
+//    private fun deleteData() {
+//        val db = FirebaseFirestore.getInstance()
+//
+//        db.collection("Test2").document("Canteen0")
+//            .delete()
+//            .addOnSuccessListener { Log.d("delete", "DocumentSnapshot successfully deleted!") }
+//            .addOnFailureListener { e -> Log.w("delete", "Error deleting document", e) }
+//    }
+//
+//    private fun updateData() {
+//        val db = FirebaseFirestore.getInstance()
+//
+//
+//        db.collection("Test2").document("Canteen0")
+//            .update("time", "lllllllllll")
+//            .addOnSuccessListener {
+//                Log.i("upload", "success")
+//            }
+//            .addOnFailureListener {
+//                Log.i("upload", "Error adding document", it)
+//            }
+//            .addOnCompleteListener {
+//                Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show();
+//            }
+//    }
+//
+//    override fun onPrepareOptionsMenu(menu: Menu) {
+//        menu.clear()
+//    }
 
 
-    private fun deleteData() {
-        val db = FirebaseFirestore.getInstance()
 
-        db.collection("Test2").document("Canteen0")
-            .delete()
-            .addOnSuccessListener { Log.d("delete", "DocumentSnapshot successfully deleted!") }
-            .addOnFailureListener { e -> Log.w("delete", "Error deleting document", e) }
-    }
-
-    private fun updateData() {
-        val db = FirebaseFirestore.getInstance()
-
-
-        db.collection("Test2").document("Canteen0")
-            .update("time", "lllllllllll")
-            .addOnSuccessListener {
-                Log.i("upload", "success")
-            }
-            .addOnFailureListener {
-                Log.i("upload", "Error adding document", it)
-            }
-            .addOnCompleteListener {
-                Toast.makeText(activity, "Finish Upload Data!", Toast.LENGTH_SHORT).show();
-            }
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.clear()
-    }
 
 //    private fun uploadPhoto() {
 //

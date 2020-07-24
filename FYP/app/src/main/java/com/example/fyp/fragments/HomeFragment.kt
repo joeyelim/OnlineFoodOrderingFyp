@@ -34,8 +34,6 @@ import com.google.firebase.ktx.Firebase
  * A simple [Fragment] subclass.
  */
 class HomeFragment : Fragment(), onListClick {
-
-
     private lateinit var binding: FragmentHomeBinding
     private var adapter: CanteenFireStoreRecyclerAdapter? = null
     private lateinit var mAuth : FirebaseAuth
