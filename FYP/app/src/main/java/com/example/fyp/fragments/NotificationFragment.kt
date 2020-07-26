@@ -8,26 +8,36 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
+import com.example.fyp.Chat.ChatFragment
+import com.example.fyp.Chat.SearchFragment
 import com.example.fyp.Class.Canteen
 import com.example.fyp.Class.Food
 import com.example.fyp.Class.Notification
 import com.example.fyp.FirestoreAdapter.NotificationFirestoreAdapter
 import com.example.fyp.FirestoreAdapter.onListClick4
+import com.example.fyp.MainActivity
 import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentNotificationBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.fragment_notification.*
 import kotlin.collections.ArrayList
 import java.util.*
 
@@ -36,32 +46,38 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class NotificationFragment : Fragment(), onListClick4 {
+class NotificationFragment : Fragment() {
     private lateinit var binding: FragmentNotificationBinding
     private lateinit var storage: FirebaseStorage
-    private var adapter: NotificationFirestoreAdapter? = null
+//    private var adapter: NotificationFirestoreAdapter? = null
     private lateinit var userViewModel: UserViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
             inflater, com.example.fyp.R.layout.fragment_notification, container, false
         )
 
+        (activity as MainActivity).setNavVisible()
+//        (activity as AppCompatActivity).setSupportActionBar(binding.chatToolbar)
+//        val toolbar: androidx.appcompat.widget.Toolbar = binding.chatToolbar
+//        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+//        (activity as AppCompatActivity).supportActionBar?.title = ""
+
+
+
         userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
         checkLogin()
-        initRecycleView()
+//        initRecycleView()
 
-        binding.fabBtn.setOnClickListener{
-            it.findNavController()
-                .navigate(NotificationFragmentDirections.actionNotificationFragmentToStaffCreatePostFragment())
-        }
+//        binding.fabBtn.setOnClickListener{
+//            it.findNavController()
+//                .navigate(NotificationFragmentDirections.actionNotificationFragmentToStaffCreatePostFragment())
+//        }
 
-
+/*
         binding.btnUploadFirestore.setOnClickListener {
             uploadData()
 //            updateData()
@@ -70,23 +86,78 @@ class NotificationFragment : Fragment(), onListClick4 {
         binding.btnDeleteFirestore.setOnClickListener {
             deleteData()
         }
+*/
+/*
+        binding.btnUploadFirestorage.setOnClickListener {
+            uploadPhoto()
+        }
 
-//        binding.btnUploadFirestorage.setOnClickListener {
-//            uploadPhoto()
-//        }
-//
-//        binding.btnUploadFirestorage.setOnClickListener {
-//            deletePhoto()
-//        }
-
+        binding.btnUploadFirestorage.setOnClickListener {
+            deletePhoto()
+        }
+ */
         // [START storage_field_initialization]
-        storage = Firebase.storage
+//        storage = Firebase.storage
         // [END storage_field_initialization]
 
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
 
+        val tabLayout = binding.chatTabLayout
+        val viewPager = binding.chatViewPager
+        val viewPagerAdapter = viewPagerAdapter(childFragmentManager)
+
+        viewPagerAdapter.addFragment(ChatFragment(), "Chats")
+        viewPagerAdapter.addFragment(SearchFragment(), "Search")
+
+        viewPager.adapter = viewPagerAdapter
+        tabLayout.setupWithViewPager(viewPager)
+        chat_tabLayout.setupWithViewPager(viewPager)
+    }
+
+    internal class viewPagerAdapter(fragmentManager: FragmentManager):
+    FragmentPagerAdapter(fragmentManager)
+    {
+        private val fragments: ArrayList<Fragment>
+        private val titles: ArrayList<String>
+
+        init {
+            fragments = ArrayList<Fragment>()
+            titles = ArrayList<String>()
+        }
+        override fun getItem(position: Int): Fragment {
+            return fragments[position]
+        }
+
+        override fun getCount(): Int {
+            return fragments.size
+        }
+
+        fun addFragment(fragment: Fragment, title: String){
+            fragments.add(fragment)
+            titles.add(title)
+        }
+
+        override fun getPageTitle(i: Int): CharSequence? {
+            return titles[i]
+        }
+
+    }
+
+    private fun checkLogin() {
+        if (Firebase.auth.currentUser == null || userViewModel.user?.email == "") {
+            findNavController().navigate(NotificationFragmentDirections.actionNotificationFragmentToFragmentHome())
+        }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
+    }
+
+    /*
     private fun initRecycleView() {
 
         val db = FirebaseFirestore.getInstance()
@@ -101,10 +172,10 @@ class NotificationFragment : Fragment(), onListClick4 {
 
                     if (p0.size() > 0) {
                         binding.textView3.visibility = View.GONE
-                        binding.rvNotification.visibility = View.VISIBLE
+                        binding.chatViewPager.visibility = View.VISIBLE
                     } else {
                         binding.textView3.visibility = View.VISIBLE
-                        binding.rvNotification.visibility = View.GONE
+                        binding.chatViewPager.visibility = View.GONE
                         binding.textView3.setText("There are currently no any notification yet.")
                     }
                 }
@@ -114,10 +185,11 @@ class NotificationFragment : Fragment(), onListClick4 {
                 FirestoreRecyclerOptions.Builder<Notification>()
                     .setQuery(query, Notification::class.java).build()
 
-            adapter = NotificationFirestoreAdapter(options, this, context!!)
-            binding.rvNotification.layoutManager = LinearLayoutManager(activity)
-            binding.rvNotification.adapter = adapter
+//            adapter = NotificationFirestoreAdapter(options, this, context!!)
+//            binding.rvNotification.layoutManager = LinearLayoutManager(activity)
+//            binding.rvNotification.adapter = adapter
 
+/*
             // Staff view
             if (userViewModel.user?.role == "staff") {
                 binding.fabBtn.visibility = View.VISIBLE
@@ -125,11 +197,16 @@ class NotificationFragment : Fragment(), onListClick4 {
             else {
                 binding.fabBtn.visibility = View.GONE
             }
+
+ */
         } catch (e: Exception) {
 
         }
     }
 
+     */
+
+/*
     override fun onStart() {
         super.onStart()
         if (userViewModel.user!!.email != "") {
@@ -142,19 +219,19 @@ class NotificationFragment : Fragment(), onListClick4 {
         if (userViewModel.user!!.email != "") {
             adapter?.stopListening()
         }
-    }
+    }*/
 
+
+    /*
     override fun onItemClick(notif: Notification, position: Int) {
         userViewModel.notification = notif
         this.findNavController()
             .navigate(NotificationFragmentDirections.actionNotificationFragmentToNotificationDetailsFragment())
     }
 
-    private fun checkLogin() {
-        if (Firebase.auth.currentUser == null || userViewModel.user?.email == "") {
-            findNavController().navigate(NotificationFragmentDirections.actionNotificationFragmentToFragmentHome())
-        }
-    }
+     */
+
+
 
 
 
@@ -186,7 +263,8 @@ class NotificationFragment : Fragment(), onListClick4 {
 //            }
 //    }
 
-    // upload multuple data
+/*
+    // upload multiple data
     private fun uploadData() {
         var dataList = ArrayList<Canteen>()
 
@@ -361,9 +439,7 @@ class NotificationFragment : Fragment(), onListClick4 {
             }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.clear()
-    }
+*/
 
 //    private fun uploadPhoto() {
 //
