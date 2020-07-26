@@ -9,6 +9,7 @@ class User {
     var email : String? = ""
     var canteen : String? = ""
     var store : String? = ""
+    var registrationToken: MutableList<String> = mutableListOf()
 
     constructor()
 
@@ -40,7 +41,8 @@ class User {
         phone_number: String?,
         password: String?,
         role: String?,
-        email: String?
+        email: String?,
+        registrationToken: MutableList<String>
     ) {
         this.profile_pic = profile_pic
         this.first_name = first_name
@@ -48,5 +50,6 @@ class User {
         this.phone_number = phone_number
         this.role = role
         this.email = email
+        this.registrationToken = registrationToken
     }
 }

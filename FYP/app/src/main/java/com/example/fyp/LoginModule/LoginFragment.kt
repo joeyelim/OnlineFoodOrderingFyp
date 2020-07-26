@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.fyp.Chat.Service.MyFirebaseInstanceIDService
 import com.example.fyp.Class.User
 import com.example.fyp.MainActivity
 import com.example.fyp.R
@@ -35,6 +36,7 @@ import com.example.fyp.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
 
 
 /**
@@ -123,7 +125,7 @@ class LoginFragment : Fragment() {
                             ).show()
                         } else {
                             Toast.makeText(
-                                activity, "Welcome, Directing To Home Page..",
+                                activity, "Welcome! Directing To Home Page...",
                                 Toast.LENGTH_SHORT
                             ).show()
 
@@ -132,6 +134,9 @@ class LoginFragment : Fragment() {
                                 .get()
                                 .addOnSuccessListener {
                                     userViewModel.user = it.toObject(User::class.java)
+                                    val registrationToken = FirebaseInstanceId.getInstance().token
+                                    MyFirebaseInstanceIDService.addTokenToFirestore(registrationToken)
+
                                 }
                                 .addOnCompleteListener {
                                     this.findNavController()

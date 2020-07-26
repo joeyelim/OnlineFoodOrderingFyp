@@ -40,7 +40,7 @@ class LoginViewModel : ViewModel() {
     }
 
     fun setCurrentUser() {
-        _currentUser.value = User("asd", "asd", "ads", "ad", "ws","asd", "email")
+        _currentUser.value = User("asd", "asd", "ads", "ad", "ws","asd", "email", mutableListOf())
     }
 
 

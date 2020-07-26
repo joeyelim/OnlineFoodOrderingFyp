@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Chat.Item.PersonItem
 import com.example.fyp.Util.FirestoreUtil
+import com.example.fyp.ViewModel.UserViewModel
 import com.example.fyp.databinding.FragmentSearchBinding
 import com.google.firebase.firestore.ListenerRegistration
 import com.xwray.groupie.GroupAdapter
@@ -28,6 +30,8 @@ class SearchFragment : Fragment() {
     private var shouldIdInitRecyclerView = true
     private lateinit var peopleSection: Section
 
+    private lateinit var userViewModel: UserViewModel
+
 //    private var userAdapter: UserAdapter? = null
 //    private var mUsers: List<User>? = null
 
@@ -40,6 +44,7 @@ class SearchFragment : Fragment() {
         )
 
         userListenerRegistration = FirestoreUtil.addUserListener(this.activity!!, this::updateRecyclerView)
+        userViewModel = ViewModelProviders.of(activity!!).get(UserViewModel::class.java)
 
         return binding.root
     }
@@ -76,10 +81,18 @@ class SearchFragment : Fragment() {
     private val onItemClick = OnItemClickListener { item, view ->
         if (item is PersonItem) {
 
-            startActivity(intentFor<ChatActivity>(
-                AppConstant.USER_NAME to item.person.phone_number,
-                AppConstant.USER_ID to item.userId)
+            if(userViewModel.user?.role == "staff"){
+                startActivity(intentFor<ChatActivity>(
+                    AppConstant.USER_NAME to item.person.store,
+                    AppConstant.USER_ID to item.userId)
                 )
+            } else {
+                startActivity(intentFor<ChatActivity>(
+                    AppConstant.USER_NAME to item.person.phone_number,
+                    AppConstant.USER_ID to item.userId)
+                )
+            }
+
         }
 
     }
