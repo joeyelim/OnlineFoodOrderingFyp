@@ -54,16 +54,16 @@
 
 <!--            </androidx.appcompat.widget.Toolbar>-->
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/chat_tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                app:tabTextColor="@color/white"
-                app:tabSelectedTextColor="@color/white"
-                app:tabIndicatorColor="@color/white">
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:id="@+id/chat_tabLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/colorPrimary"-->
+<!--                app:tabTextColor="@color/white"-->
+<!--                app:tabSelectedTextColor="@color/white"-->
+<!--                app:tabIndicatorColor="@color/white">-->
 
-            </com.google.android.material.tabs.TabLayout>
+<!--            </com.google.android.material.tabs.TabLayout>-->
 
         </com.google.android.material.appbar.AppBarLayout>
 

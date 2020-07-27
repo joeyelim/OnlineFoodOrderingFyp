@@ -29,5 +29,9 @@ class ChatFragment : Fragment() {
         return binding.root
     }
 
+    private fun retrieveChatList(){
+
+    }
+
 
 }

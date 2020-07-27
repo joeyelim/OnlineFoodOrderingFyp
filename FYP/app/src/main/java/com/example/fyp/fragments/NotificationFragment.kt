@@ -106,16 +106,16 @@ class NotificationFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val tabLayout = binding.chatTabLayout
+//        val tabLayout = binding.chatTabLayout
         val viewPager = binding.chatViewPager
         val viewPagerAdapter = viewPagerAdapter(childFragmentManager)
 
-        viewPagerAdapter.addFragment(ChatFragment(), "Chats")
+//        viewPagerAdapter.addFragment(ChatFragment(), "Chats")
         viewPagerAdapter.addFragment(SearchFragment(), "Search")
 
         viewPager.adapter = viewPagerAdapter
-        tabLayout.setupWithViewPager(viewPager)
-        chat_tabLayout.setupWithViewPager(viewPager)
+//        tabLayout.setupWithViewPager(viewPager)
+//        chat_tabLayout.setupWithViewPager(viewPager)
     }
 
     internal class viewPagerAdapter(fragmentManager: FragmentManager):
