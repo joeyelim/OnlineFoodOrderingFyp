@@ -158,6 +158,12 @@ class ProfileFragment : Fragment(), OnRatingClick {
         binding.txtFullName.text = userViewModel.user?.first_name + " " + userViewModel.user?.last_name
         binding.txtEmail.text = userViewModel.user?.email
         binding.txtPhone.text = userViewModel.user?.phone_number
+
+        if (userViewModel.user?.role == "staff") {
+            binding.txtStaff.text = "  Staff\n" + userViewModel.user?.store
+        } else {
+            binding.txtStaff.text = ""
+        }
     }
 
     private fun iniRecycleView() {

@@ -217,8 +217,8 @@ class SignUpFragment : Fragment() {
 
     private fun assignUser() {
         user = User("Photo",binding.txtFirstN.text.toString(),binding.txtLastN.text.toString()
-        ,binding.txtPhone.text.toString(),"student",binding.txtPassword.text.toString()
-            ,binding.txtEmail.text.toString(), mutableListOf())
+        ,binding.txtPhone.text.toString(),"student",
+            binding.txtEmail.text.toString(), mutableListOf())
     }
 
     private fun addUserToDatabase() {

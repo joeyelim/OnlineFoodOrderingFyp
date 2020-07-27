@@ -13,6 +13,7 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp.Chat.model.MessageType
@@ -45,23 +46,35 @@ class ChatActivity : AppCompatActivity() {
         }
 
         val otherUserId = intent.getStringExtra(AppConstant.USER_ID)
-        FirestoreUtil.getOrCreateChatChannel(otherUserId) {channelId ->
+        FirestoreUtil.getOrCreateChatChannel(otherUserId) { channelId ->
             messagesListenerRegistration =
                 FirestoreUtil.addChatMessageListener(channelId, this, this::updateRecyclerView)
+            if(currentUser.role != "staff") {
+                relativeLayout_message.visibility = View.GONE
+            } else {
+                relativeLayout_message.visibility = View.VISIBLE
+                imageView_send.setOnClickListener {
+                    val messageToSend =
+                        TextMessage(
+                            editText_message.text.toString(),
+                            Calendar.getInstance().time,
+                            FirebaseAuth.getInstance().currentUser?.email.toString(),
+                            otherUserId,
+                            currentUser.store.toString()
+                        )
+                    editText_message.setText("")
+                    FirestoreUtil.sendMessage(messageToSend, channelId)
+                }
+                fab_send_image.setOnClickListener {
+                    //TODO: Send image message
 
-            imageView_send.setOnClickListener{
-                val messageToSend =
-                    TextMessage(editText_message.text.toString(), Calendar.getInstance().time,
-                        FirebaseAuth.getInstance().currentUser?.email.toString(), otherUserId, currentUser.store.toString())
-                editText_message.setText("")
-                FirestoreUtil.sendMessage(messageToSend, channelId)
-            }
-            fab_send_image.setOnClickListener{
-                //TODO: Send image message
-
+                }
             }
         }
+
     }
+
+
 
     private fun updateRecyclerView(message: List<Item>){
         fun init() {

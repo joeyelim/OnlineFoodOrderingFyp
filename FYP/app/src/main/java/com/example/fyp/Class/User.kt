@@ -39,7 +39,6 @@ class User {
         first_name: String?,
         last_name: String?,
         phone_number: String?,
-        password: String?,
         role: String?,
         email: String?,
         registrationToken: MutableList<String>

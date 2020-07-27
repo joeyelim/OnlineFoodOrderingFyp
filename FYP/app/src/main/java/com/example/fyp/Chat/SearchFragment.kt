@@ -81,17 +81,10 @@ class SearchFragment : Fragment() {
     private val onItemClick = OnItemClickListener { item, view ->
         if (item is PersonItem) {
 
-            if(userViewModel.user?.role == "staff"){
-                startActivity(intentFor<ChatActivity>(
-                    AppConstant.USER_NAME to item.person.store,
-                    AppConstant.USER_ID to item.userId)
-                )
-            } else {
                 startActivity(intentFor<ChatActivity>(
                     AppConstant.USER_NAME to item.person.phone_number,
                     AppConstant.USER_ID to item.userId)
                 )
-            }
 
         }
 
