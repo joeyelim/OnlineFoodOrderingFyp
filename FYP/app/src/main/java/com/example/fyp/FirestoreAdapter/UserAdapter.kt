@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.Class.User
 import com.example.fyp.R
+import com.example.fyp.ViewModel.UserViewModel
 import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.user_search_item_layout.view.*
 
@@ -33,20 +35,24 @@ class UserAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, i: Int) {
         val user: User = mUsers[1]
-        holder.txtUsername.text = user!!.phone_number
+        if(user!!.role == "staff"){
+            holder.txtUsername.text = user!!.store
+        } else {
+            holder.txtUsername.text = user!!.phone_number
+        }
 
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var txtUsername: TextView
-        var txtOnline: MaterialCardView
-        var txtOffline: MaterialCardView
+//        var txtOnline: MaterialCardView
+//        var txtOffline: MaterialCardView
         var txtMessageLast: TextView
 
         init {
             txtUsername = itemView.findViewById(R.id.txtChatUsername)
-            txtOnline = itemView.findViewById(R.id.cv_imgOnline)
-            txtOffline = itemView.findViewById(R.id.cv_imgOffline)
+//            txtOnline = itemView.findViewById(R.id.cv_imgOnline)
+//            txtOffline = itemView.findViewById(R.id.cv_imgOffline)
             txtMessageLast = itemView.findViewById(R.id.message_last)
         }
     }
