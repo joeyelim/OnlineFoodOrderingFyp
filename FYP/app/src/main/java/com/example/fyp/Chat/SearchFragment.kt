@@ -1,6 +1,7 @@
 package com.example.fyp.Chat
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.user_search_item_layout.view.*
 import org.jetbrains.anko.support.v4.intentFor
 
 
@@ -79,11 +81,14 @@ class SearchFragment : Fragment() {
     }
 
     private val onItemClick = OnItemClickListener { item, view ->
+        Log.i("Test", view.txtChatUsername.text.toString())
+
         if (item is PersonItem) {
 
                 startActivity(intentFor<ChatActivity>(
                     AppConstant.USER_NAME to item.person.email,
-                    AppConstant.USER_ID to item.userId)
+                    AppConstant.USER_ID to item.userId,
+                    AppConstant.TARGET_EMAIL to view.txtChatUsername.text.toString())
                 )
 
         }

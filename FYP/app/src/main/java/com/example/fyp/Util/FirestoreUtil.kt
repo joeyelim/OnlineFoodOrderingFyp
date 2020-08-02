@@ -82,7 +82,7 @@ object FirestoreUtil {
     }
 
     fun addChatMessageListener(channelId: String, context: Context,
-                               onListen:(List<Item>)-> Unit):ListenerRegistration {
+                               onListen:(List<Item>)-> Unit, email : String):ListenerRegistration {
         return chatChannelCollectionRef.document(channelId).collection("message")
             .orderBy("time")
             .addSnapshotListener{ querySnapshot, firebaseFirestoreException ->
@@ -93,7 +93,7 @@ object FirestoreUtil {
                 val item = mutableListOf<Item>()
                 querySnapshot!!.documents.forEach{
                     if (it["type"] == MessageType.TEXT)
-                        item.add(TextMessageItem(it.toObject(TextMessage::class.java)!!, context))
+                        item.add(TextMessageItem(it.toObject(TextMessage::class.java)!!, context, email))
                     else
                         TODO("Add image message.")
                 }

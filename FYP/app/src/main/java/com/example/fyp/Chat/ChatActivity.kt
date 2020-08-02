@@ -56,9 +56,11 @@ class ChatActivity : AppCompatActivity() {
 //            }
 
         val otherUserId = intent.getStringExtra(AppConstant.USER_ID)
+        val targetEmail = intent.getStringExtra(AppConstant.TARGET_EMAIL)
         FirestoreUtil.getOrCreateChatChannel(otherUserId) { channelId ->
             messagesListenerRegistration =
-                FirestoreUtil.addChatMessageListener(channelId, this, this::updateRecyclerView)
+                FirestoreUtil.addChatMessageListener(channelId, this, this::updateRecyclerView,
+                    targetEmail)
             if(currentUser.role != "staff") {
                 relativeLayout_message.visibility = View.GONE
             } else {

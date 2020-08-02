@@ -26,7 +26,8 @@ import java.text.SimpleDateFormat
 
 
 class TextMessageItem(val message: TextMessage,
-                      val context: Context
+                      val context: Context,
+                      val email : String
                         )
     :Item() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -58,28 +59,7 @@ class TextMessageItem(val message: TextMessage,
             }
 
         viewHolder.message_root.setOnClickListener {
-            val textMessage: TextMessage = TextMessage()
-
             val dialog = AlertDialog.Builder(context)
-
-
-
-//            val documentId = FirebaseFirestore.getInstance()
-//                .collection("chatChannels").document().getId()
-//            val documentId1 = FirebaseFirestore.getInstance()
-//                .collection("chatChannels").document(documentId)
-//                .collection("message").document().getId()
-
-//            val i = FirebaseAuth.getInstance().currentUser?.email
-            Log.i("testing", FirebaseAuth.getInstance().currentUser?.email)
-
-            val channelId = FirebaseFirestore.getInstance()
-                .collection("User")
-                .document(FirebaseAuth.getInstance().currentUser?.email!!)
-                .collection("engagedChatChannels")
-                .document(it.email.toString())
-            Log.i("testing", it.email.toString())
-            Log.i("testing", channelId.toString())
 
 
             dialog.setTitle("Delete")
@@ -87,12 +67,49 @@ class TextMessageItem(val message: TextMessage,
 
             dialog.setPositiveButton("Delete") { _: DialogInterface, _: Int ->
 
-                FirebaseFirestore.getInstance()
-                    .collection("chatChannels").document()
-                    .collection("message").document()
-                    .delete()
-                    .addOnCompleteListener {
-                        Toast.makeText(context, "Deleted.", Toast.LENGTH_LONG).show()
+             var id = "123"
+                var msgId = "456"
+
+            FirebaseFirestore.getInstance()
+                    .collection("User")
+                    .document(FirebaseAuth.getInstance().currentUser?.email!!)
+                    .collection("engagedChatChannels")
+                    .document(email)
+                    .get()
+                    .addOnSuccessListener {
+                        id = it["channelId"].toString()
+
+                        FirebaseFirestore.getInstance()
+                            .collection("chatChannels").document(id)
+                            .collection("message")
+                            .whereEqualTo("text", message.text)
+                            .get()
+                            .addOnSuccessListener {
+                                for (item in it.documents) {
+                                    Log.i("Test", item.id)
+                                    msgId = item.id
+                                }
+                            }.addOnCompleteListener {
+                                FirebaseFirestore.getInstance()
+                                    .collection("chatChannels").document(id)
+                                    .collection("message").document(msgId)
+                                    .delete()
+                            }
+
+//                            .delete()
+//                            .addOnCompleteListener {
+//                                Toast.makeText(context, "Deleted.", Toast.LENGTH_LONG).show()
+//                            }
+
+
+
+                        FirebaseFirestore.getInstance()
+                            .collection("chatChannels").document(id)
+                            .collection("message").document()
+                            .delete()
+                            .addOnCompleteListener {
+                                Toast.makeText(context, "Deleted.", Toast.LENGTH_LONG).show()
+                            }
                     }
             }
             dialog.setNegativeButton("No") { _: DialogInterface, _: Int -> }
