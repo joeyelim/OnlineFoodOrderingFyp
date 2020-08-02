@@ -229,11 +229,19 @@ class ProfileFragment : Fragment(), OnRatingClick {
     }
 
     private fun updateRating(rating : Float, review: UserReview) {
+
         val db = FirebaseFirestore.getInstance()
 
         db.runBatch {
             it.update(db.collection("User").document(userViewModel.user?.email!!)
                 .collection("User_Review").document(review.id!!), "star", rating)
+
+            it.update(db.collection("Canteen").document(review.canteen!!)
+                .collection("Store").document(review.store!!)
+                .collection("Food").document(review.foodName!!),
+                "total_star",
+                rating
+            )
 
             it.update(db.collection("Canteen").document(review.canteen!!)
                 .collection("Store").document(review.store!!)

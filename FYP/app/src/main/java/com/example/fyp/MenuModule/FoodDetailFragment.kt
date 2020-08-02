@@ -247,8 +247,12 @@ class FoodDetailFragment : Fragment() {
         val average: Float = (star!! / total!!.toFloat())
 
         binding.txtReview.text = "( " + viewModel.food.total_review.toString() + " reviews ; " +
-                "Average : " +
+        "Average : " +
                 DecimalFormat("#.#").format(average) + " stars )"
+
+//        binding.txtReview.text = "( " + total + " reviews ; " +
+//                "Average : " +
+//                DecimalFormat("#.#").format(average) + " stars )"
     }
 
     private fun intiUI() {
