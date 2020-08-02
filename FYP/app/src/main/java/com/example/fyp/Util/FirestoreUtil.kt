@@ -66,6 +66,7 @@ object FirestoreUtil {
                 val newChannel = chatChannelCollectionRef.document()
                 newChannel.set(ChatChannel(mutableListOf(currentUserId, otherUserId)))
 
+
                 currentUserDocRef
                     .collection("engagedChatChannels")
                     .document(otherUserId)

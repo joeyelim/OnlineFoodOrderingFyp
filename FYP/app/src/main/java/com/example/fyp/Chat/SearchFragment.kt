@@ -82,7 +82,7 @@ class SearchFragment : Fragment() {
         if (item is PersonItem) {
 
                 startActivity(intentFor<ChatActivity>(
-                    AppConstant.USER_NAME to item.person.phone_number,
+                    AppConstant.USER_NAME to item.person.email,
                     AppConstant.USER_ID to item.userId)
                 )
 

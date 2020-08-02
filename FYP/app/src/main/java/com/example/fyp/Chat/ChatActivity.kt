@@ -20,6 +20,7 @@ import com.example.fyp.Chat.model.MessageType
 import com.example.fyp.Chat.model.TextMessage
 import com.example.fyp.Class.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
@@ -29,7 +30,6 @@ import java.util.*
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var currentUser: User
-    private lateinit var otherUser: String
     private lateinit var messagesListenerRegistration: ListenerRegistration
     private var shouldInitRecyclerView = true
     private lateinit var messagesSection: Section
@@ -41,9 +41,19 @@ class ChatActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = intent.getStringExtra(AppConstant.USER_NAME)
 
-        FirestoreUtil.getCurrentUser {
-            currentUser = it
-        }
+//        FirestoreUtil.getCurrentUser {
+//            currentUser = it
+//
+//        }
+
+
+        FirebaseFirestore.getInstance()
+            .collection("User")
+            .document(FirebaseAuth.getInstance().currentUser?.email!!)
+            .get()
+            .addOnSuccessListener {
+                currentUser = it.toObject(User::class.java)
+            }
 
         val otherUserId = intent.getStringExtra(AppConstant.USER_ID)
         FirestoreUtil.getOrCreateChatChannel(otherUserId) { channelId ->

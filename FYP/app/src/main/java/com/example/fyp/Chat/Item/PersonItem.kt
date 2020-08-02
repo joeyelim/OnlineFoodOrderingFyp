@@ -13,7 +13,7 @@ class PersonItem(val person: User,
     : Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.txtChatUsername.text = person.phone_number
+        viewHolder.txtChatUsername.text = person.email
         viewHolder.message_last.text = ""
 
     }
