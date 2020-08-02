@@ -41,19 +41,19 @@ class ChatActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = intent.getStringExtra(AppConstant.USER_NAME)
 
-//        FirestoreUtil.getCurrentUser {
-//            currentUser = it
-//
-//        }
+        FirestoreUtil.getCurrentUser {
+            currentUser = it
+
+        }
 
 
-        FirebaseFirestore.getInstance()
-            .collection("User")
-            .document(FirebaseAuth.getInstance().currentUser?.email!!)
-            .get()
-            .addOnSuccessListener {
-                currentUser = it.toObject(User::class.java)
-            }
+//        FirebaseFirestore.getInstance()
+//            .collection("User")
+//            .document(FirebaseAuth.getInstance().currentUser?.email!!)
+//            .get()
+//            .addOnSuccessListener {
+//                currentUser = it.toObject(User::class.java)
+//            }
 
         val otherUserId = intent.getStringExtra(AppConstant.USER_ID)
         FirestoreUtil.getOrCreateChatChannel(otherUserId) { channelId ->
