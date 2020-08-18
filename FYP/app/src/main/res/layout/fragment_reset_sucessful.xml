@@ -4,10 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:fillViewport="true">-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -15,105 +15,105 @@
             android:background="@drawable/login_background"
             tools:context=".LoginModule.ResetSucessfulFragment">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="310dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/text_field_border"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/constraintLayout"-->
+<!--                android:layout_width="310dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:background="@drawable/text_field_border"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
 
 
-                <TextView
-                    android:id="@+id/txtResetSuccess"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:text="@string/password_reset_successfully"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/title_text_size"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <TextView-->
+<!--                    android:id="@+id/txtResetSuccess"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="32dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:text="@string/password_reset_successfully"-->
+<!--                    android:textColor="@color/colorPrimaryDark"-->
+<!--                    android:textSize="@dimen/title_text_size"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtResetSuccess">
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtResetSuccess">-->
 
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/dear" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView4"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/dear" />-->
 
-                    <TextView
-                        android:id="@+id/txtUserName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:layout_toRightOf="@+id/textView4"
-                        android:text="@string/text_view"
-                        android:textStyle="bold" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtUserName"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="4dp"-->
+<!--                        android:layout_toRightOf="@+id/textView4"-->
+<!--                        android:text="@string/text_view"-->
+<!--                        android:textStyle="bold" />-->
 
-                    <TextView
-                        android:id="@+id/txtComma"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/txtUserName"
-                        android:text=" ," />
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtComma"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_toRightOf="@+id/txtUserName"-->
+<!--                        android:text=" ," />-->
 
-                    <TextView
-                        android:id="@+id/txtContent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/textView4"
-                        android:text="@string/your_email_account_is" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtContent"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/textView4"-->
+<!--                        android:text="@string/your_email_account_is" />-->
 
-                    <TextView
-                        android:id="@+id/txtUserEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/textView4"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_toRightOf="@+id/txtContent"
-                        android:layout_toEndOf="@+id/txtContent"
-                        android:text="@string/textview"
-                        android:textStyle="bold" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtUserEmail"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/textView4"-->
+<!--                        android:layout_marginLeft="4dp"-->
+<!--                        android:layout_marginStart="4dp"-->
+<!--                        android:layout_toRightOf="@+id/txtContent"-->
+<!--                        android:layout_toEndOf="@+id/txtContent"-->
+<!--                        android:text="@string/textview"-->
+<!--                        android:textStyle="bold" />-->
 
-                    <TextView
-                        android:id="@+id/txtSuccessContent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtContent"
-                        android:text="Your account password has been reset successfully." />
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtSuccessContent"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/txtContent"-->
+<!--                        android:text="Your account password has been reset successfully." />-->
 
-                    <Button
-                        android:id="@+id/btnLogin"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtSuccessContent"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="24dp"
-                        android:text="@string/login"
-                        android:textColor="@color/colorAccent12" />
+<!--                    <Button-->
+<!--                        android:id="@+id/btnLogin"-->
+<!--                        style="@style/Widget.MaterialComponents.Button.TextButton"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/txtSuccessContent"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:layout_marginTop="24dp"-->
+<!--                        android:layout_marginBottom="24dp"-->
+<!--                        android:text="@string/login"-->
+<!--                        android:textColor="@color/colorAccent12" />-->
 
-                </RelativeLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </RelativeLayout>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+<!--    </ScrollView>-->
 </layout>

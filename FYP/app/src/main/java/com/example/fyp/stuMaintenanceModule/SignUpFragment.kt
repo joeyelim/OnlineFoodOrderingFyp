@@ -148,12 +148,18 @@ class SignUpFragment : Fragment() {
         val lastName = binding.txtLastN.text.toString()
         val phone = binding.txtPhone.text.toString()
 
-        if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()
+        if (email.isEmpty() || password.isEmpty()
+            || firstName.isEmpty() || !isValidFName(firstName)
+            || lastName.isEmpty() || !isValidLName(lastName)
+            || phone.isEmpty() || !isValidPhoneNo(phone)
             || !Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.text.toString()).matches()
             || !isValidPassword(password) ) {
 
             if (firstName.isEmpty()) {
                 binding.txtFirstNLayout.error = "*First name is require."
+            }
+            else if (!isValidFName(firstName)) {
+                binding.txtFirstNLayout.error = "*Invalid first name."
             }
             else {
                 binding.txtFirstNLayout.isErrorEnabled = false
@@ -162,12 +168,18 @@ class SignUpFragment : Fragment() {
             if (lastName.isEmpty()) {
                 binding.txtLastNLayout.error = "*Last name is require."
             }
+            else if (!isValidFName(lastName)) {
+                binding.txtLastNLayout.error = "*Invalid last name."
+            }
             else {
                 binding.txtLastNLayout.isErrorEnabled = false
             }
 
             if (phone.isEmpty()) {
                 binding.txtPhoneLayout.error = "*Phone number is require."
+            }
+            else if (!isValidPhoneNo(phone)) {
+                binding.txtPhoneLayout.error = "*Invalid phone number."
             }
             else {
                 binding.txtPhoneLayout.isErrorEnabled = false
@@ -200,12 +212,54 @@ class SignUpFragment : Fragment() {
         return true
     }
 
+    private fun isValidFName(name: String): Boolean {
+
+        val pattern: Pattern
+        val matcher: Matcher
+
+        val PASSWORD_PATTERN = "[a-zA-Z].{1,30}$"
+
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(name)
+
+        return matcher.matches()
+
+    }
+
+    private fun isValidLName(name: String): Boolean {
+
+        val pattern: Pattern
+        val matcher: Matcher
+
+        val PASSWORD_PATTERN = "[a-zA-Z].{1,50}\$"
+
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(name)
+
+        return matcher.matches()
+
+    }
+
+    private fun isValidPhoneNo(phone: String): Boolean {
+
+        val pattern: Pattern
+        val matcher: Matcher
+
+        val PASSWORD_PATTERN = "[0-9].{1,11}$"
+
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(phone)
+
+        return matcher.matches()
+
+    }
+
     private fun isValidPassword(password: String): Boolean {
 
         val pattern: Pattern
         val matcher: Matcher
 
-        // a digit, a lower case letter must occur at least once & at least six place   s though
+        // a digit, a alphabet must occur at least once & at least six places though
         val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$"
 
         pattern = Pattern.compile(PASSWORD_PATTERN)

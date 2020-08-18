@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:fillViewport="true">-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,150 +14,150 @@
         android:background="@drawable/login_background"
         tools:context=".LoginModule.ResetPwdFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/text_field_border"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/constraintLayout"-->
+<!--            android:layout_width="350dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:background="@drawable/text_field_border"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
-            <ImageView
-                android:id="@+id/imgLogo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/txtNewPwdTitle"
-                app:layout_constraintEnd_toStartOf="@+id/txtResetPwdTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/logo3" />
+<!--            <ImageView-->
+<!--                android:id="@+id/imgLogo"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginStart="64dp"-->
+<!--                android:layout_marginBottom="32dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/txtNewPwdTitle"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/txtResetPwdTitle"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:srcCompat="@drawable/logo3" />-->
 
-            <TextView
-                android:id="@+id/txtResetPwdTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="64dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/reset_password"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtNewPwdTitle"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                app:layout_constraintStart_toEndOf="@+id/imgLogo"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+<!--            <TextView-->
+<!--                android:id="@+id/txtResetPwdTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_marginEnd="64dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:text="@string/reset_password"-->
+<!--                android:textSize="24sp"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/txtNewPwdTitle"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/constraintLayout"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/imgLogo"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/constraintLayout" />-->
 
-            <TextView
-                android:id="@+id/txtNewPwdTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="50dp"
-                android:text="@string/new_password_colon"
-                android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtResetPwdTitle" />
+<!--            <TextView-->
+<!--                android:id="@+id/txtNewPwdTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="50dp"-->
+<!--                android:text="@string/new_password_colon"-->
+<!--                android:textColor="@color/colorPrimaryDark"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txtResetPwdTitle" />-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtNewPwdLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:theme="@style/MyEditTextTheme"
-                android:layout_width="@dimen/signUp_field_length"
-                android:layout_height="wrap_content"
-                android:hint="@string/new_password"
-                app:boxBackgroundMode="outline"
-                app:endIconMode="password_toggle"
-                app:helperText="@string/password_helperText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtNewPwdTitle">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/txtNewPwdLayout"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                android:theme="@style/MyEditTextTheme"-->
+<!--                android:layout_width="@dimen/signUp_field_length"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="@string/new_password"-->
+<!--                app:boxBackgroundMode="outline"-->
+<!--                app:endIconMode="password_toggle"-->
+<!--                app:helperText="@string/password_helperText"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txtNewPwdTitle">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtNewPwd"
-                    android:layout_width="@dimen/signUp_field_length"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_lock_black"
-                    android:inputType="textPassword"
-                    android:scrollHorizontally="true"
-                    android:singleLine="true" />
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/txtNewPwd"-->
+<!--                    android:layout_width="@dimen/signUp_field_length"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:drawableStart="@drawable/ic_lock_black"-->
+<!--                    android:inputType="textPassword"-->
+<!--                    android:scrollHorizontally="true"-->
+<!--                    android:singleLine="true" />-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <TextView
-                android:id="@+id/txtConfirmPwdTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/confirm_password_colon"
-                android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtNewPwdLayout" />
+<!--            <TextView-->
+<!--                android:id="@+id/txtConfirmPwdTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:text="@string/confirm_password_colon"-->
+<!--                android:textColor="@color/colorPrimaryDark"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txtNewPwdLayout" />-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtConfirmPwdLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:theme="@style/MyEditTextTheme"
-                android:layout_width="@dimen/signUp_field_length"
-                android:layout_height="wrap_content"
-                android:hint="@string/confirm_password"
-                app:boxBackgroundMode="outline"
-                app:endIconMode="password_toggle"
-                app:helperText="@string/confirmpwd_helper_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtConfirmPwdTitle">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/txtConfirmPwdLayout"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                android:theme="@style/MyEditTextTheme"-->
+<!--                android:layout_width="@dimen/signUp_field_length"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="@string/confirm_password"-->
+<!--                app:boxBackgroundMode="outline"-->
+<!--                app:endIconMode="password_toggle"-->
+<!--                app:helperText="@string/confirmpwd_helper_text"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txtConfirmPwdTitle">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtConfirmPwd"
-                    android:layout_width="@dimen/signUp_field_length"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_lock_black"
-                    android:inputType="textPassword"
-                    android:scrollHorizontally="true"
-                    android:singleLine="true" />
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/txtConfirmPwd"-->
+<!--                    android:layout_width="@dimen/signUp_field_length"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:drawableStart="@drawable/ic_lock_black"-->
+<!--                    android:inputType="textPassword"-->
+<!--                    android:scrollHorizontally="true"-->
+<!--                    android:singleLine="true" />-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBack"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="62dp"
-                android:layout_marginEnd="125dp"
-                android:layout_marginBottom="32dp"
-                android:layout_weight="1"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:text="@string/back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnConfirm"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtConfirmPwdLayout"
-                app:strokeColor="@color/colorPrimary"
-                app:strokeWidth="2dp" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btnBack"-->
+<!--                style="?attr/materialButtonOutlinedStyle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="62dp"-->
+<!--                android:layout_marginEnd="125dp"-->
+<!--                android:layout_marginBottom="32dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:shadowColor="@color/colorPrimaryDark"-->
+<!--                android:text="@string/back"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/btnConfirm"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txtConfirmPwdLayout"-->
+<!--                app:strokeColor="@color/colorPrimary"-->
+<!--                app:strokeWidth="2dp" />-->
 
-            <Button
-                android:id="@+id/btnConfirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="62dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="32dp"
-                android:text="@string/confirm"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtConfirmPwdLayout" />
+<!--            <Button-->
+<!--                android:id="@+id/btnConfirm"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="62dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_marginBottom="32dp"-->
+<!--                android:text="@string/confirm"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txtConfirmPwdLayout" />-->
 
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+<!--</ScrollView>-->
 </layout>
