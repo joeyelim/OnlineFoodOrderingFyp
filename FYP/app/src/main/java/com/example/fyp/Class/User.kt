@@ -14,16 +14,9 @@ class User {
     constructor()
 
     constructor(
-        profile_pic: String?,
-        first_name: String?,
-        last_name: String?,
-        phone_number: String?,
-        role: String?,
-        email: String?,
-        canteen: String?,
-        store : String?
-
-    ) {
+        profile_pic: String?, first_name: String?, last_name: String?, phone_number: String?,
+        role: String?, email: String?, canteen: String?, store : String?)
+    {
         this.profile_pic = profile_pic
         this.first_name = first_name
         this.last_name = last_name

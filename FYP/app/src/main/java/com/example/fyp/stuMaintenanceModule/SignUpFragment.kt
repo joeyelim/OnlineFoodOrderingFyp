@@ -93,11 +93,6 @@ class SignUpFragment : Fragment() {
                     user?.sendEmailVerification()
                         ?.addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-//                                Toast.makeText(
-//                                    activity, "Sent verification Email, Please Verify " +
-//                                            "Your Email Before Login",
-//                                    Toast.LENGTH_SHORT
-//                                ).show()
                                 val snackbar = Snackbar.make(
                                     root_layout, "Register Successful! Please Verify Your Email" +
                                             "Before Login", Snackbar.LENGTH_LONG
@@ -114,19 +109,6 @@ class SignUpFragment : Fragment() {
                                 ).show()
                             }
                         }
-
-//                    val snackbar = Snackbar.make(
-//                        root_layout, "Register Successful! Please Verify Your Email" +
-//                                "Before Login", Snackbar.LENGTH_LONG
-//                    )
-//                    snackbar.setAction("Close", View.OnClickListener {
-//                        snackbar.dismiss()
-//                    })
-//                    (snackbar.view).layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-//                    snackbar.show()
-
-
-
                 } else {
                     // If sign in fails, display a message to the user.
 

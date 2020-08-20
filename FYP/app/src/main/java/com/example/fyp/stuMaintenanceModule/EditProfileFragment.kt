@@ -66,13 +66,18 @@ class EditProfileFragment : Fragment() {
 
         FirebaseFirestore.getInstance()
             .collection("User").document(userViewModel.user?.email!!)
-            .update( "first_name", binding.txtFirstN.text.toString(),
-                "last_name", binding.txtLastN.text.toString(),
-                "phone_number", binding.txtPhone.text.toString()
-
-            ).addOnSuccessListener {
+            .update(
+                "first_name",
+                binding.txtFirstN.text.toString(),
+                "last_name",
+                binding.txtLastN.text.toString(),
+                "phone_number",
+                binding.txtPhone.text.toString()
+            )
+            .addOnSuccessListener {
                 Log.i("Test", "Success Update")
-            }.addOnCompleteListener {
+            }
+            .addOnCompleteListener {
                 val snackbar = Snackbar.make(
                     this.requireView(),
                     "Profile Being Updated",

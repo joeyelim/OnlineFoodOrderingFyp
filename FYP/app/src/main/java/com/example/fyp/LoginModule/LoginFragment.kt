@@ -123,11 +123,11 @@ class LoginFragment : Fragment() {
                                 activity, "Please Verify Your Email First",
                                 Toast.LENGTH_SHORT
                             ).show()
+
                         } else {
                             Toast.makeText(
                                 activity, "Welcome! Directing To Home Page...",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                                Toast.LENGTH_SHORT).show()
 
                             val db = FirebaseFirestore.getInstance()
                             db.collection("User").document(email!!)
@@ -136,14 +136,12 @@ class LoginFragment : Fragment() {
                                     userViewModel.user = it.toObject(User::class.java)
                                     val registrationToken = FirebaseInstanceId.getInstance().token
                                     MyFirebaseInstanceIDService.addTokenToFirestore(registrationToken)
-
                                 }
+
                                 .addOnCompleteListener {
                                     this.findNavController()
                                         .navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                                 }
-
-                            val user = FirebaseAuth.getInstance().currentUser
                         }
                     }
                 } else {

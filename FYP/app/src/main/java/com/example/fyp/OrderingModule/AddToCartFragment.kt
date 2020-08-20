@@ -130,7 +130,7 @@ class AddToCartFragment : Fragment() {
     {
         // save cart id
         val calForDate = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm:ss") //or use getDateInstance()
+        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
         val saveCurrentDateTime = formatter.format(calForDate)
 
         val db = FirebaseFirestore.getInstance()
