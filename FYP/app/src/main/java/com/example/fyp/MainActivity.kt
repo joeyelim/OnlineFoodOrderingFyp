@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.fragment_home,
                 R.id.cartFragment,
                 R.id.orderListFragment,
+                R.id.notificationFragment,
                 R.id.profileFragment
             )
         )

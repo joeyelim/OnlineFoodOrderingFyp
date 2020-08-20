@@ -158,6 +158,12 @@ class ProfileFragment : Fragment(), OnRatingClick {
         binding.txtFullName.text = userViewModel.user?.first_name + " " + userViewModel.user?.last_name
         binding.txtEmail.text = userViewModel.user?.email
         binding.txtPhone.text = userViewModel.user?.phone_number
+
+        if (userViewModel.user?.role == "staff") {
+            binding.txtStaff.text = "  Staff\n" + userViewModel.user?.store
+        } else {
+            binding.txtStaff.text = ""
+        }
     }
 
     private fun iniRecycleView() {
@@ -223,11 +229,19 @@ class ProfileFragment : Fragment(), OnRatingClick {
     }
 
     private fun updateRating(rating : Float, review: UserReview) {
+
         val db = FirebaseFirestore.getInstance()
 
         db.runBatch {
             it.update(db.collection("User").document(userViewModel.user?.email!!)
                 .collection("User_Review").document(review.id!!), "star", rating)
+
+            it.update(db.collection("Canteen").document(review.canteen!!)
+                .collection("Store").document(review.store!!)
+                .collection("Food").document(review.foodName!!),
+                "total_star",
+                rating
+            )
 
             it.update(db.collection("Canteen").document(review.canteen!!)
                 .collection("Store").document(review.store!!)

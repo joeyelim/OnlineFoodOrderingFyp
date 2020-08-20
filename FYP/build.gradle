@@ -5,6 +5,7 @@ buildscript {
 
     ext {
         navigationVersion = '1.0.0-rc02'
+        anko_version = '0.10.8'
     }
 
     repositories {

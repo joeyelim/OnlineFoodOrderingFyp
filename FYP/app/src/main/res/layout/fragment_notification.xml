@@ -8,99 +8,158 @@
         android:layout_height="match_parent"
         tools:context=".fragments.NotificationFragment">
 
-        <ScrollView
-            android:id="@+id/svNotification"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_chat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fillViewport="true"
+            android:theme="@style/AppTheme.AppBarOverlay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--                android:id="@+id/chat_toolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                android:background="@color/colorPrimary"-->
+<!--                app:popupTheme="@style/AppTheme.PopupOverlay">-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvNotification"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/cv_image"-->
+<!--                    android:layout_width="32dp"-->
+<!--                    android:layout_height="32dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    app:cardBackgroundColor="@color/lightGray"-->
+<!--                    app:cardCornerRadius="25dp">-->
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/notification"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/img_profile"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        app:srcCompat="@drawable/ic_person"-->
+<!--                        android:contentDescription="@string/profile_image"/>-->
 
-                <TextView
-                    android:id="@+id/notificationBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:background="@color/fui_transparent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rvNotification" />
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
+<!--                <TextView-->
+<!--                    android:id="@+id/txtChatUsername"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="username"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:layout_marginStart="26dp"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textStyle="bold"/>-->
 
-                <Button
-                    android:id="@+id/btnUploadFirestore"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="btnUploadFirestore"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+<!--            </androidx.appcompat.widget.Toolbar>-->
 
-                <Button
-                    android:id="@+id/btnUploadFirestorage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="btnUploadFirestorage"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@+id/btnUploadFirestore" />
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:id="@+id/chat_tabLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/colorPrimary"-->
+<!--                app:tabTextColor="@color/white"-->
+<!--                app:tabSelectedTextColor="@color/white"-->
+<!--                app:tabIndicatorColor="@color/white">-->
 
-                <Button
-                    android:id="@+id/btnDeleteFirestorage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="btnDeleteFirestorage"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@+id/btnUploadFirestorage" />
+<!--            </com.google.android.material.tabs.TabLayout>-->
 
-                <Button
-                    android:id="@+id/btnDeleteFirestore"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="btnDeleteFirestore"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@+id/btnDeleteFirestorage" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabBtn"
-            android:layout_width="wrap_content"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/chat_view_pager"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="70dp"
-            app:backgroundTint="@color/colorPrimary"
-            app:elevation="6dp"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add"
-            app:tint="@color/white" />
+            app:layout_constraintTop_toBottomOf="@+id/appbar_chat">
+
+        </androidx.viewpager.widget.ViewPager>
+
+        <include layout="@layout/chat_content_main" />
+
+<!--        <ScrollView-->
+<!--            android:id="@+id/svNotification"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fillViewport="true"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/rvNotification"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/notificationBox"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="70dp"-->
+<!--                    android:background="@color/fui_transparent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/rvNotification" />-->
+
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnUploadFirestore"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="btnUploadFirestore"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/textView3" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnUploadFirestorage"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="btnUploadFirestorage"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/btnUploadFirestore" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnDeleteFirestorage"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="btnDeleteFirestorage"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/btnUploadFirestorage" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnDeleteFirestore"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="btnDeleteFirestore"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/btnDeleteFirestorage" />-->
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fabBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_marginBottom="70dp"-->
+<!--            app:backgroundTint="@color/colorPrimary"-->
+<!--            app:elevation="6dp"-->
+<!--            app:fabSize="normal"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:srcCompat="@drawable/ic_add"-->
+<!--            app:tint="@color/white" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
